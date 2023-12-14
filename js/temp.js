@@ -1,8 +1,8 @@
-var tmp = {}
+var tmp = {};
 
 function resetTemp() {
-    let d = new Date()
-    keep = [tmp.el, tmp.prevSave]
+    let d = new Date();
+    keep = [tmp.el, tmp.prevSave];
     tmp = {
         tree_time: 0,
 
@@ -63,19 +63,19 @@ function resetTemp() {
             te: 118,
             tt: 118,
 
-            max_tier: [1,1],
-            unl_length: [0,0],
+            max_tier: [1, 1],
+            unl_length: [0, 0],
         },
-    
+
         fermions: {
-            ch: [0,0],
-            gains: [E(0),E(0)],
-            maxTier: [[],[]],
-            tiers: [[],[]],
-            effs:  [[],[]],
-            bonuses: [[],[]],
+            ch: [0, 0],
+            gains: [E(0), E(0)],
+            maxTier: [[], []],
+            tiers: [[], []],
+            effs: [[], []],
+            bonuses: [[], []],
         },
-    
+
         supernova: {
             time: 0,
             tree_choosed: "",
@@ -87,7 +87,7 @@ function resetTemp() {
             tree_afford: {},
             tree_afford2: [],
         },
-    
+
         radiation: {
             unl: false,
             ds_gain: [],
@@ -111,7 +111,7 @@ function resetTemp() {
 
         prim: {
             eff: [],
-            w: [6,6,6,6,2,2,2,1],
+            w: [6, 6, 6, 6, 2, 2, 2, 1],
         },
 
         en: {
@@ -122,9 +122,7 @@ function resetTemp() {
             reward_br: [],
         },
 
-        rip: {
-            
-        },
+        rip: {},
 
         dark: {
             shadowEff: {},
@@ -139,7 +137,7 @@ function resetTemp() {
             gain: [],
             upg: [],
             exponent: 2,
-            FSS_eff: [1,1],
+            FSS_eff: [1, 1],
         },
 
         overflow: {
@@ -160,21 +158,21 @@ function resetTemp() {
         },
 
         overflow_start: {
-            dm: E('ee30'),
-            mass: E('ee69'),
-            bh: E('ee69'),
-            quark: E('ee90'),
-            atomic: E('ee82'),
-            stronger: E('e115')
+            dm: E("ee30"),
+            mass: E("ee69"),
+            bh: E("ee69"),
+            quark: E("ee90"),
+            atomic: E("ee82"),
+            stronger: E("e115"),
         },
 
         overflow_power: {
-            mass: E(.5),
+            mass: E(0.5),
             bh: E(0.5),
-            stronger: E(.5),
+            stronger: E(0.5),
         },
 
-        rank_collapse: { start: E('1e14'), power: E(2), reduction: E(1) },
+        rank_collapse: { start: E("1e14"), power: E(2), reduction: E(1) },
 
         mass_glyph_msg: 0,
 
@@ -198,8 +196,8 @@ function resetTemp() {
 
         exotic_atom: {
             amount: E(0),
-            gain: [E(0),E(0)],
-            eff: [[],[]],
+            gain: [E(0), E(0)],
+            eff: [[], []],
         },
 
         prevSave: "",
@@ -209,7 +207,7 @@ function resetTemp() {
 
         inf_reached: false,
         inf_time: 0,
-        inf_limit: Decimal.pow(10,Number.MAX_VALUE),
+        inf_limit: Decimal.pow(10, Number.MAX_VALUE),
 
         inf_unl: false,
 
@@ -239,79 +237,83 @@ function resetTemp() {
         massFP: E(1),
 
         build: {},
-    }
+    };
 
-    for (let x in BUILDINGS_DATA) tmp.build[x] = {
-        bulk: E(0),
-		total: E(0),
-		bonus: E(0),
-        effect: {},
-    }
+    for (let x in BUILDINGS_DATA)
+        tmp.build[x] = {
+            bulk: E(0),
+            total: E(0),
+            bonus: E(0),
+            effect: {},
+        };
 
-    for (let x = 0; x < PRES_LEN; x++) tmp.prestiges.eff[x] = {}
-    for (let x = 0; x < ASCENSIONS.names.length; x++) tmp.ascensions.eff[x] = {}
-    for (let x in BEYOND_RANKS.rewardEff) tmp.beyond_ranks.eff[x] = {}
-    for (let x = UPGS.mass.cols; x >= 1; x--) tmp.upgs.mass[x] = {}
-    for (let x = 1; x <= UPGS.main.cols; x++) tmp.upgs.main[x] = {}
+    for (let x = 0; x < PRES_LEN; x++) tmp.prestiges.eff[x] = {};
+    for (let x = 0; x < ASCENSIONS.names.length; x++)
+        tmp.ascensions.eff[x] = {};
+    for (let x in BEYOND_RANKS.rewardEff) tmp.beyond_ranks.eff[x] = {};
+    for (let x = UPGS.mass.cols; x >= 1; x--) tmp.upgs.mass[x] = {};
+    for (let x = 1; x <= UPGS.main.cols; x++) tmp.upgs.main[x] = {};
     for (let j = 0; j < TREE_TAB.length; j++) {
-        tmp.supernova.tree_had2[j] = []
-        tmp.supernova.tree_afford2[j] = []
+        tmp.supernova.tree_had2[j] = [];
+        tmp.supernova.tree_afford2[j] = [];
     }
-    for (let x = 0; x < TABS[1].length; x++) tmp.stab.push(0)
+    for (let x = 0; x < TABS[1].length; x++) tmp.stab.push(0);
     for (let i = 0; i < TREE_IDS.length; i++) {
         for (let j = 0; j < TREE_TAB.length; j++) {
             for (let k = 0; k < TREE_IDS[i][j].length; k++) {
-                let id = TREE_IDS[i][j][k]
+                let id = TREE_IDS[i][j][k];
                 if (id != "") {
-                    let u = TREE_UPGS.ids[id]
-                    tmp.supernova.tree_had2[j].push(id)
-                    tmp.supernova.tree_had.push(id)
+                    let u = TREE_UPGS.ids[id];
+                    tmp.supernova.tree_had2[j].push(id);
+                    tmp.supernova.tree_had.push(id);
                     // if (u && !u.qf && !u.cs) tmp.supernova.auto_tree.push(id)
                 }
             }
         }
     }
-    for (let x = 0; x < MASS_DILATION.break.upgs.ids.length; x++) tmp.bd.upgs[x] = {}
+    for (let x = 0; x < MASS_DILATION.break.upgs.ids.length; x++)
+        tmp.bd.upgs[x] = {};
     for (let x = 0; x < SCALE_TYPE.length; x++) {
-        let st = SCALE_TYPE[x]
+        let st = SCALE_TYPE[x];
 
-        tmp.scaling_power[st] = {}
-        tmp.scaling_start[st] = {}
-        tmp.no_scalings[st] = []
+        tmp.scaling_power[st] = {};
+        tmp.scaling_start[st] = {};
+        tmp.no_scalings[st] = [];
     }
-    for (let x = 0; x < MATTERS_LEN; x++) tmp.matters.upg[x] = {} 
+    for (let x = 0; x < MATTERS_LEN; x++) tmp.matters.upg[x] = {};
     for (let i in CORE) {
-        tmp.core_score[i] = [0,0,0,0]
-        tmp.core_eff[i] = []
+        tmp.core_score[i] = [0, 0, 0, 0];
+        tmp.core_eff[i] = [];
     }
-    tmp.el = keep[0]
-    tmp.prevSave = keep[1]
+    tmp.el = keep[0];
+    tmp.prevSave = keep[1];
 }
 
-resetTemp()
+resetTemp();
 
 function updateMassTemp() {
-    tmp.massSoftPower = FORMS.massSoftPower()
-    tmp.massSoftGain = FORMS.massSoftGain()
-    tmp.massSoftPower2 = FORMS.massSoftPower2()
-    tmp.massSoftGain2 = FORMS.massSoftGain2()
-    tmp.massSoftPower3 = FORMS.massSoftPower3()
-    tmp.massSoftGain3 = FORMS.massSoftGain3()
-    tmp.massSoftPower4 = FORMS.massSoftPower4()
-    tmp.massSoftGain4 = FORMS.massSoftGain4()
-    tmp.massSoftPower5 = FORMS.massSoftPower5()
-    tmp.massSoftGain5 = FORMS.massSoftGain5()
-    tmp.massSoftPower6 = FORMS.massSoftPower6()
-    tmp.massSoftGain6 = FORMS.massSoftGain6()
-    tmp.massSoftPower7 = FORMS.massSoftPower7()
-    tmp.massSoftGain7 = FORMS.massSoftGain7()
-    tmp.massSoftPower8 = FORMS.massSoftPower8()
-    tmp.massSoftGain8 = FORMS.massSoftGain8()
-    tmp.massGain = FORMS.massGain()
+    tmp.massSoftPower = FORMS.massSoftPower();
+    tmp.massSoftGain = FORMS.massSoftGain();
+    tmp.massSoftPower2 = FORMS.massSoftPower2();
+    tmp.massSoftGain2 = FORMS.massSoftGain2();
+    tmp.massSoftPower3 = FORMS.massSoftPower3();
+    tmp.massSoftGain3 = FORMS.massSoftGain3();
+    tmp.massSoftPower4 = FORMS.massSoftPower4();
+    tmp.massSoftGain4 = FORMS.massSoftGain4();
+    tmp.massSoftPower5 = FORMS.massSoftPower5();
+    tmp.massSoftGain5 = FORMS.massSoftGain5();
+    tmp.massSoftPower6 = FORMS.massSoftPower6();
+    tmp.massSoftGain6 = FORMS.massSoftGain6();
+    tmp.massSoftPower7 = FORMS.massSoftPower7();
+    tmp.massSoftGain7 = FORMS.massSoftGain7();
+    tmp.massSoftPower8 = FORMS.massSoftPower8();
+    tmp.massSoftGain8 = FORMS.massSoftGain8();
+    tmp.massGain = FORMS.massGain();
 }
 
 function updateTickspeedTemp() {
-    tmp.tickspeedFP = hasCharger(4) && !hasElement(17,1) ? 1 : tmp.fermions.effs[1][2]
+    tmp.tickspeedFP =
+        hasCharger(4) && !hasElement(17, 1) ? 1 : tmp.fermions.effs[1][2];
 
     /*
     let fp = E(1)
@@ -327,39 +329,49 @@ function updateTickspeedTemp() {
 }
 
 function updateAcceleratorTemp() {
-    tmp.accelCost = Decimal.pow(10,Decimal.pow(1.5,player.accelerator)).floor()
-    tmp.accelBulk = E(0)
-    if (player.rp.points.gte(10)) tmp.accelBulk = player.rp.points.max(1).log10().max(1).log(1.5).add(1).floor()
-    tmp.accelEffect = FORMS.accel.effect()
+    tmp.accelCost = Decimal.pow(
+        10,
+        Decimal.pow(1.5, player.accelerator),
+    ).floor();
+    tmp.accelBulk = E(0);
+    if (player.rp.points.gte(10))
+        tmp.accelBulk = player.rp.points
+            .max(1)
+            .log10()
+            .max(1)
+            .log(1.5)
+            .add(1)
+            .floor();
+    tmp.accelEffect = FORMS.accel.effect();
 }
 
 function updateUpgradesTemp() {
     tmp.massFP = E(1);
-    if (hasElement(248)) tmp.massFP = tmp.massFP.mul(getEnRewardEff(0))
-    
-    UPGS.main.temp()
+    if (hasElement(248)) tmp.massFP = tmp.massFP.mul(getEnRewardEff(0));
+
+    UPGS.main.temp();
     // UPGS.mass.temp()
 }
 
 function updateRagePowerTemp() {
-    if (!tmp.rp) tmp.rp = {}
-    tmp.rp.gain = FORMS.rp.gain()
-    tmp.rp.can = tmp.rp.gain.gte(1)
+    if (!tmp.rp) tmp.rp = {};
+    tmp.rp.gain = FORMS.rp.gain();
+    tmp.rp.can = tmp.rp.gain.gte(1);
 }
 
 function updateBlackHoleTemp() {
-    if (!tmp.bh) tmp.bh = {}
-    let t = tmp.bh
-    t.dm_gain = FORMS.bh.DM_gain()
-    t.fSoftStart = FORMS.bh.fSoftStart()
-    t.fSoftPower = FORMS.bh.fSoftPower()
-    t.f = FORMS.bh.f()
-    t.massSoftPower = FORMS.bh.massSoftPower()
-    t.massSoftGain = FORMS.bh.massSoftGain()
-    t.massPowerGain = FORMS.bh.massPowerGain()
-    t.mass_gain = FORMS.bh.massGain()
-    t.dm_can = t.dm_gain.gte(1)
-    t.effect = FORMS.bh.effect()
+    if (!tmp.bh) tmp.bh = {};
+    let t = tmp.bh;
+    t.dm_gain = FORMS.bh.DM_gain();
+    t.fSoftStart = FORMS.bh.fSoftStart();
+    t.fSoftPower = FORMS.bh.fSoftPower();
+    t.f = FORMS.bh.f();
+    t.massSoftPower = FORMS.bh.massSoftPower();
+    t.massSoftGain = FORMS.bh.massSoftGain();
+    t.massPowerGain = FORMS.bh.massPowerGain();
+    t.mass_gain = FORMS.bh.massGain();
+    t.dm_can = t.dm_gain.gte(1);
+    t.effect = FORMS.bh.effect();
 
     /*
 
@@ -380,14 +392,14 @@ function updateBlackHoleTemp() {
 
     // Unstable
 
-    t = tmp.unstable_bh
-    
-    t.p = E(1)
-    if (tmp.inf_unl) t.p = t.p.div(theoremEff('bh',2))
-    if (hasUpgrade('bh',23)) t.p = t.p.div(.75)
+    t = tmp.unstable_bh;
 
-    t.gain = UNSTABLE_BH.gain()
-    t.effect = UNSTABLE_BH.effect()
+    t.p = E(1);
+    if (tmp.inf_unl) t.p = t.p.div(theoremEff("bh", 2));
+    if (hasUpgrade("bh", 23)) t.p = t.p.div(0.75);
+
+    t.gain = UNSTABLE_BH.gain();
+    t.effect = UNSTABLE_BH.effect();
 
     /*
 
@@ -403,62 +415,62 @@ function updateBlackHoleTemp() {
 }
 
 function updateTemp() {
-    tmp.offlineActive = player.offline.time > 1
-    tmp.offlineMult = tmp.offlineActive?player.offline.time+1:1
+    tmp.offlineActive = player.offline.time > 1;
+    tmp.offlineMult = tmp.offlineActive ? player.offline.time + 1 : 1;
 
-    tmp.c16active = CHALS.inChal(16)
-    tmp.c18active = CHALS.inChal(18)
+    tmp.c16active = CHALS.inChal(16);
+    tmp.c18active = CHALS.inChal(18);
 
-    tmp.inf_unl = player.inf.theorem.gte(1)
+    tmp.inf_unl = player.inf.theorem.gte(1);
 
-    tmp.chal13comp = player.chal.comps[13].gte(1)
-    tmp.chal14comp = player.chal.comps[14].gte(1)
-    tmp.chal15comp = player.chal.comps[15].gte(1)
-    tmp.darkRunUnlocked = hasElement(161)
-    tmp.matterUnl = hasElement(188)
-    tmp.moreUpgs = hasElement(192)
-    tmp.mass4Unl = hasElement(202)
-    tmp.brUnl = hasElement(208)
-    tmp.eaUnl = hasCharger(5)
-    tmp.brokenInf = hasInfUpgrade(16)
-    tmp.tfUnl = hasElement(230)
-    tmp.ascensions_unl = player.chal.comps[17].gte(4)
-    tmp.CS_unl = hasElement(251)
-    tmp.c18reward = player.chal.comps[18].gte(4)
-    tmp.fifthRowUnl = hasElement(270)
+    tmp.chal13comp = player.chal.comps[13].gte(1);
+    tmp.chal14comp = player.chal.comps[14].gte(1);
+    tmp.chal15comp = player.chal.comps[15].gte(1);
+    tmp.darkRunUnlocked = hasElement(161);
+    tmp.matterUnl = hasElement(188);
+    tmp.moreUpgs = hasElement(192);
+    tmp.mass4Unl = hasElement(202);
+    tmp.brUnl = hasElement(208);
+    tmp.eaUnl = hasCharger(5);
+    tmp.brokenInf = hasInfUpgrade(16);
+    tmp.tfUnl = hasElement(230);
+    tmp.ascensions_unl = player.chal.comps[17].gte(4);
+    tmp.CS_unl = hasElement(251);
+    tmp.c18reward = player.chal.comps[18].gte(4);
+    tmp.fifthRowUnl = hasElement(270);
 
-    tmp.SN_passive = hasElement(36,1)
+    tmp.SN_passive = hasElement(36, 1);
 
-    tmp.NHDimprove = hasElement(268)
+    tmp.NHDimprove = hasElement(268);
 
-    updateGPTemp()
+    updateGPTemp();
 
-    updateInfTemp()
-    updateC16Temp()
-    updateDarkTemp()
-    updateQuantumTemp()
+    updateInfTemp();
+    updateC16Temp();
+    updateDarkTemp();
+    updateQuantumTemp();
 
-    updateRadiationTemp()
-    updateFermionsTemp()
-    updateBosonsTemp()
-    updateSupernovaTemp()
+    updateRadiationTemp();
+    updateFermionsTemp();
+    updateBosonsTemp();
+    updateSupernovaTemp();
 
-    updateElementsTemp()
-    updateMDTemp()
-    updateUpgradesTemp()
-    updateChalTemp()
-    updateAtomTemp()
+    updateElementsTemp();
+    updateMDTemp();
+    updateUpgradesTemp();
+    updateChalTemp();
+    updateAtomTemp();
     // updateAcceleratorTemp()
-    BUILDINGS.temp()
+    BUILDINGS.temp();
 
-    updateStarsTemp()
-    updateScalingTemp()
-    updateRagePowerTemp()
-    updateBlackHoleTemp()
-    updateTickspeedTemp()
-    updateRanksTemp()
-    updateMassTemp()
+    updateStarsTemp();
+    updateScalingTemp();
+    updateRagePowerTemp();
+    updateBlackHoleTemp();
+    updateTickspeedTemp();
+    updateRanksTemp();
+    updateMassTemp();
 
-    tmp.preInfGlobalSpeed = FORMS.getPreInfGlobalSpeed()
-    tmp.preQUGlobalSpeed = FORMS.getPreQUGlobalSpeed()
+    tmp.preInfGlobalSpeed = FORMS.getPreInfGlobalSpeed();
+    tmp.preQUGlobalSpeed = FORMS.getPreQUGlobalSpeed();
 }

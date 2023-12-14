@@ -1,1 +1,1 @@
-var debug = {}
+var debug = {};
