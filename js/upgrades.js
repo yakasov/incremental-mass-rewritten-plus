@@ -53,8 +53,8 @@ const UPGS = {
                 cost = Decimal.pow(
                     10,
                     Decimal.pow(inc, lvl.scaleEvery("massUpg4").pow(pow)).mul(
-                        start,
-                    ),
+                        start
+                    )
                 );
                 if (player.mass.gte(Decimal.pow(10, start)))
                     bulk = player.mass
@@ -104,12 +104,12 @@ const UPGS = {
                 if (player.ranks.rank.gte(3))
                     step = step.add(RANKS.effect.rank[3]());
                 step = step.mul(
-                    tmp.upgs.mass[2] ? tmp.upgs.mass[2].eff.eff : 1,
+                    tmp.upgs.mass[2] ? tmp.upgs.mass[2].eff.eff : 1
                 );
                 let ret = step.mul(
                     hasAscension(0, 1)
                         ? x.add(1).mul(tmp.upgs.mass[1].bonus.add(1))
-                        : x.add(tmp.upgs.mass[1].bonus),
+                        : x.add(tmp.upgs.mass[1].bonus)
                 );
                 if (hasElement(209)) ret = ret.pow(elemEffect(209));
                 return { step: step, eff: ret };
@@ -124,7 +124,7 @@ const UPGS = {
                 let x = E(0);
                 if (player.mainUpg.rp.includes(1))
                     x = x.add(
-                        tmp.upgs.main ? tmp.upgs.main[1][1].effect : E(0),
+                        tmp.upgs.main ? tmp.upgs.main[1][1].effect : E(0)
                     );
                 if (player.mainUpg.rp.includes(2))
                     x = hasAscension(0, 1)
@@ -148,13 +148,13 @@ const UPGS = {
                 if (player.ranks.rank.gte(5))
                     step = step.add(RANKS.effect.rank[5]());
                 step = step.pow(
-                    tmp.upgs.mass[3] ? tmp.upgs.mass[3].eff.eff : 1,
+                    tmp.upgs.mass[3] ? tmp.upgs.mass[3].eff.eff : 1
                 );
                 let ret = step
                     .mul(
                         hasAscension(0, 1)
                             ? x.add(1).mul(tmp.upgs.mass[2].bonus.add(1))
-                            : x.add(tmp.upgs.mass[2].bonus),
+                            : x.add(tmp.upgs.mass[2].bonus)
                     )
                     .add(1); //.softcap("ee14",0.95,2)
                 if (hasElement(203)) ret = ret.pow(elemEffect(203));
@@ -170,7 +170,7 @@ const UPGS = {
                 let x = E(0);
                 if (player.mainUpg.rp.includes(2))
                     x = x.add(
-                        tmp.upgs.main ? tmp.upgs.main[1][2].effect : E(0),
+                        tmp.upgs.main ? tmp.upgs.main[1][2].effect : E(0)
                     );
                 if (player.mainUpg.rp.includes(7))
                     x = hasAscension(0, 1)
@@ -198,7 +198,7 @@ const UPGS = {
                 if (player.ranks.rank.gte(34)) ss = ss.add(2);
                 if (player.mainUpg.bh.includes(9))
                     ss = ss.add(
-                        tmp.upgs.main ? tmp.upgs.main[2][9].effect : E(0),
+                        tmp.upgs.main ? tmp.upgs.main[2][9].effect : E(0)
                     );
                 let step = E(1);
                 if (player.ranks.tetr.gte(2))
@@ -206,13 +206,13 @@ const UPGS = {
                 if (player.mainUpg.rp.includes(9)) step = step.add(0.25);
                 if (player.mainUpg.rp.includes(12))
                     step = step.add(
-                        tmp.upgs.main ? tmp.upgs.main[1][12].effect : E(0),
+                        tmp.upgs.main ? tmp.upgs.main[1][12].effect : E(0)
                     );
                 if (hasElement(4)) step = step.mul(tmp.elements.effect[4]);
                 if (player.md.upgs[3].gte(1))
                     step = step.mul(tmp.md.upgs[3].eff);
                 step = step.pow(
-                    tmp.upgs.mass[4] ? tmp.upgs.mass[4].eff.eff : 1,
+                    tmp.upgs.mass[4] ? tmp.upgs.mass[4].eff.eff : 1
                 );
 
                 let sp = 0.5;
@@ -435,12 +435,12 @@ const UPGS = {
                               .mul(
                                   hasElement(38)
                                       ? tmp.elements.effect[38].add(1)
-                                      : 1,
+                                      : 1
                               )
                         : player.build.tickspeed.amt
                               .div(3)
                               .add(
-                                  hasElement(38) ? tmp.elements.effect[38] : 0,
+                                  hasElement(38) ? tmp.elements.effect[38] : 0
                               );
                     return ret.floor();
                 },
@@ -459,7 +459,7 @@ const UPGS = {
                             .max(1)
                             .log10()
                             .pow(1.25)
-                            .softcap(2.5, 0.5, 0),
+                            .softcap(2.5, 0.5, 0)
                     );
                     return ret;
                 },
@@ -501,7 +501,7 @@ const UPGS = {
                     return overflow(
                         ret.softcap("e1.5e31", 0.95, 2),
                         "ee185",
-                        0.5,
+                        0.5
                     );
                 },
                 effDesc(x = this.effect()) {
@@ -596,7 +596,7 @@ const UPGS = {
                 effect() {
                     let x = Decimal.pow(
                         10,
-                        tmp.matters.upg[12].eff.max(1).log10().pow(0.8),
+                        tmp.matters.upg[12].eff.max(1).log10().pow(0.8)
                     );
                     return overflow(x, 1e20, 0.5);
                 },
@@ -828,7 +828,7 @@ const UPGS = {
                 cost: E(1e33),
                 effect() {
                     let ret = E(2).pow(
-                        player.bh.dm.add(1).log10().softcap(11600, 0.5, 0),
+                        player.bh.dm.add(1).log10().softcap(11600, 0.5, 0)
                     );
                     return ret.min("ee7000");
                 },
@@ -872,7 +872,7 @@ const UPGS = {
                 effect() {
                     let ret = player.atom.powers[1].add(1).pow(2);
                     return overflow(ret, "ee108", 0.25).min(
-                        tmp.c16active ? "ee100" : "ee110",
+                        tmp.c16active ? "ee100" : "ee110"
                     );
                 },
                 effDesc(x = this.effect()) {
@@ -1021,7 +1021,7 @@ const UPGS = {
                 effect() {
                     let x = expMult(
                         player.dark.c16.bestBH.add(10).log10(),
-                        0.4,
+                        0.4
                     );
                     return x;
                 },
@@ -1117,7 +1117,7 @@ const UPGS = {
             },
             9: {
                 desc: "Stronger effect softcap is 15% weaker.",
-                cost: E(2e44),
+                cost: E(5e42),
             },
             10: {
                 desc: "Tier requirement is halved. Hyper Rank starts later based on Tiers you have.",
@@ -1443,7 +1443,7 @@ const UPGS = {
                 effect() {
                     let x = Decimal.pow(
                         1.1,
-                        player.bh.dm.add(1).log10().add(1).log10(),
+                        player.bh.dm.add(1).log10().add(1).log10()
                     );
                     return x;
                 },
@@ -1460,7 +1460,7 @@ const UPGS = {
                 effect() {
                     let x = Decimal.pow(
                         2,
-                        player.mass.add(1).log10().add(1).log10().pow(1.5),
+                        player.mass.add(1).log10().add(1).log10().pow(1.5)
                     );
                     return x;
                 },

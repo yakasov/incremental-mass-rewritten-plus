@@ -175,7 +175,7 @@ const BUILDINGS_DATA = {
             if (player.mainUpg.rp.includes(9)) step = step.add(0.25);
             if (player.mainUpg.rp.includes(12))
                 step = step.add(
-                    tmp.upgs.main ? tmp.upgs.main[1][12].effect : E(0),
+                    tmp.upgs.main ? tmp.upgs.main[1][12].effect : E(0)
                 );
             if (hasElement(4)) step = step.mul(tmp.elements.effect[4]);
             if (player.md.upgs[3].gte(1)) step = step.mul(tmp.md.upgs[3].eff);
@@ -514,7 +514,7 @@ const BUILDINGS_DATA = {
             let eff = x.mul(step).add(1);
             eff = overflow(eff, ss, sp).overflow(
                 25000,
-                hasBeyondRank(20, 1) ? 0.4 : 1 / 3,
+                hasBeyondRank(20, 1) ? 0.4 : 1 / 3
             );
             return { power: step, effect: eff, ss };
         },
@@ -568,7 +568,7 @@ const BUILDINGS_DATA = {
 
             return Decimal.pow(
                 1.75,
-                x.div(fp2).scaleEvery("bh_condenser", false, [1, 1, 1, fp]),
+                x.div(fp2).scaleEvery("bh_condenser", false, [1, 1, 1, fp])
             );
         },
         get bulk() {
@@ -601,18 +601,18 @@ const BUILDINGS_DATA = {
             pow = pow.add(tmp.chal.eff[6]);
             if (player.mainUpg.bh.includes(2))
                 pow = pow.mul(
-                    tmp.upgs.main ? tmp.upgs.main[2][2].effect : E(1),
+                    tmp.upgs.main ? tmp.upgs.main[2][2].effect : E(1)
                 );
             pow = pow.add(tmp.atom.particles[2].powerEffect.eff2);
             if (player.mainUpg.atom.includes(11))
                 pow = pow.mul(
-                    tmp.upgs.main ? tmp.upgs.main[3][11].effect : E(1),
+                    tmp.upgs.main ? tmp.upgs.main[3][11].effect : E(1)
                 );
             pow = pow.mul(tmp.bosons.upgs.photon[1].effect);
             pow = pow.mul(tmp.prim.eff[2][1]);
             pow = pow.mul(getEnRewardEff(3)[1]);
             if (hasTree("bs5")) pow = pow.mul(tmp.bosons.effect.z_boson[0]);
-            if (hasTree("bh2")) pow = pow.pow(1.15);
+            if (hasTree("bh2")) pow = pow.pow(1.2);
             if (hasElement(129)) pow = pow.pow(elemEffect(18));
             if (hasBeyondRank(2, 4))
                 pow = pow.pow(BUILDINGS.eff("accelerator"));
@@ -679,7 +679,7 @@ const BUILDINGS_DATA = {
             if (hasBeyondRank(1, 137)) p **= 0.8;
 
             return Decimal.pow(10, x.scaleEvery("fvm", false).pow(p)).mul(
-                1e300,
+                1e300
             );
         },
         get bulk() {
@@ -753,7 +753,7 @@ const BUILDINGS_DATA = {
 
             return Decimal.pow(
                 2,
-                x.div(fp2).scaleEvery("gamma_ray", false, [1, 1, 1, fp]),
+                x.div(fp2).scaleEvery("gamma_ray", false, [1, 1, 1, fp])
             );
         },
         get bulk() {
@@ -780,11 +780,11 @@ const BUILDINGS_DATA = {
             let pow = E(2);
             if (player.mainUpg.atom.includes(4))
                 pow = pow.add(
-                    tmp.upgs.main ? tmp.upgs.main[3][4].effect : E(0),
+                    tmp.upgs.main ? tmp.upgs.main[3][4].effect : E(0)
                 );
             if (player.mainUpg.atom.includes(11))
                 pow = pow.mul(
-                    tmp.upgs.main ? tmp.upgs.main[3][11].effect : E(1),
+                    tmp.upgs.main ? tmp.upgs.main[3][11].effect : E(1)
                 );
             if (hasTree("gr1")) pow = pow.mul(tmp.supernova.tree_eff.gr1);
             pow = pow.mul(tmp.bosons.upgs.gluon[1].effect);
@@ -1154,8 +1154,6 @@ const BUILDINGS = {
             b.level = b.level.add(1);
         }
 
-        console.log();
-
         if (!b.noSpend && b.res.gt(cost)) {
             b.res = b.res.sub(cost).max(0); // without .max(0) causes NaN because of negative amount
         }
@@ -1202,10 +1200,10 @@ const BUILDINGS = {
             b.level.format(0) +
                 (bt.bonus.gt(0)
                     ? (b.beMultiplicative ? " × " : " + ") + bt.bonus.format(0)
-                    : ""),
+                    : "")
         ); //  + " = " + bt.total.format(0)
         tmp.el["building_scale_" + i].setHTML(
-            b.scale ? getScalingName(b.scale) : "",
+            b.scale ? getScalingName(b.scale) : ""
         );
 
         let cost = b.cost(),
@@ -1218,12 +1216,12 @@ const BUILDINGS = {
         tmp.el["building_cost_" + i].setHTML(
             allow
                 ? "Cost: " + b.get_cost(cost)
-                : "Locked" + (b.denyPurchaseText ?? ""),
+                : "Locked" + (b.denyPurchaseText ?? "")
         );
 
         tmp.el["building_auto_" + i].setDisplay(b.autoUnlocked);
         tmp.el["building_auto_" + i].setHTML(
-            player.build[i].auto ? "ON" : "OFF",
+            player.build[i].auto ? "ON" : "OFF"
         );
 
         let eff = bt.effect;
@@ -1248,7 +1246,7 @@ function getMassUpgradeCost(i, lvl) {
         let pow = 1.5;
         cost = Decimal.pow(
             10,
-            Decimal.pow(inc, lvl.scaleEvery("massUpg4").pow(pow)).mul(start),
+            Decimal.pow(inc, lvl.scaleEvery("massUpg4").pow(pow)).mul(start)
         );
     } else {
         fp = tmp.massFP;

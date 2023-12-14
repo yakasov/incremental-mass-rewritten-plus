@@ -246,9 +246,9 @@ const INF = {
                 10,
                 Decimal.pow(
                     1.05,
-                    player.inf.theorem.scaleEvery("inf_theorem").pow(1.25),
-                ).mul(Math.log10(Number.MAX_VALUE)),
-            ),
+                    player.inf.theorem.scaleEvery("inf_theorem").pow(1.25)
+                ).mul(Math.log10(Number.MAX_VALUE))
+            )
         );
 
         return x;
@@ -263,7 +263,7 @@ const INF = {
                     "inf",
                     () => {
                         CONFIRMS_FUNCTION.inf(limit);
-                    },
+                    }
                 );
             else CONFIRMS_FUNCTION.inf(limit);
         }
@@ -285,7 +285,7 @@ const INF = {
                 .div(3.5e6)
                 .max(1)
                 .log(1.1)
-                .add(1),
+                .add(1)
         );
 
         if (hasElement(16, 1))
@@ -376,23 +376,23 @@ const INF = {
         ],
         [
             {
-                title: "Tree Automation",
-                desc: "Automate pre-corrupted tree.",
-                cost: E(100),
-            },
-            {
                 title: "Self-Infinity",
                 desc: "Infinity theorem boosts infinity points gain.",
-                cost: E(100),
+                cost: E(50),
                 effect() {
                     let x = Decimal.pow(
                         hasBeyondRank(6, 1) ? 3 : 2,
-                        player.inf.theorem,
+                        player.inf.theorem
                     );
 
                     return x;
                 },
                 effectDesc: (x) => formatMult(x, 0),
+            },
+            {
+                title: "Tree Automation",
+                desc: "Automate pre-corrupted tree.",
+                cost: E(100),
             },
             {
                 title: "Stop Big Rip Switching",
@@ -446,7 +446,7 @@ const INF = {
                 effect() {
                     let x = Decimal.pow(
                         hasBeyondRank(6, 1) ? 3 : 2,
-                        player.inf.theorem,
+                        player.inf.theorem
                     );
 
                     return x;
@@ -729,7 +729,7 @@ function calcInf(dt) {
     if (tmp.CS_unl) {
         player.inf.cs_amount = CORRUPTED_STAR.calcNextGain(
             player.inf.cs_amount,
-            tmp.cs_speed.mul(dt),
+            tmp.cs_speed.mul(dt)
         );
     }
 
@@ -738,7 +738,7 @@ function calcInf(dt) {
             let p = player.inf.core[i];
             if (p) {
                 player.inf.fragment[p.type] = player.inf.fragment[p.type].add(
-                    calcFragmentBase(p, p.star, p.power).mul(dt / 100),
+                    calcFragmentBase(p, p.star, p.power).mul(dt / 100)
                 );
             }
         }
@@ -755,7 +755,7 @@ function updateInfHTML() {
         tmp.el.dim_mass.setTxt(
             formatMass(player.inf.dim_mass) +
                 " " +
-                player.inf.dim_mass.formatGain(tmp.dim_mass_gain, true),
+                player.inf.dim_mass.formatGain(tmp.dim_mass_gain, true)
         );
         tmp.el.dim_mass_eff.setHTML("+" + tmp.dim_mass_eff.format());
 
@@ -787,7 +787,7 @@ function updateInfHTML() {
                             " | " +
                             (ct.preEff[i] || "???.") +
                             ` <b class='sky'>(${ct.effDesc[i](
-                                ctmp[i],
+                                ctmp[i]
                             )})</b><br>`;
                 }
                 let f = player.inf.fragment[t];
@@ -799,13 +799,13 @@ function updateInfHTML() {
                     h +=
                         `<h2>${ct.title} <b>(${format(
                             core_tmp[t].total_p.mul(100),
-                            0,
+                            0
                         )}%)</b></h2><br>` +
                         hh +
                         "<br>";
             }
             tmp.el.core_eff_div.setHTML(
-                h || "Place any theorem in core to show effects!",
+                h || "Place any theorem in core to show effects!"
             );
         } else if (tmp.stab[8] == 2) {
             tmp.el.ip_amt.setHTML(
@@ -815,9 +815,9 @@ function updateInfHTML() {
                           player.inf.points.formatGain(
                               player.inf.best
                                   .div(1e2)
-                                  .mul(tmp.cs_effect.inf_speed),
+                                  .mul(tmp.cs_effect.inf_speed)
                           )
-                        : ""),
+                        : "")
             );
 
             for (let r in INF.upgs) {
@@ -862,7 +862,7 @@ function updateInfHTML() {
                                     : ""
                                 : "<br>Cost: <b>" +
                                       u.cost.format(0) +
-                                      "</b> Infinity Points",
+                                      "</b> Infinity Points"
                         );
                     }
                 }

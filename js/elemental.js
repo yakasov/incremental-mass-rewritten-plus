@@ -253,8 +253,8 @@ const ELEMENTS = {
         let res = u.inf
             ? player.inf.points
             : u.dark
-              ? player.dark.shadow
-              : player.atom.quarks;
+            ? player.dark.shadow
+            : player.atom.quarks;
         return (
             res.gte(u.cost) &&
             !hasElement(x) &&
@@ -350,7 +350,7 @@ const ELEMENTS = {
                           .add(1)
                     : E(1);
                 return overflow(x.softcap(1e45, 0.1, 0), "e60000", 0.5).min(
-                    "ee6",
+                    "ee6"
                 );
             },
             effDesc(x) {
@@ -465,7 +465,7 @@ const ELEMENTS = {
                               .mul(0.01)
                               .add(1),
                     1000,
-                    0.5,
+                    0.5
                 );
                 if (hasElement(18, 1)) x = x.pow(muElemEff(18));
                 return x;
@@ -703,7 +703,7 @@ const ELEMENTS = {
             desc: `Collapsed star boosts the last type of stars.`,
             cost: E("e1000"),
             effect() {
-                let x = player.stars.points.add(1).log10().add(1).pow(1.1);
+                let x = player.stars.points.add(1).log10().add(1).pow(1.15);
                 return x;
             },
             effDesc(x) {
@@ -826,12 +826,12 @@ const ELEMENTS = {
                 x = hasElement(236)
                     ? Decimal.pow(
                           1.1,
-                          player.stars.points.add(1).log10().add(1).log10(),
+                          player.stars.points.add(1).log10().add(1).log10()
                       )
                     : overflow(
                           player.stars.points.add(1).softcap("e3e15", 0.85, 2),
                           "ee100",
-                          0.5,
+                          0.5
                       );
                 return x;
             },
@@ -927,7 +927,7 @@ const ELEMENTS = {
                           tmp.atom.atomicEff
                               .add(1)
                               .log10()
-                              .pow(2 / 3),
+                              .pow(2 / 3)
                       )
                     : E(1);
                 return x;
@@ -1277,7 +1277,7 @@ const ELEMENTS = {
                     1.1,
                     player.supernova.times
                         .overflow(1e75, 0.1)
-                        .softcap(2e5, 0.25, 0),
+                        .softcap(2e5, 0.25, 0)
                 );
                 return x;
             },
@@ -1579,7 +1579,7 @@ const ELEMENTS = {
             effect() {
                 let x = Decimal.pow(
                     1.1,
-                    player.qu.en.amt.add(1).log10().pow(0.9),
+                    player.qu.en.amt.add(1).log10().pow(0.9)
                 );
                 return x.overflow("ee5", 0.5, 0);
             },
@@ -1614,7 +1614,7 @@ const ELEMENTS = {
             effect() {
                 let x = Decimal.pow(
                     2,
-                    tmp.prestiges.base.max(1).log10().root(2),
+                    tmp.prestiges.base.max(1).log10().root(2)
                 );
                 if (tmp.c16active) x = overflow(x, 10, 0.5);
                 return x;
@@ -1667,7 +1667,7 @@ const ELEMENTS = {
             effect() {
                 let x = Decimal.pow(
                     1.1,
-                    player.bh.dm.add(1).log10().add(1).log10(),
+                    player.bh.dm.add(1).log10().add(1).log10()
                 );
                 return x;
             },
@@ -2106,7 +2106,7 @@ const ELEMENTS = {
                 let x = overflow(
                     tmp.matters.upg[12].eff.max(1),
                     "ee3",
-                    0.5,
+                    0.5
                 ).root(4);
                 if (tmp.c16active) x = x.log10().add(1);
                 return x;
@@ -2569,8 +2569,8 @@ function setupElementsHTML() {
                               ELEMENTS.names[num]
                           }')" onmouseover="tmp.elements.choosed = ${num}" onmouseleave="tmp.elements.choosed = 0">
                 <div style="font-size: 12px;">${num}</div><sup class="muon-symbol"></sup>${
-                    ELEMENTS.names[num]
-                }
+                              ELEMENTS.names[num]
+                          }
                 </button>`;
                 if (k == 1) {
                     if (num == 56 || num == 88) num += 14;
@@ -2609,8 +2609,8 @@ function setupElementsHTML() {
         <button class="btn" id="elemTier_btn${i}" onclick="player.atom.elemTier[player.atom.elemLayer] = ${i}">
             Tier ${i}<br>
             <span style="font-size: 10px">[${ELEMENTS.exp[i - 1] + 1} - ${
-                ELEMENTS.exp[i]
-            }]</span>
+            ELEMENTS.exp[i]
+        }]</span>
         </button>
         `;
     }
@@ -2627,7 +2627,7 @@ function updateElementsHTML() {
 
     tmp.el.elemLayer.setDisplay(tmp.eaUnl);
     tmp.el.elemLayer.setHTML(
-        "Elements' Layer: " + ["Normal", "Muonic"][elayer],
+        "Elements' Layer: " + ["Normal", "Muonic"][elayer]
     );
 
     tmp.el.elemTierDiv.setDisplay(tElem.max_tier[elayer] > 1);
@@ -2649,7 +2649,7 @@ function updateElementsHTML() {
                 ["", "Muonic "][elayer] +
                 ELEMENTS.fullNames[ch] +
                 "]</b> " +
-                eu.desc,
+                eu.desc
         );
         tmp.el.elem_desc.setClasses({
             sky: true,
@@ -2661,14 +2661,14 @@ function updateElementsHTML() {
                 (eu.c16
                     ? " in Challenge 16"
                     : !infU7 && BR_ELEM.includes(ch)
-                      ? " in Big Rip"
-                      : "") +
+                    ? " in Big Rip"
+                    : "") +
                 (player.qu.rip.active && tElem.cannot.includes(ch)
                     ? " [CANNOT AFFORD in Big Rip]"
-                    : ""),
+                    : "")
         );
         tmp.el.elem_eff.setHTML(
-            eu.effDesc ? "Currently: " + eu.effDesc(eff[ch]) : "",
+            eu.effDesc ? "Currently: " + eu.effDesc(eff[ch]) : ""
         );
     }
 
@@ -2715,7 +2715,7 @@ function updateElementsHTML() {
                                       c16: elayer == 0 && eu.c16,
                                       inf: elayer == 0 && eu.inf,
                                       cs: elayer == 1 && eu.cs,
-                                  },
+                                  }
                         );
                     }
                 }

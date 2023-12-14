@@ -667,7 +667,7 @@ const CHALS = {
         max: E(50),
         inc: E(64),
         pow: E(1.25),
-        start: E(1.5e76),
+        start: E(1e74),
         effect(x) {
             let c = hasPrestige(2, 25);
             let ret = c

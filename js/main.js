@@ -226,7 +226,7 @@ const FORMS = {
     },
     massSoftPower2() {
         let p = E(
-            player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.1 : 0.25,
+            player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.1 : 0.25
         );
         if (hasElement(51)) p = p.pow(0.9);
         return p;
@@ -244,20 +244,20 @@ const FORMS = {
     },
     massSoftPower3() {
         let p = E(
-            player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.1 : 0.2,
+            player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.1 : 0.2
         );
         if (hasElement(77))
             p = p.pow(
                 player.qu.rip.active || tmp.c16active || inDarkRun()
                     ? 0.95
-                    : 0.825,
+                    : 0.825
             );
         return p;
     },
     massSoftGain4() {
         if (player.ranks.hex.gte(17)) return EINF;
         let s = mlt(
-            player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.1 : 1e4,
+            player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.1 : 1e4
         );
         if (player.ranks.pent.gte(8)) s = s.pow(RANKS.effect.pent[8]());
         if (hasTree("qc1")) s = s.pow(treeEff("qc1"));
@@ -269,16 +269,14 @@ const FORMS = {
         let p = E(0.1);
         if (hasElement(100))
             p = p.pow(
-                player.qu.rip.active || tmp.c16active || inDarkRun()
-                    ? 0.8
-                    : 0.5,
+                player.qu.rip.active || tmp.c16active || inDarkRun() ? 0.8 : 0.5
             );
         return p;
     },
     massSoftGain5() {
         if (player.ranks.hex.gte(36)) return EINF;
         let s = mlt(
-            player.qu.rip.active || tmp.c16active || inDarkRun() ? 1e4 : 1e12,
+            player.qu.rip.active || tmp.c16active || inDarkRun() ? 1e4 : 1e12
         );
         if (hasPrestige(0, 8)) s = s.pow(prestigeEff(0, 8));
         if (hasUpgrade("br", 12)) s = s.pow(upgEffect(4, 12));
@@ -401,7 +399,7 @@ const FORMS = {
                 (hasAscension(0, 1)
                     ? t.add(1).mul(bonus.add(1))
                     : t.add(bonus)
-                ).mul(hasElement(80) ? 25 : 1),
+                ).mul(hasElement(80) ? 25 : 1)
             );
 
             if (!hasElement(199) || CHALS.inChal(15)) {
@@ -493,7 +491,7 @@ const FORMS = {
                 gain = gain.mul(RANKS.effect.tier[6]());
             if (player.mainUpg.bh.includes(6))
                 gain = gain.mul(
-                    tmp.upgs.main ? tmp.upgs.main[2][6].effect : E(1),
+                    tmp.upgs.main ? tmp.upgs.main[2][6].effect : E(1)
                 );
             if (hasTree("rp1")) gain = gain.mul(tmp.supernova.tree_eff.rp1);
 
@@ -531,7 +529,7 @@ const FORMS = {
                     createConfirm(
                         "Are you sure you want to reset?",
                         "rpReset",
-                        CONFIRMS_FUNCTION.rage,
+                        CONFIRMS_FUNCTION.rage
                     );
                 else CONFIRMS_FUNCTION.rage();
             }
@@ -716,7 +714,7 @@ const FORMS = {
                     createConfirm(
                         "Are you sure you want to reset?",
                         "bhReset",
-                        CONFIRMS_FUNCTION.bh,
+                        CONFIRMS_FUNCTION.bh
                     );
                 else CONFIRMS_FUNCTION.bh();
             }
@@ -743,7 +741,7 @@ const FORMS = {
 
             if (hasElement(201))
                 x = Decimal.add(1.1, exoticAEff(0, 5, 0)).pow(
-                    x.max(1).log10().add(1).log10().pow(0.8),
+                    x.max(1).log10().add(1).log10().pow(0.8)
                 );
 
             if (hasUpgrade("bh", 18)) x = x.pow(2.5);
@@ -791,18 +789,18 @@ const FORMS = {
                 pow = pow.add(tmp.chal.eff[6]);
                 if (player.mainUpg.bh.includes(2))
                     pow = pow.mul(
-                        tmp.upgs.main ? tmp.upgs.main[2][2].effect : E(1),
+                        tmp.upgs.main ? tmp.upgs.main[2][2].effect : E(1)
                     );
                 pow = pow.add(tmp.atom.particles[2].powerEffect.eff2);
                 if (player.mainUpg.atom.includes(11))
                     pow = pow.mul(
-                        tmp.upgs.main ? tmp.upgs.main[3][11].effect : E(1),
+                        tmp.upgs.main ? tmp.upgs.main[3][11].effect : E(1)
                     );
                 pow = pow.mul(tmp.bosons.upgs.photon[1].effect);
                 pow = pow.mul(tmp.prim.eff[2][1]);
                 pow = pow.mul(getEnRewardEff(3)[1]);
                 if (hasTree("bs5")) pow = pow.mul(tmp.bosons.effect.z_boson[0]);
-                if (hasTree("bh2")) pow = pow.pow(1.15);
+                if (hasTree("bh2")) pow = pow.pow(1.2);
                 if (hasElement(129)) pow = pow.pow(elemEffect(18));
                 if (hasBeyondRank(2, 4))
                     pow = pow.pow(BUILDINGS.eff("accelerator"));
@@ -829,7 +827,7 @@ const FORMS = {
                 let x = E(0);
                 if (player.mainUpg.bh.includes(15))
                     x = x.add(
-                        tmp.upgs.main ? tmp.upgs.main[2][15].effect : E(0),
+                        tmp.upgs.main ? tmp.upgs.main[2][15].effect : E(0)
                     );
                 x = x.mul(getEnRewardEff(4));
                 return x;
@@ -982,7 +980,7 @@ function format(ex, acc = 4, max = 12, type = player.options.notation) {
                               E(3)
                                   .sub(e.sub(e3_mul))
                                   .add(acc == 0 ? 0 : 1)
-                                  .toNumber(),
+                                  .toNumber()
                           ) + " ") +
                     final
                 );
@@ -1008,8 +1006,8 @@ function formatMass(ex) {
         return ex.gte("ee14979")
             ? formatARV(ex)
             : ex.gte("1.5e1000000056")
-              ? format(ex.div(1.5e56).max(1).log10().div(1e9)) + " mlt"
-              : format(ex) + " g";
+            ? format(ex.div(1.5e56).max(1).log10().div(1e9)) + " mlt"
+            : format(ex) + " g";
     }
 
     if (ex.gte(E(1.5e56).mul("ee9"))) return formatARV(ex);

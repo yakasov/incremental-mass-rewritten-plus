@@ -80,7 +80,7 @@ const RESOURCES_DIS = {
                           ? tmp.atom.quarkGain
                                 .mul(tmp.atom.quarkGainSec)
                                 .mul(gs)
-                          : 0,
+                          : 0
                   )
                 : "(+" + format(tmp.atom.quarkGain, 0) + ")"),
     },
@@ -95,11 +95,11 @@ const RESOURCES_DIS = {
             (player.md.active
                 ? "(+" + format(tmp.md.rp_gain, 0) + ")"
                 : hasTree("qol3")
-                  ? formatGain(
-                        player.md.particles,
-                        tmp.md.passive_rp_gain.mul(gs),
-                    )
-                  : "(inactive)"),
+                ? formatGain(
+                      player.md.particles,
+                      tmp.md.passive_rp_gain.mul(gs)
+                  )
+                : "(inactive)"),
 
         resetBtn() {
             MASS_DILATION.onactive();
@@ -170,7 +170,7 @@ const RESOURCES_DIS = {
             (hasElement(118)
                 ? tmp.dark.rayEff.passive
                     ? player.dark.rays.formatGain(
-                          tmp.dark.gain.mul(tmp.dark.rayEff.passive).mul(gs),
+                          tmp.dark.gain.mul(tmp.dark.rayEff.passive).mul(gs)
                       )
                     : "(+" + tmp.dark.gain.format(0) + ")"
                 : "(require Og-118)"),
@@ -181,7 +181,9 @@ const RESOURCES_DIS = {
     },
     fss: {
         unl: () =>
-            player.dark.matters.final.gt(0) || (tmp.inf_unl && hasElement(188)),
+            player.dark.matters.final.gt(0) ||
+            (tmp.inf_unl && hasElement(188)) ||
+            tmp.matters.FSS_base.gte(tmp.matters.FSS_req),
         icon: "fss",
 
         desc: (gs) =>
@@ -242,7 +244,7 @@ const RESOURCES_DIS = {
                     .log10()
                     .div(tmp.inf_limit.max(1).log10().max(10).log10())
                     .max(0)
-                    .min(1),
+                    .min(1)
             ) +
             (tmp.brokenInf ? " to next infinity)" : " to infinity)"),
 
@@ -287,10 +289,10 @@ function setupResourcesHTML() {
             }>
                 <span style="margin-right: 5px; text-align: right;" id="${i}_res_desc">X</span>
                 <div><img src="images/${rd.icon || "mass"}.png" ${
-                    rd.resetBtn
-                        ? `onclick="reset_res_btn('${i}')" style="cursor: pointer;"`
-                        : ""
-                }></div>
+            rd.resetBtn
+                ? `onclick="reset_res_btn('${i}')" style="cursor: pointer;"`
+                : ""
+        }></div>
             </div>
         </div>
         `;
@@ -322,7 +324,7 @@ function updateResourcesHTML() {
 
         if (unl) {
             tmp.el[i + "_res_desc"].setHTML(
-                rd.desc(INF_GS_RES.includes(i) ? inf_gs : qu_gs),
+                rd.desc(INF_GS_RES.includes(i) ? inf_gs : qu_gs)
             );
         }
     }
@@ -337,7 +339,7 @@ function updateResourcesHiderHTML() {
 
         if (unl) {
             tmp.el[i + "_res_hide_btn"].setTxt(
-                player.options.res_hide[i] ? "ON" : "OFF",
+                player.options.res_hide[i] ? "ON" : "OFF"
             );
         }
     }
