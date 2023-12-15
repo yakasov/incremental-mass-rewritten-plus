@@ -104,8 +104,8 @@ const POPUP_GROUPS = {
     },
     supernova10: {
         html: `
-            Congratulations!<br><br>You have becomed 10 Supernovas!<br>
-            And you can manualy supernova!<br><br>
+            Congratulations!<br><br>You have exploded into 10 Supernovas!<br>
+            And you can manually supernova!<br><br>
             <b>Bosons are unlocked in Supernova tab!</b>
         `,
         width: 400,
@@ -116,7 +116,7 @@ const POPUP_GROUPS = {
     },
     fermions: {
         html: `
-            Congratulations!<br><br>You have beated Challenge 10!<br><br>
+            Congratulations!<br><br>You have beaten Challenge 10!<br><br>
             <b>Fermions are unlocked in Supernova tab!</b>
         `,
         width: 400,
@@ -129,7 +129,7 @@ const POPUP_GROUPS = {
         html() {
             return `
             Congratulations!<br><br>You have reached ${formatMass(
-                mlt(1e4),
+                mlt(1e4)
             )} of mass after beating Challenge 12!<br><br>
             <b>You need to go Quantum!</b>
         `;
@@ -156,7 +156,7 @@ const POPUP_GROUPS = {
         html() {
             return `
             <img src="images/qu_story2.png"><br><br>
-            Don’t worry, new mechanics will arrive for you!
+            Don’t worry, new mechanics await you!
         `;
         },
         button: "Cool",
@@ -168,7 +168,7 @@ const POPUP_GROUPS = {
         html() {
             return `
             Congratulations!<br><br>You have reached ${formatMass(
-                mlt(7.5e6),
+                mlt(7.5e6)
             )} of mass!<br><br>
             <b>Entropy is unlocked in Quantum tab!</b>
         `;
@@ -502,25 +502,25 @@ function updateStatsHTML() {
     if (tmp.stab[1] == 0)
         for (let i in RANKS.names) {
             tmp.el[`stats_${RANKS.names[i]}_btn`].setDisplay(
-                player.ranks[RANKS.names[i]].gt(0),
+                player.ranks[RANKS.names[i]].gt(0)
             );
         }
     else if (tmp.stab[1] == 1)
         for (let i in SCALE_TYPE) {
             tmp.el[`stats_${SCALE_TYPE[i]}_btn`].setDisplay(
-                tmp.scaling[SCALE_TYPE[i]].length > 0,
+                tmp.scaling[SCALE_TYPE[i]].length > 0
             );
         }
     else if (tmp.stab[1] == 2)
         for (let i in PRESTIGES.names) {
             tmp.el[`stats_${PRESTIGES.names[i]}_btn`].setDisplay(
-                player.prestiges[i].gt(0),
+                player.prestiges[i].gt(0)
             );
         }
     else if (tmp.stab[1] == 4)
         for (let i in ASCENSIONS.names) {
             tmp.el[`stats_${ASCENSIONS.names[i]}_btn`].setDisplay(
-                player.ascensions[i].gt(0),
+                player.ascensions[i].gt(0)
             );
         }
 }

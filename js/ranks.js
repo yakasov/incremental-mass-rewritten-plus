@@ -21,7 +21,7 @@ const RANKS = {
     bulk(type) {
         if (tmp.ranks[type].can) {
             player.ranks[type] = player.ranks[type].max(
-                tmp.ranks[type].bulk.max(player.ranks[type].add(1)),
+                tmp.ranks[type].bulk.max(player.ranks[type].add(1))
             );
             let reset = true;
             if (tmp.chal14comp || tmp.inf_unl) reset = false;
@@ -181,7 +181,7 @@ const RANKS = {
                     .pow(
                         player.ranks.rank.gte(17)
                             ? player.ranks.rank.add(1).root(3)
-                            : 2,
+                            : 2
                     );
                 return ret;
             },
@@ -209,9 +209,9 @@ const RANKS = {
                         .pow(
                             player.ranks.tier.gte(55)
                                 ? RANKS.effect.tier[55]()
-                                : 1,
+                                : 1
                         )
-                        .softcap(1000, 0.5, 0),
+                        .softcap(1000, 0.5, 0)
                 );
                 return ret;
             },
@@ -223,7 +223,7 @@ const RANKS = {
                             .mul(0.0025)
                             .add(1)
                             .softcap(1.25, 0.5, 0)
-                            .sub(1),
+                            .sub(1)
                     )
                     .max(0.75);
                 return ret;
@@ -433,7 +433,7 @@ const PRESTIGES = {
             case 0:
                 x = Decimal.pow(
                     1.1,
-                    y.scaleEvery("prestige0", false, [0, 0, 0, fp]).pow(1.1),
+                    y.scaleEvery("prestige0", false, [0, 0, 0, fp]).pow(1.1)
                 ).mul(2e13);
                 break;
             case 1:
@@ -800,7 +800,7 @@ const PRESTIGES = {
                 () => {
                     let x = Decimal.pow(
                         player.dark.exotic_atom.tier.add(1),
-                        1.5,
+                        1.5
                     );
                     return x;
                 },
@@ -958,7 +958,7 @@ function updateRanksTemp() {
                 .scaleEvery("rank", false, [1, 1, 1, 1, rt_fp2, 1, ifp])
                 .pow(rooted_fp)
                 .div(fp)
-                .pow(1.15),
+                .pow(1.15)
         )
         .mul(10);
     tmp.ranks.rank.bulk = E(0);
@@ -1087,7 +1087,7 @@ function updateRanksTemp() {
         let rn = RANKS.names[x];
         if (x > 0) {
             tmp.ranks[rn].can = player.ranks[RANKS.names[x - 1]].gte(
-                tmp.ranks[rn].req,
+                tmp.ranks[rn].req
             );
         }
     }
@@ -1130,7 +1130,7 @@ function updateRanksTemp() {
 
     tmp.beyond_ranks.max_tier = BEYOND_RANKS.getTier();
     tmp.beyond_ranks.latestRank = BEYOND_RANKS.getRankFromTier(
-        tmp.beyond_ranks.max_tier,
+        tmp.beyond_ranks.max_tier
     );
 
     tmp.beyond_ranks.req = BEYOND_RANKS.req();
@@ -1185,7 +1185,7 @@ const BEYOND_RANKS = {
                       tmp.beyond_ranks.scale_start,
                       tmp.beyond_ranks.scale_pow,
                       0,
-                      true,
+                      true
                   )
                   .floor()
             : E(1);
@@ -1199,12 +1199,12 @@ const BEYOND_RANKS = {
                     i.scale(
                         tmp.beyond_ranks.scale_start,
                         tmp.beyond_ranks.scale_pow,
-                        0,
+                        0
                     ),
-                    1,
+                    1
                 ).div(tmp.beyond_ranks.tier_power),
-                1 / 0.8,
-            ),
+                1 / 0.8
+            )
         ).ceil();
 
         return r.div(hp).floor();
@@ -1212,7 +1212,7 @@ const BEYOND_RANKS = {
     getRequirementFromTier(
         i,
         t = tmp.beyond_ranks.latestRank,
-        mt = tmp.beyond_ranks.max_tier,
+        mt = tmp.beyond_ranks.max_tier
     ) {
         let s = tmp.beyond_ranks.scale_start,
             p = tmp.beyond_ranks.scale_pow;
@@ -1221,9 +1221,9 @@ const BEYOND_RANKS = {
             Decimal.pow(
                 Decimal.div(
                     mt.add(1).scale(s, p, 0).sub(1),
-                    tmp.beyond_ranks.tier_power,
+                    tmp.beyond_ranks.tier_power
                 ),
-                1 / 0.8,
+                1 / 0.8
             ).sub(
                 Decimal.pow(
                     Decimal.sub(mt, i)
@@ -1231,9 +1231,9 @@ const BEYOND_RANKS = {
                         .scale(s, p, 0)
                         .sub(1)
                         .div(tmp.beyond_ranks.tier_power),
-                    1 / 0.8,
-                ),
-            ),
+                    1 / 0.8
+                )
+            )
         )
             .mul(Decimal.add(t, 1))
             .ceil();
@@ -1255,7 +1255,7 @@ const BEYOND_RANKS = {
                 ? player.ranks.beyond.max(tmp.beyond_ranks.bulk)
                 : player.ranks.beyond.add(1);
 
-            if (hasBeyondRank(2, 2) || hasInfUpgrade(10)) return;
+            if (hasBeyondRank(2, 2) || hasInfUpgrade(5)) return;
 
             player.ranks.hex = E(0);
             DARK.doReset();
@@ -1422,7 +1422,7 @@ const BEYOND_RANKS = {
                             .max(1)
                             .log10()
                             .div(15)
-                            .root(3),
+                            .root(3)
                     );
 
                     return x;
@@ -1441,7 +1441,7 @@ const BEYOND_RANKS = {
                 () => {
                     let x = Decimal.sub(
                         1,
-                        tmp.beyond_ranks.max_tier.mul(0.025),
+                        tmp.beyond_ranks.max_tier.mul(0.025)
                     );
 
                     return Decimal.max(0.5, x);
@@ -1455,7 +1455,7 @@ const BEYOND_RANKS = {
                     let x = overflow(tmp.prim.eff[7].div(5), 1e6, 0.5).softcap(
                         1e7,
                         1 / 3,
-                        0,
+                        0
                     );
 
                     return x;
@@ -1510,7 +1510,7 @@ const BEYOND_RANKS = {
                 () => {
                     let x = Decimal.pow(
                         1.25,
-                        tmp.beyond_ranks.max_tier.sub(13).max(0).root(2),
+                        tmp.beyond_ranks.max_tier.sub(13).max(0).root(2)
                     );
 
                     return x;
@@ -1599,7 +1599,7 @@ function updateRanksHTML() {
                     if (player.ranks[rn].lt(keys[i])) {
                         desc = ` At ${RANKS.fullNames[x]} ${format(
                             keys[i],
-                            0,
+                            0
                         )} - ${RANKS.desc[rn][keys[i]]}`;
                         break;
                     }
@@ -1618,11 +1618,11 @@ function updateRanksHTML() {
                         ? formatMass(tmp.ranks[rn].req)
                         : RANKS.fullNames[x - 1] +
                               " " +
-                              format(tmp.ranks[rn].req, 0),
+                              format(tmp.ranks[rn].req, 0)
                 );
                 tmp.el["ranks_auto_" + x].setDisplay(RANKS.autoUnl[rn]());
                 tmp.el["ranks_auto_" + x].setTxt(
-                    player.auto_ranks[rn] ? "ON" : "OFF",
+                    player.auto_ranks[rn] ? "ON" : "OFF"
                 );
             }
         }
@@ -1647,7 +1647,7 @@ function updateRanksHTML() {
 
             // Beyond Rank
 
-            tmp.el.br_auto.setDisplay(hasBeyondRank(2, 1) || hasInfUpgrade(10));
+            tmp.el.br_auto.setDisplay(hasBeyondRank(2, 1) || hasInfUpgrade(5));
             tmp.el.br_auto.setTxt(player.auto_ranks.beyond ? "ON" : "OFF");
 
             let t = tmp.beyond_ranks.max_tier;
@@ -1694,19 +1694,19 @@ function updateRanksHTML() {
             h = `
                 Reset your Hexes (and force a darkness reset) but hept/oct/enne etc. up. ${r}<br>
                 To ${getRankTierName(t.add(5))} up, require ${getRankTierName(
-                    t.add(4),
-                )} ${
-                    t == 1
-                        ? tmp.beyond_ranks.req.format(0)
-                        : BEYOND_RANKS.getRequirementFromTier(
-                              1,
-                              tmp.beyond_ranks.latestRank,
-                              t.sub(1),
-                          ).format(0)
-                }.<br>
+                t.add(4)
+            )} ${
+                t == 1
+                    ? tmp.beyond_ranks.req.format(0)
+                    : BEYOND_RANKS.getRequirementFromTier(
+                          1,
+                          tmp.beyond_ranks.latestRank,
+                          t.sub(1)
+                      ).format(0)
+            }.<br>
                 To ${getRankTierName(t.add(6))} up, require ${getRankTierName(
-                    t.add(5),
-                )} ${BEYOND_RANKS.getRequirementFromTier(1, 0).format(0)}.
+                t.add(5)
+            )} ${BEYOND_RANKS.getRequirementFromTier(1, 0).format(0)}.
             `;
 
             tmp.el.br_desc.setHTML(h);
@@ -1722,14 +1722,14 @@ function updateRanksHTML() {
         tmp.el.rankCollapse.setDisplay(player.ranks.beyond.gte(rc.start));
         tmp.el.rankCollapse.setHTML(
             `Because of Rank Collapse at <b>${BEYOND_RANKS.getRankDisplayFromValue(
-                rc.start,
-            )}</b>, Hept's requirement is raised by <b>${rc.reduction.format()}</b>!`,
+                rc.start
+            )}</b>, Hept's requirement is raised by <b>${rc.reduction.format()}</b>!`
         );
     } else if (tmp.rank_tab == 1) {
         tmp.el.pres_base.setHTML(
             `${tmp.prestiges.baseMul.format(0)}<sup>${format(
-                tmp.prestiges.baseExp,
-            )}</sup> = ${tmp.prestiges.base.format(0)}`,
+                tmp.prestiges.baseExp
+            )}</sup> = ${tmp.prestiges.base.format(0)}`
         );
 
         for (let x = 0; x < PRES_LEN; x++) {
@@ -1748,14 +1748,14 @@ function updateRanksHTML() {
                     ) {
                         desc = ` At ${PRESTIGES.fullNames[x]} ${format(
                             keys[i],
-                            0,
+                            0
                         )} - ${PRESTIGES.rewards[x][keys[i]]}`;
                         break;
                     }
                 }
 
                 tmp.el["pres_scale_" + x].setTxt(
-                    getScalingName("prestige" + x),
+                    getScalingName("prestige" + x)
                 );
                 tmp.el["pres_amt_" + x].setTxt(format(p, 0));
                 tmp.el["pres_" + x].setClasses({
@@ -1772,11 +1772,11 @@ function updateRanksHTML() {
                         ? format(tmp.prestiges.req[x], 0) + " of Prestige Base"
                         : PRESTIGES.fullNames[x - 1] +
                               " " +
-                              format(tmp.prestiges.req[x], 0),
+                              format(tmp.prestiges.req[x], 0)
                 );
                 tmp.el["pres_auto_" + x].setDisplay(PRESTIGES.autoUnl[x]());
                 tmp.el["pres_auto_" + x].setTxt(
-                    player.auto_pres[x] ? "ON" : "OFF",
+                    player.auto_pres[x] ? "ON" : "OFF"
                 );
             }
         }
@@ -1793,7 +1793,7 @@ const GAL_PRESTIGE = {
     req() {
         let x = Decimal.pow(
             10,
-            player.gal_prestige.scaleEvery("gal_prestige").pow(1.5),
+            player.gal_prestige.scaleEvery("gal_prestige").pow(1.5)
         ).mul(1e17);
 
         return x;
@@ -1898,7 +1898,7 @@ const GAL_PRESTIGE = {
             case 1:
                 x = Decimal.pow(
                     0.97,
-                    res.add(1).log10().overflow(10, 0.5).root(2),
+                    res.add(1).log10().overflow(10, 0.5).root(2)
                 );
                 break;
             case 2:
@@ -1907,7 +1907,7 @@ const GAL_PRESTIGE = {
             case 3:
                 x = Decimal.pow(
                     0.9,
-                    res.add(10).log10().log10().add(1).pow(2).sub(1),
+                    res.add(10).log10().log10().add(1).pow(2).sub(1)
                 );
                 break;
             case 4:
@@ -1963,52 +1963,52 @@ function updateGPHTML() {
 
         if (gp.gte(1))
             h += `You have <h4>${res[0].format(0)}</h4> ${res[0].formatGain(
-                res_gain[0],
+                res_gain[0]
             )} Galactic Stars (based on collapsed stars and galactic prestige), 
         which strengthens star generators by <h4>${formatPercent(
-            res_effect[0].sub(1),
+            res_effect[0].sub(1)
         )}</h4> exponentially.<br>`;
 
         if (gp.gte(2))
             h += `You have <h4>${formatMass(res[1])}</h4> ${res[1].formatGain(
                 res_gain[1],
-                true,
+                true
             )} of Prestige Mass (based on prestige base and galactic prestige), 
         which weakens mass overflow^1-2 by <h4>${formatReduction(
-            res_effect[1],
+            res_effect[1]
         )}</h4>.<br>`;
 
         if (gp.gte(4))
             h += `You have <h4>${res[2].format(0)}</h4> ${res[2].formatGain(
-                res_gain[2],
+                res_gain[2]
             )} Galactic Matter (based on fading matter and galactic prestige), 
         which increases to the base of all Matter upgrades by <h4>+${format(
-            res_effect[2],
+            res_effect[2]
         )}</h4>.<br>`;
 
         if (gp.gte(6))
             h += `You have <h4>${res[3].format(0)}</h4> ${res[3].formatGain(
-                res_gain[3],
+                res_gain[3]
             )} Redshift (based on frequency and galactic prestige), 
         which reduces Rank requirement by <h4>^${format(
             res_effect[3],
-            5,
+            5
         )}</h4>.<br>`;
 
         if (gp.gte(9))
             h += `You have <h4>${res[4].format(0)}</h4> ${res[4].formatGain(
-                res_gain[4],
+                res_gain[4]
             )} Normal Energy (based on corrupted star and galactic prestige), 
         which weaken corrupted star reduction by <h4>${formatReduction(
-            res_effect[4],
+            res_effect[4]
         )}</h4>.<br>`;
 
         if (gp.gte(14))
             h += `You have <h4>${res[5].format(0)}</h4> ${res[5].formatGain(
-                res_gain[5],
+                res_gain[5]
             )} Dilatons (based on higgs bosons and galactic prestige), 
         which increases Pre-Infinity Global Speed by <h4>${formatMult(
-            res_effect[5],
+            res_effect[5]
         )}</h4>.<br>`;
 
         tmp.el.gp_rewards.setHTML(h);

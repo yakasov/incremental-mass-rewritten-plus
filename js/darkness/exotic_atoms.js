@@ -45,7 +45,7 @@ const MUONIC_ELEM = {
             eff() {
                 let x = Decimal.pow(
                     hasElement(26, 1) ? 3 : 2,
-                    player.atom.muonic_el.length,
+                    player.atom.muonic_el.length
                 );
                 return x;
             },
@@ -61,8 +61,8 @@ const MUONIC_ELEM = {
                     x = x.mul(
                         Decimal.pow(
                             c16 ? 1.25 : 1.1,
-                            player.chal.comps[i].root(2),
-                        ),
+                            player.chal.comps[i].root(2)
+                        )
                     );
                 return x;
             },
@@ -516,7 +516,7 @@ function updateMuonSymbol(start = false) {
 
     document.documentElement.style.setProperty(
         "--elem-symbol-size",
-        ["18px", "16px"][elayer],
+        ["18px", "16px"][elayer]
     );
 
     let divs = document.getElementsByClassName("muon-symbol");
@@ -549,7 +549,7 @@ const EXOTIC_ATOM = {
         else
             r = Decimal.pow(
                 "e1000",
-                Decimal.pow(1.25, t.sub(12).div(tmp.exotic_atom.req_fp)),
+                Decimal.pow(1.25, t.sub(12).div(tmp.exotic_atom.req_fp))
             );
 
         return r;
@@ -570,7 +570,7 @@ const EXOTIC_ATOM = {
     getAmount(
         a0 = player.dark.exotic_atom.amount[0],
         a1 = player.dark.exotic_atom.amount[1],
-        floor = true,
+        floor = true
     ) {
         let x = a0.mul(a1);
 
@@ -625,7 +625,7 @@ const EXOTIC_ATOM = {
                 },
                 (x) =>
                     `Ultra & Meta-Prestige Levels start <b>${formatMult(
-                        x,
+                        x
                     )}</b> later`,
             ],
             [
@@ -648,20 +648,20 @@ const EXOTIC_ATOM = {
                 },
                 (x) =>
                     `Impossible Challenges 1-12 start <b>${formatMult(
-                        x,
+                        x
                     )}</b> later`,
             ],
             [
                 (a) => {
                     let x = Decimal.pow(
                         0.8725,
-                        a.add(1).log10().softcap(20, 0.25, 0).root(2),
+                        a.add(1).log10().softcap(20, 0.25, 0).root(2)
                     );
                     return x.toNumber();
                 },
                 (x) =>
                     `Weaken softcaps of atomic power's effect by <b>${formatReduction(
-                        x,
+                        x
                     )}</b>`,
             ],
             [
@@ -671,7 +671,7 @@ const EXOTIC_ATOM = {
                 },
                 (x) =>
                     `Increase the base of Prestige Level 382 for Collapsed Star's effect, the base of Binilunium-201 for BH's effect by <b>+${format(
-                        x,
+                        x
                     )}</b>`,
             ],
         ],
@@ -687,7 +687,7 @@ const EXOTIC_ATOM = {
                 },
                 (x) =>
                     `Boosts mass of unstable BH gain by <b>${formatMult(
-                        x[0],
+                        x[0]
                     )}</b>` +
                     (hasElement(39, 1) ? `, <b>^${format(x[1])}</b>` : ""),
             ],
@@ -720,7 +720,7 @@ const EXOTIC_ATOM = {
                 },
                 (x) =>
                     `Increase parallel extruder's power by <b>+${format(
-                        x,
+                        x
                     )}</b>`,
             ],
             [
@@ -801,12 +801,12 @@ function updateExoticAtomsHTML() {
     if (t.gt(0)) {
         let g = EXOTIC_ATOM.getAmount(
                 ea.amount[0].add(tea.gain[0].mul(inf_gs)),
-                ea.amount[1].add(tea.gain[1].mul(inf_gs)),
+                ea.amount[1].add(tea.gain[1].mul(inf_gs))
             ).sub(tea.amount),
             tt = t.min(12).toNumber();
 
         tmp.el.ext_atom.setHTML(
-            tea.amount.format(0) + " " + tea.amount.formatGain(g),
+            tea.amount.format(0) + " " + tea.amount.formatGain(g)
         );
         tmp.el.ea_strength.setHTML(formatPercent(tea.strength));
 
@@ -814,7 +814,7 @@ function updateExoticAtomsHTML() {
             tmp.el["ea_amt" + i].setHTML(
                 ea.amount[i].format(2) +
                     " " +
-                    ea.amount[i].formatGain(tea.gain[i].mul(inf_gs)),
+                    ea.amount[i].formatGain(tea.gain[i].mul(inf_gs))
             );
 
             let h = "";

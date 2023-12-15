@@ -32,9 +32,9 @@ const QUANTUM = {
                         createConfirm(
                             "ARE YOU SURE ABOUT IT???",
                             "quReset",
-                            () => CONFIRMS_FUNCTION.qu(auto, force, rip, bd),
+                            () => CONFIRMS_FUNCTION.qu(auto, force, rip, bd)
                         );
-                    },
+                    }
                 );
             else CONFIRMS_FUNCTION.qu(auto, force, rip, bd);
         }
@@ -80,7 +80,7 @@ const QUANTUM = {
                     "qol7",
                     "chal4b",
                     "chal7a",
-                    "chal8",
+                    "chal8"
                 );
             if (tmp.qu.mil_reached[3]) {
                 if (!force) keep.push("unl1");
@@ -136,7 +136,7 @@ const QUANTUM = {
         let x = E(1);
         if (tmp.qu.mil_reached[5])
             x = x.mul(
-                tmp.preQUGlobalSpeed.max(1).root(2).softcap(1e50, 0.95, 2),
+                tmp.preQUGlobalSpeed.max(1).root(2).softcap(1e50, 0.95, 2)
             );
         if (hasTree("qu5")) x = x.mul(tmp.supernova.tree_eff.qu5);
         if (hasElement(138)) x = x.mul(elemEffect(138, 1));
@@ -297,14 +297,14 @@ function calcQuantum(dt) {
         player.qu.bp = player.qu.bp.add(tmp.qu.bpGain.mul(inf_gs));
         for (let x = 0; x < CHROMA_LEN; x++)
             player.qu.chroma[x] = player.qu.chroma[x].add(
-                tmp.qu.chroma_gain[x].mul(inf_gs),
+                tmp.qu.chroma_gain[x].mul(inf_gs)
             );
 
         if (player.qu.auto_cr) QUANTUM.cosmic_str.buyMax();
 
         if (PRIM.unl()) {
             player.qu.prim.theorems = player.qu.prim.theorems.max(
-                tmp.prim.theorems,
+                tmp.prim.theorems
             );
         }
 
@@ -321,11 +321,11 @@ function calcQuantum(dt) {
 
         if (hasUpgrade("br", 8)) {
             player.qu.points = player.qu.points.add(
-                tmp.qu.gain.mul(inf_gs).div(10),
+                tmp.qu.gain.mul(inf_gs).div(10)
             );
             if (player.qu.rip.active || hasElement(147))
                 player.qu.rip.amt = player.qu.rip.amt.add(
-                    tmp.rip.gain.mul(inf_gs).div(10),
+                    tmp.rip.gain.mul(inf_gs).div(10)
                 );
         }
 
@@ -340,10 +340,10 @@ function calcQuantum(dt) {
 
     if (hasUpgrade("br", 9)) {
         player.md.break.energy = player.md.break.energy.add(
-            tmp.bd.energyGain.mul(inf_gs),
+            tmp.bd.energyGain.mul(inf_gs)
         );
         player.md.break.mass = player.md.break.mass.add(
-            tmp.bd.massGain.mul(inf_gs),
+            tmp.bd.massGain.mul(inf_gs)
         );
     }
 
@@ -399,7 +399,7 @@ function updateQuantumHTML() {
         tmp.el.bpAmt.setTxt(
             format(player.qu.bp, 1) +
                 " " +
-                formatGain(player.qu.bp, tmp.qu.bpGain.mul(inf_gs)),
+                formatGain(player.qu.bp, tmp.qu.bpGain.mul(inf_gs))
         );
         tmp.el.bpEff.setTxt(format(tmp.qu.bpEff));
 
@@ -426,7 +426,7 @@ function updateQuantumHTML() {
             for (let x = 0; x < QUANTUM.mils.length; x++) {
                 tmp.el["qu_mil" + x].changeStyle(
                     "background-color",
-                    tmp.qu.mil_reached[x] ? "#2f22" : "#4442",
+                    tmp.qu.mil_reached[x] ? "#2f22" : "#4442"
                 );
                 tmp.el["qu_mil_goal" + x].setTxt(format(QUANTUM.mils[x][0], 0));
             }
@@ -437,7 +437,7 @@ function updateQuantumHTML() {
             tmp.el.auto_qu_res.setTxt(
                 player.qu.auto.mode == 0
                     ? format(tmp.qu.auto_input, 0)
-                    : formatTime(tmp.qu.auto_input, 1) + "s",
+                    : formatTime(tmp.qu.auto_input, 1) + "s"
             );
         }
         if (tmp.stab[6] == 3) updatePrimordiumHTML();

@@ -74,9 +74,9 @@ Decimal.prototype.scaleName = function (type, id, rev = false, type_index) {
                     ? 3
                     : 1
                 : type_index >= 6
-                  ? 2
-                  : 0,
-            rev,
+                ? 2
+                : 0,
+            rev
         );
     }
     return x;
@@ -85,7 +85,7 @@ Decimal.prototype.scaleName = function (type, id, rev = false, type_index) {
 Decimal.prototype.scaleEvery = function (
     id,
     rev = false,
-    fp = SCALE_FP[id] ? SCALE_FP[id]() : [1, 1, 1, 1, 1, 1],
+    fp = SCALE_FP[id] ? SCALE_FP[id]() : [1, 1, 1, 1, 1, 1]
 ) {
     var x = this.clone();
     for (let i = 0; i < SCALE_TYPE.length; i++) {
@@ -103,8 +103,8 @@ Decimal.prototype.scaleEvery = function (
                 ? x.mul(f)
                 : x.div(f)
             : rev
-              ? x.mul(f).scaleName(sc, id, rev, s)
-              : x.scaleName(sc, id, rev, s).div(f);
+            ? x.mul(f).scaleName(sc, id, rev, s)
+            : x.scaleName(sc, id, rev, s).div(f);
     }
     return x;
 };
@@ -158,7 +158,7 @@ function calc(dt) {
         }
         if (
             player.auto_ranks.beyond &&
-            (hasBeyondRank(2, 1) || hasInfUpgrade(10))
+            (hasBeyondRank(2, 1) || hasInfUpgrade(5))
         )
             BEYOND_RANKS.reset(true);
         for (let x = 0; x < PRES_LEN; x++)
@@ -181,16 +181,16 @@ function calc(dt) {
             player.bh.dm = player.bh.dm.add(tmp.bh.dm_gain.mul(du_gs));
         if (hasElement(14))
             player.atom.quarks = player.atom.quarks.add(
-                tmp.atom.quarkGain.mul(du_gs.mul(tmp.atom.quarkGainSec)),
+                tmp.atom.quarkGain.mul(du_gs.mul(tmp.atom.quarkGainSec))
             );
         if (hasElement(24))
             player.atom.points = player.atom.points.add(
-                tmp.atom.gain.mul(du_gs),
+                tmp.atom.gain.mul(du_gs)
             );
         if (hasElement(30) && !(CHALS.inChal(9) || FERMIONS.onActive("12")))
             for (let x = 0; x < 3; x++)
                 player.atom.particles[x] = player.atom.particles[x].add(
-                    player.atom.quarks.mul(du_gs).div(10),
+                    player.atom.quarks.mul(du_gs).div(10)
                 );
         if (hasElement(43))
             for (let x = 0; x < MASS_DILATION.upgs.ids.length; x++)
@@ -213,11 +213,11 @@ function calc(dt) {
             player.bh.mass = player.bh.mass.add(tmp.bh.mass_gain.mul(du_gs));
         if (player.atom.unl) {
             player.atom.atomic = player.atom.atomic.add(
-                tmp.atom.atomicGain.mul(du_gs),
+                tmp.atom.atomicGain.mul(du_gs)
             );
             for (let x = 0; x < 3; x++)
                 player.atom.powers[x] = player.atom.powers[x].add(
-                    tmp.atom.particles[x].powerGain.mul(du_gs),
+                    tmp.atom.particles[x].powerGain.mul(du_gs)
                 );
         }
         if (hasTree("qol1"))
@@ -228,7 +228,7 @@ function calc(dt) {
             player.md.particles = player.md.particles.add(
                 player.md.active
                     ? tmp.md.rp_gain.mul(du_gs)
-                    : tmp.md.passive_rp_gain.mul(du_gs),
+                    : tmp.md.passive_rp_gain.mul(du_gs)
             );
         if (hasTree("qol4")) STARS.generators.unl(true);
         if (hasTree("qol7")) {
@@ -241,7 +241,7 @@ function calc(dt) {
 
         for (let i = 0; i < GAL_PRESTIGE.res_length; i++)
             player.gp_resources[i] = player.gp_resources[i].add(
-                tmp.gp.res_gain[i].mul(dt),
+                tmp.gp.res_gain[i].mul(dt)
             );
 
         RADIATION.autoBuyBoosts();
@@ -255,11 +255,11 @@ function calc(dt) {
 
         if (tmp.SN_passive)
             player.supernova.times = player.supernova.times.add(
-                tmp.supernova.passive.mul(dt),
+                tmp.supernova.passive.mul(dt)
             );
         else if (hasTree("qu_qol4"))
             player.supernova.times = player.supernova.times.max(
-                tmp.supernova.bulk,
+                tmp.supernova.bulk
             );
 
         if (hasTree("qol6")) CHALS.exit(true);
@@ -268,26 +268,26 @@ function calc(dt) {
             if (hasTree("qu_qol3"))
                 for (let x = 1; x <= 4; x++)
                     player.chal.comps[x] = player.chal.comps[x].max(
-                        tmp.chal.bulk[x].min(tmp.chal.max[x]),
+                        tmp.chal.bulk[x].min(tmp.chal.max[x])
                     );
             if (hasTree("qu_qol5"))
                 for (let x = 5; x <= 8; x++)
                     player.chal.comps[x] = player.chal.comps[x].max(
-                        tmp.chal.bulk[x].min(tmp.chal.max[x]),
+                        tmp.chal.bulk[x].min(tmp.chal.max[x])
                     );
             if (hasElement(122))
                 for (let x = 9; x <= 11; x++)
                     player.chal.comps[x] = player.chal.comps[x].max(
-                        tmp.chal.bulk[x].min(tmp.chal.max[x]),
+                        tmp.chal.bulk[x].min(tmp.chal.max[x])
                     );
             if (hasElement(131))
                 player.chal.comps[12] = player.chal.comps[12].max(
-                    tmp.chal.bulk[12].min(tmp.chal.max[12]),
+                    tmp.chal.bulk[12].min(tmp.chal.max[12])
                 );
             if (hasInfUpgrade(12))
                 for (let x = 13; x <= 15; x++)
                     player.chal.comps[x] = player.chal.comps[x].max(
-                        tmp.chal.bulk[x].min(tmp.chal.max[x]),
+                        tmp.chal.bulk[x].min(tmp.chal.max[x])
                     );
         }
     }
@@ -499,7 +499,7 @@ function loadPlayer(load) {
                 player.supernova.fermions.tiers[i][x].min(
                     typeof f.maxTier == "function"
                         ? f.maxTier()
-                        : f.maxTier || 1 / 0,
+                        : f.maxTier || 1 / 0
                 );
         }
     if (typeof player.atom.elemTier == "number")
@@ -539,8 +539,8 @@ function clonePlayer(obj, data) {
             Object.getPrototypeOf(data[k]).constructor.name == "Decimal"
                 ? E(obj[k])
                 : typeof obj[k] == "object"
-                  ? clonePlayer(obj[k], data[k])
-                  : obj[k];
+                ? clonePlayer(obj[k], data[k])
+                : obj[k];
     }
 
     return unique;
@@ -590,7 +590,7 @@ function convertStringToDecimal() {
     for (let x in BOSONS.upgs.ids)
         for (let y in BOSONS.upgs[BOSONS.upgs.ids[x]])
             player.supernova.b_upgs[BOSONS.upgs.ids[x]][y] = E(
-                player.supernova.b_upgs[BOSONS.upgs.ids[x]][y] || 0,
+                player.supernova.b_upgs[BOSONS.upgs.ids[x]][y] || 0
             );
 
     for (let x in player.inf.core) {
@@ -684,18 +684,18 @@ function importy() {
             if (ssf[2](loadgame)) return;
             if (st == "OJY$VFe*b") {
                 addNotify(
-                    'monke<br><img style="width: 100%; height: 100%" src="https://i.kym-cdn.com/photos/images/original/001/132/314/cbc.jpg">',
+                    'monke<br><img style="width: 100%; height: 100%" src="https://i.kym-cdn.com/photos/images/original/001/132/314/cbc.jpg">'
                 );
                 return;
             } else if (st == "p4H)pb{v2y5?g!") {
                 addNotify(
-                    '2+2=5<br><img src="https://cdn2.penguin.com.au/authors/400/106175au.jpg">',
+                    '2+2=5<br><img src="https://cdn2.penguin.com.au/authors/400/106175au.jpg">'
                 );
                 return;
             } else if (st == "L5{W*oI.NhA-lE)C1#e") {
                 addNotify(
                     '<img src="https://steamuserimages-a.akamaihd.net/ugc/83721257582613769/22687C6536A50ADB3489A721A264E0EF506A89B3/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">',
-                    6,
+                    6
                 );
                 return;
             } else if (st == "a+F4gro<?/Sd") {
@@ -722,7 +722,7 @@ function importy() {
                     player = keep;
                 }
             }
-        },
+        }
     );
 }
 
@@ -795,7 +795,7 @@ function loadGame(start = true, gotNaN = false) {
                     createPopup(
                         `You trolled! I can't disable softcap! April Fools! <br><br> <img src="https://media.tenor.com/GryShD35-psAAAAM/troll-face-creepy-smile.gif">`,
                         "troll",
-                        "Dammit!",
+                        "Dammit!"
                     );
                     document.body.style.background = `url(https://usagif.com/wp-content/uploads/2021/4fh5wi/troll-face-26.gif)`;
                     tmp.aprilEnabled = true;
@@ -804,9 +804,9 @@ function loadGame(start = true, gotNaN = false) {
                     createPopup(
                         `<img style="width: 200px; height: 200px" src="https://media.tenor.com/U1dgzSAQk8wAAAAd/kys.gif">`,
                         "kys",
-                        "die",
+                        "die"
                     );
-                },
+                }
             );
     }
 }
@@ -830,8 +830,8 @@ function isNaNed(val) {
     return typeof val == "number"
         ? isNaN(val)
         : Object.getPrototypeOf(val).constructor.name == "Decimal"
-          ? isNaN(val.mag)
-          : false;
+        ? isNaN(val.mag)
+        : false;
 }
 
 function findNaN(obj, str = false, data = getPlayerData(), node = "player") {
@@ -862,7 +862,7 @@ function findNaN(obj, str = false, data = getPlayerData(), node = "player") {
                 obj[k],
                 str,
                 data[k],
-                (node ? node + "." : "") + k,
+                (node ? node + "." : "") + k
             );
             if (node2) return node2;
         }
@@ -878,7 +878,7 @@ function overflow(number, start, power, meta = 1) {
         number = Decimal.iteratedexp(
             10,
             meta,
-            number.iteratedlog(10, meta).div(s).pow(power).mul(s),
+            number.iteratedlog(10, meta).div(s).pow(power).mul(s)
         );
     }
     return number;
@@ -955,37 +955,37 @@ function simulateTime(sec) {
             .log10(),
     };
 
-    // console.log(s2)
-
     if (s2.mass.gte(10))
-        h += `<br>Your mass's exponent<sup>2</sup> is increased by <b>${s2.mass.format(
-            2,
+        h += `<br>Your mass's exponent<sup>2</sup> increased by <b>${s2.mass.format(
+            2
         )}</b>.`;
     else if (s.mass.gte(10))
-        h += `<br>Your mass's exponent is increased by <b>${s.mass.format(
-            2,
+        h += `<br>Your mass's exponent increased by <b>${s.mass.format(
+            2
         )}</b>.`;
 
     if (s2.bh_mass.gte(10))
-        h += `<br>Your exponent<sup>2</sup> of mass of black hole is increased by <b>${s2.bh_mass.format(
-            2,
+        h += `<br>Your mass of black hole's exponent<sup>2</sup> increased by <b>${s2.bh_mass.format(
+            2
         )}</b>.`;
     else if (s.bh_mass.gte(10))
-        h += `<br>Your exponent of mass of black hole is increased by <b>${s.bh_mass.format(
-            2,
+        h += `<br>Your mass of black hole exponent increased by <b>${s.bh_mass.format(
+            2
         )}</b>.`;
 
     if (s2.quarks.gte(10))
-        h += `<br>Your quark's exponent<sup>2</sup> is increased by <b>${s2.quarks.format(
-            2,
+        h += `<br>Your quark's exponent<sup>2</sup> increased by <b>${s2.quarks.format(
+            2
         )}</b>.`;
     else if (s.quarks.gte(10))
-        h += `<br>Your quark's exponent is increased by <b>${s.quarks.format(
-            2,
+        h += `<br>Your quark's exponent increased by <b>${s.quarks.format(
+            2
         )}</b>.`;
 
     if (s.sn.gte(1e3))
-        h += `<br>You were becomed <b>${s.sn.format(0)}</b> more supernovas.`;
+        h += `<br>You exploded into <b>${s.sn.format(0)}</b> more supernovas.`;
 
-    createPopup(h, "offline");
+    if (sec > 300) {
+        createPopup(h, "offline");
+    }
 }

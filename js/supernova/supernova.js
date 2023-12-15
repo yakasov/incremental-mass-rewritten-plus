@@ -5,7 +5,7 @@ const SUPERNOVA = {
                 createConfirm(
                     "Are you sure to reset without being Supernova?",
                     "sn",
-                    () => CONFIRMS_FUNCTION.sn(force, chal, post, fermion),
+                    () => CONFIRMS_FUNCTION.sn(force, chal, post, fermion)
                 );
             else CONFIRMS_FUNCTION.sn(force, chal, post, fermion);
         } else CONFIRMS_FUNCTION.sn(force, chal, post, fermion);
@@ -108,7 +108,7 @@ const SUPERNOVA = {
                 x
                     .scaleEvery("supernova", false, [1, 1, 1, 1, ff])
                     .div(ml_fp)
-                    .pow(1.25),
+                    .pow(1.25)
             )
             .mul(1e90);
         bulk = E(0);
@@ -167,7 +167,7 @@ function calcSupernova(dt) {
     }
     if (su.times.gte(1) || quUnl())
         su.stars = su.stars.add(
-            tmp.supernova.star_gain.mul(dt).mul(tmp.preQUGlobalSpeed),
+            tmp.supernova.star_gain.mul(dt).mul(tmp.preQUGlobalSpeed)
         );
 
     if (!su.post_10 && su.times.gte(10)) {
@@ -187,7 +187,7 @@ function calcSupernova(dt) {
         if (tmp.fermions.ch[0] >= 0) {
             su.fermions.tiers[tmp.fermions.ch[0]][tmp.fermions.ch[1]] =
                 su.fermions.tiers[tmp.fermions.ch[0]][tmp.fermions.ch[1]].max(
-                    tmp.fermions.tiers[tmp.fermions.ch[0]][tmp.fermions.ch[1]],
+                    tmp.fermions.tiers[tmp.fermions.ch[0]][tmp.fermions.ch[1]]
                 );
         }
         if (tmp.fermions.ch[0] != 0 || tmp.fermions.ch[1] >= 6)
@@ -201,18 +201,18 @@ function calcSupernova(dt) {
                         }
         for (let x = 0; x < 2; x++)
             su.fermions.points[x] = su.fermions.points[x].add(
-                tmp.fermions.gains[x].mul(du_gs),
+                tmp.fermions.gains[x].mul(du_gs)
             );
     }
 
     if (tmp.radiation.unl) {
         if (!player.qu.en.eth[0])
             su.radiation.hz = su.radiation.hz.add(
-                tmp.radiation.hz_gain.mul(du_gs),
+                tmp.radiation.hz_gain.mul(du_gs)
             );
         for (let x = 0; x < RAD_LEN; x++)
             su.radiation.ds[x] = su.radiation.ds[x].add(
-                tmp.radiation.ds_gain[x].mul(du_gs),
+                tmp.radiation.ds_gain[x].mul(du_gs)
             );
     }
 }
@@ -256,8 +256,8 @@ function updateSupernovaTemp() {
                 (t.qf
                     ? player.qu.points
                     : t.cs
-                      ? player.dark.c16.shard
-                      : player.supernova.stars
+                    ? player.dark.c16.shard
+                    : player.supernova.stars
                 ).gte(t.cost) &&
                 !bought &&
                 req;
@@ -299,25 +299,22 @@ function updateSupernovaEndingHTML() {
         }%)`;
         tmp.el.supernova_scene.setDisplay(tmp.supernova.time > 4);
         tmp.el.sns1.setOpacity(
-            Math.max(Math.min(tmp.supernova.time - 4, 1), 0),
+            Math.max(Math.min(tmp.supernova.time - 4, 1), 0)
         );
         tmp.el.sns2.setOpacity(
-            Math.max(Math.min(tmp.supernova.time - 7, 1), 0),
+            Math.max(Math.min(tmp.supernova.time - 7, 1), 0)
         );
         tmp.el.sns3.setOpacity(
-            Math.max(Math.min(tmp.supernova.time - 10, 1), 0),
+            Math.max(Math.min(tmp.supernova.time - 10, 1), 0)
         );
         tmp.el.sns4.setOpacity(
-            Math.max(Math.min(tmp.supernova.time - 14, 1), 0),
+            Math.max(Math.min(tmp.supernova.time - 14, 1), 0)
         );
         tmp.el.sns5.setVisible(tmp.supernova.time > 17);
         tmp.el.sns5.setOpacity(
-            Math.max(Math.min(tmp.supernova.time - 17, 1), 0),
+            Math.max(Math.min(tmp.supernova.time - 17, 1), 0)
         );
     }
-    // if ((player.supernova.times.lte(0)?!tmp.supernova.reached:true) || quUnl()) document.body.style.backgroundColor = tmp.tab == 5 ? "#000" : "#111"
-
-    // tmp.el.app_supernova.setDisplay((player.supernova.times.lte(0) ? !tmp.supernova.reached || quUnl() : true) && tmp.tab == 5)
 
     if (tmp.tab == 5) {
         if (tmp.stab[5] == 0) {
@@ -326,8 +323,8 @@ function updateSupernovaEndingHTML() {
                     " " +
                     formatGain(
                         player.supernova.stars,
-                        tmp.supernova.star_gain.mul(tmp.preQUGlobalSpeed),
-                    ),
+                        tmp.supernova.star_gain.mul(tmp.preQUGlobalSpeed)
+                    )
             );
             updateTreeHTML();
         }

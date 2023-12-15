@@ -2632,6 +2632,37 @@ function updateElementsHTML() {
 
     tmp.el.elemTierDiv.setDisplay(tElem.max_tier[elayer] > 1);
 
+    tmp.el.quarks_disp.setDisplay(!elayer && player.atom.elemTier[elayer] == 1);
+    tmp.el.quarks_amt.setHTML(
+        player.atom.quarks.format(0) +
+            " " +
+            player.atom.quarks.formatGain(tmp.atom.quarkGain)
+    );
+
+    tmp.el.dark_shadow_disp.setDisplay(
+        !elayer && player.atom.elemTier[elayer] == 2
+    );
+    tmp.el.dark_shadow_amt.setHTML(
+        player.dark.shadow.format(0) +
+            " " +
+            player.dark.shadow.formatGain(tmp.dark.shadowGain)
+    );
+
+    tmp.el.ext_atom_disp.setDisplay(elayer);
+    let g = EXOTIC_ATOM.getAmount(
+        player.dark.exotic_atom.amount[0].add(
+            tmp.exotic_atom.gain[0].mul(tmp.preInfGlobalSpeed)
+        ),
+        player.dark.exotic_atom.amount[1].add(
+            tmp.exotic_atom.gain[1].mul(tmp.preInfGlobalSpeed)
+        )
+    ).sub(tmp.exotic_atom.amount);
+    tmp.el.ext_atom_amt.setHTML(
+        tmp.exotic_atom.amount.format(0) +
+            " " +
+            tmp.exotic_atom.amount.formatGain(g)
+    );
+
     let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];
 
     let ch = tElem.choosed;

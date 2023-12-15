@@ -87,7 +87,7 @@ const RADIATION = {
             FERMIONS.onActive("15") ||
             (Math.floor(i / 3) > 0 &&
                 player.supernova.radiation.hz.lt(
-                    RADIATION.unls[Math.floor(i / 3)],
+                    RADIATION.unls[Math.floor(i / 3)]
                 ))
         )
             b = E(0);
@@ -163,7 +163,7 @@ const RADIATION = {
             },
             desc(x) {
                 return `Radio wave is boosted by ${format(
-                    x,
+                    x
                 )}x (based on Frequency)`;
             },
         },
@@ -211,7 +211,7 @@ const RADIATION = {
             },
             desc(x) {
                 return `Exponent from the mass of BH formula is increased by ${format(
-                    x,
+                    x
                 )}`;
             },
         },
@@ -239,7 +239,7 @@ const RADIATION = {
             },
             desc(x) {
                 return `Infrared is boosted by ${format(
-                    x,
+                    x
                 )}x (based on Microwave)`;
             },
         },
@@ -277,7 +277,7 @@ const RADIATION = {
             },
             desc(x) {
                 return `Visible is boosted by ${format(
-                    x,
+                    x
                 )}x (based on Infrared)`;
             },
         },
@@ -302,8 +302,8 @@ const RADIATION = {
                 return x;
             },
             desc(x) {
-                return `Neutron Star is boosted by ${format(
-                    x,
+                return `Neutron Stars are boosted by ${format(
+                    x
                 )}x (based on Frequency)`;
             },
         },
@@ -320,7 +320,7 @@ const RADIATION = {
             },
             desc(x) {
                 return `Ultraviolet is boosted by ${format(
-                    x,
+                    x
                 )}x (based on Visible)`;
             },
         },
@@ -338,7 +338,7 @@ const RADIATION = {
             title: `Meta-Rank Boost`,
             eff(b) {
                 let x = E(1.025).pow(
-                    b.softcap(13000, 0.2, 0).softcap(400, 0.5, 0),
+                    b.softcap(13000, 0.2, 0).softcap(400, 0.5, 0)
                 );
                 return x;
             },
@@ -359,7 +359,7 @@ const RADIATION = {
             },
             desc(x) {
                 return `X-ray is boosted by ${format(
-                    x,
+                    x
                 )}x (based on Ultraviolet)`;
             },
         },
@@ -445,7 +445,7 @@ function updateRadiationTemp() {
         tmp.radiation.ds_eff[x] = RADIATION.ds_eff(x);
 
         tmp.radiation.bs.sum[x] = player.supernova.radiation.bs[2 * x].add(
-            player.supernova.radiation.bs[2 * x + 1],
+            player.supernova.radiation.bs[2 * x + 1]
         );
 
         for (let y = 0; y < 3; y++) {
@@ -454,7 +454,7 @@ function updateRadiationTemp() {
                 .div(3)
                 .floor(); //.softcap(10,0.75,0)
             tmp.radiation.bs.bonus_lvl[3 * x + y] = RADIATION.getbonusLevel(
-                3 * x + y,
+                3 * x + y
             );
         }
         for (let y = 0; y < 2; y++)
@@ -479,34 +479,30 @@ function setupRadiationHTML() {
         <div id="${id}_div" class="table_center radiation">
             <div class="sub_rad" style="width: 450px">
                 Your distance of ${name}'s wave is <span id="${id}_distance">0</span> meters.<br>Which multiples ${
-                    x == 0
-                        ? "Frequency"
-                        : "distance of " + RADIATION.names[x - 1]
-                } gain by <span id="${id}_disEff">1</span>x
+            x == 0 ? "Frequency" : "distance of " + RADIATION.names[x - 1]
+        } gain by <span id="${id}_disEff">1</span>x
             </div><div class="table_center sub_rad" style="align-items: center">
                 <button id="${b1}_btn" class="btn rad" onclick="RADIATION.buyBoost(${
-                    2 * x
-                })">
+            2 * x
+        })">
                     Aplitude: <span id="${b1}_lvl1">0</span><br>
                     Cost: <span id="${b1}_cost">0</span> meters
                 </button><button id="${b2}_btn" class="btn rad" onclick="RADIATION.buyBoost(${
-                    2 * x + 1
-                })">
+            2 * x + 1
+        })">
                     Velocity: <span id="${b2}_lvl1">0</span><br>
                     Cost: <span id="${b2}_cost">0</span> meters
                 </button>
             </div><div class="sub_rad" style="width: 100%">
                 ${RADIATION.boosts[3 * x].title} [<span id="rad_level_${
-                    3 * x
-                }">0</span>]: <span id="rad_level_${3 * x}_desc">0</span><br>
+            3 * x
+        }">0</span>]: <span id="rad_level_${3 * x}_desc">0</span><br>
                 ${RADIATION.boosts[3 * x + 1].title} [<span id="rad_level_${
-                    3 * x + 1
-                }">0</span>]: <span id="rad_level_${
-                    3 * x + 1
-                }_desc">0</span><br>
+            3 * x + 1
+        }">0</span>]: <span id="rad_level_${3 * x + 1}_desc">0</span><br>
                 ${RADIATION.boosts[3 * x + 2].title} [<span id="rad_level_${
-                    3 * x + 2
-                }">0</span>]: <span id="rad_level_${3 * x + 2}_desc">0</span>
+            3 * x + 2
+        }">0</span>]: <span id="rad_level_${3 * x + 2}_desc">0</span>
             </div>
         </div>
         `;
@@ -520,8 +516,8 @@ function updateRadiationHTML() {
             " " +
             formatGain(
                 player.supernova.radiation.hz,
-                tmp.radiation.hz_gain.mul(tmp.preQUGlobalSpeed),
-            ),
+                tmp.radiation.hz_gain.mul(tmp.preQUGlobalSpeed)
+            )
     );
     tmp.el.frequency_eff.setTxt(format(tmp.radiation.hz_effect));
 
@@ -556,8 +552,8 @@ function updateRadiationHTML() {
                     " " +
                     formatGain(
                         player.supernova.radiation.ds[x],
-                        tmp.radiation.ds_gain[x].mul(tmp.preQUGlobalSpeed),
-                    ),
+                        tmp.radiation.ds_gain[x].mul(tmp.preQUGlobalSpeed)
+                    )
             );
             tmp.el[id + "_disEff"].setTxt(format(tmp.radiation.ds_eff[x]));
 
@@ -566,16 +562,16 @@ function updateRadiationHTML() {
                 let id2 = `rad_boost_${b}`;
 
                 tmp.el[id2 + "_lvl1"].setTxt(
-                    format(player.supernova.radiation.bs[b], 0),
+                    format(player.supernova.radiation.bs[b], 0)
                 );
                 tmp.el[id2 + "_cost"].setTxt(
-                    format(tmp.radiation.bs.cost[b], 1),
+                    format(tmp.radiation.bs.cost[b], 1)
                 );
                 tmp.el[id2 + "_btn"].setClasses({
                     btn: true,
                     rad: true,
                     locked: player.supernova.radiation.ds[x].lt(
-                        tmp.radiation.bs.cost[b],
+                        tmp.radiation.bs.cost[b]
                     ),
                 });
             }
@@ -587,12 +583,10 @@ function updateRadiationHTML() {
                         (tmp.radiation.bs.bonus_lvl[lvl].gt(0)
                             ? " + " + format(tmp.radiation.bs.bonus_lvl[lvl])
                             : "") +
-                        (A23
-                            ? ", ×" + RADIATION.getA23Bonus(lvl).format()
-                            : ""),
+                        (A23 ? ", ×" + RADIATION.getA23Bonus(lvl).format() : "")
                 );
                 tmp.el[id2 + "_desc"].setTxt(
-                    RADIATION.boosts[lvl].desc(tmp.radiation.bs.eff[lvl]),
+                    RADIATION.boosts[lvl].desc(tmp.radiation.bs.eff[lvl])
                 );
             }
         }

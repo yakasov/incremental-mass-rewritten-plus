@@ -183,7 +183,7 @@ const TREE_UPGS = {
         },
         sn3: {
             branch: ["sn2"],
-            desc: `Blue stars boost Neutron star gain at a reduced rate.`,
+            desc: `Blue stars boost Neutron Star gain at a reduced rate.`,
             req() {
                 return player.supernova.times.gte(6);
             },
@@ -240,7 +240,7 @@ const TREE_UPGS = {
         },
         m1: {
             branch: ["c"],
-            desc: `Neutron star multiplies Mass gain.`,
+            desc: `Neutron Star multiplies Mass gain.`,
             cost: E(100),
             effect() {
                 let x = hasElement(219)
@@ -923,7 +923,7 @@ const TREE_UPGS = {
             unl() {
                 return quUnl();
             },
-            desc: `Gain more Quantum Foams based on Supernovas.`,
+            desc: `Gain more Quantum Foam based on Supernovas.`,
             cost: E(1e290),
             effect() {
                 let x = player.supernova.times.root(2).div(10).add(1);
@@ -938,7 +938,7 @@ const TREE_UPGS = {
                 return PRIM.unl();
             },
             branch: ["qf1"],
-            desc: `Quantum Foams are boosted by Neutron Stars.`,
+            desc: `Quantum Foam is boosted by Neutron Stars.`,
             cost: E("e735"),
             effect() {
                 let x = player.supernova.stars.add(1).log10().add(1).root(3);
@@ -953,7 +953,7 @@ const TREE_UPGS = {
                 return hasTree("unl3");
             },
             branch: ["qf1"],
-            desc: `Quantum Foams are boosted by Blueprint Particles.`,
+            desc: `Quantum Foam is boosted by Blueprint Particles.`,
             cost: E("e850"),
             effect() {
                 let x = player.qu.bp.add(1).log10().add(1).pow(2);
@@ -1991,10 +1991,10 @@ function updateTreeHTML() {
         )}<br>
         <span>Cost: ${format(t_ch.cost, 2)} ${
                   t_ch.qf
-                      ? "Quantum foam"
+                      ? "Quantum Foam"
                       : t_ch.cs
-                      ? '<span class="corrupted_text">Corrupted Shard</span>'
-                      : "Neutron star"
+                      ? '<span class="corrupted_text">Corrupted Shards</span>'
+                      : "Neutron Stars"
               }</span><br>
         <span class="green">${
             t_ch.effDesc

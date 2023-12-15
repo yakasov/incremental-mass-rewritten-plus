@@ -1,7 +1,7 @@
 const CHARGERS = [
     {
         req: E(1e100),
-        cost: E(3),
+        cost: E(1),
         desc: `
         Multiply all matters gain by 1e10, and square mass of black hole gain.
         `,
@@ -96,7 +96,7 @@ const UNSTABLE_BH = {
 
         return this.getProduction(
             bh,
-            tmp.unstable_bh.gain.mul(tmp.preInfGlobalSpeed),
+            tmp.unstable_bh.gain.mul(tmp.preInfGlobalSpeed)
         ).sub(bh);
     },
     effect() {
@@ -209,7 +209,7 @@ function corruptedShardGain() {
             .overflow(1e9, 0.5 ** w)
             .div(100)
             .root(hasElement(223) ? 2.9 : 3)
-            .sub(1),
+            .sub(1)
     );
 
     if (hasPrestige(3, 4)) x = x.mul(prestigeEff(3, 4));
@@ -244,10 +244,10 @@ function updateC16HTML() {
         let req = bh.gte(c.req);
 
         tmp.el[id + "_req"].setHTML(
-            `Requires: <b>${formatMass(c.req)}</b> of black hole.`,
+            `Requires: <b>${formatMass(c.req)}</b> of black hole.`
         );
         tmp.el[id + "_cost"].setHTML(
-            `Cost: <b>${c.cost.format(0)}</b> Corrupted Shard.`,
+            `Cost: <b>${c.cost.format(0)}</b> Corrupted Shard.`
         );
 
         tmp.el[id + "_req"].setDisplay(!req);

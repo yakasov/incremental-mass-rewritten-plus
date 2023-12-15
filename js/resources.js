@@ -197,7 +197,7 @@ const RESOURCES_DIS = {
         },
     },
     corrupt: {
-        unl: () => player.dark.c16.first,
+        unl: () => CHALS[16].unl(),
         icon: "corrupted",
         class: "corrupted_text",
 

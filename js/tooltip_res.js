@@ -6,7 +6,7 @@ const TOOLTIP_RES = {
 
             if (tmp.overflowBefore.mass.gte(tmp.overflow_start.mass[0]))
                 h += `<br>(<b>+${formatMass(
-                    tmp.overflowBefore.mass,
+                    tmp.overflowBefore.mass
                 )}</b> gained before <b>overflow</b>)`;
 
             /*
@@ -25,7 +25,7 @@ const TOOLTIP_RES = {
         desc() {
             let h = `<i>
             Reach over <b>${formatMass(
-                1e15,
+                1e15
             )}</b> of normal mass to reset previous features for gain Rage Powers.
             </i>`;
 
@@ -37,7 +37,7 @@ const TOOLTIP_RES = {
         desc() {
             let h = `<i>
             Reach over <b>${format(
-                1e20,
+                1e20
             )}</b> Rage Power to reset all previous features for gain Dark Matters.
             </i>`;
 
@@ -48,23 +48,23 @@ const TOOLTIP_RES = {
         full: "Black Hole",
         desc() {
             let h = `You have <b>${formatMass(
-                player.bh.mass,
+                player.bh.mass
             )}</b> of black hole.`;
 
             if (tmp.overflowBefore.bh.gte(tmp.overflow_start.bh[0]))
                 h += `<br>(<b>+${formatMass(
-                    tmp.overflowBefore.bh,
+                    tmp.overflowBefore.bh
                 )}</b> gained before <b>overflow</b>)`;
 
             if (hasCharger(1))
                 h += `
             <br class='line'>You have <b class='corrupted_text'>${formatMass(
-                player.bh.unstable,
+                player.bh.unstable
             )} ${formatGain(
-                player.bh.unstable,
-                UNSTABLE_BH.calcProduction(),
-                true,
-            )}</b> of Unstable Black Hole.
+                    player.bh.unstable,
+                    UNSTABLE_BH.calcProduction(),
+                    true
+                )}</b> of Unstable Black Hole.
             `;
 
             /*
@@ -82,7 +82,7 @@ const TOOLTIP_RES = {
         desc() {
             let h = `<i>
             Reach over <b>${formatMass(
-                uni(1e100),
+                uni(1e100)
             )}</b> of black hole to reset all previous features for gain Atoms & Quarks.
             </i>`;
 
@@ -97,14 +97,14 @@ const TOOLTIP_RES = {
             if (tmp.overflowBefore.quark.gte(tmp.overflow_start.quark))
                 h += `<br>(<b>+${format(
                     tmp.overflowBefore.quark,
-                    0,
+                    0
                 )}</b> gained before <b>overflow</b>)`;
 
             if (tmp.eaUnl)
                 h += `
             <br class='line'>
             You have <b class='orange'>${tmp.exotic_atom.amount.format(
-                0,
+                0
             )}</b> Exotic Atoms.
             `;
 
@@ -116,32 +116,32 @@ const TOOLTIP_RES = {
         desc() {
             let h = `
             You have <b>${formatMass(
-                player.md.mass,
+                player.md.mass
             )} ${player.md.mass.formatGain(
                 tmp.md.mass_gain.mul(tmp.preQUGlobalSpeed),
-                true,
+                true
             )}</b> of dilated mass.
             `;
 
             if (tmp.overflowBefore.dm.gte(tmp.overflow_start.dm))
                 h += `<br>(<b>+${formatMass(
-                    tmp.overflowBefore.dm,
+                    tmp.overflowBefore.dm
                 )}</b> gained before <b>overflow</b>)`;
 
             if (player.md.break.active)
                 h += `
             <br class='line'>
             You have <b class='sky'>${player.md.break.energy.format(
-                0,
+                0
             )} ${player.md.break.energy.formatGain(
-                tmp.bd.energyGain,
-            )}</b> Relativistic Energy.<br>
+                    tmp.bd.energyGain
+                )}</b> Relativistic Energy.<br>
             You have <b class='sky'>${formatMass(
-                player.md.break.mass,
+                player.md.break.mass
             )} ${player.md.break.mass.formatGain(
-                tmp.bd.massGain,
-                true,
-            )}</b> of Relativistic Mass.
+                    tmp.bd.massGain,
+                    true
+                )}</b> of Relativistic Mass.
             `;
 
             h += `
@@ -149,7 +149,7 @@ const TOOLTIP_RES = {
             ${
                 player.md.active
                     ? `Reach <b>${formatMass(
-                          tmp.md.mass_req,
+                          tmp.md.mass_req
                       )}</b> of normal mass to gain Relativistic Particles, or cancel dilation.`
                     : "Dilate mass, then cancel."
             }<br><br>Dilating mass will force an atom reset. While mass is dilated, all pre-atom resources and atomic power gain will get their multipliers' exponents raised to 0.8<br>
@@ -162,20 +162,20 @@ const TOOLTIP_RES = {
         full: "Supernova",
         desc() {
             let h = `
-            You have becomed <b>${player.supernova.times.format(
-                0,
-            )}</b> ${getScalingName("supernova")}Supernova
+            You have exploded into a ${getScalingName(
+                "supernova"
+            )}Supernova <b>${player.supernova.times.format(0)}</b> times
             <br class='line'>
             You have <b>${player.stars.points.format(
-                0,
+                0
             )} ${player.stars.points.formatGain(
-                tmp.stars.gain.mul(tmp.preQUGlobalSpeed),
-            )}</b> Collapsed Star.<br>
+                tmp.stars.gain.mul(tmp.preQUGlobalSpeed)
+            )}</b> Collapsed Stars.<br>
             You have <b>${player.supernova.stars.format(
-                0,
+                0
             )} ${player.supernova.stars.formatGain(
-                tmp.supernova.star_gain.mul(tmp.preQUGlobalSpeed),
-            )}</b> Neutron Star.
+                tmp.supernova.star_gain.mul(tmp.preQUGlobalSpeed)
+            )}</b> Neutron Stars.
             `;
 
             if (!tmp.SN_passive)
@@ -184,7 +184,7 @@ const TOOLTIP_RES = {
             ${
                 "Reach over <b>" +
                 format(tmp.supernova.maxlimit) +
-                "</b> collapsed stars to go Supernova"
+                "</b> collapsed stars to explode into a Supernova"
             }.
             </i>`;
 
@@ -210,9 +210,14 @@ const TOOLTIP_RES = {
         full: "Death Shard",
         desc() {
             let h = `<i>
-            Big Rip the Dimension, then go back.
+            Big Rip the Dimension, then go back. Gain <b>Death Shards</b> based on your normal mass while in Big Rip, and unlock various new upgrades.
             <br><br>
-            While in Big Rip, Entropy Rewards don't work, all Primordium effects are 50% weaker except for Epsilon Particles, which don't work, supernova tree upgrades qu2 and qu10 don't work, and you are trapped in Quantum Challenge with modifiers [10,2,10,10,5,0,2,10]. Death Shards are gained based on your normal mass while in Big Rip. Unlock various upgrades from Big Rip.
+            While in Big Rip:<br>
+            • Entropy rewards are disabled.<br>
+            • All Primordium effects are 50% weaker (Epsilon Particles are disabled).<br>
+            • Supernova tree upgrades qu2 and qu10 are disabled.<br>
+            • You are trapped in Quantum Challenge with the modifiers [10,2,10,10,5,0,2,10].<br>
+
             </i>`;
 
             return h;
@@ -225,21 +230,21 @@ const TOOLTIP_RES = {
 
             if (player.dark.unl) {
                 h += `You have <b>${player.dark.shadow.format(
-                    0,
+                    0
                 )} ${player.dark.shadow.formatGain(
-                    tmp.dark.shadowGain,
-                )}</b> Dark Shadow.`;
+                    tmp.dark.shadowGain
+                )}</b> Dark Shadows.`;
                 if (tmp.chal14comp)
                     h += `<br>You have <b>${player.dark.abyssalBlot.format(
-                        0,
+                        0
                     )} ${player.dark.abyssalBlot.formatGain(
-                        tmp.dark.abGain,
-                    )}</b> Abyssal Blot.`;
+                        tmp.dark.abGain
+                    )}</b> Abyssal Blots.`;
                 h += `<br class='line'>`;
             }
 
             h += `<i>
-            Require <b>Oganesson-118</b> to go Dark.
+            Requires <b>Oganesson-118</b> to go Dark.
             </i>`;
 
             return h;
@@ -271,8 +276,8 @@ const TOOLTIP_RES = {
             <br class='line'>
             <i>
             Reach over <b>${tmp.matters.FSS_req.format(
-                0,
-            )}</b> of FSS's base to get Final Star Shard.
+                0
+            )}</b> of FSS's base to get a Final Star Shard.
             </i>`;
 
             return h;
@@ -283,14 +288,14 @@ const TOOLTIP_RES = {
         desc() {
             let h = `
             Your best mass of black hole in the 16th Challenge is <b>${formatMass(
-                player.dark.c16.bestBH,
+                player.dark.c16.bestBH
             )}</b>.
             <br class='line'>
             <i>
-            Start the 16th Challenge. Earn <b>Corrupted Shards</b> based on your mass of black hole, when exiting the challenge with more than <b>${formatMass(
-                "e100",
-            )}</b> of black hole.<br><br>
-            • You cannot gain rage powers, and all matters' formulas are disabled, and they generate each other. Red matter generates dark matter.<br>
+            Start the 16th Challenge. Earn <b>Corrupted Shards</b> based on your mass of black hole (when exiting the challenge with more than <b>${formatMass(
+                "e100"
+            )}</b> of black hole).<br><br>
+            • You cannot gain rage powers, all matters' formulas are disabled, and they generate each other. Red matter generates dark matter.<br>
             • Pre-C16 features, such as rank, prestige tiers, main upgrades, elements, tree upgrades, etc. may be corrupted (disabled).<br>
             • You are trapped in Mass Dilation & Dark Run with 100 all glyphs (10 slovak glyphs).<br>
             • Primordium particles are disabled.<br>
@@ -304,20 +309,18 @@ const TOOLTIP_RES = {
         full: "Infinity",
         desc() {
             let h = `
-            Your ${getScalingName(
-                "inf_theorem",
-            )}Infinity Theorem is <b class="yellow">${player.inf.theorem.format(
-                0,
-            )}</b>.
+            You have <b class="yellow">${player.inf.theorem.format(
+                0
+            )}</b> ${getScalingName("inf_theorem")}Infinity Theorems. 
             <br class='line'>
             <i>
             Reach over <b>${formatMass(
-                INF.req,
-            )}</b> of normal mass to get Infinity Points and choose Theorem in Core.
+                INF.req
+            )}</b> of normal mass to get Infinity Points and choose a new Theorem in Core.
             <br><br>
             Your normal mass limit is <b>${formatMass(tmp.inf_limit)}</b>
             <br><br>
-            Going Infinity resets everything darkness as well!
+            Going Infinity resets everything including Darkness!
             </i>`;
 
             return h;
@@ -343,7 +346,7 @@ function updateTooltipResHTML(start = false) {
         if (tr)
             tr.setTooltip(
                 `<h3>[ ${tr_data.full} ]</h3>` +
-                    (tr_data.desc ? "<br class='line'>" + tr_data.desc() : ""),
+                    (tr_data.desc ? "<br class='line'>" + tr_data.desc() : "")
             );
     }
 }

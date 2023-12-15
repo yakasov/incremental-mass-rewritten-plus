@@ -305,10 +305,10 @@ const INF = {
             .log10()
             .sub(307)
             .root(hasInfUpgrade(20) ? 1.9 : 2)
-            .div(2);
+            .div(1.9);
         x = Decimal.pow(10, x.sub(1));
 
-        if (hasInfUpgrade(5)) x = x.mul(infUpgEffect(5));
+        if (hasInfUpgrade(4)) x = x.mul(infUpgEffect(4));
         if (hasElement(17, 1)) x = x.mul(muElemEff(17));
         if (hasElement(20, 1)) x = x.mul(muElemEff(20));
         if (hasElement(282)) x = x.mul(elemEffect(282));
@@ -391,7 +391,7 @@ const INF = {
             },
             {
                 title: "Tree Automation",
-                desc: "Automate pre-corrupted tree.",
+                desc: "Automate pre-corrupted tree. Also, start with beyond-ranks automation.",
                 cost: E(100),
             },
             {
@@ -424,7 +424,7 @@ const INF = {
             },
             {
                 title: "Final Star Automation",
-                desc: "Automate final star shard, and it doesn’t reset anything. Also, start with beyond-ranks automation.",
+                desc: "Automate final star shard, and it doesn’t reset anything.",
                 cost: E(2e3),
             },
             {
@@ -703,7 +703,7 @@ function calcInf(dt) {
     if (!player.inf.reached && player.mass.gte(INF.req))
         player.inf.reached = true;
 
-    if (hasInfUpgrade(4))
+    if (hasInfUpgrade(5))
         for (let x = 0; x < TREE_TYPES.qu.length; x++)
             TREE_UPGS.buy(TREE_TYPES.qu[x], true);
     if (hasInfUpgrade(6)) for (let x = 119; x <= 218; x++) buyElement(x, 0);
@@ -820,6 +820,8 @@ function updateInfHTML() {
                         : "")
             );
 
+            tmp.el.ip_theorem_amt.setHTML(player.inf.theorem.format(0));
+
             for (let r in INF.upgs) {
                 r = parseInt(r);
 
@@ -877,8 +879,8 @@ function setupInfUpgradesHTML() {
     for (let r in INF.upgs) {
         r = parseInt(r);
 
-        let h = `<div class='table_center' id='iu_row${r}'>
-        <div class='iu_req_div'><div>Require ${INF.upg_row_req[r]} Infinity Theorem</div></div>`;
+        let h = `<div id='iu_row${r}'>
+        <div class='iu_req_div'><div>Requires ${INF.upg_row_req[r]} Infinity Theorems</div></div>`;
 
         let ru = INF.upgs[r];
 
