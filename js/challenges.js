@@ -843,7 +843,7 @@ const CHALS = {
             return hasElement(168);
         },
         title: "The Reality II",
-        desc: "You are trapped in c1-12 and quantum challenge with modifiers [10,5,10,10,10,10,10,10].",
+        desc: "You are trapped in C1-12 and Quantum Challenge with modifiers [10,5,10,10,10,10,10,10].",
         reward: `Normal mass's overflow starts later based on completions.<br><span class="yellow">On first completion, unlock more features!</span>`,
         max: E(100),
         inc: E("e1e6"),
@@ -863,10 +863,10 @@ const CHALS = {
         },
         title: "Chaotic Matter Annihilation",
         desc: `
-        • You cannot gain rage powers, and all matters' formulas are disabled, and they generate each other. Red matter generates dark matter.<br>
+        • You cannot gain Rage Powers, and all matters' formulas are disabled but they generate each other. Red Matter generates Dark Matter.<br>
         • Pre-C16 features, such as rank, prestige tiers, main upgrades, elements, tree upgrades, etc. may be corrupted (disabled).<br>
-        • You are trapped in Mass Dilation & Dark Run with 100 all glyphs (10 slovak glyphs).<br>
-        • Primordium particles are disabled.<br>
+        • You are trapped in Mass Dilation & Dark Run with 100 all glyphs (10 Slovak glyphs).<br>
+        • Primordium Particles are disabled.<br>
         • Pre-Quantum global speed is always set to /100.<br>
         You can earn Corrupted Shards based on your mass of black hole, when exiting the challenge.
         `,
@@ -919,7 +919,7 @@ const CHALS = {
         },
         title: "Reinforced Scaling",
         desc: `
-        You cannot weaken nor remove pre-Infinity scalings. You are stuck in dark run with 500 all glyphs (unaffected by weakness).
+        You cannot weaken nor remove pre-Infinity scalings. You are stuck in a Dark Run with 500 of all glyphs (unaffected by weakness).
         `,
         reward: `Hybridized Uran-Astatine applies to Exotic scalings, and strengthen C16's reward.<br><span class="yellow">On 4th completion, unlock fifth star in the theorem and more features.</span>`,
         max: E(100),
@@ -942,12 +942,12 @@ const CHALS = {
         title: "Yin Yang Malfunction",
         get desc() {
             return `
-        You cannot become/generate supernovas, produce star resources, dark ray (it is capped at ${format(
+        You cannot explode into/generate Supernovas, produce star resources, Dark Rays (it is capped at ${format(
             1e12
-        )}), dark shadow, and abyssal blot, nor purchase tree upgrades. You are stuck in dark run with 1000 all glyphs (unaffected by weakness). This challenge resets supernova.
+        )}), Dark Shadow, Abyssal Blots, or purchase tree upgrades. You are stuck in a Dark Run with 1000 of all glyphs (unaffected by weakness). This challenge resets Supernova.
         `;
         },
-        reward: `Generate more supernovas by completions.<br><span class="yellow">On 10th completion, unlock sixth row of infinity upgrades.</span>`,
+        reward: `Generate more Supernovas by completions.<br><span class="yellow">On 10th completion, unlock sixth row of Infinity upgrades.</span>`,
         max: E(100),
         inc: E("1e10"),
         pow: E(3),
@@ -965,7 +965,7 @@ const CHALS = {
             return hasElement(290);
         },
         title: "The Reality III",
-        desc: "You are trapped in C1-19 and dark run with 1500 all glyphs. Theorems in the Core don't work. This challenge resets main upgrades.",
+        desc: "You are trapped in C1-19 and a Dark Run with 1500 of all glyphs. Theorems in the Core don't work. This challenge resets main upgrades.",
         reward: `???.<br><span class="yellow">On first completion, unlock ???.</span>`,
         max: E(100),
         inc: E(10),
@@ -981,21 +981,3 @@ const CHALS = {
     },
     cols: 20,
 };
-
-/*
-3: {
-    unl() { return player.chal.comps[2].gte(1) },
-    title: "Placeholder",
-    desc: "Placeholder.",
-    reward: `Placeholder.`,
-    max: E(50),
-    inc: E(10),
-    pow: E(1.25),
-    start: EINF,
-    effect(x) {
-        let ret = E(1)
-        return ret
-    },
-    effDesc(x) { return format(x)+"x" },
-},
-*/

@@ -122,7 +122,11 @@ const RESOURCES_DIS = {
         },
 
         resetBtn() {
-            if (player.supernova.post_10) SUPERNOVA.reset(false, false, true);
+            if (player.supernova.post_10) {
+                SUPERNOVA.reset(false, false, true);
+            } else {
+                SUPERNOVA.reset(true);
+            }
         },
     },
     qu: {

@@ -1337,7 +1337,7 @@ h4 {
     margin-top: 10px;
     padding: 10px 0;
     width: calc(100% - 4px);
-    height: 300px;
+    height: 500px;
     overflow-y: auto;
     border: solid 2px grey;
 }

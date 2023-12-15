@@ -28,7 +28,7 @@ const FERMIONS = {
             createConfirm(
                 "Are you sure to switch any type of any Fermion?",
                 "switchF",
-                () => CONFIRMS_FUNCTION.switchF(i, x),
+                () => CONFIRMS_FUNCTION.switchF(i, x)
             );
         else CONFIRMS_FUNCTION.switchF(i, x);
     },
@@ -36,7 +36,7 @@ const FERMIONS = {
         let x = E(0);
         if (hasTree("prim3") && j < 6)
             x = x.add(
-                tmp.prim.eff[5][1].min(j > 2 && !hasElement(172) ? 4 : EINF),
+                tmp.prim.eff[5][1].min(j > 2 && !hasElement(172) ? 4 : EINF)
             );
         if (hasTree("ct3")) x = x.add(treeEff("ct3"));
         return x;
@@ -171,7 +171,7 @@ const FERMIONS = {
                 desc(x) {
                     return (
                         `Z<sup>0</sup> Boson's first effect is ${format(
-                            x.sub(1).mul(100),
+                            x.sub(1).mul(100)
                         )}% stronger` +
                         (x.gte(5)
                             ? " <span class='soft'>(softcapped)</span>"
@@ -222,7 +222,7 @@ const FERMIONS = {
                 desc(x) {
                     return (
                         `4th Photon & Gluon upgrades are ${format(
-                            x,
+                            x
                         )}x stronger` +
                         (x.gte(1.5)
                             ? " <span class='soft'>(softcapped)</span>"
@@ -297,7 +297,7 @@ const FERMIONS = {
                     if (hasElement(213)) {
                         let y = expMult(
                             t.add(1).pow(i.add(1).log10().add(1).log10()),
-                            0.8,
+                            0.8
                         );
                         return x.min(500).max(y);
                     }
@@ -335,7 +335,7 @@ const FERMIONS = {
                 },
                 desc(x) {
                     return `Dark ray's effect is ^${x.format()} stronger`.corrupt(
-                        tmp.c16active,
+                        tmp.c16active
                     );
                 },
                 inc: "product of above u-quarks",
@@ -374,7 +374,7 @@ const FERMIONS = {
                 desc(x) {
                     return (
                         `Collapsed Stars gain softcap starts ^${format(
-                            x,
+                            x
                         )} later` +
                         (x.gte(1.5)
                             ? " <span class='soft'>(softcapped)</span>"
@@ -446,7 +446,7 @@ const FERMIONS = {
                 },
                 desc(x) {
                     return `Tickspeed is ${format(
-                        x,
+                        x
                     )}x cheaper (before Meta scaling)`;
                 },
                 inc: "Dark Matter",
@@ -524,7 +524,7 @@ const FERMIONS = {
                     let x = hasCharger(3)
                         ? Decimal.pow(
                               0.975,
-                              overflow(m.max(1).log10(), 10, 0.5),
+                              overflow(m.max(1).log10(), 10, 0.5)
                           )
                         : Math.min(
                               hasElement(157)
@@ -538,7 +538,7 @@ const FERMIONS = {
                               E(0.95)
                                   .pow(m.softcap(27, 0.5, 0))
                                   .max(2 / 3)
-                                  .toNumber(),
+                                  .toNumber()
                           );
                     return x;
                 },
@@ -580,7 +580,7 @@ const FERMIONS = {
                 },
                 desc(x) {
                     return `Pre-Meta BH Condensers & Cosmic Rays are ${format(
-                        x,
+                        x
                     )}x cheaper`;
                 },
                 inc: "Tickspeed Power",
@@ -662,7 +662,7 @@ function setupFermionsHTML() {
                 Next Tier at: <span id="${id}_nextTier">X</span><br>
                 (Increased by ${f.inc})<br><br>
                 Effect: <span id="${id}_desc">X</span><br>
-                On Active: ${f.cons}
+                <span class="red">On Active: ${f.cons}</span>
             </button>
             `;
         }
@@ -704,7 +704,7 @@ function updateFermionsTemp() {
                     : player.supernova.fermions.tiers[i][x]
                           .add(tmp.fermions.bonuses[i][x])
                           .mul(i == 1 ? tmp.radiation.bs.eff[16] : 1)
-                          .mul(i == 0 ? tmp.radiation.bs.eff[19] : 1),
+                          .mul(i == 0 ? tmp.radiation.bs.eff[19] : 1)
             );
         }
     }
@@ -737,8 +737,8 @@ function updateFermionsHTML() {
                 " " +
                 formatGain(
                     player.supernova.fermions.points[i],
-                    tmp.fermions.gains[i].mul(tmp.preQUGlobalSpeed),
-                ),
+                    tmp.fermions.gains[i].mul(tmp.preQUGlobalSpeed)
+                )
         );
         let unls = FERMIONS.getUnlLength(i);
         for (let x = 0; x < FERMIONS.types[i].length; x++) {
@@ -757,10 +757,10 @@ function updateFermionsHTML() {
                     choosed: active,
                 });
                 tmp.el[id + "_nextTier"].setTxt(
-                    fm(f.nextTierAt(player.supernova.fermions.tiers[i][x])),
+                    fm(f.nextTierAt(player.supernova.fermions.tiers[i][x]))
                 );
                 tmp.el[id + "_tier_scale"].setTxt(
-                    getScalingName("fTier", i, x),
+                    getScalingName("fTier", i, x)
                 );
                 tmp.el[id + "_tier"].setTxt(
                     format(player.supernova.fermions.tiers[i][x], 0) +
@@ -769,7 +769,7 @@ function updateFermionsHTML() {
                             : "") +
                         (tmp.fermions.bonuses[i][x].gt(0)
                             ? " + " + tmp.fermions.bonuses[i][x].format()
-                            : ""),
+                            : "")
                 );
                 tmp.el[id + "_desc"].setHTML(f.desc(tmp.fermions.effs[i][x]));
 

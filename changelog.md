@@ -1,5 +1,19 @@
 # Changes from Incremental Mass Rewritten (v0.7.1.6)
 
+## v -plus.2
+
+-   Various string improvements and standardisations
+-   Removed the 'reset without Supernova' button. Supernovas can now be reset for at any time on the right icon
+-   Fermion negative effects are highlighted in red to make it clear they're a debuff
+-   Increased Theorem Inventory height
+-   Chance to have multiple dots on Theorems increased (10% -> 20%)
+-   Chance for dots to spawn on a Theorem when levelling increased (10% -> 15%)
+-   Break Infinity upgrade increases chance for dots to spawn on a Theorem (+10%)
+-   Protoversal Theorem's "cheaper cosmic strings" dot effect is boosted (~33%+)
+-   Protoversal Theorem's "entropy scaling" dot effect is boosted (~33%+)
+-   Einsten Theorem's "glyphic mass" dot effect is boosted (~33%+)
+-   Parallel Extruder scaling decreased (^1.2 -> ^1.17)
+
 ## v -plus.1
 
 -   Several resource pluralisations

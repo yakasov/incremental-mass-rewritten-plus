@@ -991,12 +991,12 @@ const BUILDINGS_DATA = {
         },
 
         cost(x = this.level) {
-            return Decimal.pow(1.2, x.scaleEvery("pe")).mul(1000);
+            return Decimal.pow(1.17, x.scaleEvery("pe")).mul(1000);
         },
         get bulk() {
             return this.res
                 .div(1000)
-                .log(1.2)
+                .log(1.17)
                 .scaleEvery("pe", true)
                 .add(1)
                 .floor();

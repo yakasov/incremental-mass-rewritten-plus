@@ -259,7 +259,7 @@ const INF = {
                 CONFIRMS_FUNCTION.inf(limit);
             else if (player.confirms.inf)
                 createConfirm(
-                    `Are you sure you want to go infinity without selecting any theorem?`,
+                    `Are you sure you want to go Infinity without selecting any theorem?`,
                     "inf",
                     () => {
                         CONFIRMS_FUNCTION.inf(limit);
@@ -331,7 +331,7 @@ const INF = {
             },
             {
                 title: "Infinity Mass",
-                desc: "Normal mass & BH mass gains are boosted by total infinity points.",
+                desc: "Normal mass & BH mass gains are boosted by total Infinity Points.",
                 cost: E(1),
                 effect() {
                     let x = player.inf.total;
@@ -352,32 +352,19 @@ const INF = {
             },
             {
                 title: "Legacy Mass Upgrade 4",
-                desc: "Start with overpower unlocked, its starting cost is massively decreased (likewise, start with Binilbium-202 unlocked).",
+                desc: "Start with Overpower unlocked, its starting cost is massively decreased (likewise, start with Binilbium-202 unlocked).",
                 cost: E(1),
             },
             {
                 title: "Dark Rest",
-                desc: "Keep glyph upgrades on infinity (likewise, start with Unhexunium-161 unlocked).",
+                desc: "Keep glyph upgrades on Infinity (likewise, start with Unhexunium-161 unlocked).",
                 cost: E(1),
             },
-            /*
-            {
-                title: "Placeholder Title",
-                desc: "Placeholder Description.",
-                cost: E(1),
-                effect() {
-                    let x = E(1)
-
-                    return x
-                },
-                effectDesc: x => "Placeholder",
-            },
-            */
         ],
         [
             {
                 title: "Self-Infinity",
-                desc: "Infinity theorem boosts infinity points gain.",
+                desc: "Infinity Theorems boost Infinity Points gain.",
                 cost: E(50),
                 effect() {
                     let x = Decimal.pow(
@@ -396,19 +383,19 @@ const INF = {
             },
             {
                 title: "Stop Big Rip Switching",
-                desc: "Pre-218 big rip elements are now affordable outside Big Rip. Automate elements tier 2 (119th-218th).",
+                desc: "Pre-218 Big Rip elements are now affordable outside Big Rip. Automate elements tier 2 (119th-218th).",
                 cost: E(100),
             },
             {
                 title: "Dark Passive",
-                desc: "Start with more dark rays (like dark ray’s first reward unlocked).",
+                desc: "Start with more Dark Rays (like Dark Ray’s first reward unlocked).",
                 cost: E(100),
             },
         ],
         [
             {
                 title: "Corrupted Construction",
-                desc: "Start with rows of upgrades bought in corrupted tree (based on infinity theorems, starting at 2, ending at 5).",
+                desc: "Start with rows of upgrades bought in corrupted tree (based on Infinity Theorems, starting at 2, ending at 5).",
                 cost: E(2e3),
                 effect() {
                     let x = Math.min(Math.max(1, player.inf.theorem - 1), 4);
@@ -424,19 +411,19 @@ const INF = {
             },
             {
                 title: "Final Star Automation",
-                desc: "Automate final star shard, and it doesn’t reset anything.",
+                desc: "Automate Final Star Shard, and it doesn’t reset anything.",
                 cost: E(2e3),
             },
             {
                 title: "Lethal Universe",
-                desc: "Keep big rip upgrades and breaking dilation on infinity.",
+                desc: "Keep Big Rip upgrades and breaking dilation on Infinity.",
                 cost: E(2e3),
             },
         ],
         [
             {
                 title: "Dark Challenge Automation",
-                desc: "Automate challenges 13-15.",
+                desc: "Automate Challenges 13-15.",
                 cost: E(6e6),
             },
             {
@@ -455,26 +442,26 @@ const INF = {
             },
             {
                 title: "Muonic Automation",
-                desc: "Automate muonic elements and muon-catalyzed fusion.",
+                desc: "Automate Muonic Elements and Muon-Catalyzed Fusion.",
                 cost: E(6e6),
             },
             {
                 title: "Corrupted Peak",
-                desc: "Start with C16 unlocked. Keep corruption upgrades and best BH in C16 on infinity. Unlock more corruption upgrades.",
+                desc: "Start with C16 unlocked. Keep corruption upgrades and best BH in C16 on Infinity. Unlock more corruption upgrades.",
                 cost: E(6e6),
             },
         ],
         [
             {
                 title: "Break Infinity",
-                desc: "Reaching infinity no longer plays animation. You can lift beyond normal mass limit and get infinity theorems freely. Finally, unlock Element Tier 3, more Muonic Elements.",
+                desc: "Reaching Infinity no longer plays animation. You can lift beyond normal mass limit and get Infinity Theorems freely. There is a 10% higher chance to gain dots on Theorems. Finally, unlock Element Tier 3, more Muonic Elements.",
                 cost: E(1e12),
             },
         ],
         [
             {
                 title: "Extraordinary Matters",
-                desc: "Every matter upgrade (except red matter) now provides an additional boost to previous matter.",
+                desc: "Every matter upgrade (except Red Matter) now provides an additional boost to previous matter.",
                 cost: E(1e145),
             },
             {

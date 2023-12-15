@@ -3,7 +3,7 @@ const SUPERNOVA = {
         if (!chal && !post && !fermion) {
             if (force && player.confirms.sn)
                 createConfirm(
-                    "Are you sure to reset without being Supernova?",
+                    "Are you sure you want to reset without becoming a Supernova?",
                     "sn",
                     () => CONFIRMS_FUNCTION.sn(force, chal, post, fermion)
                 );

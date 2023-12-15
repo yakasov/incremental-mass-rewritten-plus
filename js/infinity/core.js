@@ -191,8 +191,8 @@ const CORE = {
                 return x;
             },
             (x) =>
-                `Raise mass of unstable black hole gain to the <b>${format(
-                    x,
+                `Raise mass of Unstable Black Hole gain to the <b>${format(
+                    x
                 )}</b>th power.`,
         ],
     },
@@ -200,12 +200,12 @@ const CORE = {
         title: `Dalton Theorem`,
         icon: `Ξ`,
         preEff: [
-            `Boost quarks gain.`,
-            `Boost quark & atomic power overflows starting.`,
-            `Increase overpower's power.`,
-            `Increase accelerator's power.`,
+            `Boost Quarks gain.`,
+            `Boost Quark & Atomic Power overflow start.`,
+            `Increase Overpower's power.`,
+            `Increase Accelerator's power.`,
             `Boost Exotic Atom gain.`,
-            `Boost dilated mass gain.`,
+            `Boost Dilated Mass gain.`,
         ],
         res: `Exotic Atom`,
         boost() {
@@ -293,12 +293,12 @@ const CORE = {
         title: `Protoversal Theorem`,
         icon: `Π`,
         preEff: [
-            `Make cosmic string cheaper.`,
-            `Strengthen primordium particles.`,
+            `Make Cosmic Strings cheaper.`,
+            `Strengthen Primordium Particles.`,
             `Weaken each “entropic” reward scaling.`,
             `Weaken QC modifications.`,
             `Boost Entropy gain and cap.`,
-            `Boost quantum foam and death shard gain.`,
+            `Boost Quantum Foam and Death Shard gain.`,
         ],
         res: `Quantum Foam`,
         boost() {
@@ -306,7 +306,7 @@ const CORE = {
         },
         eff: [
             (s) => {
-                let x = s.add(1).log10().div(2).add(1); // Math.log10(s+1)/2+1
+                let x = s.add(1).log10().div(1.5).add(1); // Math.log10(s+1)/2+1
 
                 return x;
             },
@@ -316,7 +316,7 @@ const CORE = {
                 return x;
             },
             (s) => {
-                let x = s.add(1).log10().div(100).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
+                let x = s.add(1).log10().div(75).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
 
                 return x;
             },
@@ -372,10 +372,10 @@ const CORE = {
         preEff: [
             `Boost pre-infinity global speed.`,
             `Boost pre-quantum global speed.`,
-            `Boost dark shadow & abyssal blot gains.`,
+            `Boost Dark Shadow & Abyssal Blot gains.`,
             `Weaken each glyphic mass nerfing.`,
             `Boost Exotic Atom Reward Strength.`,
-            `Boost supernova generation.`,
+            `Boost Supernova generation.`,
         ],
         res: `Corrupted Shard`,
         boost() {
@@ -398,7 +398,7 @@ const CORE = {
                 return x;
             },
             (s) => {
-                let x = s.add(1).log10().div(100).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
+                let x = s.add(1).log10().div(75).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
 
                 return x;
             },
@@ -449,7 +449,7 @@ const CORE = {
             },
             (x) =>
                 `Weaken beyond rank’s next tier requirement by <b>${formatReduction(
-                    x,
+                    x
                 )}</b>.`,
         ],
     },
@@ -461,9 +461,9 @@ const MAX_CORE_LENGTH = 8;
 const MIN_CORE_LENGTH = 4;
 const MAX_INV_LENGTH = 100;
 
-const CORE_CHANCE_MIN = 0.1;
+const CORE_CHANCE_MIN = 0.2;
 const CORE_TYPE = Object.keys(CORE);
-const MIN_STAR_CHANCES = [0.1, 0.1, 0.1, 0.1, 0.01, 0.01, 0.0025, 0.000125]; // new Array(MAX_STARS).fill(0.1)
+const MIN_STAR_CHANCES = [0.15, 0.15, 0.15, 0.15, 0.01, 0.01, 0.0025, 0.000125];
 
 const MAX_CORE_FIT = 1;
 
@@ -478,15 +478,17 @@ function getCoreChance(i, lvl = tmp.core_lvl) {
         Decimal.pow(
             Decimal.sub(
                 1,
-                Decimal.pow(MIN_STAR_CHANCES[i], core_star_luck[i].pow(-1)),
+                Decimal.pow(MIN_STAR_CHANCES[i], core_star_luck[i].pow(-1))
             ),
-            lvl.floor().pow(0.4),
-        ),
+            lvl.floor().pow(0.4)
+        ).sub(hasInfUpgrade(16) ? 0.1 : 0)
     );
 } // 1-Math.pow(1-MIN_STAR_CHANCES[i]**(1/core_star_luck[i]),Math.floor(lvl)**0.4)
+
 function getPowerMult(lvl = tmp.core_lvl) {
     return lvl.sub(1).floor().root(2).div(100).mul(tmp.cs_effect.power_mult);
 } // Math.floor(lvl-1)**0.5/100 * tmp.cs_effect.power_mult
+
 function chanceToBool(arr) {
     return arr.map((x, i) => core_star_chances[i].gt(x));
 }
@@ -541,7 +543,7 @@ debug.generateTheorem = (chance = CORE_CHANCE_MIN) => {
 debug.addRandomTheorem = (
     level = 1,
     power = 1,
-    max_chance = CORE_CHANCE_MIN,
+    max_chance = CORE_CHANCE_MIN
 ) => {
     let c = [];
     while (c.length == 0) {
@@ -558,7 +560,7 @@ debug.addRandomTheorem = (
         CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)],
         c,
         level,
-        power,
+        power
     );
 };
 
@@ -581,8 +583,6 @@ var changeCoreFromBestLevel = () => {
 function theoremEff(t, i, def = 1) {
     return tmp.core_eff[t][i] || def;
 }
-
-// setInterval(debug.generateTheorem,1000)
 
 function getTheoremHTML(data, sub = false) {
     let s = "";
@@ -630,7 +630,7 @@ function getTheoremPreEffects(data, s, p, level) {
     if (tmp.tfUnl)
         e += `<br class='line'>Form into <b>+${format(
             calcFragmentBase(data, s, p, level),
-            0,
+            0
         )}</b> fragment base`;
     return e;
 }
@@ -679,7 +679,7 @@ function updateCoreHTML() {
     let lvl = tmp.core_lvl,
         fl = Decimal.floor(lvl);
     tmp.el.pt_lvl.setHTML(
-        `<b>${format(fl, 0)}</b> (${formatPercent(lvl.sub(fl))})`,
+        `<b>${format(fl, 0)}</b> (${formatPercent(lvl.sub(fl))})`
     );
 
     if (TS_visible) {
@@ -703,8 +703,8 @@ function updateCoreHTML() {
             pt.setHTML(
                 getTheoremHTML(
                     { type: p.type, level: fl, power, star: s },
-                    true,
-                ),
+                    true
+                )
             );
 
             pt.setTooltip(`
@@ -716,8 +716,8 @@ function updateCoreHTML() {
 
         tmp.el.preTReq.setHTML(
             `Reach over <b>${formatMass(
-                INF.req,
-            )}</b> of normal mass to show theorems that you will choose.`,
+                INF.req
+            )}</b> of normal mass to show theorems that you can choose.`
         );
     }
 
@@ -744,7 +744,7 @@ function updateTheoremCore() {
                       [p.type]: true,
                       choosed: i + "c" == t_choosed,
                   }
-                : { theorem_div: true },
+                : { theorem_div: true }
         );
 
         t.setHTML(p ? getTheoremHTML(p, true) : "");
@@ -762,7 +762,7 @@ function updateTheoremCore() {
             <h3>${CORE[type].title}</h3><br>
             [Level ${format(p.level, 0)}, Power: ${format(
                 p.power.mul(100),
-                0,
+                0
             )}%]
             <br class='line'>
             ${getTheoremPreEffects(p, p.star, p.power)}
@@ -786,7 +786,7 @@ function updateTheoremInv() {
                       [p.type]: true,
                       choosed: i == t_choosed,
                   }
-                : { theorem_div: true },
+                : { theorem_div: true }
         );
 
         t.setHTML(p ? getTheoremHTML(p, true) : "");
@@ -799,7 +799,7 @@ function updateTheoremInv() {
         <br class='line'>
         ${getTheoremPreEffects(p, p.star, p.power)}
         `
-                : "",
+                : ""
         );
     }
 }
@@ -816,7 +816,7 @@ function removeTheorem() {
             t_choosed = "-";
 
             updateTheoremInv();
-        },
+        }
     );
 }
 
@@ -826,7 +826,7 @@ function formTheorem() {
     let inv = player.inf.inv[t_choosed];
 
     player.inf.fragment[inv.type] = player.inf.fragment[inv.type].add(
-        calcFragmentBase(inv, inv.star, inv.power),
+        calcFragmentBase(inv, inv.star, inv.power)
     );
 
     delete player.inf.inv[t_choosed];
@@ -864,14 +864,14 @@ function addTheorem(type, star, level, power) {
                 star: chanceToBool(star),
                 level,
                 power: power.mul(100).round().div(100),
-            }; // Math.round(power*100)/100
+            };
             s = false;
             break;
         }
     if (s)
         createPopup(
-            "Your inventory is maxed! You need to remove unused or useless theorem...",
-            "inv_maxed",
+            "Your inventory is full! You need to remove unused or useless theorems...",
+            "inv_maxed"
         );
     updateTheoremInv();
 }
@@ -900,11 +900,11 @@ function chooseTheorem(id, is_core = false) {
                             switchTheorems(t_choosed, id);
                         else
                             createConfirm(
-                                `Are you sure you want to pick theorem out of core?`,
+                                `Are you sure you want to pick the theorem out of the core?`,
                                 "pickout",
                                 () => {
                                     switchTheorems(t_choosed, id, true);
-                                },
+                                }
                             );
                         return;
                     }
@@ -922,11 +922,11 @@ function chooseTheorem(id, is_core = false) {
                     switchTheorems(id, t_choosed.split("c")[0]);
                 else
                     createConfirm(
-                        `Are you sure you want to pick theorem out of core?`,
+                        `Are you sure you want to pick the theorem out of the core?`,
                         "pickout",
                         () => {
                             switchTheorems(id, t_choosed.split("c")[0], true);
-                        },
+                        }
                     );
                 return;
             }
@@ -956,7 +956,7 @@ function isTheoremHigher(t, t_target) {
         t.type != t_target.type ||
         t.level.gt(t_target.level) ||
         Decimal.pow(t.level, t.power).gt(
-            Decimal.pow(t_target.level, t_target.power),
+            Decimal.pow(t_target.level, t_target.power)
         )
     )
         return false;
@@ -1023,10 +1023,10 @@ function updateCoreTemp() {
         for (let j = 0; j < MAX_STARS; j++) {
             let sc = Decimal.pow(
                 ct.total_s[j].mul(
-                    Decimal.pow(boost, ct.total_s[j].add(1).log10().add(1)),
+                    Decimal.pow(boost, ct.total_s[j].add(1).log10().add(1))
                 ),
-                ct.total_p,
-            ); // Decimal.pow(ct.total_s[j] * Math.pow(boost, Math.log10(ct.total_s[j]+1)+1),ct.total_p)
+                ct.total_p
+            );
             sc = overflow(sc, ss, 0.5);
             if (sc.gt(0)) sc = sc.add(tmp.dim_mass_eff);
 
@@ -1044,10 +1044,4 @@ var TS_visible = true;
 
 function updateOneSec() {
     if (hasElement(242)) changeCoreFromBestLevel();
-
-    if (false) {
-        let p = true;
-        for (let i in player.inf.core) p &&= player.inf.core[i];
-        TS_visible = !p;
-    }
 }
