@@ -1973,7 +1973,7 @@ const ELEMENTS = {
         },
         {
             inf: true,
-            desc: `Passively gain 1% of best IP gained on Infinity. The softcap of Theorem’s level starts +5 later again.`,
+            desc: `Passively gain 1% of best IP gained on Infinity. The softcap of Theorem’s level starts +10 later again.`,
             cost: E("5e22"),
         },
         {
@@ -2639,7 +2639,7 @@ function updateElementsHTML() {
     );
 
     tmp.el.dark_shadow_disp.setDisplay(
-        !elayer && player.atom.elemTier[elayer] == 2
+        !elayer && [2, 3].includes(player.atom.elemTier[elayer])
     );
     tmp.el.dark_shadow_amt.setHTML(
         player.dark.shadow.format(0) +

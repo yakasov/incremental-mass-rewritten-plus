@@ -209,13 +209,16 @@ const CHALS = {
     },
     getReset(x) {
         if (x < 5)
-            return "Entering this challenge will force dark matter reset.";
-        else if (x < 9) return "Entering this challenge will force atom reset.";
-        else if (x < 13) return "Entering challenge will supernova reset.";
+            return "Entering this challenge will force a Dark Matter reset.";
+        else if (x < 9)
+            return "Entering this challenge will force an Atom reset.";
+        else if (x < 13)
+            return "Entering this challenge will a Supernova reset.";
         else if (x < 16)
-            return "Entering challenge will force a Darkness reset.";
-        else if (x == 16) return "Entering challenge will force an FSS reset.";
-        return "Entering challenge will force an Infinity reset.";
+            return "Entering this challenge will force a Darkness reset.";
+        else if (x == 16)
+            return "Entering this challenge will force an FSS reset.";
+        return "Entering this challenge will force an Infinity reset.";
     },
     getMax(i) {
         if (i <= 12 && hasPrestige(2, 25)) return EINF;
@@ -894,7 +897,10 @@ const CHALS = {
         },
         title: "Unnatural Tickspeed",
         desc: `
-        Tickspeeds, Accelerators, BHC, FVM, Cosmic Rays, Star Boosters, and Cosmic Strings (including bonuses) don't work, they are unaffordable or unobtainable. Second neutron effect doesn't work until Atom Upgrade 18. Black Hole's effect doesn't work until Binilunium-201. You are stuck in dark run with 250 all glyphs (unaffected by weakness).
+        • Tickspeeds, Accelerators, BHC, FVM, Cosmic Rays, Star Boosters, and Cosmic Strings (including bonuses) don't work and are unobtainable.<br>
+        • Second neutron effect doesn't work until Atom Upgrade 18.<br>
+        • Black Hole's effect doesn't work until Binilunium-201.<br>
+        • You are stuck in a Dark Run with 250 of each glyph (unaffected by weakness).
         `,
         reward: `Per completion, increase the softcap of theorem's level starting by +3.<br><span class="yellow">On 4th completion, unlock Ascensions and more elements.</span>`,
         max: E(100),
@@ -919,7 +925,7 @@ const CHALS = {
         },
         title: "Reinforced Scaling",
         desc: `
-        You cannot weaken nor remove pre-Infinity scalings. You are stuck in a Dark Run with 500 of all glyphs (unaffected by weakness).
+        You cannot weaken nor remove pre-Infinity scalings. You are stuck in a Dark Run with 500 of each glyph (unaffected by weakness).
         `,
         reward: `Hybridized Uran-Astatine applies to Exotic scalings, and strengthen C16's reward.<br><span class="yellow">On 4th completion, unlock fifth star in the theorem and more features.</span>`,
         max: E(100),
@@ -944,7 +950,7 @@ const CHALS = {
             return `
         You cannot explode into/generate Supernovas, produce star resources, Dark Rays (it is capped at ${format(
             1e12
-        )}), Dark Shadow, Abyssal Blots, or purchase tree upgrades. You are stuck in a Dark Run with 1000 of all glyphs (unaffected by weakness). This challenge resets Supernova.
+        )}), Dark Shadow, Abyssal Blots, or purchase tree upgrades. You are stuck in a Dark Run with 1000 of each glyph (unaffected by weakness). Entering this challenge resets Supernova.
         `;
         },
         reward: `Generate more Supernovas by completions.<br><span class="yellow">On 10th completion, unlock sixth row of Infinity upgrades.</span>`,
@@ -965,7 +971,7 @@ const CHALS = {
             return hasElement(290);
         },
         title: "The Reality III",
-        desc: "You are trapped in C1-19 and a Dark Run with 1500 of all glyphs. Theorems in the Core don't work. This challenge resets main upgrades.",
+        desc: "You are trapped in C1-19 and a Dark Run with 1500 of each glyph. Theorems in the Core don't work. Entering this challenge resets main upgrades.",
         reward: `???.<br><span class="yellow">On first completion, unlock ???.</span>`,
         max: E(100),
         inc: E(10),

@@ -646,7 +646,7 @@ function updateInfTemp() {
     tmp.inf_level_ss = E(5);
 
     if (hasElement(222)) tmp.inf_level_ss = tmp.inf_level_ss.add(5);
-    if (hasElement(235)) tmp.inf_level_ss = tmp.inf_level_ss.add(5);
+    if (hasElement(235)) tmp.inf_level_ss = tmp.inf_level_ss.add(10);
     if (tmp.chal)
         tmp.inf_level_ss = tmp.inf_level_ss.add(tmp.chal.eff[17] || 0);
 
