@@ -362,7 +362,7 @@ const ELEMENTS = {
             cost: E(1e18),
         },
         {
-            desc: `Gain 1% more quarks for each challenge completion.`,
+            desc: `Gain 1% more Quarks for each challenge completion.`,
             cost: E(5e18),
             effect() {
                 let x;
@@ -419,7 +419,7 @@ const ELEMENTS = {
             cost: E(1e29),
         },
         {
-            desc: `For every c7 completion, increase c5 and c6 cap by 2.`,
+            desc: `For every C7 completion, increase C5 and C6 cap by 2.`,
             cost: E(2.5e30),
             effect() {
                 let x = player.chal.comps[7].mul(2);
@@ -431,7 +431,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Passively gain 5% of the quarks you would get from resetting each second.`,
+            desc: `Passively gain 5% of the Quarks you would get from resetting each second.`,
             cost: E(1e33),
         },
         {
@@ -454,7 +454,7 @@ const ELEMENTS = {
             cost: E(1e40),
         },
         {
-            desc: `You can now automatically buy Cosmic Rays. Cosmic Ray raises tickspeed effect at an extremely reduced rate.`,
+            desc: `You can now automatically buy Cosmic Rays. Cosmic Ray raises Tickspeed effect at an extremely reduced rate.`,
             cost: E(1e44),
             effect() {
                 let x = overflow(
@@ -487,7 +487,7 @@ const ELEMENTS = {
             cost: E(1e56),
         },
         {
-            desc: `Dilated mass gain is increased by tickspeed at a reduced rate.`,
+            desc: `Dilated mass gain is increased by Tickspeed at a reduced rate.`,
             cost: E(1e61),
             effect() {
                 let x = E(1.25).pow(player.build.tickspeed.amt.pow(0.55));
@@ -502,7 +502,7 @@ const ELEMENTS = {
             cost: E(1e65),
         },
         {
-            desc: `Passively gain 100% of the atoms you would get from resetting each second. Atomic Power boost Relativistic particles gain at a reduced rate.`,
+            desc: `Passively gain 100% of the Atoms you would get from resetting each second. Atomic Power boost Relativistic Particles gain at a reduced rate.`,
             cost: E(1e75),
             effect() {
                 let x = hasPrestige(0, 40)
@@ -542,7 +542,7 @@ const ELEMENTS = {
             cost: E(1e90),
         },
         {
-            desc: `Mass gain is raised to 1.5 while in mass dilation.`,
+            desc: `Mass gain is raised to 1.5 while in Mass Dilation.`,
             cost: E(1e97),
         },
         {
@@ -550,11 +550,11 @@ const ELEMENTS = {
             cost: E(1e100),
         },
         {
-            desc: `Electron power's effects are better. Passively gain 10% of each particle you would assign quarks.`,
+            desc: `Electron power's effects are better. Passively gain 10% of each quark assignable particle.`,
             cost: E(1e107),
         },
         {
-            desc: `Dilated mass boosts Relativistic particles gain.`,
+            desc: `Dilated Mass boosts Relativistic Particles gain.`,
             cost: E(1e130),
             effect() {
                 let x = player.md.mass.add(1).pow(0.0125);
@@ -565,7 +565,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Increase dilated mass gain exponent by 5%.`,
+            desc: `Increase Dilated Mass gain exponent by 5%.`,
             cost: E(1e140),
         },
         {
@@ -573,7 +573,7 @@ const ELEMENTS = {
             cost: E(1e155),
         },
         {
-            desc: `Rage power boosts Relativistic particles gain.`,
+            desc: `Rage Power boosts Relativistic Particles gain.`,
             cost: E(1e175),
             effect() {
                 let x = player.rp.points.max(1).log10().add(1).pow(0.75);
@@ -584,7 +584,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Mass from Black Hole boosts dilated mass gain.`,
+            desc: `Mass from Black Hole boosts Dilated Mass gain.`,
             cost: E(1e210),
             effect() {
                 let x = player.bh.mass.max(1).log10().add(1).pow(0.8);
@@ -610,7 +610,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Cosmic Ray's free tickspeeds now add to RU7.`,
+            desc: `Cosmic Ray's free Tickspeeds now add to RU7.`,
             cost: E(1e260),
             effect() {
                 let x = tmp.atom ? tmp.atom.atomicEff : E(0);
@@ -626,7 +626,7 @@ const ELEMENTS = {
             cost: E(1e285),
         },
         {
-            desc: `Collapsed star boosts dilated mass gain.`,
+            desc: `Collapsed Star boosts Dilated Mass gain.`,
             cost: E(1e303),
             effect() {
                 let x = player.stars.points.add(1).pow(0.5);
@@ -648,7 +648,7 @@ const ELEMENTS = {
             cost: E("e315"),
         },
         {
-            desc: `Collapsed stars boost quark gain.`,
+            desc: `Collapsed Stars boost Quark gain.`,
             cost: E("e325"),
             effect() {
                 let x = player.stars.points.add(1).pow(1 / 3);
@@ -670,7 +670,7 @@ const ELEMENTS = {
             cost: E("e380"),
         },
         {
-            desc: `Collapsed star boosts relativistic particles gain.`,
+            desc: `Collapsed Star boosts Relativistic Particles gain.`,
             cost: E("e420"),
             effect() {
                 let x = player.stars.points.add(1).pow(0.15).min(1e20);
@@ -681,7 +681,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Collapsed star's effect boosts mass of black hole gain at a reduced rate.`,
+            desc: `Collapsed Star's effect boosts Mass of Black Hole gain at a reduced rate.`,
             cost: E("e510"),
             effect() {
                 let x = tmp.stars ? tmp.stars.effect.add(1).pow(0.02) : E(1);
@@ -696,11 +696,11 @@ const ELEMENTS = {
             cost: E("e610"),
         },
         {
-            desc: `Collapsed stars effect is 10% stronger.`,
+            desc: `Collapsed Stars effect is 10% stronger.`,
             cost: E("e800"),
         },
         {
-            desc: `Collapsed star boosts the last type of stars.`,
+            desc: `Collapsed Star boosts the last type of stars.`,
             cost: E("e1000"),
             effect() {
                 let x = player.stars.points.add(1).log10().add(1).pow(1.15);
@@ -715,11 +715,11 @@ const ELEMENTS = {
             cost: E("e1750"),
         },
         {
-            desc: `Mass gain softcap^2 is 10% weaker.`,
+            desc: `Mass gain softcap<sup>2</sup> is 10% weaker.`,
             cost: E("e2400"),
         },
         {
-            desc: `Mass of black hole boosts atomic powers gain at a reduced rate.`,
+            desc: `Mass of Black Hole boosts Atomic Powers gain at a reduced rate.`,
             cost: E("e2800"),
             effect() {
                 let x = expMult(player.bh.mass.add(1), 0.6);
@@ -734,7 +734,7 @@ const ELEMENTS = {
             cost: E("e4600"),
         },
         {
-            desc: `Normal mass boosts all-star resources at a reduced rate.`,
+            desc: `Normal mass boosts all star resources at a reduced rate.`,
             cost: E("e5200"),
             effect() {
                 let x = player.mass.max(1).log10().root(2);
@@ -792,7 +792,7 @@ const ELEMENTS = {
             cost: E("e1.5e5"),
         },
         {
-            desc: `Ultra rank scaling starts 3 later for every supernova.`,
+            desc: `Ultra rank scaling starts 3 later for every Supernova.`,
             cost: E("e2.5e5"),
             effect() {
                 let x = player.supernova.times.mul(3);
@@ -803,7 +803,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Non-Bonus tickspeeds are 25x more effective.`,
+            desc: `Non-Bonus Tickspeeds are 25x more effective.`,
             cost: E("e3e5"),
         },
         {
@@ -819,7 +819,7 @@ const ELEMENTS = {
             cost: E("e1.1e6"),
         },
         {
-            desc: `Collapsed stars boost quarks gain.`,
+            desc: `Collapsed Stars boost Quarks gain.`,
             cost: E("e1.7e6"),
             effect() {
                 let x;
@@ -844,7 +844,7 @@ const ELEMENTS = {
             cost: E("e4.8e6"),
         },
         {
-            desc: `Pent is now added in mass gain formula from collapsed stars.`,
+            desc: `Pent is now added in mass gain formula from Collapsed Stars.`,
             cost: E("e3.6e7"),
         },
         {
@@ -891,7 +891,7 @@ const ELEMENTS = {
             cost: E("e3.75e10"),
         },
         {
-            desc: `Mass softcap^3 is 17.5% weaker.`,
+            desc: `Mass softcap<sup>^3</sup> is 17.5% weaker.`,
             cost: E("e4e11"),
         },
         {
@@ -919,7 +919,7 @@ const ELEMENTS = {
             cost: E("e3e14"),
         },
         {
-            desc: `Pre-Ultra Mass Upgrades scale weaker based on Cosmic Ray's free tickspeeds.`,
+            desc: `Pre-Ultra Mass Upgrades scale weaker based on Cosmic Ray's free Tickspeeds.`,
             cost: E("e7e14"),
             effect() {
                 let x = tmp.atom
@@ -949,7 +949,7 @@ const ELEMENTS = {
             cost: E("e150"),
         },
         {
-            desc: `All tickspeed scalings start 100x later (after nerf from 8th QC modifier).`,
+            desc: `All Tickspeed scalings start 100x later (after nerf from 8th QC modifier).`,
             cost: E("e500"),
         },
         {
@@ -964,7 +964,6 @@ const ELEMENTS = {
                     .mul(1.25)
                     .add(1)
                     .pow(hasElement(201) || player.qu.rip.active ? 2 : 0.4);
-                //if (player.qu.rip.active) x = x.softcap(100,0.1,0)
                 return x;
             },
             effDesc(x) {
@@ -983,7 +982,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Entropic Accelerator & Booster nerfing is 10% weaker.`,
+            desc: `Entropic Accelerator & Booster nerfs are 10% weaker.`,
             cost: E("e2700"),
         },
         {
@@ -991,7 +990,7 @@ const ELEMENTS = {
             cost: E("e4800"),
         },
         {
-            desc: `Entropy gain is increased by 66.7% for every OoM^2 of normal mass.`,
+            desc: `Entropy gain is increased by 66.7% for every OoM<sup>^2</sup> of normal mass.`,
             cost: E("e29500"),
             effect() {
                 let x = E(5 / 3).pow(player.mass.add(1).log10().add(1).log10());
@@ -1002,7 +1001,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Death Shard gain is increased by 10% for every supernova.`,
+            desc: `Death Shard gain is increased by 10% for every Supernova.`,
             cost: E("e32000"),
             effect() {
                 let s = player.supernova.times.overflow(1e8, 0.5);
@@ -1017,11 +1016,11 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Epsilon particles work in big rip, but are 90% weaker.`,
+            desc: `Epsilon Particles work in big rip, but are 90% weaker.`,
             cost: E("e34500"),
         },
         {
-            desc: `Entropic Converter nerfing is 10% weaker.`,
+            desc: `Entropic Converter nerf is 10% weaker.`,
             cost: E("e202000"),
         },
         {
@@ -1033,7 +1032,7 @@ const ELEMENTS = {
             cost: E("e1.2e7"),
         },
         {
-            desc: `Remove softcap^3 from Photon Upgrade 3 effect, and its softcap^2 is weaker.`,
+            desc: `Remove softcap<sup>^3</sup> from Photon Upgrade 3 effect, and its softcap<sup>^2</sup> is weaker.`,
             cost: E("e2.15e7"),
         },
         {
@@ -1080,7 +1079,7 @@ const ELEMENTS = {
             cost: E("e2.2e9"),
         },
         {
-            desc: `Entropic Evaporation^2 and Condenser^2 scale 15% weaker.`,
+            desc: `Entropic Evaporation<sup>^2</sup> and Condenser<sup>^2</sup> scale 15% weaker.`,
             cost: E("e7.25e9"),
         },
         {
@@ -1092,11 +1091,11 @@ const ELEMENTS = {
             cost: E("e1.6e10"),
         },
         {
-            desc: `Entropic multiplier is effective in big rip.`,
+            desc: `Entropic multiplier is effective in Big Rip.`,
             cost: E("e3e10"),
         },
         {
-            desc: `Mass gain softcap^4 is 50% weaker (only 20% in Big Rip).`,
+            desc: `Mass gain softcap<sup>^4</sup> is 50% weaker (only 20% in Big Rip).`,
             cost: E("e6e10"),
         },
         {
@@ -1153,7 +1152,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Pre-Quantum global speed affects dark shadow gain at a logarithmic reduced rate.`,
+            desc: `Pre-Quantum global speed affects Dark Shadow gain at a logarithmic reduced rate.`,
             cost: E("500"),
             effect() {
                 let s = tmp.preQUGlobalSpeed || E(1);
@@ -1173,7 +1172,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `You can buy Cerium-58 in big rip.`,
+            desc: `You can buy Cerium-58 in Big Rip.`,
             cost: E("25000"),
         },
         {
@@ -1183,7 +1182,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `You can now automatically buy break dilation upgrades. They no longer spent relativistic mass.`,
+            desc: `You can now automatically buy break dilation upgrades. They no longer spent Relativistic Mass.`,
             cost: E("ee19"),
         },
         {
@@ -1211,7 +1210,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Start with break dilation unlocked. Relativistic energy gain is increased by 10%.`,
+            desc: `Start with break dilation unlocked. Relativistic Energy gain is increased by 10%.`,
             cost: E("1e9"),
         },
         {
@@ -1265,12 +1264,12 @@ const ELEMENTS = {
             cost: E("1e18"),
         },
         {
-            desc: `Super & Hyper cosmic string scalings are 25% weaker.`,
+            desc: `Super & Hyper Cosmic String scalings are 25% weaker.`,
             cost: E("ee30"),
         },
         {
             br: true,
-            desc: `Supernova boosts blueprint particles earned.`,
+            desc: `Supernova boosts Blueprint Particles earned.`,
             cost: E("e8.6e26"),
             effect() {
                 let x = Decimal.pow(
@@ -1287,7 +1286,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Gain 100% of the Quantizes you would get from resetting each second. Supernova boosts quantizes.`,
+            desc: `Gain 100% of the Quantizes you would get from resetting each second. Supernova boosts Quantizes.`,
             cost: E("2e22"),
             effect() {
                 let x = player.supernova.times.pow(1.25).add(1);
@@ -1303,7 +1302,7 @@ const ELEMENTS = {
             cost: E("e2e27"),
         },
         {
-            desc: `Gain 10x more dark rays.`,
+            desc: `Gain 10x more Dark Rays.`,
             cost: E("e1.5e30"),
         },
         {
@@ -1313,7 +1312,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Dark shadow’s second effect is better. Keep pre-118 big rip elements on darkness.`,
+            desc: `Dark Shadow’s second effect is better. Keep pre-118 Big Rip elements on Darkness.`,
             cost: E("1e27"),
         },
         {
@@ -1337,7 +1336,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Quantum shard’s base is increased based on the number of elements bought.`,
+            desc: `Quantum Shard’s base is increased based on the number of elements bought.`,
             cost: E("ee30"),
             effect() {
                 let x = player.atom.elements.length / 100;
@@ -1371,7 +1370,7 @@ const ELEMENTS = {
             cost: E("1e68"),
         },
         {
-            desc: `Boost Dark Ray gain based on quarks.`,
+            desc: `Boost Dark Ray gain based on Quarks.`,
             cost: E("e3.6e61"),
             effect() {
                 let x = player.atom.quarks
@@ -1423,7 +1422,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Uncap [Neut-Muon]’s effect, and it’s better if its effect is greater than 33%.`,
+            desc: `Uncap [Neut-Muon]’s effect. It is stronger when the effect is greater than 33%.`,
             cost: E("1e84"),
         },
         {
@@ -1432,7 +1431,7 @@ const ELEMENTS = {
             cost: E("e2.5e53"),
         },
         {
-            desc: `Abyssal Blot’s second effect applies to mass gain’s softcap^7-8, they are 20% weaker.`,
+            desc: `Abyssal Blot’s second effect applies to mass gain’s softcap<sup>^7-8</sup> and they are 20% weaker.`,
             cost: E("e2.2e69"),
         },
         {
@@ -1442,11 +1441,11 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Unlock Dark Run. Keep Oganesson-118 on darkness.`,
+            desc: `Unlock Dark Run. Keep Oganesson-118 on Darkness.`,
             cost: E("1e96"),
         },
         {
-            desc: `Collapsed star’s effect now provide an exponential boost at a reduced rate. It now applies to mass of black hole gain. But nullify Palladium-46, Cadmium-48, Thulium-69 & Osmium-76.`,
+            desc: `Collapsed Star’s effect now provide an exponential boost at a reduced rate. It now applies to mass of black hole gain. But nullify Palladium-46, Cadmium-48, Thulium-69 & Osmium-76.`,
             cost: E("e2e69"),
         },
         {
@@ -1478,12 +1477,12 @@ const ELEMENTS = {
             cost: E("1e106"),
         },
         {
-            desc: `Remove two softcaps of particle powers gain.`,
+            desc: `Remove two softcaps of Particle Powers gain.`,
             cost: E("e2.35e72"),
         },
         {
             br: true,
-            desc: `Collapsed star’s effect is even better.`,
+            desc: `Collapsed Star’s effect is even better.`,
             cost: E("e1.7e72"),
         },
         {
@@ -1501,7 +1500,7 @@ const ELEMENTS = {
             cost: E("e1.45e78"),
         },
         {
-            desc: `Neutronium-0 can affect supernova challenges at a reduced rate.`,
+            desc: `Neutronium-0 can affect Supernova challenges at a reduced rate.`,
             cost: E("e1.51e78"),
         },
         {
@@ -1510,7 +1509,7 @@ const ELEMENTS = {
             cost: E("e1.39e75"),
         },
         {
-            desc: `Supernova boosts dark rays earned.`,
+            desc: `Supernova boosts Dark Rays earned.`,
             cost: E("e4.8e78"),
             effect() {
                 let x = player.supernova.times.add(1).root(2);
@@ -1534,7 +1533,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Exotic rank starts later based on meta-rank starting.`,
+            desc: `Exotic Rank starts later based on meta-rank starting.`,
             cost: E("e4.8e79"),
             effect() {
                 if (!tmp.scaling_start.meta || !tmp.scaling_start.meta.rank)
@@ -1549,7 +1548,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation^2 is slightly weaker.`,
+            desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation<sup>^2</sup> is slightly weaker.`,
             cost: E("e4.4e76"),
             effect() {
                 let x = Decimal.pow(1.25, player.prestiges[0]);
@@ -1569,12 +1568,12 @@ const ELEMENTS = {
             cost: E("e1.2e84"),
         },
         {
-            desc: `Raise collapsed stars gain after softcap by 10.`,
+            desc: `Raise Collapsed Stars gain after softcap by 10.`,
             cost: E("e3.2e84"),
         },
         {
             br: true,
-            desc: `Entropy boosts dark ray gain.`,
+            desc: `Entropy boosts Dark Ray gain.`,
             cost: E("e9.5e80"),
             effect() {
                 let x = Decimal.pow(
@@ -1630,7 +1629,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Dark matter boosts abyssal blots gain. Ultra mass upgrades start ^1.5 later.`,
+            desc: `Dark Matter boosts Abyssal Blot gain. Ultra mass upgrades start ^1.5 later.`,
             cost: E("e8.8e89"),
             effect() {
                 let x = player.bh.dm.add(1).log10().add(1);
@@ -1662,7 +1661,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Each Matter’s gain is increased by 10% for every OoM^2 of Dark Matter. Unlock more main upgrades.`,
+            desc: `Each Matter’s gain is increased by 10% for every OoM<sup>^2</sup> of Dark Matter. Unlock more main upgrades.`,
             cost: E(1e303),
             effect() {
                 let x = Decimal.pow(
@@ -1688,7 +1687,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Keep prestige tiers on darkness. Super and Hyper Prestige Levels start x2 later.`,
+            desc: `Keep prestige tiers on Darkness. Super and Hyper Prestige Levels start x2 later.`,
             cost: E("e360"),
         },
         {
@@ -1702,7 +1701,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Exotic Rank and Ultra Prestige Level scaling are 10% weaker.`,
+            desc: `Exotic Rank and Ultra Prestige Level scale 10% weaker.`,
             cost: E("e435"),
         },
         {
@@ -1710,7 +1709,7 @@ const ELEMENTS = {
             cost: E("e1.6e94"),
         },
         {
-            desc: `Unlock Accelerators, tickspeed now provides an exponential boost, but nullify Argon-18 and Unpentnilium-150 (except in 15th Challenge).`,
+            desc: `Unlock Accelerators and Tickspeed now provides an exponential boost, but nullify Argon-18 and Unpentnilium-150 (except in 15th Challenge).`,
             cost: E("e8.6e95"),
         },
         {
@@ -1719,7 +1718,7 @@ const ELEMENTS = {
             cost: E("1e2.6e97"),
         },
         {
-            desc: `Black hole’s effect provides an exponential boost to mass. Actinium-89 is now stronger outside big rip.`,
+            desc: `Black hole’s effect provides an exponential boost to mass. Actinium-89 is now stronger outside Big Rip.`,
             cost: E("e3.65e99"),
         },
         {
@@ -1745,11 +1744,11 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `1st and 3rd Photon & Gluon upgrades provide an exponential boost. Keep big rip upgrades on darkness.`,
+            desc: `1st and 3rd Photon & Gluon upgrades provide an exponential boost. Keep Big Rip upgrades on Darkness.`,
             cost: E("e605"),
         },
         {
-            desc: `Overpower boosts accelerator power at a reduced rate.`,
+            desc: `Overpower boosts Accelerator power at a reduced rate.`,
             cost: E("e4.2e101"),
             effect() {
                 let x = player.build.mass_4.amt.pow(1.5).add(10).log10();
@@ -1762,7 +1761,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Dark matter boosts matter exponent.`,
+            desc: `Dark Matter boosts matter exponent.`,
             cost: E("1e1.69e100"),
             effect() {
                 let x = player.bh.dm
@@ -1823,7 +1822,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Meta-Rank Boost also affects Meta-Tetr starting at a reduced rate, strengthen Unpentpentium-155.`,
+            desc: `Meta-Rank Boost also affects Meta-Tetr starting at a reduced rate. Additionally, strengthen Unpentpentium-155.`,
             cost: E("1e5e110"),
             effect() {
                 let x = tmp.radiation.bs.eff[14].max(1).log10().add(1);
@@ -1835,7 +1834,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Exotic supernova scales 25% weaker.`,
+            desc: `Exotic Supernova scales 25% weaker.`,
             cost: E("1e1.6e117"),
         },
         {
@@ -1849,7 +1848,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Entropic Evaporation^2 and Condenser^2 scale another 15% weaker.`,
+            desc: `Entropic Evaporation<sup>^2</sup> and Condenser<sup>^2</sup> scale another 15% weaker.`,
             cost: E("e3.1e123"),
         },
         {
@@ -1881,12 +1880,12 @@ const ELEMENTS = {
         },
         {
             inf: true,
-            desc: `The softcap of theorem’s level starts +5 later.`,
+            desc: `The softcap of Theorem’s level starts +5 later.`,
             cost: E("1e13"),
         },
         {
             c16: true,
-            desc: `Improve the formula of corrupted shard gain better.`,
+            desc: `Improve the formula of Corrupted Shard gain better.`,
             cost: E("e1e23"),
         },
         {
@@ -1895,7 +1894,7 @@ const ELEMENTS = {
         },
         {
             inf: true,
-            desc: `Infinity theorem increases parallel extruder’s power. Muon-Catalyzed Fusion no longer resets.`,
+            desc: `Infinity Theorem increases Parallel Extruder’s power. Muon-Catalyzed Fusion no longer resets.`,
             cost: E("1e14"),
             effect() {
                 let x = player.inf.theorem.div(20);
@@ -1937,17 +1936,17 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Increase C16’s max completions to 100. Keep C16 completions in infinity.`,
+            desc: `Increase C16’s max completions to 100. Keep C16 completions in Infinity.`,
             cost: E("e810000"),
         },
         {
             inf: true,
-            desc: `Allow you to form any theorem into its fragments, they give you benefits.`,
+            desc: `Allow you to form any Theorem into its fragments, providing benefits.`,
             cost: E("5e17"),
         },
         {
             c16: true,
-            desc: `Mass of black hole boosts mass overflow^1-2 starting.`,
+            desc: `Mass of black hole boosts mass overflow<sup>^1-2</sup> starting.`,
             cost: E("e1e26"),
             effect() {
                 let x = player.bh.mass.add(10).log10().root(20);
@@ -1960,7 +1959,7 @@ const ELEMENTS = {
         },
         {
             inf: true,
-            desc: `Passively generate 100% of corrupted shards gained by best mass of black hole in C16.`,
+            desc: `Passively generate 100% of Corrupted Shards gained by best Mass of Black Hole in C16.`,
             cost: E("1.25e19"),
         },
         {
@@ -1969,12 +1968,12 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Remove the softcap of abyssal blot’s seven reward.`,
+            desc: `Remove the softcap of Abyssal Blot’s seventh reward.`,
             cost: E("e1800000"),
         },
         {
             inf: true,
-            desc: `Passively gain 1% of best IP gained on infinity. The softcap of theorem’s level starts +5 later again.`,
+            desc: `Passively gain 1% of best IP gained on Infinity. The softcap of Theorem’s level starts +5 later again.`,
             cost: E("5e22"),
         },
         {
@@ -1988,12 +1987,12 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Abyssal blot’s eighth reward is even stronger.`,
+            desc: `Abyssal Blot’s eighth reward is even stronger.`,
             cost: E("e6e6"),
         },
         {
             inf: true,
-            desc: `Going infinity without any theorem selected will auto-fragment each theorem at 25% yield.`,
+            desc: `Going Infinity without any Theorem selected will auto-fragment each Theorem at 25% yield.`,
             cost: E("1e24"),
         },
         {
@@ -2007,7 +2006,7 @@ const ELEMENTS = {
             cost: E("ee38"),
         },
         {
-            desc: `Current theorem’s level now automatically appends to theorems in core if it’s greater than their level. Keep FV Manipulators on infinity.`,
+            desc: `Current Theorem’s level now automatically appends to Theorems in core if it’s greater than their level. Keep FV Manipulators on Infinity.`,
             cost: E("ee888"),
         },
         {
@@ -2016,7 +2015,7 @@ const ELEMENTS = {
             cost: E("e9.2e6"),
         },
         {
-            desc: `Dimensional mass gain is boosted by infinity theorems. Its formula is slightly better.`,
+            desc: `Dimensional mass gain is boosted by Infinity Theorems. Its formula is slightly better.`,
             cost: E("ee1155"),
             effect() {
                 let x = hasElement(273)
@@ -2035,7 +2034,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Super FSS starts +1 later per 2 infinity theorems.`,
+            desc: `Super FSS starts +1 later per 2 Infinity Theorems.`,
             cost: E("e4.15e7"),
             effect() {
                 let x = player.inf.theorem.div(2).floor();
@@ -2069,17 +2068,17 @@ const ELEMENTS = {
             cost: E("e35"),
         },
         {
-            desc: `Black Hole’s Mass Overflow^2 starts ^1.5 later to exponent.`,
+            desc: `Black Hole’s Mass Overflow<sup>^2</sup> starts ^1.5 later to exponent.`,
             cost: E("ee2256"),
         },
         {
             inf: true,
-            desc: `Passively gain 1% of fragment formed from theorem in the core.`,
+            desc: `Passively gain 1% of fragments formed from Theorem in the Core.`,
             cost: E("e41"),
         },
         {
             c16: true,
-            desc: `De-corrupt Unhexbium-162.`,
+            desc: `Purify Unhexbium-162.`,
             cost: E("e1e77"),
         },
         {
@@ -2100,7 +2099,7 @@ const ELEMENTS = {
             cost: E("e1e92"),
         },
         {
-            desc: `Fading Matters boost mass overflow^2 starting.`,
+            desc: `Fading Matters boost mass overflow<sup>^2</sup> starting.`,
             cost: E("e3e3003"),
             effect() {
                 let x = overflow(
@@ -2121,12 +2120,12 @@ const ELEMENTS = {
             cost: E("e45"),
         },
         {
-            desc: `The softcap of accelerator’s effect is slightly weaker.`,
+            desc: `The softcap of Accelerator’s effect is slightly weaker.`,
             cost: E("ee6366"),
         },
         {
             dark: true,
-            desc: `Abyssal Blot’s eighth reward is now works in C16.`,
+            desc: `Abyssal Blot’s eighth reward now works in C16.`,
             cost: E("e1.3e10"),
         },
         {
@@ -2140,7 +2139,7 @@ const ELEMENTS = {
             cost: E("e59"),
         },
         {
-            desc: `Galactic Prestige’s resources are affected by pre-infinity global speed.`,
+            desc: `Galactic Prestige’s resources are affected by pre-Infinity global speed.`,
             cost: E("ee7676"),
             effect() {
                 let x = tmp.preInfGlobalSpeed.max(1).root(2);
@@ -2152,7 +2151,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Prestige mass’s effect now affects stronger overflow^1-2 at a reduced rate.`,
+            desc: `Prestige mass’s effect now affects stronger overflow<sup>^1-2</sup> at a reduced rate.`,
             cost: E("ee294"),
             effect() {
                 let x = GPEffect(1, E(1)).root(2);
@@ -2169,7 +2168,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `The softcap of abyssal blot’s tenth reward is slightly weaker.`,
+            desc: `The softcap of Abyssal Blot’s tenth reward is slightly weaker.`,
             cost: E("e1.7e10"),
         },
         {
@@ -2183,7 +2182,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Newton Theorem’s fifth star now affects black hole overflow^2, but weaker in C16.`,
+            desc: `Newton Theorem’s fifth star now affects black hole overflow<sup>^2</sup>, but weaker in C16.`,
             cost: E("ee1745"),
             effect() {
                 let x = theoremEff("mass", 4);
@@ -2221,7 +2220,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Dark shadow’s fourth reward now affects supernova generation at reduced rate.`,
+            desc: `Dark Shadow’s fourth reward now affects Supernova generation at reduced rate.`,
             cost: E("e1.67e11"),
             effect() {
                 let x = tmp.dark.shadowEff.sn || E(1);
@@ -2243,11 +2242,11 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `You can now buy false vacuum manipulator outside C16.`,
+            desc: `You can now buy False Vacuum Manipulator outside C16.`,
             cost: E("ee6170"),
         },
         {
-            desc: `Bonus cosmic string strengthens its power at a reduced rate.`,
+            desc: `Bonus Cosmic String strengthens its power at a reduced rate.`,
             cost: E("ee23500"),
             effect() {
                 let x = tmp.build.cosmic_string.bonus.add(1).pow(0.75);
@@ -2259,7 +2258,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `The base of collapsed star’s effect for supernova generation is slightly stronger.`,
+            desc: `The base of Collapsed Star’s effect for Supernova generation is slightly stronger.`,
             cost: E("e1.13e12"),
         },
         {
@@ -2280,7 +2279,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Total corrupted shards boost infinity points gain.`,
+            desc: `Total Corrupted Shards boost Infinity Points gain.`,
             cost: E("ee6700"),
             effect() {
                 let x = player.dark.c16.totalS.add(10).log10();
@@ -2379,7 +2378,7 @@ const ELEMENTS = {
                 if (PRIM.unl()) u += 3;
                 if (hasTree("unl3")) u += 3;
                 if (player.qu.rip.first) u += 9;
-                if (hasUpgrade("br", 9)) u += 23; // 23
+                if (hasUpgrade("br", 9)) u += 23;
             }
             if (tmp.chal13comp) u += 10 + 2;
             if (tmp.chal14comp) u += 6 + 11;

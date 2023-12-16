@@ -1,5 +1,10 @@
 # Changes from Incremental Mass Rewritten (v0.7.1.6)
 
+## v -plus.2.1
+
+-   Element string improvements
+-   Added a 'Form all theorems into fragments' button
+
 ## v -plus.2
 
 -   Various string improvements and standardisations

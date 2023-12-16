@@ -50,7 +50,7 @@ const MATTERS = {
                     .log10()
                     .add(1)
                     .pow(tmp.matters.exponent)
-                    .sub(1),
+                    .sub(1)
             );
         }
 
@@ -70,7 +70,7 @@ const MATTERS = {
                 x = c16
                     ? x.mul(player.dark.matters.amt[i + 1].add(1))
                     : x.pow(
-                          player.dark.matters.amt[i + 1].max(1).log10().add(1),
+                          player.dark.matters.amt[i + 1].max(1).log10().add(1)
                       );
         }
 
@@ -107,7 +107,7 @@ const MATTERS = {
                   lvl
                       .scale(i > 0 ? 25 : 50, 1.05, 1)
                       .add(1)
-                      .pow(pow),
+                      .pow(pow)
               );
 
         let bulk = (
@@ -131,10 +131,10 @@ const MATTERS = {
         let eff = c16
             ? Decimal.pow(base, lvl)
             : i == 0
-              ? hasElement(21, 1)
-                  ? Decimal.pow(base, lvl.root(5))
-                  : lvl.add(1)
-              : Decimal.pow(base, lvl);
+            ? hasElement(21, 1)
+                ? Decimal.pow(base, lvl.root(5))
+                : lvl.add(1)
+            : Decimal.pow(base, lvl);
 
         if (i == 0) eff = eff.overflow("e2500", 0.5).overflow("e75000", 1 / 3);
 
@@ -161,7 +161,7 @@ const MATTERS = {
                         .log10()
                         .add(1)
                         .log10()
-                        .add(1),
+                        .add(1)
                 );
 
             if (hasPrestige(1, 91)) x = x.pow(1.05);
@@ -278,7 +278,7 @@ function updateMattersHTML() {
             tmp.el["matter_gain" + i].setTxt(
                 i == 0
                     ? amt.formatGain(tmp.bh.dm_gain.mul(tmp.preQUGlobalSpeed))
-                    : amt.formatGain(tmp.matters.gain[i - 1].mul(inf_gs)),
+                    : amt.formatGain(tmp.matters.gain[i - 1].mul(inf_gs))
             );
 
             if (i > 0) {
@@ -297,7 +297,7 @@ function updateMattersHTML() {
                             ? ", ^" +
                               tu.exp.format() +
                               (c16 ? "" : " to exponent")
-                            : ""),
+                            : "")
                 );
                 tmp.el["matter_upg_cost" + i].setHTML(tu.cost.format(0));
             }
@@ -315,8 +315,8 @@ function updateMattersHTML() {
 
         tmp.el.final_star_base.setHTML(
             `You have ${tmp.matters.FSS_base.format(
-                0,
-            )} FSS base (based on previous matters)`,
+                0
+            )} FSS base (based on previous matters)`
         );
         tmp.el.FSS_req.setTxt(tmp.matters.FSS_req.format(0));
         tmp.el.FSS_btn.setClasses({
@@ -329,9 +329,9 @@ function updateMattersHTML() {
     tmp.el.FSS_eff1.setHTML(
         player.dark.matters.final.gt(0)
             ? `Thanks to FSS, your Matters gain is boosted by ^${tmp.matters.FSS_eff[0].format(
-                  1,
+                  1
               )}`.corrupt(c16 && !hasElement(11, 1))
-            : "",
+            : ""
     );
 }
 
@@ -346,7 +346,7 @@ function updateMattersTemp() {
 
     if (hasElement(29, 1))
         tmp.matters.str = tmp.matters.str.mul(
-            Decimal.max(1, tmp.exotic_atom.strength.root(2)),
+            Decimal.max(1, tmp.exotic_atom.strength.root(2))
         );
 
     let e = Decimal.add(2, glyphUpgEff(11, 0)).add(exoticAEff(1, 5, 0));
@@ -362,7 +362,7 @@ function updateMattersTemp() {
 
     tmp.matters.req_unl = Decimal.pow(
         1e100,
-        Decimal.pow(1.2, Math.max(0, player.dark.matters.unls - 4) ** 1.5),
+        Decimal.pow(1.2, Math.max(0, player.dark.matters.unls - 4) ** 1.5)
     );
 
     for (let i = 0; i < MATTERS_LEN; i++) {
@@ -388,8 +388,8 @@ function setupMattersHTML() {
                 html += `
             <br><br>
             <button class="btn full" id="matter_upg_btn${i}" onclick="getMatterUpgrade(${
-                i - 1
-            })">
+                    i - 1
+                })">
                 Boost ${MATTERS.names[i - 1]} Matter gain.<br>
                 Currently: <span id="matter_upg_eff${i}">???</span><br>
                 Require: <span id="matter_upg_cost${i}">???</span> ${
@@ -408,7 +408,7 @@ function setupMattersHTML() {
                 <span id="final_star_base">You have ??? Final Star Shard base (based on previous matters)</span>
                 <br><br>
                 <button class="btn full" id="FSS_btn" onclick="MATTERS.final_star_shard.reset()">
-                    Reset dark shadows, abyssal blots, matters, and force darkness reset for a final star shard. It boosts matters gain and glyphic mass.<br>
+                    Reset Dark Shadows, Abyssal Blots, matters, and force Darkness reset for a Final Star Shard. It boosts matters gain and glyphic mass.<br>
                     Requires: <span id="FSS_req">???</span> FSS base
                 </button>
             </div>

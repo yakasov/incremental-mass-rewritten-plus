@@ -370,8 +370,8 @@ const CORE = {
         title: `Einstein Theorem`,
         icon: `Δ`,
         preEff: [
-            `Boost pre-infinity global speed.`,
-            `Boost pre-quantum global speed.`,
+            `Boost pre-Infinity global speed.`,
+            `Boost pre-Quantum global speed.`,
             `Boost Dark Shadow & Abyssal Blot gains.`,
             `Weaken each glyphic mass nerfing.`,
             `Boost Exotic Atom Reward Strength.`,
@@ -834,6 +834,22 @@ function formTheorem() {
     t_choosed = "-";
 
     updateTheoremInv();
+}
+
+function formAllTheorems() {
+    const CURRENT_INV_LENGTH = player.inf.inv.length;
+
+    player.inf.inv.forEach((i) => {
+        if (i) {
+            player.inf.fragment[i.type] = player.inf.fragment[i.type].add(
+                calcFragmentBase(i, i.star, i.power)
+            );
+        }
+
+        player.inf.inv = new Array(CURRENT_INV_LENGTH);
+
+        updateTheoremInv();
+    });
 }
 
 function createPreTheorem() {
