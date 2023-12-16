@@ -1,10 +1,21 @@
 # Changes from Incremental Mass Rewritten (v0.7.1.6)
 
+## v -plus.3
+
+-   Corrupted text display is more subtle
+-   Added a Corrupted Star display on the Muonic Elemental Layer if Corrupted Stars have been unlocked
+-   Improved Bipentpentium description
+-   Galactic Prestige button displays next reward requirement
+-   Biocttrium automates Parallel Extruders in addition to making them thrice as effective
+-   Corrupted Star upgrade 1 scales slower (^1e3 -> ^2e5)
+-   Corrupted Star upgrade 2 start is cheaper (1e36+ -> 1e33+)
+-   Biseptquadium's effect is boosted (root 3 -> root 2.8)
+
 ## v -plus.2.2
 
 -   Challenge string improvements
 -   Added a Dark Shadows display on the Tier 3 Normal Elemental Layer
--   Bitripentium's Theorem level softcap is boosted (+5 -> +10 Levels
+-   Bitripentium's Theorem level softcap is boosted (+5 -> +10 Levels)
 
 ## v -plus.2.1
 

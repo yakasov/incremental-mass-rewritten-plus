@@ -1,6 +1,6 @@
 const TREE_TAB = [
     { title: "Main" },
-    { title: "Quality of life" },
+    { title: "Quality of Life" },
     { title: "Challenge" },
     {
         title: "Post-Supernova",

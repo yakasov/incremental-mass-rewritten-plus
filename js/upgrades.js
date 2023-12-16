@@ -591,7 +591,7 @@ const UPGS = {
                 unl() {
                     return tmp.brUnl || tmp.inf_unl;
                 },
-                desc: `Fading matter's upgrade applies to rage powers gain at a reduce rate.`,
+                desc: `Fading Matter's upgrade applies to rage powers gain at a reduce rate.`,
                 cost: E("e1.5e128"),
                 effect() {
                     let x = Decimal.pow(

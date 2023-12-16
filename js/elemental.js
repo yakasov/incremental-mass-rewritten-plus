@@ -891,7 +891,7 @@ const ELEMENTS = {
             cost: E("e3.75e10"),
         },
         {
-            desc: `Mass softcap<sup>^3</sup> is 17.5% weaker.`,
+            desc: `Mass softcap<sup>3</sup> is 17.5% weaker.`,
             cost: E("e4e11"),
         },
         {
@@ -990,7 +990,7 @@ const ELEMENTS = {
             cost: E("e4800"),
         },
         {
-            desc: `Entropy gain is increased by 66.7% for every OoM<sup>^2</sup> of normal mass.`,
+            desc: `Entropy gain is increased by 66.7% for every OoM2</sup> of normal mass.`,
             cost: E("e29500"),
             effect() {
                 let x = E(5 / 3).pow(player.mass.add(1).log10().add(1).log10());
@@ -1032,7 +1032,7 @@ const ELEMENTS = {
             cost: E("e1.2e7"),
         },
         {
-            desc: `Remove softcap<sup>^3</sup> from Photon Upgrade 3 effect, and its softcap<sup>^2</sup> is weaker.`,
+            desc: `Remove softcap<sup>3</sup> from Photon Upgrade 3 effect, and its softcap<sup>2</sup> is weaker.`,
             cost: E("e2.15e7"),
         },
         {
@@ -1079,7 +1079,7 @@ const ELEMENTS = {
             cost: E("e2.2e9"),
         },
         {
-            desc: `Entropic Evaporation<sup>^2</sup> and Condenser<sup>^2</sup> scale 15% weaker.`,
+            desc: `Entropic Evaporation<sup>2</sup> and Condenser<sup>2</sup> scale 15% weaker.`,
             cost: E("e7.25e9"),
         },
         {
@@ -1095,7 +1095,7 @@ const ELEMENTS = {
             cost: E("e3e10"),
         },
         {
-            desc: `Mass gain softcap<sup>^4</sup> is 50% weaker (only 20% in Big Rip).`,
+            desc: `Mass gain softcap<sup>4</sup> is 50% weaker (only 20% in Big Rip).`,
             cost: E("e6e10"),
         },
         {
@@ -1235,7 +1235,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Unlock the 13th Challenge, Automate Big Rip upgrades.`,
+            desc: `Unlock the 13th Challenge and automate Big Rip upgrades.`,
             cost: E("e13"),
         },
         {
@@ -1431,7 +1431,7 @@ const ELEMENTS = {
             cost: E("e2.5e53"),
         },
         {
-            desc: `Abyssal Blot’s second effect applies to mass gain’s softcap<sup>^7-8</sup> and they are 20% weaker.`,
+            desc: `Abyssal Blot’s second effect applies to mass gain’s softcap<sup>7-8</sup> and they are 20% weaker.`,
             cost: E("e2.2e69"),
         },
         {
@@ -1548,7 +1548,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation<sup>^2</sup> is slightly weaker.`,
+            desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation<sup>2</sup> is slightly weaker.`,
             cost: E("e4.4e76"),
             effect() {
                 let x = Decimal.pow(1.25, player.prestiges[0]);
@@ -1661,7 +1661,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Each Matter’s gain is increased by 10% for every OoM<sup>^2</sup> of Dark Matter. Unlock more main upgrades.`,
+            desc: `Each Matter’s gain is increased by 10% for every OoM<sup>2</sup> of Dark Matter. Unlock more main upgrades.`,
             cost: E(1e303),
             effect() {
                 let x = Decimal.pow(
@@ -1848,7 +1848,7 @@ const ELEMENTS = {
         },
         {
             br: true,
-            desc: `Entropic Evaporation<sup>^2</sup> and Condenser<sup>^2</sup> scale another 15% weaker.`,
+            desc: `Entropic Evaporation<sup>2</sup> and Condenser<sup>2</sup> scale another 15% weaker.`,
             cost: E("e3.1e123"),
         },
         {
@@ -1946,7 +1946,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Mass of black hole boosts mass overflow<sup>^1-2</sup> starting.`,
+            desc: `Mass of black hole boosts mass overflow<sup>1-2</sup> starting.`,
             cost: E("e1e26"),
             effect() {
                 let x = player.bh.mass.add(10).log10().root(20);
@@ -2068,7 +2068,7 @@ const ELEMENTS = {
             cost: E("e35"),
         },
         {
-            desc: `Black Hole’s Mass Overflow<sup>^2</sup> starts ^1.5 later to exponent.`,
+            desc: `Black Hole’s Mass Overflow<sup>2</sup> starts ^1.5 later to exponent.`,
             cost: E("ee2256"),
         },
         {
@@ -2083,7 +2083,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `C17’s completions boost Super Parallel Extruder.`,
+            desc: `C17’s completions cause Super Parallel Extruder to scale later.`,
             cost: E("e1.9e8"),
             effect() {
                 let x = (player.chal.comps[17] || E(0)).pow(2).div(4).floor();
@@ -2099,7 +2099,7 @@ const ELEMENTS = {
             cost: E("e1e92"),
         },
         {
-            desc: `Fading Matters boost mass overflow<sup>^2</sup> starting.`,
+            desc: `Fading Matters boost mass overflow<sup>2</sup> starting.`,
             cost: E("e3e3003"),
             effect() {
                 let x = overflow(
@@ -2151,7 +2151,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Prestige mass’s effect now affects stronger overflow<sup>^1-2</sup> at a reduced rate.`,
+            desc: `Prestige mass’s effect now affects stronger overflow<sup>1-2</sup> at a reduced rate.`,
             cost: E("ee294"),
             effect() {
                 let x = GPEffect(1, E(1)).root(2);
@@ -2177,12 +2177,12 @@ const ELEMENTS = {
             cost: E("ee347"),
         },
         {
-            desc: `Newton, Hawking, and Dalton Theorems are GREATLY improved.`,
+            desc: `Newton, Hawking, and Dalton Theorems are greatly improved.`,
             cost: E("ee7773"),
         },
         {
             c16: true,
-            desc: `Newton Theorem’s fifth star now affects black hole overflow<sup>^2</sup>, but weaker in C16.`,
+            desc: `Newton Theorem’s fifth star now affects Black Hole overflow<sup>2</sup>, but weaker in C16.`,
             cost: E("ee1745"),
             effect() {
                 let x = theoremEff("mass", 4);
@@ -2194,7 +2194,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Unlock fifth row of main upgrades.`,
+            desc: `Unlock fifth row of main upgrades as well as more elements.`,
             cost: E("ee10333"),
         },
         {
@@ -2204,7 +2204,7 @@ const ELEMENTS = {
         },
         {
             inf: true,
-            desc: `The softcap of theorem’s meta-score starts x1.05 later per infinity theorem.`,
+            desc: `The softcap of Theorem’s Meta-Score starts x1.05 later per Infinity Theorem.`,
             cost: E("1e94"),
             effect() {
                 let x = Decimal.pow(1.05, player.inf.theorem);
@@ -2220,11 +2220,11 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Dark Shadow’s fourth reward now affects Supernova generation at reduced rate.`,
+            desc: `Dark Shadow’s fourth reward now affects Supernova generation at a reduced rate.`,
             cost: E("e1.67e11"),
             effect() {
                 let x = tmp.dark.shadowEff.sn || E(1);
-                x = x.root(3);
+                x = x.root(2.8);
                 return x;
             },
             effDesc(x) {
@@ -2233,7 +2233,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Super False Vacuum Manipulator is 50% weaker.`,
+            desc: `Super False Vacuum Manipulator scales 50% weaker.`,
             cost: E("ee3500"),
         },
         {
@@ -2282,7 +2282,7 @@ const ELEMENTS = {
             desc: `Total Corrupted Shards boost Infinity Points gain.`,
             cost: E("ee6700"),
             effect() {
-                let x = player.dark.c16.totalS.add(10).log10();
+                let x = player.dark.c16.totalS.add(10).log10().mul(2);
                 return x;
             },
             effDesc(x) {
@@ -2290,7 +2290,7 @@ const ELEMENTS = {
             },
         },
         {
-            desc: `Parallel Extruder is thrice as effective.`,
+            desc: `Automate Parallel Extruder. They are thrice as effective.`,
             cost: E("ee46000"),
         },
         {
@@ -2315,7 +2315,7 @@ const ELEMENTS = {
         },
         {
             dark: true,
-            desc: `Rank Collapse starts later based on fading matter.`,
+            desc: `Rank Collapse starts later based on Fading Matter.`,
             cost: E("e6.5e12"),
             effect() {
                 let x = player.dark.matters.amt[12]
@@ -2331,7 +2331,7 @@ const ELEMENTS = {
         },
         {
             c16: true,
-            desc: `Challenge 5’s reward is twice as stronger.`,
+            desc: `Challenge 5’s reward is twice as strong.`,
             cost: E("ee23700"),
         },
         {
@@ -2660,6 +2660,20 @@ function updateElementsHTML() {
         tmp.exotic_atom.amount.format(0) +
             " " +
             tmp.exotic_atom.amount.formatGain(g)
+    );
+
+    tmp.el.corrupted_star_disp.setDisplay(elayer && player.inf.cs_amount.gt(0));
+    tmp.el.corrupted_star_amt.setHTML(
+        player.inf.cs_amount.format(2) +
+            (player.inf.cs_amount.gt(1)
+                ? ` (×${CORRUPTED_STAR.calcNextGain(
+                      player.inf.cs_amount,
+                      tmp.cs_speed.div(FPS)
+                  )
+                      .div(player.inf.cs_amount)
+                      .pow(FPS)
+                      .format()}/sec)`
+                : "")
     );
 
     let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];

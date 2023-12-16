@@ -103,30 +103,30 @@ const RANKS = {
     },
     desc: {
         rank: {
-            1: "unlock mass upgrade 1.",
-            2: "unlock mass upgrade 2, reduce mass upgrade 1 scaling by 20%.",
-            3: "unlock mass upgrade 3, reduce mass upgrade 2 scaling by 20%, and mass upgrade 1 boosts itself.",
-            4: "reduce mass upgrade 3 scaling by 20%.",
-            5: "mass upgrade 2 boosts itself.",
-            6: "boost mass gain by (x+1)^2, where x is rank.",
-            13: "triple mass gain.",
+            1: "unlock Mass upgrade 1.",
+            2: "unlock Mass upgrade 2, reduce Mass upgrade 1 scaling by 20%.",
+            3: "unlock Mass upgrade 3, reduce Mass upgrade 2 scaling by 20%, and Mass upgrade 1 boosts itself.",
+            4: "reduce Mass upgrade 3 scaling by 20%.",
+            5: "Mass upgrade 2 boosts itself.",
+            6: "boost Mass gain by (x+1)^2, where x is rank.",
+            13: "triple Mass gain.",
             14: "double Rage Powers gain.",
             17: "Rank 6 reward effect is better. [(x+1)^2 -> (x+1)^x^1/3]",
-            34: "mass upgrade 3 softcaps 1.2x later.",
+            34: "Mass upgrade 3 softcaps 1.2x later.",
             40: "adds tickspeed power based on ranks.",
             45: "rank boosts Rage Powers gain.",
             90: "rank 40 reward is stronger.",
-            180: "mass gain is raised by 1.025.",
+            180: "Mass gain is raised by 1.025.",
             220: "rank 40 reward is overpowered.",
-            300: "rank multiplies quark gain.",
-            380: "rank multiplies mass gain.",
-            800: "make mass gain softcap 0.25% weaker based on rank, hardcaps at 25%.",
+            300: "rank multiplies Quark gain.",
+            380: "rank multiplies Mass gain.",
+            800: "make Mass gain softcap 0.25% weaker based on rank. Hardcaps at 25%.",
         },
         tier: {
             1: "reduce rank requirements by 20%.",
-            2: "raise mass gain by 1.15",
-            3: "reduce all mass upgrade scalings by 20%.",
-            4: "adds +5% tickspeed power for every tier you have, softcaps at +40%.",
+            2: "raise Mass gain by 1.15",
+            3: "reduce all Mass upgrade scalings by 20%.",
+            4: "adds +5% Tickspeed power for every tier you have. Softcaps at +40%.",
             6: "boost rage powers based on tiers.",
             8: "Tier 6's reward is boosted based on dark matters.",
             12: "Tier 4's reward is twice as effective and the softcap is removed.",
@@ -135,12 +135,12 @@ const RANKS = {
             100: "Super Tetr scales 5 later.",
         },
         tetr: {
-            1: "reduce tier requirements by 25%, and hyper rank scaling is 15% weaker.",
-            2: "mass upgrade 3 boosts itself.",
-            3: "raise tickspeed effect by 1.05.",
-            4: "Super rank scaling is weaker based on tier, and super tier scales 20% weaker.",
+            1: "reduce tier requirements by 25%, and Hyper Rank scaling is 15% weaker.",
+            2: "Mass upgrade 3 boosts itself.",
+            3: "raise Tickspeed effect by 1.05.",
+            4: "Super Rank scaling is weaker based on tier, and super tier scales 20% weaker.",
             5: "Hyper/Ultra Tickspeed starts later based on tetr.",
-            8: "Mass gain softcap^2 starts ^1.5 later.",
+            8: "Mass gain softcap<sup>2</sup> starts ^1.5 later.",
         },
         pent: {
             1: "reduce tetr requirements by 15%, and Meta-Rank starts 1.1x later.",
@@ -152,17 +152,17 @@ const RANKS = {
         },
         hex: {
             1: "reduce pent reqirements by 20%.",
-            4: "increase dark ray gain by +20% per hex.",
-            6: "remove first softcap of normal mass gain.",
-            10: "remove second softcap of normal mass gain.",
-            13: "remove third softcap of normal mass gain.",
-            17: "remove fourth softcap of normal mass gain.",
-            36: "remove fifth softcap of normal mass gain.",
+            4: "increase Dark Ray gain by +20% per hex.",
+            6: "remove first softcap of normal Mass gain.",
+            10: "remove second softcap of normal Mass gain.",
+            13: "remove third softcap of normal Mass gain.",
+            17: "remove fourth softcap of normal Mass gain.",
+            36: "remove fifth softcap of normal Mass gain.",
             43: "hex 4's effect is overpowered.",
-            48: "remove sixth softcap of normal mass gain.",
-            62: "remove seventh softcap of normal mass gain.",
+            48: "remove sixth softcap of normal Mass gain.",
+            62: "remove seventh softcap of normal Mass gain.",
             91: "+0.15 to matter exponents.",
-            157: "remove eighth softcap of normal mass gain.",
+            157: "remove eighth softcap of normal Mass gain.",
         },
     },
     effect: {
@@ -581,9 +581,9 @@ const PRESTIGES = {
             3: `Quadruple Quantum Foam and Death Shard gain.`,
             5: `Pre-Quantum Global Speed is raised by ^2 (before division).`,
             6: `Tickspeed Power softcap starts ^100 later.`,
-            8: `Mass softcap^5 starts later based on Prestige.`,
+            8: `Mass softcap<sup>5</sup> starts later based on Prestige.`,
             10: `Gain more Relativistic Energy based on Prestige.`,
-            12: `Stronger Effect's softcap^2 is 7.04% weaker.`,
+            12: `Stronger Effect's softcap<sup>2</sup> is 7.04% weaker.`,
             15: `Tetr 2's reward is overpowered.`,
             18: `Rank’s effect on Prestige Base is doubled.`,
             24: `Super Cosmic Strings scale 20% weaker.`,
@@ -611,7 +611,7 @@ const PRESTIGES = {
             5: `Pent 5's reward is stronger based on Prestige Base.`,
             7: `Quarks are boosted based on Honor.`,
             15: `Super & Hyper cosmic strings scale weaker based on Honor.`,
-            22: `Raise dark shadow gain by 1.1.`,
+            22: `Raise Dark Shadow gain by 1.1.`,
             33: `Hybridized Uran-Astatine applies to pre-Meta Pent requirements at a reduced rate.`,
             46: `Add 500 more C13-15 max completions.`,
             66: `All Fermions' scaling is 20% weaker.`,
@@ -625,24 +625,24 @@ const PRESTIGES = {
             510: `Raise Kaon & Pion gains to the 1.1th power.`,
         },
         {
-            1: `The requirement for prestige levels & honors are 15% lower.`,
-            3: `Break dilation upgrade 12 is cheaper.`,
+            1: `The requirement for Prestige Levels & Honors are 15% lower.`,
+            3: `Break Dilation upgrade 12 is cheaper.`,
             4: `Unlock new effect for Hybridized Uran-Astatine.`,
-            5: `Glory boosts glyphic mass.`,
+            5: `Glory boosts Glyphic Mass.`,
             8: `Glory reduces Black Hole Overflow nerf.`,
-            22: `Glory boosts all matters gain.`,
-            25: `Uncap pre-darkness challenges' completion cap. C7's reward is changed.`,
+            22: `Glory boosts all matter gains.`,
+            25: `Uncap pre-Darkness challenges' completion cap. C7's reward is changed.`,
             28: `FV Manipulator Power is boosted by Honor.`,
             34: `Pions boost Kaons gain at a reduced rate.`,
             40: `[ct4]'s effect is better.`,
-            45: `Unstable BH affects mass of black hole overflow^2 starting.`,
-            58: `Exotic Atom's reward strength is increased by +5% per beyond-ranks' maximum tier.`,
+            45: `Unstable BH affects mass of black hole overflow<sup>2</sup> starting.`,
+            58: `Exotic Atom's reward strength is increased by +5% per Beyond-Ranks' maximum tier.`,
             121: `Oct 1's reward is raised by 4.`,
         },
         {
             1: `The requirements for previous prestiges are 10% lower.`,
             2: `Exotic Supernova starts x1.25 later every Renown.`,
-            4: `Corrupted shard gain is increased by +50% per Renown.`,
+            4: `Corrupted Shard gain is increased by +50% per Renown.`,
             6: `Exotic Atoms boost their other resources.`,
             10: `Prestige Level 388 also applies to Glory scaling.`,
         },
@@ -1265,35 +1265,35 @@ const BEYOND_RANKS = {
     rewards: {
         1: {
             1: `Add 0.5 to matter exponents.`,
-            2: `All matter upgrades are stronger based on dark ray.`,
+            2: `All matter upgrades are stronger based on Dark Ray.`,
             4: `Hybridized Uran-Astatine's second effect is stronger based on FSS.`,
-            7: `Matters gain is boosted by Hept.`,
+            7: `Matter gains are boosted by Hept.`,
         },
         2: {
             1: `Automate Beyond-Ranks. Beyond-Ranks now affect prestige base.`,
             2: `Beyond-Ranks will no longer reset anything. [Meta-Lepton]'s effect is multiplied by 8.`,
-            4: `Accelerator's effect affects tickspeed, BHC & cosmic ray powers. Chromas gain is raised to the 1.1th power.`,
+            4: `Accelerator's effect affects Tickspeed, BHC & cosmic ray powers. Chromas gain is raised to the 1.1th power.`,
             7: `Gain more fermions based on Hept, except Meta-Fermions.`,
             10: `Raise mass of black hole to the 1.2th power.`,
-            15: `Remove all scalings from mass upgrades 1-3.`,
-            17: `[qu9] is more effective based on mass of black hole. Exotic Supernova starts later based on Quantizes.`,
+            15: `Remove all scalings from Mass upgrades 1-3.`,
+            17: `[qu9] is more effective based on Mass of Black Hole. Exotic Supernova starts later based on Quantizes.`,
             20: `C1's reward is changed.`,
         },
         3: {
             1: `Mass & Stronger Overflow is weaker based on archverse tier of normal mass.`,
             2: `Super FSS starts +1 later.`,
             4: `Beyond Rank boosts Kaon & Pion gain.`,
-            12: `Remove the softcap of dark ray's fourth reward.`,
-            18: `Super FSS scales +2.5% weaker per beyond-ranks' maximum tier (capped at 50%).`,
-            32: `Argon-18 affects tickspeed's power.`,
+            12: `Remove the softcap of Dark Ray's fourth reward.`,
+            18: `Super FSS scales +2.5% weaker per Beyond-Ranks' maximum tier (capped at 50%).`,
+            32: `Argon-18 affects Tickspeed's power.`,
         },
         4: {
-            1: `Beta Particles affect supercritical supernova starting at a reduced rate.`,
-            2: `Prestige base's exponent is increased by beyond-ranks' maximum tier, starting at Dec.`,
+            1: `Beta Particles affect Supercritical Supernovas starting at a reduced rate.`,
+            2: `Prestige base's exponent is increased by Beyond-Ranks' maximum tier, starting at Dec.`,
             40: `[Tau]'s reward is cubed.`,
         },
         5: {
-            2: `Super FSS starts +1 later per beyond-ranks' maximum tier, starting at Dec.`,
+            2: `Super FSS starts +1 later per Beyond-Ranks' maximum tier, starting at Dec.`,
             7: `Remove pre-meta scalings from Prestige Level.`,
         },
         6: {
@@ -1301,7 +1301,7 @@ const BEYOND_RANKS = {
             12: `Bitriunium-231 is cubed.`,
         },
         8: {
-            1: `Infinity Points gain is doubled every highest beyond-rank tier you reached.`,
+            1: `Infinity Points gain is doubled every highest Beyond-Rank tier you reached.`,
         },
         11: {
             1: `Remove all scalings from Honor & Glory.`,
@@ -1310,10 +1310,10 @@ const BEYOND_RANKS = {
             1: `Neutronium-0 now affects C16's reward at an extremely reduced rate.`,
         },
         14: {
-            1: `The formula of Dec 2's effect is better. Meta-Prestige Level starts later based on beyond-ranks' maximum tier, starting at Icos.`,
+            1: `The formula of Dec 2's effect is better. Meta-Prestige Level starts later based on Beyond-Ranks' maximum tier, starting at Icos.`,
         },
         16: {
-            1: `Ascension Base's exponent is increased by beyond-ranks' maximum tier, starting at Icos.`,
+            1: `Ascension Base's exponent is increased by Beyond-Ranks' maximum tier, starting at Icos.`,
         },
         20: {
             1: `The second softcap of Accelerator's Effect is slightly weaker.`,
@@ -1692,7 +1692,7 @@ function updateRanksHTML() {
             }
 
             h = `
-                Reset your Hexes (and force a darkness reset) but hept/oct/enne etc. up. ${r}<br>
+                Reset your Hexes (and force a Darkness reset) but Hept/Oct/Enne etc. up. ${r}<br>
                 To ${getRankTierName(t.add(5))} up, require ${getRankTierName(
                 t.add(4)
             )} ${
@@ -1937,17 +1937,26 @@ function updateGPTemp() {
 }
 
 function updateGPHTML() {
-    let unl = hasElement(262);
+    const UNL = hasElement(262);
+    const REWARD_REQS = [1, 2, 4, 6, 9, 14];
 
-    tmp.el.galactic_prestige_div.setDisplay(unl);
+    tmp.el.galactic_prestige_div.setDisplay(UNL);
 
-    if (unl) {
-        let gp = player.gal_prestige;
+    if (UNL) {
+        const gp = player.gal_prestige;
 
         tmp.el.gal_prestige.setHTML(gp.format(0));
         tmp.el.gal_prestige_scale.setHTML(getScalingName("gal_prestige"));
         tmp.el.gp_btn.setHTML(`
-        Reset Supernovas (force an Infinity reset), but Galactic Prestige up. Next Galactic Prestige reveals its treasure or happens nothing.<br><br>
+        Reset Supernovas (force an Infinity reset), but Galactic Prestige up. ${
+            gp < 14
+                ? "Next reward at " +
+                  REWARD_REQS.find((r) => {
+                      return r > gp;
+                  }) +
+                  "Galactic Prestiges."
+                : ""
+        } <br><br>
         Require: <b>${tmp.gp.req.format()}</b> Supernovas
         `);
         tmp.el.gp_btn.setClasses({
@@ -1964,7 +1973,7 @@ function updateGPHTML() {
         if (gp.gte(1))
             h += `You have <h4>${res[0].format(0)}</h4> ${res[0].formatGain(
                 res_gain[0]
-            )} Galactic Stars (based on collapsed stars and galactic prestige), 
+            )} Galactic Stars (based on Collapsed Stars and Galactic Prestige), 
         which strengthens star generators by <h4>${formatPercent(
             res_effect[0].sub(1)
         )}</h4> exponentially.<br>`;
@@ -1973,15 +1982,15 @@ function updateGPHTML() {
             h += `You have <h4>${formatMass(res[1])}</h4> ${res[1].formatGain(
                 res_gain[1],
                 true
-            )} of Prestige Mass (based on prestige base and galactic prestige), 
-        which weakens mass overflow^1-2 by <h4>${formatReduction(
+            )} of Prestige Mass (based on Prestige base and Galactic Prestige), 
+        which weakens Mass overflow<sup>1-2</sup> by <h4>${formatReduction(
             res_effect[1]
         )}</h4>.<br>`;
 
         if (gp.gte(4))
             h += `You have <h4>${res[2].format(0)}</h4> ${res[2].formatGain(
                 res_gain[2]
-            )} Galactic Matter (based on fading matter and galactic prestige), 
+            )} Galactic Matter (based on Fading Matter and Galactic Prestige), 
         which increases to the base of all Matter upgrades by <h4>+${format(
             res_effect[2]
         )}</h4>.<br>`;
@@ -1989,7 +1998,7 @@ function updateGPHTML() {
         if (gp.gte(6))
             h += `You have <h4>${res[3].format(0)}</h4> ${res[3].formatGain(
                 res_gain[3]
-            )} Redshift (based on frequency and galactic prestige), 
+            )} Redshift (based on Frequency and Galactic Prestige), 
         which reduces Rank requirement by <h4>^${format(
             res_effect[3],
             5
@@ -1998,16 +2007,16 @@ function updateGPHTML() {
         if (gp.gte(9))
             h += `You have <h4>${res[4].format(0)}</h4> ${res[4].formatGain(
                 res_gain[4]
-            )} Normal Energy (based on corrupted star and galactic prestige), 
-        which weaken corrupted star reduction by <h4>${formatReduction(
+            )} Normal Energy (based on Corrupted Star and Galactic Prestige), 
+        which weaken Corrupted Star reduction by <h4>${formatReduction(
             res_effect[4]
         )}</h4>.<br>`;
 
         if (gp.gte(14))
             h += `You have <h4>${res[5].format(0)}</h4> ${res[5].formatGain(
                 res_gain[5]
-            )} Dilatons (based on higgs bosons and galactic prestige), 
-        which increases Pre-Infinity Global Speed by <h4>${formatMult(
+            )} Dilations (based on Higgs Bosons and Galactic Prestige), 
+        which increases pre-Infinity Global Speed by <h4>${formatMult(
             res_effect[5]
         )}</h4>.<br>`;
 

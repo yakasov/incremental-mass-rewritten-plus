@@ -404,7 +404,7 @@ const MUONIC_ELEM = {
             cost: E("e26900"),
         },
         {
-            desc: `Muonic Zirconium-40 is twice as stronger.`,
+            desc: `Muonic Zirconium-40 is twice as strong.`,
             cost: E("e33100"),
         },
         {

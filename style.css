@@ -285,18 +285,18 @@ button {
 }
 
 .quark_color {
-    animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    animation: quark_color 6s cubic-bezier(0.25, 0, 0.5, 1) infinite;
 }
 
 .corrupted_text {
     color: white;
-    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    animation: corrupted_text 4s cubic-bezier(0.25, 0, 0.5, 1) infinite;
 }
 
 .corrupted_text2::after {
     content: " [Corrupted]";
     color: white;
-    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    animation: corrupted_text 4s cubic-bezier(0.25, 0, 0.5, 1) infinite;
 }
 
 @keyframes corrupted_text {
@@ -322,7 +322,7 @@ button {
 }
 
 .idk {
-    animation: idk 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    animation: idk 4s cubic-bezier(0.25, 0, 0.5, 1) infinite;
 }
 
 @keyframes idk {
@@ -577,7 +577,7 @@ button {
     box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
         3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
     z-index: 1;
-    animation: corrupted_div 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    animation: corrupted_div 4s cubic-bezier(0.25, 0, 0.5, 1) infinite;
 }
 
 .elements.c16.bought {

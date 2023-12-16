@@ -45,7 +45,7 @@ const CORRUPTED_STAR = {
         if (hasElement(64, 1))
             x.prim_reduce = Decimal.pow(
                 0.9,
-                cs.add(1).log10().overflow(10, 0.5).root(2),
+                cs.add(1).log10().overflow(10, 0.5).root(2)
             );
 
         return x;
@@ -89,7 +89,7 @@ function updateCSTemp() {
 
     let s = Decimal.pow(
         2,
-        player.inf.cs_double[0].add(player.inf.cs_double[1]),
+        player.inf.cs_double[0].add(player.inf.cs_double[1])
     );
 
     if (hasElement(33, 1)) s = s.mul(muElemEff(33));
@@ -116,7 +116,7 @@ function buyCSUpg(i) {
         case 0:
             if (player.inf.cs_amount.gte(getCSUpgRequirement(0))) {
                 bulk = bulkCSUpgRequirement(0, player.inf.cs_amount).max(
-                    player.inf.cs_double[0],
+                    player.inf.cs_double[0]
                 );
                 player.inf.cs_double[0] = bulk;
 
@@ -128,7 +128,7 @@ function buyCSUpg(i) {
         case 1:
             if (player.inf.points.gte(getCSUpgRequirement(1))) {
                 bulk = bulkCSUpgRequirement(1, player.inf.points).max(
-                    player.inf.cs_double[1],
+                    player.inf.cs_double[1]
                 );
                 player.inf.cs_double[1] = bulk;
 
@@ -147,10 +147,10 @@ function getCSUpgRequirement(i, lvl = player.inf.cs_double[i]) {
 
     switch (i) {
         case 0:
-            x = Decimal.pow(1e3, lvl.add(1)).div(tmp.csu_div);
+            x = Decimal.pow(5e2, lvl.add(1)).div(tmp.csu_div);
             break;
         case 1:
-            x = Decimal.pow(10, lvl).mul(1e36).div(tmp.csu_div);
+            x = Decimal.pow(10, lvl).mul(1e33).div(tmp.csu_div);
             break;
     }
 
@@ -162,10 +162,10 @@ function bulkCSUpgRequirement(i, amt) {
 
     switch (i) {
         case 0:
-            x = amt.mul(tmp.csu_div).log(1e3).sub(1);
+            x = amt.mul(tmp.csu_div).log(5e2).sub(1);
             break;
         case 1:
-            x = amt.mul(tmp.csu_div).div(1e36).max(1).log(10);
+            x = amt.mul(tmp.csu_div).div(1e33).max(1).log(10);
             break;
     }
 
@@ -181,7 +181,7 @@ function updateCSHTML() {
             .pow(FPS);
 
     tmp.el.cs_amount.setHTML(
-        cs.format(2) + (cs.gt(1) ? ` (×${cs_growth.format()}/sec)` : ""),
+        cs.format(2) + (cs.gt(1) ? ` (×${cs_growth.format()}/sec)` : "")
     );
     tmp.el.cs_speed.setHTML(formatMult(tmp.cs_speed));
 
@@ -213,11 +213,11 @@ function updateCSHTML() {
         cs.gte(tmp.cs_reduce_start1)
             ? `Corrupted Star's Growth is rooted by <b>${Decimal.log(
                   2,
-                  cs_growth,
+                  cs_growth
               )
                   .mul(tmp.cs_speed)
                   .format()}</b>!`
-            : "",
+            : ""
     );
 
     let eff = tmp.cs_effect,
@@ -226,22 +226,22 @@ function updateCSHTML() {
     h += `
     Increase Theorem's Power by <b>${formatMult(eff.power_mult)}</b>
     <br>Increase Theorem's Star 1-4 Luck by <b>${formatMult(
-        eff.theorem_luck,
+        eff.theorem_luck
     )}</b>
     <br>Speed IP Generation by <b>${formatMult(eff.inf_speed)}</b>
     `;
 
     if (eff.sn_speed)
         h += `<br>Speed Supernova Generation by <b>${formatMult(
-            eff.sn_speed,
+            eff.sn_speed
         )}</b>`;
     if (eff.ea_reward)
         h += `<br>Increase reward strength of exotic atom by <b>+${formatPercent(
-            eff.ea_reward,
+            eff.ea_reward
         )}</b>`;
     if (eff.prim_reduce)
         h += `<br>Reduce the primordium theorem requirement by <b>^${format(
-            eff.prim_reduce,
+            eff.prim_reduce
         )}</b>`;
 
     tmp.el.cs_effect.setHTML(h);
