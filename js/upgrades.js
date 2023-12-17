@@ -163,7 +163,7 @@ const UPGS = {
             effDesc(eff) {
                 return {
                     step: "+" + format(eff.step) + "x",
-                    eff: "x" + format(eff.eff) + " to Muscler Power",
+                    eff: formatMult(eff.eff) + " to Muscler Power",
                 };
             },
             bonus() {
@@ -399,7 +399,7 @@ const UPGS = {
             },
             2: {
                 desc: "Strongers add Boosters.",
-                cost: E(10),
+                cost: E(2),
                 effect() {
                     let ret = player.build.mass_3.amt;
                     return ret;
@@ -410,7 +410,7 @@ const UPGS = {
             },
             3: {
                 desc: "You can automatically buy mass upgrades.",
-                cost: E(25),
+                cost: E(30),
             },
             4: {
                 desc: "Ranks no longer reset anything.",
@@ -418,15 +418,15 @@ const UPGS = {
             },
             5: {
                 desc: "You can automatically rank up.",
-                cost: E(1e4),
+                cost: E(1e3),
             },
             6: {
                 desc: "You can automatically tier up.",
-                cost: E(1e5),
+                cost: E(1e4),
             },
             7: {
-                desc: "For every 3 tickspeeds add Stronger.",
-                cost: E(1e7),
+                desc: "Tickspeed adds Stronger.",
+                cost: E(1e5),
                 effect() {
                     let ret = hasAscension(0, 1)
                         ? player.build.tickspeed.amt
@@ -450,7 +450,7 @@ const UPGS = {
             },
             8: {
                 desc: "Super and Hyper mass upgrade scalings are weaker based on Rage Power.",
-                cost: E(1e15),
+                cost: E(1e12),
                 effect() {
                     let ret = E(0.9).pow(
                         player.rp.points
@@ -549,7 +549,7 @@ const UPGS = {
                     return ret;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             14: {
@@ -570,7 +570,7 @@ const UPGS = {
                     return ret;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             16: {
@@ -619,7 +619,7 @@ const UPGS = {
                     return x;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             20: {
@@ -729,7 +729,7 @@ const UPGS = {
             },
             lens: 25,
             1: {
-                desc: "Mass Upgardes no longer spend mass.",
+                desc: "Mass Upgrades no longer spend mass.",
                 cost: E(1),
             },
             2: {
@@ -953,7 +953,7 @@ const UPGS = {
                     return x;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             20: {
@@ -1009,7 +1009,7 @@ const UPGS = {
                 unl() {
                     return tmp.fifthRowUnl;
                 },
-                desc: `Challenge 12's reward now multiplies each bonus radiation boosts.`,
+                desc: `Challenge 12's reward now boosts each bonus radiation boosts.`,
                 cost: E("ee236000"),
             },
             25: {
@@ -1321,7 +1321,7 @@ const UPGS = {
             },
             3: {
                 desc: `Pre-Quantum Global Speed is raised based on Death Shards (before division).`,
-                cost: E(50),
+                cost: E(20),
                 effect() {
                     let x = player.qu.rip.amt.add(1).log10().div(25).add(1);
                     return x.softcap(30, 0.5, 0);
@@ -1332,22 +1332,22 @@ const UPGS = {
             },
             4: {
                 desc: `Start with 2 tiers of each Fermion in Big Rip.`,
-                cost: E(250),
+                cost: E(100),
             },
             5: {
                 desc: `Root Star Booster’s starting cost by 10. Star Booster’s base is increased based on Death Shards.`,
-                cost: E(2500),
+                cost: E(1000),
                 effect() {
                     let x = player.qu.rip.amt.add(1).log10().add(1).pow(3);
                     return x;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             6: {
                 desc: `Start with all Radiation features unlocked.`,
-                cost: E(15000),
+                cost: E(5000),
             },
             7: {
                 desc: `Hybridized Uran-Astatine is twice as effective in Big Rip.`,
@@ -1410,7 +1410,7 @@ const UPGS = {
                     return x.min("e2.5e4");
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             14: {
@@ -1465,7 +1465,7 @@ const UPGS = {
                     return x;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             19: {
@@ -1489,7 +1489,7 @@ const UPGS = {
                     return x;
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x) + " cheaper";
+                    return formatMult(x) + " cheaper";
                 },
             },
             20: {
@@ -1503,7 +1503,7 @@ const UPGS = {
                     return overflow(x, 10, 0.5).pow(1.25);
                 },
                 effDesc(x = this.effect()) {
-                    return "x" + format(x);
+                    return formatMult(x);
                 },
             },
             21: {
@@ -1563,20 +1563,6 @@ const UPGS = {
         },
     },
 };
-
-/*
-1: {
-    desc: "Placeholder.",
-    cost: E(1),
-    effect() {
-        let ret = E(1)
-        return ret
-    },
-    effDesc(x=this.effect()) {
-        return format(x)+"x"
-    },
-},
-*/
 
 function hasUpgrade(id, x) {
     return player.mainUpg[id].includes(x);

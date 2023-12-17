@@ -256,15 +256,6 @@ const RESOURCES_DIS = {
             INF.goInf();
         },
     },
-
-    /*
-    mass: {
-        unl: ()=>true,
-        icon: "mass",
-
-        desc: (gs)=>formatMass(player.mass)+"<br>"+formatGain(player.mass, tmp.massGain.mul(gs), true),
-    },
-    */
 };
 
 function reset_res_btn(id) {

@@ -1,6 +1,6 @@
 const DARK = {
     nextEffectAt: [
-        [0, 1e12, 1e22, 1e130],
+        [0, 1e9, 1e22, 1e130],
         [1e6, 1e11, 1e25, 1e130],
         [1e120, 1e180, "e345", "e800", "e2500", "e56000", "e125500", "ee7"],
     ],
@@ -64,7 +64,7 @@ const DARK = {
                 createConfirm(
                     "Are you sure you want to raise dark?",
                     "dark",
-                    CONFIRMS_FUNCTION.dark,
+                    CONFIRMS_FUNCTION.dark
                 );
             else CONFIRMS_FUNCTION.dark();
         }
@@ -234,7 +234,7 @@ const DARK = {
                 .pow(
                     hasPrestige(1, 167)
                         ? player.dark.matters.final.add(1).root(2)
-                        : 1,
+                        : 1
                 );
             // x.pb = overflow(x.pb,1e20,0.5)
         }
@@ -275,17 +275,17 @@ const DARK = {
 function calcDark(dt) {
     if (player.dark.unl) {
         player.dark.shadow = player.dark.shadow.add(
-            tmp.dark.shadowGain.mul(dt),
+            tmp.dark.shadowGain.mul(dt)
         );
 
         if (tmp.chal14comp)
             player.dark.abyssalBlot = player.dark.abyssalBlot.add(
-                tmp.dark.abGain.mul(dt),
+                tmp.dark.abGain.mul(dt)
             );
 
         if (tmp.dark.rayEff.passive) {
             let c = player.dark.rays.add(
-                tmp.dark.gain.mul(dt).mul(tmp.dark.rayEff.passive),
+                tmp.dark.gain.mul(dt).mul(tmp.dark.rayEff.passive)
             );
             if (CHALS.inChal(19)) c = c.min(1e12);
             player.dark.rays = c;
@@ -296,7 +296,7 @@ function calcDark(dt) {
 
             for (let x = 0; x < mu - 1; x++) {
                 player.dark.matters.amt[x] = player.dark.matters.amt[x].add(
-                    tmp.matters.gain[x].mul(dt),
+                    tmp.matters.gain[x].mul(dt)
                 );
                 if (hasElement(195)) getMatterUpgrade(x);
             }
@@ -308,7 +308,7 @@ function calcDark(dt) {
 
             if (hasInfUpgrade(10))
                 player.dark.matters.final = player.dark.matters.final.max(
-                    MATTERS.final_star_shard.bulk(),
+                    MATTERS.final_star_shard.bulk()
                 );
         }
     }
@@ -319,7 +319,7 @@ function calcDark(dt) {
     if (hasCharger(1)) {
         player.bh.unstable = UNSTABLE_BH.getProduction(
             player.bh.unstable,
-            tmp.unstable_bh.gain.mul(dt),
+            tmp.unstable_bh.gain.mul(dt)
         );
     }
 
@@ -335,7 +335,7 @@ function calcDark(dt) {
             for (let i = 0; i < 2; i++)
                 player.dark.exotic_atom.amount[i] =
                     player.dark.exotic_atom.amount[i].add(
-                        tmp.exotic_atom.gain[i].mul(dt),
+                        tmp.exotic_atom.gain[i].mul(dt)
                     );
         }
     }
@@ -369,25 +369,6 @@ function updateDarkHTML() {
 
     let inf_gs = tmp.preInfGlobalSpeed;
 
-    /*
-    let og = hasElement(118)
-    let unl = og || player.dark.unl
-
-	tmp.el.dark_div.setDisplay(unl)
-	if (unl) tmp.el.darkAmt.setHTML(player.dark.rays.format(0)+"<br>"+(og?dtmp.rayEff.passive?player.dark.rays.formatGain(dtmp.gain.mul(dtmp.rayEff.passive)):"(+"+dtmp.gain.format(0)+")":"(require Og-118)"))
-
-    unl = player.dark.matters.final.gt(0)
-	tmp.el.fss_div.setDisplay(unl)
-	if (unl) tmp.el.FSS2.setHTML(format(player.dark.matters.final,0)+"<br>(+"+(tmp.matters.FSS_base.gte(tmp.matters.FSS_req)?1:0)+")")
-
-	unl = player.dark.c16.first
-	tmp.el.corrupt_div.setDisplay(unl)
-	if (unl) tmp.el.corruptShard1.setHTML(format(player.dark.c16.shard,0)+"<br>(+"+tmp.c16.shardGain.format(0)+")")
-
-    unl = player.chal.comps[16].gte(1)
-	tmp.el.idk_div.setDisplay(unl)
-    */
-
     if (tmp.tab == 7) {
         if (tmp.stab[7] == 0) {
             tmp.el.darkRay.setHTML(player.dark.rays.format(0));
@@ -395,8 +376,8 @@ function updateDarkHTML() {
                 player.dark.shadow.format(0) +
                     " " +
                     player.dark.shadow.formatGain(
-                        tmp.dark.shadowGain.mul(inf_gs),
-                    ),
+                        tmp.dark.shadowGain.mul(inf_gs)
+                    )
             );
 
             let eff = dtmp.shadowEff;
@@ -410,24 +391,24 @@ function updateDarkHTML() {
 
             if (eff.bp)
                 e += `<br>Boosts blueprint particles gain by <b>x${eff.bp.format(
-                    3,
+                    3
                 )}</b>`;
             if (eff.sn)
                 e +=
                     `<br>Makes you becoming <b>x${eff.sn.format(
-                        3,
+                        3
                     )}</b> more supernovas` +
                     eff.sn.softcapHTML(7.5, hasElement(9, 1));
             if (eff.en)
                 e += `<br>Boosts entropy earned by <b>x${eff.en.format(3)}</b>`;
             if (eff.ab)
                 e += `<br>Boosts abyssal blots earned by <b>x${eff.ab.format(
-                    3,
+                    3
                 )}</b>`;
             if (eff.bhp)
                 e +=
                     `<br>Boosts exponent from the mass of BH formula by <b>+${eff.bhp.format(
-                        3,
+                        3
                     )}</b><br>Uncaps BH-Exponent Boost's effect`.corrupt(c16);
 
             tmp.el.dsEff.setHTML(e);
@@ -438,8 +419,8 @@ function updateDarkHTML() {
                     player.dark.abyssalBlot.format(0) +
                         " " +
                         player.dark.abyssalBlot.formatGain(
-                            tmp.dark.abGain.mul(inf_gs),
-                        ),
+                            tmp.dark.abGain.mul(inf_gs)
+                        )
                 );
 
                 eff = dtmp.abEff;
@@ -455,39 +436,39 @@ function updateDarkHTML() {
 
                 if (eff.hr)
                     e += `<br>Boosts hawking radiation gain by <b>x${eff.hr.format(
-                        3,
+                        3
                     )}</b>`;
                 if (eff.pb)
                     e += `<br>Boosts prestige base's multiplier by <b>x${eff.pb.format(
-                        3,
+                        3
                     )}</b>`;
                 if (eff.csp)
                     e += `<br>Boosts cosmic string's power by <b>x${eff.csp.format(
-                        3,
+                        3
                     )}</b>`;
                 if (eff.mexp)
                     e +=
                         `<br>` +
                         `Boosts all matters gain by <b>^${eff.mexp.format(
-                            3,
+                            3
                         )}</b>`.corrupt(c16);
                 if (eff.accelPow)
                     e +=
                         `<br>Boosts accelerator power by <b>x${eff.accelPow.format(
-                            3,
+                            3
                         )}</b>` + eff.accelPow.softcapHTML(5, hasElement(234));
                 if (eff.ApQ_Overflow)
                     e += `<br>Atomic power & quark overflows start <b>^${eff.ApQ_Overflow.format(
-                        3,
+                        3
                     )}</b> later`;
                 if (eff.fss)
                     e += `<br>Final Star Shards are <b>${formatPercent(
-                        eff.fss - 1,
+                        eff.fss - 1
                     )}</b> stronger`;
                 if (eff.ea)
                     e +=
                         `<br>Raises Exotic Atom's formula by <b>${format(
-                            eff.ea,
+                            eff.ea
                         )}</b>` + eff.ea.softcapHTML(1.75);
 
                 tmp.el.abEff.setHTML(e);
@@ -503,18 +484,18 @@ function updateDarkHTML() {
 
             if (eff.passive)
                 e += `<br>Passively gains <b>${formatPercent(
-                    eff.passive,
+                    eff.passive
                 )}</b> of dark rays gained on reset per second`;
             if (eff.glyph)
                 e += `<br>Earns <b>x${format(
                     eff.glyph,
-                    3,
+                    3
                 )}</b> more glyphic mass`;
             if (eff.dChal)
                 e +=
                     `<br>Adds <b>${format(
                         eff.dChal,
-                        0,
+                        0
                     )}</b> more C13-15 maximum completions` +
                     eff.dChal.softcapHTML(100, hasBeyondRank(3, 12));
 

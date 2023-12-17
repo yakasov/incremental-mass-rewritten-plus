@@ -289,7 +289,6 @@ button {
 }
 
 .corrupted_text {
-    color: white;
     animation: corrupted_text 4s cubic-bezier(0.25, 0, 0.5, 1) infinite;
 }
 
@@ -302,16 +301,20 @@ button {
 @keyframes corrupted_text {
     0%,
     100% {
-        text-shadow: -2px -2px 0px #5555ff, 2px 2px 0px #ff5555;
+        text-shadow: -2px -2px 2px #5555ff, 2px 2px 2px #ff5555;
+        color: white;
     }
     25% {
-        text-shadow: -2px 2px 0px #5555ff, 2px -2px 0px #ff5555;
+        text-shadow: -2px 2px 2px #5555ff, 2px -2px 2px #ff5555;
+        color: #eeddff;
     }
     50% {
-        text-shadow: 2px 2px 0px #5555ff, -2px -2px 0px #ff5555;
+        text-shadow: 2px 2px 2px #5555ff, -2px -2px 2px #ff5555;
+        color: white;
     }
     75% {
-        text-shadow: 2px -2px 0px #5555ff, -2px 2px 0px #ff5555;
+        text-shadow: 2px -2px 2px #5555ff, -2px 2px 2px #ff5555;
+        color: #ffddee;
     }
 }
 
@@ -338,13 +341,22 @@ button {
 @keyframes quark_color {
     0%,
     100% {
-        color: red;
+        color: #f77;
+    }
+    16.7% {
+        color: #f7f;
     }
     33.3% {
-        color: blue;
+        color: #77f;
+    }
+    50% {
+        color: #7ff;
     }
     66.7% {
-        color: limegreen;
+        color: #7f7;
+    }
+    83.3% {
+        color: #ff7;
     }
 }
 
@@ -517,15 +529,22 @@ button {
     color: #666;
     border-color: #666;
     background-color: #222;
-    box-shadow: 0 0 10px #666;
+    color: #444;
+}
+
+.elements.inf {
+    border-color: orange;
+    box-shadow: 0 0 10px yellow;
 }
 
 .elements.inf.bought {
     color: black;
-    border-color: orange;
     background-color: none;
     background: radial-gradient(circle, yellow 0%, orange 50%, yellow 100%);
-    box-shadow: 0 0 10px yellow;
+}
+
+.elements.muon {
+    border-color: #f60;
 }
 
 .elements.muon.bought {
@@ -533,6 +552,11 @@ button {
     border-color: #f60;
     background-color: #f30;
     box-shadow: 0 0 10px #f60;
+}
+
+.elements.cs {
+    border-color: #a0f;
+    box-shadow: 0 0 10px #a0f;
 }
 
 .elements.cs.bought {
@@ -548,10 +572,22 @@ button {
     font-weight: bold;
 }
 
-.elements.bought.br {
+.elements.br {
     border-color: #ff3939;
+    border-color: #ff3939;
+}
+
+.elements.br.bought,
+.elements.bought.br {
     box-shadow: 0px 0px 10px 0px #ff39397e;
     background-color: #800;
+}
+
+.elements.final.bought {
+    background: radial-gradient(circle, #555555 0%, #aaa 70%, #ffffff 100%);
+    box-shadow: 0 0 10px #fff;
+    color: black;
+    font-weight: bold;
 }
 
 .btn_tree:not(.qu_tree).bought {
@@ -570,18 +606,25 @@ button {
 }
 
 .elements.corrupted,
-.btn_tree.corrupted,
-.elements.c16.bought {
+.btn_tree.corrupted {
     border-color: white;
     color: white;
     box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
         3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
-    z-index: 1;
+    opacity: 0.1;
     animation: corrupted_div 4s cubic-bezier(0.25, 0, 0.5, 1) infinite;
+}
+
+.elements.c16 {
+    border-color: #f5b;
+    box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
+        3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
 }
 
 .elements.c16.bought {
     background-color: #171717;
+
+    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .elements.corrupted {
@@ -714,6 +757,7 @@ h4 {
 }
 
 *::-webkit-scrollbar-thumb {
+    border: solid 1px black;
     background-color: #888;
     border-radius: 10px;
 }

@@ -371,18 +371,6 @@ function updateQuantumTemp() {
         .toNumber();
     tmp.qu.pick_chr = tmp.qu.theories > 0;
 
-    /*
-    let fp = E(1)
-
-    if (tmp.inf_unl) fp = fp.mul(theoremEff('proto',0))
-
-    tmp.qu.cosmic_str_cost = E(2).pow(player.qu.cosmic_str.div(fp).scaleEvery("cosmic_str").add(1)).floor()
-    tmp.qu.cosmic_str_bulk = player.qu.points.max(1).log(2).scaleEvery("cosmic_str",true).mul(fp).add(scalingActive('cosmic_str',player.qu.cosmic_str.max(tmp.qu.cosmic_str_bulk),'super')?1:0).floor()
-
-    tmp.qu.cosmic_str_can = player.qu.points.gte(tmp.qu.cosmic_str_cost)
-    tmp.qu.cosmic_str_eff = QUANTUM.cosmic_str.eff()
-    */
-
     tmp.qu.bpGain = QUANTUM.bpGain();
     tmp.qu.bpEff = QUANTUM.bpEff();
 
@@ -404,18 +392,6 @@ function updateQuantumHTML() {
         tmp.el.bpEff.setTxt(format(tmp.qu.bpEff));
 
         BUILDINGS.update("cosmic_string");
-
-        /*
-        tmp.el.cosmic_str_lvl.setTxt(format(player.qu.cosmic_str,0)+(tmp.qu.cosmic_str_eff.bonus.gte(1)?" + "+format(tmp.qu.cosmic_str_eff.bonus,0):""))
-        tmp.el.cosmic_str_btn.setClasses({btn: true, locked: !tmp.qu.cosmic_str_can})
-        tmp.el.cosmic_str_scale.setTxt(getScalingName('cosmic_str'))
-        tmp.el.cosmic_str_cost.setTxt(format(tmp.qu.cosmic_str_cost,0))
-        tmp.el.cosmic_str_pow.setTxt(format(tmp.qu.cosmic_str_eff.pow))
-        tmp.el.cosmic_str_eff.setHTML(format(tmp.qu.cosmic_str_eff.eff))
-
-        tmp.el.cosmic_str_auto.setDisplay(hasElement(147))
-        tmp.el.cosmic_str_auto.setHTML(player.qu.auto_cr?"ON":"OFF")
-        */
     }
 
     if (tmp.tab == 6) {

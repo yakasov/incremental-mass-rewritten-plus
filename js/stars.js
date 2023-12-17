@@ -56,21 +56,16 @@ const STARS = {
                                 .log10()
                                 .add(1)
                                 .log10()
-                                .add(1),
+                                .add(1)
                         )
                         .root(2)
-                        .sub(1),
+                        .sub(1)
                 );
             } else {
                 x = pp
                     .log10()
                     .mul(
-                        player.stars.points
-                            .add(1)
-                            .log10()
-                            .add(1)
-                            .log10()
-                            .add(1),
+                        player.stars.points.add(1).log10().add(1).log10().add(1)
                     )
                     .add(1);
 
@@ -100,7 +95,7 @@ const STARS = {
                 (hasElement(69) ? player.ranks.pent.mul(pp) : E(0)).softcap(
                     9,
                     0.5,
-                    0,
+                    0
                 ),
             ];
             x = s
@@ -116,8 +111,8 @@ const STARS = {
                                 .add(1)
                                 .pow(5 / 9)
                                 .mul(0.25)
-                                .mul(t3.pow(0.85).mul(0.0125).add(1)),
-                        ),
+                                .mul(t3.pow(0.85).mul(0.0125).add(1))
+                        )
                 );
             x = x
                 .softcap("ee15", 0.95, 2)
@@ -193,7 +188,7 @@ function calcStars(dt) {
         player.stars.points = player.stars.points.min(tmp.supernova.maxlimit);
     for (let x = 0; x < tmp.stars.max_unlocks; x++)
         player.stars.generators[x] = player.stars.generators[x].add(
-            tmp.stars.generators_gain[x].mul(dt),
+            tmp.stars.generators_gain[x].mul(dt)
         );
 }
 
@@ -216,26 +211,6 @@ function updateStarsTemp() {
             : EINF;
 
     BUILDINGS.update("star_booster");
-
-    /*
-    let s = E("e8000")
-    let inc = E("e100")
-    if (hasUpgrade('br',5)) {
-        s = s.root(10)
-        inc = inc.root(10)
-    }
-    tmp.stars.generator_boost_req = inc.pow(player.stars.boost.pow(1.25)).mul(s)//.scale(1e35,2,0)
-    tmp.stars.generator_boost_bulk = player.atom.quarks.gte(s)?player.atom.quarks.div(s).max(1).log(inc).root(1.25).add(1).floor():E(0)//.scale(1e35,2,0,true)
-
-    tmp.stars.generator_boost_base = E(2)
-    if (hasElement(57)) tmp.stars.generator_boost_base = tmp.stars.generator_boost_base.mul(tmp.elements.effect[57])
-    if (hasUpgrade('br',5)) tmp.stars.generator_boost_base = tmp.stars.generator_boost_base.mul(upgEffect(4,5))
-    tmp.stars.generator_boost_base = tmp.stars.generator_boost_base.softcap(1e13,0.5,0)//.softcap(3e15,0.1,0)
-
-    if (CHALS.inChal(17)) tmp.stars.generator_boost_base = E(1)
-
-    tmp.stars.generator_boost_eff = tmp.stars.generator_boost_base.pow(player.stars.boost.mul(tmp.chal?tmp.chal.eff[11]:1)).softcap('e3e18',0.95,2)
-    */
 
     for (let x = 0; x < tmp.stars.max_unlocks; x++)
         tmp.stars.generators_gain[x] = STARS.generators.gain(x);
@@ -322,25 +297,25 @@ function updateStarsHTML() {
             " " +
             formatGain(
                 player.stars.points,
-                tmp.stars.gain.mul(tmp.preQUGlobalSpeed),
-            ),
+                tmp.stars.gain.mul(tmp.preQUGlobalSpeed)
+            )
     );
     tmp.el.stars_Eff.setHTML(
         (hasElement(162) ? "^" : "×") +
             `<h4>${format(tmp.stars.effect)}</h4>` +
             (tmp.SN_passive
                 ? `, +<h4>${tmp.supernova.passive.format(
-                      0,
+                      0
                   )}</h4>/s to supernova gain`
-                : ""),
+                : "")
     );
     tmp.el.stars_Eff.setClasses({ corrupted_text2: tmp.c16active });
 
     tmp.el.star_btn.setDisplay(player.stars.unls < tmp.stars.max_unlocks);
     tmp.el.star_btn.setHTML(
         `Unlock new type of Stars, require ${format(
-            tmp.stars.generator_req,
-        )} Quark`,
+            tmp.stars.generator_req
+        )} Quark`
     );
 
     tmp.el.star_btn.setClasses({
@@ -359,19 +334,19 @@ function updateStarsHTML() {
                     "<br>" +
                     formatGain(
                         player.stars.generators[x],
-                        tmp.stars.generators_gain[x].mul(tmp.preQUGlobalSpeed),
-                    ),
+                        tmp.stars.generators_gain[x].mul(tmp.preQUGlobalSpeed)
+                    )
             );
     }
 
     tmp.el.starSiltation.setDisplay(
-        player.stars.points.gte(tmp.overflow_start.star[0]),
+        player.stars.points.gte(tmp.overflow_start.star[0])
     );
     tmp.el.starSiltation.setHTML(
         `Because of star siltation at <b>${format(
-            tmp.overflow_start.star[0],
+            tmp.overflow_start.star[0]
         )}</b>, the exponent of collapsed stars is ${overflowFormat(
-            tmp.overflow.star || 1,
-        )}!`,
+            tmp.overflow.star || 1
+        )}!`
     );
 }

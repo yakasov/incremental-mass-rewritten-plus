@@ -3,7 +3,7 @@ const ASCENSIONS = {
     fullNames: ["Ascension", "Transcension"],
     resetName: ["Ascend", "Transcend"],
     baseExponent() {
-        let x = theoremEff("mass", 5, 0);
+        let x = theoremEff("mass", 5, E(0));
 
         if (hasElement(284)) x = x.add(elemEffect(284, 0));
         if (hasElement(44, 1)) x = x.add(muElemEff(44, 0));
@@ -43,7 +43,7 @@ const ASCENSIONS = {
             case 0:
                 x = Decimal.pow(
                     1.1,
-                    y.div(fp).scaleEvery("ascension0", false).pow(1.1),
+                    y.div(fp).scaleEvery("ascension0", false).pow(1.1)
                 ).mul(1600);
                 break;
             case 1:
@@ -105,7 +105,7 @@ const ASCENSIONS = {
     },
     rewards: [
         {
-            1: `The bonus of tickspeed, each mass upgrade (except Overpower) now multiplies its level instead of adding. Dalton Theorem is even stronger.`,
+            1: `The bonus of tickspeed, each mass upgrade (except Overpower) now boosts its level instead of adding. Dalton Theorem is even stronger.`,
             2: `Meta-Fermions start ^2 later.`,
             3: `19th Big Rip upgrade is twice as effective, and remove the overflow from unstable BH's effect.`,
             4: `Kaon & Pion gains are multiplied by 5 every Ascension.`,
@@ -113,9 +113,9 @@ const ASCENSIONS = {
             13: `Remove atomic power's overflow.`,
             15: `Remove Exotic Rank & Tier, Super & Hyper Hex.`,
             22: `Challenge 5's reward is changed again.`,
-            23: `The bonus of any radiation boost now multiplies its strengthness at an reduced rate.`,
+            23: `The bonus of any radiation boost now boosts its strengthness at an reduced rate.`,
             33: `19th Big Rip upgrade is twice as effective again.`,
-            42: `15th Black Hole upgrade now works like as Atomic Power's effect. The bonus of BHC now multiplies its level instead of adding.`,
+            42: `15th Black Hole upgrade now works like as Atomic Power's effect. The bonus of BHC now boosts its level instead of adding.`,
         },
         {
             1: `Prestige Base Exponent is doubled. Big Rip Upgrade 19 now affects Renown.`,
@@ -163,7 +163,7 @@ const ASCENSIONS = {
 };
 
 function hasAscension(i, x) {
-    return player.ascensions[i].gte(x);
+    return tmp.inf_unl && player.ascensions[i].gte(x);
 }
 function ascensionEff(i, x, def = 1) {
     return tmp.ascensions.eff[i][x] || def;
@@ -206,8 +206,8 @@ function setupAscensionsHTML() {
 function updateAscensionsHTML() {
     tmp.el.asc_base.setHTML(
         `${tmp.ascensions.baseMul.format(0)}<sup>${format(
-            tmp.ascensions.baseExp,
-        )}</sup> = ${tmp.ascensions.base.format(0)}`,
+            tmp.ascensions.baseExp
+        )}</sup> = ${tmp.ascensions.base.format(0)}`
     );
     tmp.el.asc_texp.setHTML(tmp.ascensions.tierExp.format(2));
 
@@ -222,7 +222,7 @@ function updateAscensionsHTML() {
                 if (p.lt(keys[i]) && (tmp.chal13comp || p.lte(Infinity))) {
                     desc = ` At ${ASCENSIONS.fullNames[x]} ${format(
                         keys[i],
-                        0,
+                        0
                     )} - ${ASCENSIONS.rewards[x][keys[i]]}`;
                     break;
                 }
@@ -243,7 +243,7 @@ function updateAscensionsHTML() {
                     ? format(tmp.ascensions.req[x], 0) + " of Ascension Base"
                     : ASCENSIONS.fullNames[x - 1] +
                           " " +
-                          format(tmp.ascensions.req[x], 0),
+                          format(tmp.ascensions.req[x], 0)
             );
             tmp.el["asc_auto_" + x].setDisplay(ASCENSIONS.autoUnl[x]());
             tmp.el["asc_auto_" + x].setTxt(player.auto_asc[x] ? "ON" : "OFF");
@@ -259,15 +259,13 @@ function updateAscensionsTemp() {
     for (let x = 0; x < ASCENSIONS.names.length; x++) {
         tmp.ascensions.req[x] = ASCENSIONS.req(x);
         for (let y in ASCENSIONS.rewardEff[x]) {
-            if (ASCENSIONS.rewardEff[x][y])
+            if (hasAscension(x, y) && ASCENSIONS.rewardEff[x][y])
                 tmp.ascensions.eff[x][y] = ASCENSIONS.rewardEff[x][y][0]();
         }
     }
 }
 
 function updateAscensionsRewardHTML() {
-    let c16 = tmp.c16active;
-    // tmp.el["asc_reward_name"].setTxt(ASCENSIONS.fullNames[player.asc_reward])
     for (let x = 0; x < ASCENSIONS.names.length; x++) {
         tmp.el["asc_reward_div_" + x].setDisplay(player.asc_reward == x);
         if (player.asc_reward == x) {
@@ -282,7 +280,7 @@ function updateAscensionsRewardHTML() {
                     if (tmp.el["asc_eff_" + x + "_" + y]) {
                         let eff = ASCENSIONS.rewardEff[x][keys[y]];
                         tmp.el["asc_eff_" + x + "_" + y].setHTML(
-                            eff[1](tmp.ascensions.eff[x][keys[y]]),
+                            eff[1](tmp.ascensions.eff[x][keys[y]])
                         );
                     }
                 }

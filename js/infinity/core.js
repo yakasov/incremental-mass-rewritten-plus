@@ -51,24 +51,16 @@ const CORE = {
                 return x;
             },
             (s) => {
-                let x = s.add(1).pow(s.root(1.5));
-
-                return overflow(x, 100, 0.5);
+                return overflow(s.add(1).pow(s.root(1.5)), 100, 0.5);
             },
             (s) => {
-                let x = s.add(1).log10().div(50);
-
-                return x;
+                return s.add(1).log10().div(50);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
         ],
         effDesc: [
@@ -151,26 +143,18 @@ const CORE = {
                 return x;
             },
             (s) => {
-                let x = s.add(1).log10().div(10).add(1);
-
-                return x;
+                return s.add(1).log10().div(10).add(1);
             },
             (s) => {
-                let x = s.gt(0)
+                return s.gt(0)
                     ? Decimal.pow(0.95, s.add(1).ssqrt().root(2))
                     : E(1);
-
-                return x;
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
         ],
         effDesc: [
@@ -249,24 +233,16 @@ const CORE = {
                 return x.div(1e4);
             },
             (s) => {
-                let x = s.add(1).log10().root(2).div(10).add(1);
-
-                return x;
+                return s.add(1).log10().root(2).div(10).add(1);
             },
             (s) => {
-                let x = s.add(1).log10().root(2).div(10).add(1);
-
-                return x;
+                return s.add(1).log10().root(2).div(10).add(1);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
         ],
         effDesc: [
@@ -306,44 +282,28 @@ const CORE = {
         },
         eff: [
             (s) => {
-                let x = s.add(1).log10().div(1.5).add(1); // Math.log10(s+1)/2+1
-
-                return x;
+                return s.add(1).log10().div(1.5).add(1);
             },
             (s) => {
-                let x = Decimal.pow(1.25, s.add(1).log10());
-
-                return x;
+                return Decimal.pow(1.25, s.add(1).log10());
             },
             (s) => {
-                let x = s.add(1).log10().div(75).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
-
-                return x;
+                return s.add(1).log10().div(75).add(1).pow(-1);
             },
             (s) => {
-                let x = s.add(1).log10().div(10).add(1).pow(-1); //  Math.pow(1+Math.log10(s+1)/10,-1)
-
-                return x;
+                return s.add(1).log10().div(10).add(1).pow(-1);
             },
             (s) => {
-                let x = s.add(1).log10().root(3).div(10).add(1);
-
-                return x;
+                return s.add(1).log10().root(3).div(10).add(1);
             },
             (s) => {
-                let x = s.add(1).log10().root(2).div(10).add(1);
-
-                return x;
+                return s.add(1).log10().root(2).div(10).add(1);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
         ],
         effDesc: [
@@ -383,44 +343,28 @@ const CORE = {
         },
         eff: [
             (s) => {
-                let x = s.add(1);
-
-                return x;
+                return s.add(1);
             },
             (s) => {
-                let x = s.add(1).log10().root(2).div(100).add(1); // Math.log10(s+1)**0.5/100+1
-
-                return x;
+                return s.add(1).log10().root(2).div(100).add(1);
             },
             (s) => {
-                let x = s.add(1).log10().div(100).add(1); // Math.log10(s+1)/100+1
-
-                return x;
+                return s.add(1).log10().div(100).add(1);
             },
             (s) => {
-                let x = s.add(1).log10().div(75).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
-
-                return x;
+                return s.add(1).log10().div(75).add(1).pow(-1);
             },
             (s) => {
-                let x = s.add(1).log10().root(2).div(5);
-
-                return x;
+                return s.add(1).log10().root(2).div(5);
             },
             (s) => {
-                let x = s.add(1).root(3);
-
-                return x;
+                return s.add(1).root(3);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
             (s) => {
-                let x = E(0);
-
-                return x;
+                return E(0);
             },
         ],
         effDesc: [
@@ -483,11 +427,11 @@ function getCoreChance(i, lvl = tmp.core_lvl) {
             lvl.floor().pow(0.4)
         ).sub(hasInfUpgrade(16) ? 0.1 : 0)
     );
-} // 1-Math.pow(1-MIN_STAR_CHANCES[i]**(1/core_star_luck[i]),Math.floor(lvl)**0.4)
+}
 
 function getPowerMult(lvl = tmp.core_lvl) {
     return lvl.sub(1).floor().root(2).div(100).mul(tmp.cs_effect.power_mult);
-} // Math.floor(lvl-1)**0.5/100 * tmp.cs_effect.power_mult
+}
 
 function chanceToBool(arr) {
     return arr.map((x, i) => core_star_chances[i].gt(x));
@@ -507,62 +451,6 @@ function resetCoreTemp() {
 resetCoreTemp();
 
 var t_choosed = "-";
-
-debug.generateTheorem = (chance = CORE_CHANCE_MIN) => {
-    let c = [];
-    while (c.length == 0) {
-        let m = [],
-            n = false;
-        for (let i = 0; i < MAX_STARS; i++) {
-            m[i] = Math.random();
-            if (m[i] < chance && i < 4) n = true;
-        }
-        if (n) c = m;
-    }
-    let t = CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)],
-        s = "";
-    let p = 1 + Math.random() / 5;
-
-    for (let i = 0; i < 4; i++)
-        s += `<iconify-icon icon="${
-            c[i] < chance ? "ic:baseline-star" : "ic:baseline-star-border"
-        }" width="18"></iconify-icon>`;
-
-    tmp.el.theorem_debug.setHTML(`
-    <div class="theorem_div ${t}">
-        <iconify-icon icon="${CORE[t].icon}" width="45"></iconify-icon>
-        <div class="c_pow">${format(p * 100, 0)}%</div>
-        <div class="c_lvl">${format(10 * Math.random() + 1, 0)}</div>
-        <div>
-            ${s}
-        </div>
-    </div>
-    `);
-};
-
-debug.addRandomTheorem = (
-    level = 1,
-    power = 1,
-    max_chance = CORE_CHANCE_MIN
-) => {
-    let c = [];
-    while (c.length == 0) {
-        let m = [],
-            n = false;
-        for (let i = 0; i < MAX_STARS; i++) {
-            m[i] = Math.random();
-            if (i < 4 && m[i] < max_chance) n = true;
-        }
-        if (n) c = m;
-    }
-
-    addTheorem(
-        CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)],
-        c,
-        level,
-        power
-    );
-};
 
 var changeCoreFromBestLevel = () => {
     let lvl = Decimal.floor(tmp.core_lvl),
@@ -617,7 +505,7 @@ function calcFragmentBase(data, s, p, level) {
         .pow(lvl.sub(1))
         .mul(Decimal.pow(m, p.mul(2)))
         .mul(lvl)
-        .floor(); // Decimal.pow(1.5*p,lvl-1).mul(m**(2*p)*lvl).floor()
+        .floor();
 }
 
 function getTheoremPreEffects(data, s, p, level) {
@@ -693,7 +581,7 @@ function updateCoreHTML() {
 
             let p = player.inf.pre_theorem[i],
                 s = chanceToBool(p.star_c),
-                power = pm.mul(p.power_m).mul(100).add(100).round().div(100); // Math.round(100+pm*p.power_m*100)/100
+                power = pm.mul(p.power_m).mul(100).add(100).round().div(100);
             pt.setClasses({
                 theorem_div: true,
                 tooltip: true,
@@ -906,8 +794,6 @@ function chooseTheorem(id, is_core = false) {
     else if (t_choosed == "-") {
         if (is_core ? core[id] : inv[id]) t_choosed = is_core ? id + "c" : id;
     } else {
-        // console.log(id,t_choosed)
-
         if (inv[t_choosed]) {
             if (is_core) {
                 if (core[id] !== undefined && core[id] !== null) {

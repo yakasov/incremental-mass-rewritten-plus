@@ -1,5 +1,9 @@
 # Changes from Incremental Mass Rewritten (v0.7.1.6)
 
+## v -plus.4
+
+-   Implemented changes (display, balance changes, but not new features) from v0.8-beta
+
 ## v -plus.3
 
 -   Corrupted text display is more subtle

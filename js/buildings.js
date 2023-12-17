@@ -37,7 +37,7 @@ const BUILDINGS_DATA = {
         },
 
         effect(x) {
-            let power = E(1);
+            let power = E(2);
             if (player.ranks.rank.gte(3))
                 power = power.add(RANKS.effect.rank[3]());
             power = power.mul(BUILDINGS.eff("mass_2"));
@@ -104,7 +104,7 @@ const BUILDINGS_DATA = {
                 step = step.add(RANKS.effect.rank[5]());
             step = step.pow(BUILDINGS.eff("mass_3"));
 
-            let ret = step.mul(x).add(1); //.softcap("ee14",0.95,2)
+            let ret = step.mul(x).add(1);
             if (hasElement(203)) ret = ret.pow(elemEffect(203));
 
             return { power: step, effect: ret };
@@ -123,7 +123,7 @@ const BUILDINGS_DATA = {
         },
 
         get_power: (x) => "+" + format(x.power) + "x",
-        get_effect: (x) => "x" + format(x.effect) + " to Muscler Power",
+        get_effect: (x) => formatMult(x.effect) + " to Muscler Power",
     },
     mass_3: {
         name: "Stronger",
@@ -793,7 +793,7 @@ const BUILDINGS_DATA = {
             if (hasTree("bs5")) pow = pow.mul(tmp.bosons.effect.z_boson[0]);
             if (hasTree("gr2")) pow = pow.pow(1.25);
             if (hasElement(129)) pow = pow.pow(elemEffect(18));
-            pow = pow; //.softcap('e3e12',0.9,2)
+            pow = pow;
 
             if (hasBeyondRank(2, 4))
                 pow = pow.pow(BUILDINGS.eff("accelerator"));
@@ -808,8 +808,6 @@ const BUILDINGS_DATA = {
             let exp = E(1);
             if (hasGlyphUpg(12))
                 exp = Decimal.pow(1.1, eff.max(1).log10().add(1).log10());
-
-            //exp = overflow(exp,1000,0.5)
 
             return { power: pow, effect: eff, exp: exp };
         },
@@ -875,7 +873,7 @@ const BUILDINGS_DATA = {
 
             if (hasElement(57)) pow = pow.mul(tmp.elements.effect[57]);
             if (hasUpgrade("br", 5)) pow = pow.mul(upgEffect(4, 5));
-            pow = pow.softcap(1e13, 0.5, 0, a22); //.softcap(3e15,0.1,0)
+            pow = pow.softcap(1e13, 0.5, 0, a22);
 
             if (CHALS.inChal(17)) pow = E(1);
 
@@ -1027,44 +1025,6 @@ const BUILDINGS_DATA = {
         get_power: (x) => formatMult(x.power),
         get_effect: (x) => formatMult(x.effect) + " to dimensional mass",
     },
-
-    /*
-    {
-        name: "Placeholder",
-		icon: "placeholder",
-
-        get isUnlocked() { return false },
-        get autoUnlocked() { return false },
-        get noSpend() { return false },
-
-        get res() { return player.mass },
-        set res(v) { player.mass = v },
-
-        cost(x=this.level) {
-            return EINF
-        },
-        get bulk() {
-            return E(0)
-        },
-
-        get_cost: x => format(x,0),
-
-        effect(x, bonus) {
-            let pow = E(1)
-            let eff = E(1)
-            return {power: pow, effect: eff}
-        },
-
-        get bonus() {
-            let x = E(0)
-
-            return x
-        },
-
-        get_power: x => formatMult(x.power),
-        get_effect: x => formatMult(x.effect),
-    },
-    */
 };
 
 const BUILDINGS_ORDER = [
@@ -1201,7 +1161,7 @@ const BUILDINGS = {
                 (bt.bonus.gt(0)
                     ? (b.beMultiplicative ? " × " : " + ") + bt.bonus.format(0)
                     : "")
-        ); //  + " = " + bt.total.format(0)
+        );
         tmp.el["building_scale_" + i].setHTML(
             b.scale ? getScalingName(b.scale) : ""
         );
@@ -1412,7 +1372,7 @@ function checkBuildings() {
 
     // Parallel Extruder
     b = player.build.pe;
-    if (b.amt.lte(0) && player.inf.pe && Decimal.gt(player.inf.pe, 0)) {
+    if (b.amt.lte(0) && player.inf?.pe && Decimal.gt(player.inf.pe, 0)) {
         b.amt = E(player.inf.pe);
         player.inf.pe = undefined;
     }

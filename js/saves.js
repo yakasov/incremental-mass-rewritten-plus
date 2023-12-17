@@ -983,7 +983,7 @@ function simulateTime(sec) {
         )}</b>.`;
 
     if (s.sn.gte(1e3))
-        h += `<br>You exploded into <b>${s.sn.format(0)}</b> more supernovas.`;
+        h += `<br>You imploded into <b>${s.sn.format(0)}</b> more supernovas.`;
 
     if (sec > 300) {
         createPopup(h, "offline");

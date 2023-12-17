@@ -104,7 +104,7 @@ const POPUP_GROUPS = {
     },
     supernova10: {
         html: `
-            Congratulations!<br><br>You have exploded into 10 Supernovas!<br>
+            Congratulations!<br><br>You have imploded into 10 Supernovas!<br>
             And you can manually supernova!<br><br>
             <b>Bosons are unlocked in Supernova tab!</b>
         `,
@@ -491,12 +491,6 @@ function setupStatsHTML() {
 
     new Element("asc_reward_btn").setHTML(h);
 }
-
-/*
-ranks_reward: 0,
-pres_reward: 0,
-scaling_ch: 0,
-*/
 
 function updateStatsHTML() {
     if (tmp.stab[1] == 0)

@@ -83,7 +83,7 @@ const SUPERNOVA = {
         tmp.pass = 2;
     },
     starGain() {
-        let x = E(hasTree("c") ? 0.1 : 0);
+        let x = E(hasTree("c") ? 1 : 0);
         if (hasTree("sn1")) x = x.mul(tmp.supernova.tree_eff.sn1);
         if (hasTree("sn2")) x = x.mul(tmp.supernova.tree_eff.sn2);
         if (hasTree("sn3")) x = x.mul(tmp.supernova.tree_eff.sn3);

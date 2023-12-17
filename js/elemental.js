@@ -442,8 +442,7 @@ const ELEMENTS = {
             desc: `Silicon's effect is +2% better for each element bought.`,
             cost: E(5e38),
             effect() {
-                let x = player.atom.elements.length * 0.02;
-                return Number(x);
+                return Number(player.atom.elements.length * 0.02);
             },
             effDesc(x) {
                 return "+" + format(x * 100) + "%";
@@ -490,8 +489,9 @@ const ELEMENTS = {
             desc: `Dilated mass gain is increased by Tickspeed at a reduced rate.`,
             cost: E(1e61),
             effect() {
-                let x = E(1.25).pow(player.build.tickspeed.amt.pow(0.55));
-                return x.min("ee11000");
+                return E(1.25)
+                    .pow(player.build.tickspeed.amt.pow(0.55))
+                    .min("ee11000");
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -505,7 +505,7 @@ const ELEMENTS = {
             desc: `Passively gain 100% of the Atoms you would get from resetting each second. Atomic Power boost Relativistic Particles gain at a reduced rate.`,
             cost: E(1e75),
             effect() {
-                let x = hasPrestige(0, 40)
+                return hasPrestige(0, 40)
                     ? player.atom.atomic
                           .max(1)
                           .log10()
@@ -514,7 +514,6 @@ const ELEMENTS = {
                           .add(1)
                           .root(2)
                     : player.atom.atomic.max(1).log10().add(1).pow(0.4);
-                return x;
             },
             effDesc(x) {
                 return hasPrestige(0, 40) ? "^" + format(x) : format(x) + "x";
@@ -528,10 +527,9 @@ const ELEMENTS = {
             desc: `Hardened challenge scaling is weaker for each element bought.`,
             cost: E(1e85),
             effect() {
-                let x = E(0.99)
+                return E(0.99)
                     .pow(E(player.atom.elements.length).softcap(30, 2 / 3, 0))
                     .max(0.5);
-                return x;
             },
             effDesc(x) {
                 return format(E(1).sub(x).mul(100)) + "% weaker";
@@ -576,8 +574,7 @@ const ELEMENTS = {
             desc: `Rage Power boosts Relativistic Particles gain.`,
             cost: E(1e175),
             effect() {
-                let x = player.rp.points.max(1).log10().add(1).pow(0.75);
-                return x;
+                return player.rp.points.max(1).log10().add(1).pow(0.75);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -587,8 +584,7 @@ const ELEMENTS = {
             desc: `Mass from Black Hole boosts Dilated Mass gain.`,
             cost: E(1e210),
             effect() {
-                let x = player.bh.mass.max(1).log10().add(1).pow(0.8);
-                return x;
+                return player.bh.mass.max(1).log10().add(1).pow(0.8);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -602,8 +598,7 @@ const ELEMENTS = {
             desc: `Super Tier scales weaker based on Tetr.`,
             cost: E(1e245),
             effect() {
-                let x = E(0.9).pow(player.ranks.tetr.softcap(6, 0.5, 0));
-                return x;
+                return E(0.9).pow(player.ranks.tetr.softcap(6, 0.5, 0));
             },
             effDesc(x) {
                 return format(E(1).sub(x).mul(100)) + "% weaker";
@@ -652,9 +647,7 @@ const ELEMENTS = {
             cost: E("e325"),
             effect() {
                 let x = player.stars.points.add(1).pow(1 / 3);
-
                 x = overflow(x, "ee112", 0.5);
-
                 return x.min("ee3000");
             },
             effDesc(x) {
@@ -673,8 +666,7 @@ const ELEMENTS = {
             desc: `Collapsed Star boosts Relativistic Particles gain.`,
             cost: E("e420"),
             effect() {
-                let x = player.stars.points.add(1).pow(0.15).min(1e20);
-                return x;
+                return player.stars.points.add(1).pow(0.15).min(1e20);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -684,8 +676,7 @@ const ELEMENTS = {
             desc: `Collapsed Star's effect boosts Mass of Black Hole gain at a reduced rate.`,
             cost: E("e510"),
             effect() {
-                let x = tmp.stars ? tmp.stars.effect.add(1).pow(0.02) : E(1);
-                return x;
+                return tmp.stars ? tmp.stars.effect.add(1).pow(0.02) : E(1);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -703,8 +694,7 @@ const ELEMENTS = {
             desc: `Collapsed Star boosts the last type of stars.`,
             cost: E("e1000"),
             effect() {
-                let x = player.stars.points.add(1).log10().add(1).pow(1.15);
-                return x;
+                return player.stars.points.add(1).log10().add(1).pow(1.15);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -722,8 +712,7 @@ const ELEMENTS = {
             desc: `Mass of Black Hole boosts Atomic Powers gain at a reduced rate.`,
             cost: E("e2800"),
             effect() {
-                let x = expMult(player.bh.mass.add(1), 0.6);
-                return x;
+                return expMult(player.bh.mass.add(1), 0.6);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -737,8 +726,7 @@ const ELEMENTS = {
             desc: `Normal mass boosts all star resources at a reduced rate.`,
             cost: E("e5200"),
             effect() {
-                let x = player.mass.max(1).log10().root(2);
-                return x;
+                return player.mass.max(1).log10().root(2);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -772,8 +760,7 @@ const ELEMENTS = {
             desc: `Ultra Rank & Tickspeed scale weaker based on Tier.`,
             cost: E("e5.7e4"),
             effect() {
-                let x = E(0.975).pow(player.ranks.tier.pow(0.5));
-                return x;
+                return E(0.975).pow(player.ranks.tier.pow(0.5));
             },
             effDesc(x) {
                 return format(E(1).sub(x).mul(100)) + "% weaker";
@@ -795,8 +782,7 @@ const ELEMENTS = {
             desc: `Ultra rank scaling starts 3 later for every Supernova.`,
             cost: E("e2.5e5"),
             effect() {
-                let x = player.supernova.times.mul(3);
-                return x;
+                return player.supernova.times.mul(3);
             },
             effDesc(x) {
                 return format(x, 0) + " later";
@@ -822,8 +808,7 @@ const ELEMENTS = {
             desc: `Collapsed Stars boost Quarks gain.`,
             cost: E("e1.7e6"),
             effect() {
-                let x;
-                x = hasElement(236)
+                return hasElement(236)
                     ? Decimal.pow(
                           1.1,
                           player.stars.points.add(1).log10().add(1).log10()
@@ -833,7 +818,6 @@ const ELEMENTS = {
                           "ee100",
                           0.5
                       );
-                return x;
             },
             effDesc(x) {
                 return hasElement(236) ? "^" + format(x) : format(x) + "x";
@@ -855,8 +839,7 @@ const ELEMENTS = {
             desc: `BH formula softcap starts laster based on Supernovas.`,
             cost: E("e1.6e8"),
             effect() {
-                let x = player.supernova.times.add(1).root(4);
-                return x;
+                return player.supernova.times.add(1).root(4);
             },
             effDesc(x) {
                 return "^" + format(x) + " later";
@@ -922,7 +905,7 @@ const ELEMENTS = {
             desc: `Pre-Ultra Mass Upgrades scale weaker based on Cosmic Ray's free Tickspeeds.`,
             cost: E("e7e14"),
             effect() {
-                let x = tmp.atom
+                return tmp.atom
                     ? E(0.9).pow(
                           tmp.atom.atomicEff
                               .add(1)
@@ -930,7 +913,6 @@ const ELEMENTS = {
                               .pow(2 / 3)
                       )
                     : E(1);
-                return x;
             },
             effDesc(x) {
                 return formatReduction(x) + " weaker";
@@ -956,7 +938,7 @@ const ELEMENTS = {
             desc: `Mass of Black Hole effect raises itself at a reduced logarithmic rate.`,
             cost: E("e1100"),
             effect() {
-                let x = player.bh.mass
+                return player.bh.mass
                     .add(1)
                     .log10()
                     .add(1)
@@ -964,7 +946,6 @@ const ELEMENTS = {
                     .mul(1.25)
                     .add(1)
                     .pow(hasElement(201) || player.qu.rip.active ? 2 : 0.4);
-                return x;
             },
             effDesc(x) {
                 return "^" + x.format();
@@ -974,8 +955,7 @@ const ELEMENTS = {
             desc: `Death Shard gain is boosted by Dilated Mass.`,
             cost: E("e1300"),
             effect() {
-                let x = player.md.mass.add(1).log10().add(1).pow(0.5);
-                return x;
+                return player.md.mass.add(1).log10().add(1).pow(0.5);
             },
             effDesc(x) {
                 return "x" + x.format();
@@ -993,8 +973,7 @@ const ELEMENTS = {
             desc: `Entropy gain is increased by 66.7% for every OoM2</sup> of normal mass.`,
             cost: E("e29500"),
             effect() {
-                let x = E(5 / 3).pow(player.mass.add(1).log10().add(1).log10());
-                return x;
+                return E(5 / 3).pow(player.mass.add(1).log10().add(1).log10());
             },
             effDesc(x) {
                 return "x" + x.format();
@@ -1006,8 +985,8 @@ const ELEMENTS = {
             effect() {
                 let s = player.supernova.times.overflow(1e8, 0.5);
                 if (!player.qu.rip.active) s = s.root(1.5);
-                let x = E(1.1).pow(s);
-                return x
+                return E(1.1)
+                    .pow(s)
                     .softcap(player.qu.rip.active ? "1e130" : "1e308", 0.01, 0)
                     .min("e2e4");
             },
@@ -1063,8 +1042,7 @@ const ELEMENTS = {
             effect() {
                 let b = E(2);
                 if (player.prestiges[0].gte(70)) b = b.add(player.prestiges[1]);
-                let x = b.pow(player.prestiges[1]);
-                return x;
+                return b.pow(player.prestiges[1]);
             },
             effDesc(x) {
                 return format(x) + "x";
@@ -1102,14 +1080,13 @@ const ELEMENTS = {
             desc: `Neutron Stars raise Atom gain.`,
             cost: E("e7.5e10"),
             effect() {
-                let x = player.supernova.stars
+                return player.supernova.stars
                     .add(1)
                     .log10()
                     .add(1)
                     .log10()
                     .add(1)
                     .root(3);
-                return x;
             },
             effDesc(x) {
                 return "^" + format(x);
@@ -1135,11 +1112,10 @@ const ELEMENTS = {
             desc: `Prestige Base boosts Relativistic Energy gain.`,
             cost: E("e1e14"),
             effect() {
-                let x = tmp.prestiges.base.add(1).root(3);
-                return x;
+                return tmp.prestiges.base.add(1).root(3);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1162,7 +1138,7 @@ const ELEMENTS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1251,11 +1227,10 @@ const ELEMENTS = {
             desc: `Dark Shadow gain is boosted by Death Shards.`,
             cost: E("e2.5e25"),
             effect() {
-                let x = player.qu.rip.amt.add(1).log10().add(1);
-                return x;
+                return player.qu.rip.amt.add(1).log10().add(1);
             },
             effDesc(x) {
-                return "x" + format(x, 1);
+                return formatMult(x, 1);
             },
         },
         {
@@ -1272,16 +1247,15 @@ const ELEMENTS = {
             desc: `Supernova boosts Blueprint Particles earned.`,
             cost: E("e8.6e26"),
             effect() {
-                let x = Decimal.pow(
+                return Decimal.pow(
                     1.1,
                     player.supernova.times
                         .overflow(1e75, 0.1)
                         .softcap(2e5, 0.25, 0)
                 );
-                return x;
             },
             effDesc(x) {
-                return "x" + format(x, 1);
+                return formatMult(x, 1);
             },
         },
         {
@@ -1289,11 +1263,10 @@ const ELEMENTS = {
             desc: `Gain 100% of the Quantizes you would get from resetting each second. Supernova boosts Quantizes.`,
             cost: E("2e22"),
             effect() {
-                let x = player.supernova.times.pow(1.25).add(1);
-                return x;
+                return player.supernova.times.pow(1.25).add(1);
             },
             effDesc(x) {
-                return "x" + format(x, 1);
+                return formatMult(x, 1);
             },
         },
         {
@@ -1331,7 +1304,7 @@ const ELEMENTS = {
                 return x.softcap(1e12, 0.25, 0);
             },
             effDesc(x) {
-                return "x" + format(x) + softcapHTML(x, 1e12);
+                return formatMult(x) + softcapHTML(x, 1e12);
             },
         },
         {
@@ -1339,8 +1312,7 @@ const ELEMENTS = {
             desc: `Quantum Shard’s base is increased based on the number of elements bought.`,
             cost: E("ee30"),
             effect() {
-                let x = player.atom.elements.length / 100;
-                return x;
+                return player.atom.elements.length / 100;
             },
             effDesc(x) {
                 return "+" + format(x, 2);
@@ -1367,23 +1339,22 @@ const ELEMENTS = {
         {
             dark: true,
             desc: `Add 75 more C13 maximum completions.`,
-            cost: E("1e68"),
+            cost: E("1e67"),
         },
         {
             desc: `Boost Dark Ray gain based on Quarks.`,
             cost: E("e3.6e61"),
             effect() {
-                let x = player.atom.quarks
+                return player.atom.quarks
                     .add(1)
                     .log10()
                     .add(1)
                     .log10()
                     .add(1)
                     .pow(1.5);
-                return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1391,8 +1362,11 @@ const ELEMENTS = {
             desc: `Prestige base exponent boosts Abyssal Blot gain.`,
             cost: E("e6e47"),
             effect() {
-                let x = Decimal.max(1, tmp.prestiges.baseExp.pow(1.5));
-                return overflow(x, 400, 0.5);
+                return overflow(
+                    Decimal.max(1, tmp.prestiges.baseExp.pow(1.5)),
+                    400,
+                    0.5
+                );
             },
             effDesc(x) {
                 return "^" + format(x) + x.softcapHTML(400);
@@ -1412,7 +1386,7 @@ const ELEMENTS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x) + " later";
+                return formatMult(x) + " later";
             },
         },
         {
@@ -1512,11 +1486,10 @@ const ELEMENTS = {
             desc: `Supernova boosts Dark Rays earned.`,
             cost: E("e4.8e78"),
             effect() {
-                let x = player.supernova.times.add(1).root(2);
-                return x;
+                return player.supernova.times.add(1).root(2);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1524,12 +1497,10 @@ const ELEMENTS = {
             desc: `Dark Shadow’s fifth effect also boosts entropy cap at a reduced rate.`,
             cost: E("1e141"),
             effect() {
-                let e = tmp.dark.shadowEff.en || E(1);
-                let x = expMult(e, 0.5);
-                return x;
+                return expMult(tmp.dark.shadowEff.en || E(1), 0.5);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1543,7 +1514,7 @@ const ELEMENTS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x) + " later";
+                return formatMult(x) + " later";
             },
         },
         {
@@ -1551,11 +1522,10 @@ const ELEMENTS = {
             desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation<sup>2</sup> is slightly weaker.`,
             cost: E("e4.4e76"),
             effect() {
-                let x = Decimal.pow(1.25, player.prestiges[0]);
-                return x;
+                return Decimal.pow(1.25, player.prestiges[0]);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1583,18 +1553,17 @@ const ELEMENTS = {
                 return x.overflow("ee5", 0.5, 0);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
             desc: `Super Pent & Hex start later based on Hybridized Uran-Astatine's first effect.`,
             cost: E("e3e85"),
             effect() {
-                let x = tmp.qu.chroma_eff[1][0].max(1).log10().div(2).add(1);
-                return x;
+                return tmp.qu.chroma_eff[1][0].max(1).log10().div(2).add(1);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1632,11 +1601,10 @@ const ELEMENTS = {
             desc: `Dark Matter boosts Abyssal Blot gain. Ultra mass upgrades start ^1.5 later.`,
             cost: E("e8.8e89"),
             effect() {
-                let x = player.bh.dm.add(1).log10().add(1);
-                return x;
+                return player.bh.dm.add(1).log10().add(1);
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1647,13 +1615,12 @@ const ELEMENTS = {
             desc: `Z0 Boson’s first effect raises tickspeed power at a reduced rate.`,
             cost: E("e3.5e92"),
             effect() {
-                let x = tmp.bosons.effect.z_boson[0]
+                return tmp.bosons.effect.z_boson[0]
                     .add(1)
                     .log10()
                     .add(1)
                     .log10()
                     .add(1);
-                return x;
             },
             effDesc(x) {
                 return "^" + format(x);
@@ -1664,25 +1631,23 @@ const ELEMENTS = {
             desc: `Each Matter’s gain is increased by 10% for every OoM<sup>2</sup> of Dark Matter. Unlock more main upgrades.`,
             cost: E(1e303),
             effect() {
-                let x = Decimal.pow(
+                return Decimal.pow(
                     1.1,
                     player.bh.dm.add(1).log10().add(1).log10()
                 );
-                return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
             desc: `Hybridized Uran-Astatine’s first effect makes Exotic Rank and Meta-Tier start later at ^0.5 rate.`,
             cost: E("e3.3e93"),
             effect() {
-                let x = tmp.qu.chroma_eff[1][0].max(1).root(2);
-                return x;
+                return tmp.qu.chroma_eff[1][0].max(1).root(2);
             },
             effDesc(x) {
-                return "x" + format(x) + " later";
+                return formatMult(x) + " later";
             },
         },
         {
@@ -1751,12 +1716,10 @@ const ELEMENTS = {
             desc: `Overpower boosts Accelerator power at a reduced rate.`,
             cost: E("e4.2e101"),
             effect() {
-                let x = player.build.mass_4.amt.pow(1.5).add(10).log10();
-
-                return x;
+                return player.build.mass_4.amt.pow(1.5).add(10).log10();
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         {
@@ -1764,7 +1727,7 @@ const ELEMENTS = {
             desc: `Dark Matter boosts matter exponent.`,
             cost: E("1e1.69e100"),
             effect() {
-                let x = player.bh.dm
+                return player.bh.dm
                     .add(1)
                     .log10()
                     .add(1)
@@ -1772,8 +1735,6 @@ const ELEMENTS = {
                     .add(1)
                     .log10()
                     .div(10);
-
-                return x;
             },
             effDesc(x) {
                 return "+^" + format(x);
@@ -1809,15 +1770,13 @@ const ELEMENTS = {
             desc: `Stronger overflow starts later based on FSS.`,
             cost: E("e710"),
             effect() {
-                let x = player.dark.matters.final
+                return player.dark.matters.final
                     .pow(0.8)
                     .add(2)
                     .pow(player.dark.matters.final);
-
-                return x;
             },
             effDesc(x) {
-                return "x" + format(x) + " later";
+                return formatMult(x) + " later";
             },
         },
         {
@@ -1825,11 +1784,10 @@ const ELEMENTS = {
             desc: `Meta-Rank Boost also affects Meta-Tetr starting at a reduced rate. Additionally, strengthen Unpentpentium-155.`,
             cost: E("1e5e110"),
             effect() {
-                let x = tmp.radiation.bs.eff[14].max(1).log10().add(1);
-                return x;
+                return tmp.radiation.bs.eff[14].max(1).log10().add(1);
             },
             effDesc(x) {
-                return "x" + format(x) + " later";
+                return formatMult(x) + " later";
             },
         },
         {
@@ -1897,8 +1855,7 @@ const ELEMENTS = {
             desc: `Infinity Theorem increases Parallel Extruder’s power. Muon-Catalyzed Fusion no longer resets.`,
             cost: E("1e14"),
             effect() {
-                let x = player.inf.theorem.div(20);
-                return x;
+                return player.inf.theorem.div(20);
             },
             effDesc(x) {
                 return "+" + format(x, 2);
@@ -2018,11 +1975,9 @@ const ELEMENTS = {
             desc: `Dimensional mass gain is boosted by Infinity Theorems. Its formula is slightly better.`,
             cost: E("ee1155"),
             effect() {
-                let x = hasElement(273)
+                return hasElement(273)
                     ? Decimal.pow(10, player.inf.theorem.pow(2))
                     : player.inf.theorem.add(1).tetrate(1.75);
-
-                return x;
             },
             effDesc(x) {
                 return formatMult(x);
@@ -2037,8 +1992,7 @@ const ELEMENTS = {
             desc: `Super FSS starts +1 later per 2 Infinity Theorems.`,
             cost: E("e4.15e7"),
             effect() {
-                let x = player.inf.theorem.div(2).floor();
-                return x;
+                return player.inf.theorem.div(2).floor();
             },
             effDesc(x) {
                 return "+" + format(x, 0) + " later";
@@ -2086,8 +2040,7 @@ const ELEMENTS = {
             desc: `C17’s completions cause Super Parallel Extruder to scale later.`,
             cost: E("e1.9e8"),
             effect() {
-                let x = (player.chal.comps[17] || E(0)).pow(2).div(4).floor();
-                return x;
+                return (player.chal.comps[17] || E(0)).pow(2).div(4).floor();
             },
             effDesc(x) {
                 return "+" + format(x, 0) + " later";
@@ -2142,8 +2095,7 @@ const ELEMENTS = {
             desc: `Galactic Prestige’s resources are affected by pre-Infinity global speed.`,
             cost: E("ee7676"),
             effect() {
-                let x = tmp.preInfGlobalSpeed.max(1).root(2);
-                return x;
+                return tmp.preInfGlobalSpeed.max(1).root(2);
             },
             effDesc(x) {
                 return formatMult(x);
@@ -2207,8 +2159,7 @@ const ELEMENTS = {
             desc: `The softcap of Theorem’s Meta-Score starts x1.05 later per Infinity Theorem.`,
             cost: E("1e94"),
             effect() {
-                let x = Decimal.pow(1.05, player.inf.theorem);
-                return x;
+                return Decimal.pow(1.05, player.inf.theorem);
             },
             effDesc(x) {
                 return formatMult(x) + " later";
@@ -2224,8 +2175,7 @@ const ELEMENTS = {
             cost: E("e1.67e11"),
             effect() {
                 let x = tmp.dark.shadowEff.sn || E(1);
-                x = x.root(2.8);
-                return x;
+                return x.root(2.8);
             },
             effDesc(x) {
                 return formatMult(x);
@@ -2249,8 +2199,7 @@ const ELEMENTS = {
             desc: `Bonus Cosmic String strengthens its power at a reduced rate.`,
             cost: E("ee23500"),
             effect() {
-                let x = tmp.build.cosmic_string.bonus.add(1).pow(0.75);
-                return x;
+                return tmp.build.cosmic_string.bonus.add(1).pow(0.75);
             },
             effDesc(x) {
                 return "^" + format(x);
@@ -2270,8 +2219,7 @@ const ELEMENTS = {
             desc: `Supernovas boost galactic prestige’s resources at a reduced rate.`,
             cost: E("ee25400"),
             effect() {
-                let x = expMult(player.supernova.times.add(1), 0.5);
-                return x;
+                return expMult(player.supernova.times.add(1), 0.5);
             },
             effDesc(x) {
                 return formatMult(x);
@@ -2282,8 +2230,7 @@ const ELEMENTS = {
             desc: `Total Corrupted Shards boost Infinity Points gain.`,
             cost: E("ee6700"),
             effect() {
-                let x = player.dark.c16.totalS.add(10).log10().mul(2);
-                return x;
+                return player.dark.c16.totalS.add(10).log10().mul(2);
             },
             effDesc(x) {
                 return formatMult(x);
@@ -2298,8 +2245,7 @@ const ELEMENTS = {
             desc: `FSS boosts the exponent of Ascension’s base.`,
             cost: E("e3.24e12"),
             effect() {
-                let x = player.dark.matters.final.root(2).div(100);
-                return x;
+                return player.dark.matters.final.root(2).div(100);
             },
             effDesc(x) {
                 return "+" + format(x);
@@ -2318,12 +2264,11 @@ const ELEMENTS = {
             desc: `Rank Collapse starts later based on Fading Matter.`,
             cost: E("e6.5e12"),
             effect() {
-                let x = player.dark.matters.amt[12]
+                return player.dark.matters.amt[12]
                     .add(1e10)
                     .log10()
                     .log10()
                     .pow(4 / 3);
-                return x;
             },
             effDesc(x) {
                 return formatMult(x) + " later";
@@ -2344,17 +2289,6 @@ const ELEMENTS = {
             cost: E(Number.MAX_VALUE),
         },
     ],
-    /*
-    {
-        desc: `Placeholder.`,
-        cost: EINF,
-        effect() {
-            let x = E(1)
-            return x
-        },
-        effDesc(x) { return format(x)+"x" },
-    },
-    */
     getUnlLength() {
         let u = 4;
 

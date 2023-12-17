@@ -505,7 +505,7 @@ const CHALS = {
         },
         title: "Anti-Tickspeed",
         desc: "You cannot buy Tickspeed.",
-        reward: `Each completion adds +7.5% to Tickspeed Power.`,
+        reward: `Each completion adds +9% to Tickspeed Power.`,
         max: E(100),
         inc: E(10),
         pow: E(1.3),
@@ -514,7 +514,7 @@ const CHALS = {
             let sp = E(0.5);
             if (hasElement(8)) sp = sp.pow(0.25);
             if (hasElement(39)) sp = E(1);
-            let ret = x.mul(0.075).add(1).softcap(1.3, sp, 0).sub(1);
+            let ret = x.mul(0.09).add(1).softcap(1.3, sp, 0).sub(1);
             return ret;
         },
         effDesc(x) {
@@ -571,10 +571,10 @@ const CHALS = {
             let ret = hasElement(133)
                 ? x
                       .root(4 / 3)
-                      .mul(0.01)
+                      .mul(0.02)
                       .add(1)
-                : x.root(1.5).mul(0.01).add(1);
-            return overflow(ret.softcap(3, 0.25, 0), 1e12, 0.5);
+                : x.root(1.5).mul(0.02).add(1);
+            return overflow(ret.softcap(1.2, 2, 1), 1e12, 0.5);
         },
         effDesc(x) {
             return (
@@ -819,7 +819,7 @@ const CHALS = {
             return ret;
         },
         effDesc(x) {
-            return "x" + format(x, 1);
+            return formatMult(x, 1);
         },
     },
     14: {
@@ -838,7 +838,7 @@ const CHALS = {
             return ret;
         },
         effDesc(x) {
-            return "x" + format(x, 2);
+            return formatMult(x, 2);
         },
     },
     15: {
@@ -847,7 +847,7 @@ const CHALS = {
         },
         title: "The Reality II",
         desc: "You are trapped in C1-12 and Quantum Challenge with modifiers [10,5,10,10,10,10,10,10].",
-        reward: `Normal mass's overflow starts later based on completions.<br><span class="yellow">On first completion, unlock more features!</span>`,
+        reward: `Mass, Atomic and Quark overflows scale later.<br><span class="yellow">On first completion, unlock more features!</span>`,
         max: E(100),
         inc: E("e1e6"),
         pow: E(2),

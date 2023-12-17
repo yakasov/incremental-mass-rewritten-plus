@@ -149,7 +149,7 @@ const TREE_UPGS = {
                 return player.supernova.times.gte(1);
             },
             reqDesc: `1 Supernova.`,
-            desc: `Start generating 0.1 Neutron Star per second (not affected by offline production).`,
+            desc: `Start generating 1 Neutron Star per second.`,
             cost: E(0),
         },
         sn1: {
@@ -240,7 +240,7 @@ const TREE_UPGS = {
         },
         m1: {
             branch: ["c"],
-            desc: `Neutron Star multiplies Mass gain.`,
+            desc: `Neutron Star boosts Mass gain.`,
             cost: E(100),
             effect() {
                 let x = hasElement(219)
@@ -320,7 +320,7 @@ const TREE_UPGS = {
         },
         rp1: {
             branch: ["c"],
-            desc: `Neutron Stars multiplies Rage Powers gain`,
+            desc: `Neutron Stars boosts Rage Powers gain`,
             cost: E(200),
             effect() {
                 let x = hasElement(165)
@@ -352,7 +352,7 @@ const TREE_UPGS = {
         },
         bh1: {
             branch: ["c"],
-            desc: `Neutron Star multiplies Dark Matters gain.`,
+            desc: `Neutron Star boosts Dark Matters gain.`,
             cost: E(400),
             effect() {
                 let x = hasElement(166)
@@ -1345,7 +1345,7 @@ const TREE_UPGS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
 
@@ -1449,7 +1449,7 @@ const TREE_UPGS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         ct3: {
@@ -1526,7 +1526,7 @@ const TREE_UPGS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         ct6: {
@@ -1553,7 +1553,7 @@ const TREE_UPGS = {
         ct7: {
             branch: ["ct5"],
 
-            desc: `Neutronium-0 now affects Challenge 14 at a reduced rate. (like [ct5])`,
+            desc: `Neutronium-0 now affects Challenge 14 at a reduced rate, like [ct5].`,
             cost: E(1500),
 
             req() {
@@ -1574,7 +1574,7 @@ const TREE_UPGS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         ct9: {
@@ -1686,7 +1686,7 @@ const TREE_UPGS = {
         ct13: {
             branch: ["ct7"],
 
-            desc: `Neutronium-0 now affects Challenge 15 at a reduced rate (like [ct5]). C15 now affects Atomic & Quark Overflows.`,
+            desc: `Neutronium-0 now affects Challenge 15 at a reduced rate, like [ct5].`,
             cost: E(2.5e8),
 
             req() {
@@ -1728,7 +1728,7 @@ const TREE_UPGS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
         ct16: {
@@ -1748,25 +1748,9 @@ const TREE_UPGS = {
                 return x;
             },
             effDesc(x) {
-                return "x" + format(x);
+                return formatMult(x);
             },
         },
-
-        /*
-        x: {
-            unl() { return true },
-            req() { return true },
-            icon: "placeholder",
-            reqDesc: ``,
-            desc: `Placeholder.`,
-            cost: EINF,
-            effect() {
-                let x = E(1)
-                return x
-            },
-            effDesc(x) { return format(x)+"x" },
-        },
-        */
     },
 };
 
@@ -1802,7 +1786,7 @@ const TREE_TYPES = (() => {
 
 function hasTree(id) {
     return (
-        (player.supernova.tree.includes(id) ||
+        (player.supernova?.tree.includes(id) ||
             player.dark.c16.tree.includes(id)) &&
         !(tmp.c16active && CORRUPTED_TREE.includes(id))
     );

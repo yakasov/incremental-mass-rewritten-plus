@@ -616,28 +616,6 @@ const FERMIONS = {
                 inc: "product of above u-leptons",
                 cons: "All u-leptons at once, and force quantum reset.",
             },
-
-            /*
-            {
-                nextTierAt(x) {
-                    return EINF
-                },
-                calcTier() {
-                    let res = E(0)
-                    let x = E(0)
-                    return x
-                },
-                eff(i, t) {
-                    let x = E(1)
-                    return x
-                },
-                desc(x) {
-                    return `Placeholder`
-                },
-                inc: "Placeholder",
-                cons: "Placeholder",
-            },
-            */
         ],
     ],
     productF(i) {

@@ -21,13 +21,13 @@ const DARK_RUN = {
         else if (CHALS.inChal(18)) g = E(500);
         else if (CHALS.inChal(19)) g = E(1e3);
 
-        if (i < 4) x = g.root(2).div(100).add(1).pow(-1); // 1/(g**0.5/100+1)
+        if (i < 4) x = g.root(2).div(100).add(1).pow(-1);
         else if (i == 4)
             x = [
                 g.root(2).div(100).add(1).pow(-1),
                 Decimal.pow(1.1, g.pow(0.75)),
-            ]; // [1/(g**0.5/100+1),1.1**(g**0.75)]
-        else x = Decimal.pow(1.1, g.pow(0.75)); // 1.1**(g**0.75)
+            ];
+        else x = Decimal.pow(1.1, g.pow(0.75));
 
         return x;
     },
@@ -35,31 +35,31 @@ const DARK_RUN = {
     mass_glyph_effDesc: [
         (x) =>
             `Reduce the exponent of normal mass’s multiplier, multiplier from mass of black hole by <b>^${format(
-                x,
+                x
             )}</b> in dark run.<br class='line'>Earn more glyphs based on normal mass.`,
         (x) =>
             `Reduce the exponent of dark matter’s multiplier, rage power’s multiplier by <b>^${format(
-                x,
+                x
             )}</b> in dark run.<br class='line'>Earn more glyphs based on mass of black hole.`,
         (x) =>
             `Reduce the exponent of atom, atomic power and quark multiplier by <b>^${format(
-                x,
+                x
             )}</b> in dark run.<br class='line'>Earn more glyphs based on quarks.`,
         (x) =>
             `Reduce the exponent of relativistic particle’s multiplier, the exponent of dilated mass formula by <b>^${format(
-                x,
+                x
             )}</b> in dark run.<br class='line'>Earn more glyphs based on dilated mass.`,
         (x) =>
             `Reduce the exponent of supernova resources’ multiplier by <b>^${format(
-                x[0],
+                x[0]
             )}</b>, increase the supernova’s requirement by <b>x${format(
-                x[1],
+                x[1]
             )}</b> in dark run.<br class='line'>Earn more glyphs based on collapsed stars.`,
         (x) =>
             `Reduce the prestige base’s exponent by <b>/${format(
-                x,
+                x
             )}</b>, increase every rank’s requirement by <b>x${format(
-                x,
+                x
             )}</b> in dark run.<br class='line'>Earn more glyphs based on prestige base.`,
     ],
 
@@ -175,7 +175,7 @@ const DARK_RUN = {
             eff(i) {
                 return 1.25 ** i;
             },
-            effDesc: (x) => "x" + format(x, 2) + " later",
+            effDesc: (x) => formatMult(x, 2) + " later",
         },
         {
             max: 1,
@@ -209,7 +209,7 @@ const DARK_RUN = {
             eff(i) {
                 return 3 ** i;
             },
-            effDesc: (x) => "x" + format(x, 0),
+            effDesc: (x) => formatMult(x, 0),
         },
         {
             max: 1,
@@ -319,20 +319,14 @@ function glyphButton(i) {
     if (player.dark.run.gmode == 2) player.dark.run.glyphs[i] = E(0);
     else if (player.dark.run.active && tmp.dark.mass_glyph_gain[i].gt(0)) {
         player.dark.run.glyphs[i] = player.dark.run.glyphs[i].add(
-            tmp.dark.mass_glyph_gain[i],
+            tmp.dark.mass_glyph_gain[i]
         );
         darkRun();
     }
 }
 
 function inDarkRun() {
-    return (
-        player.dark.run.active ||
-        CHALS.inChal(17) ||
-        CHALS.inChal(18) ||
-        CHALS.inChal(19) ||
-        CHALS.inChal(20)
-    );
+    return player.dark.run.active || player.chal.active >= 16;
 }
 
 function darkRun() {
@@ -345,7 +339,7 @@ function isAffordGlyphCost(cost) {
     for (let c in cost)
         if (
             Decimal.max(player.dark.run.glyphs[c], tmp.dark.mg_passive[c]).lt(
-                cost[c],
+                cost[c]
             )
         )
             return false;
@@ -374,7 +368,7 @@ function buyGlyphUpgrade(i) {
         for (let c in cost)
             if (tmp.dark.mg_passive[c] <= 0)
                 player.dark.run.glyphs[c] = player.dark.run.glyphs[c].sub(
-                    cost[c],
+                    cost[c]
                 );
 
         if (i == 12) updateAtomTemp();
@@ -389,7 +383,7 @@ function updateDarkRunHTML() {
 
     tmp.el.dark_run_btn.setTxt(dra ? "Exit Dark Run" : "Start Dark Run");
     tmp.el.mg_btn_mode.setTxt(
-        ["Earning", "Max Earning", "Clear Glyph"][player.dark.run.gmode],
+        ["Earning", "Max Earning", "Clear Glyph"][player.dark.run.gmode]
     );
     tmp.el.mg_max_gain.setTxt(format(player.dark.run.gamount, 0));
     for (let x = 0; x < MASS_GLYPHS_LEN; x++) {
@@ -400,14 +394,14 @@ function updateDarkRunHTML() {
                       (dra
                           ? " (+" + format(tmp.dark.mass_glyph_gain[x], 0) + ")"
                           : dtmp.mg_passive[x] > 0
-                            ? " [" + format(dtmp.mg_passive[x], 0) + "]"
-                            : ""),
+                          ? " [" + format(dtmp.mg_passive[x], 0) + "]"
+                          : "")
         );
         tmp.el["mass_glyph_tooltip" + x].setTooltip(
             "<h3>" +
                 DARK_RUN.mass_glyph_name[x] +
                 "</h3><br class='line'>" +
-                DARK_RUN.mass_glyph_effDesc[x](tmp.dark.mass_glyph_eff[x]),
+                DARK_RUN.mass_glyph_effDesc[x](tmp.dark.mass_glyph_eff[x])
         );
     }
 
@@ -480,9 +474,9 @@ function updateDarkRunHTML() {
         player.dark.matters.final.gt(0)
             ? `Thanks to FSS, your glyphic mass gain is boosted by x${format(
                   tmp.matters.FSS_eff[1],
-                  2,
+                  2
               )}`
-            : "",
+            : ""
     );
 }
 
@@ -511,7 +505,7 @@ function updateDarkRunTemp() {
         let gain = DARK_RUN.mass_glyph_gain[x]();
         let mg = Decimal.max(
             0,
-            (dra ? gain : E(0)).sub(player.dark.run.glyphs[x]),
+            (dra ? gain : E(0)).sub(player.dark.run.glyphs[x])
         );
         if (player.dark.run.gmode == 1)
             mg = Decimal.min(player.dark.run.gamount, mg);

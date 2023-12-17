@@ -69,8 +69,8 @@ const ENTROPY = {
                 let x = hasElement(214)
                     ? Decimal.pow(1.1, i.pow(0.8))
                     : hasElement(114)
-                      ? i.add(1).root(1.5)
-                      : i.div(2).add(1).root(3);
+                    ? i.add(1).root(1.5)
+                    : i.div(2).add(1).root(3);
                 return x;
             },
             desc(x) {
@@ -90,7 +90,7 @@ const ENTROPY = {
             },
             desc(x) {
                 return `Atomic Power’s effect is <b>${formatPercent(
-                    x.sub(1),
+                    x.sub(1)
                 )}</b> exponentially stronger.`.corrupt(tmp.c16active);
             },
         },
@@ -110,7 +110,7 @@ const ENTROPY = {
             },
             desc(x) {
                 return `Make evaporated resources gain <b>${x.format(
-                    1,
+                    1
                 )}x</b> faster.`;
             },
         },
@@ -128,9 +128,9 @@ const ENTROPY = {
             },
             desc(x) {
                 return `Tickspeed Power gives <b>^${x[0].format(
-                    2,
+                    2
                 )}</b> boost to BHC & Cosmic Ray Powers.<br>Currently: <b>${x[1].format()}x</b>`.corrupt(
-                    tmp.c16active,
+                    tmp.c16active
                 );
             },
         },
@@ -147,9 +147,9 @@ const ENTROPY = {
             },
             desc(x) {
                 return `<b>x${x.format(
-                    2,
+                    2
                 )}</b> extra Mass upgrades, Tickspeed, BHC and Cosmic Ray.`.corrupt(
-                    tmp.c16active,
+                    tmp.c16active
                 );
             },
         },
@@ -165,7 +165,7 @@ const ENTROPY = {
             },
             desc(x) {
                 return `All pre-Supernova, pre-Pent & pre-Meta scalings are <b>${formatReduction(
-                    x,
+                    x
                 )}</b> weaker.`;
             },
         },
@@ -211,25 +211,10 @@ const ENTROPY = {
             },
             desc(x) {
                 return `Radiation effects are boosted by <b>^${x.format()}</b> based on Entropy.`.corrupt(
-                    tmp.c16active,
+                    tmp.c16active
                 );
             },
         },
-
-        /*
-        {
-            title: "Entropic Placeholder",
-
-            start: E(100),
-            inc: E(10),
-
-            eff(i) {
-                let x = E(1)
-                return x
-            },
-            desc(x) { return `Placeholder.` },
-        },
-        */
     ],
     nextReward(i) {
         let rc = this.rewards[i];
@@ -299,7 +284,7 @@ function calcEntropy(dt) {
                 .log10()
                 .add(1)
                 .log10()
-                .add(1),
+                .add(1)
         ).mul(2.25);
         if (hasTree("en1")) s1 = s1.add(s1.pow(2)).add(s1.pow(3).div(3));
         else s1 = s1.add(s1.pow(2).div(2));
@@ -309,7 +294,7 @@ function calcEntropy(dt) {
 
         s1 = Decimal.pow(
             4,
-            player.bh.mass.add(1).log10().add(1).log10().add(1).log10().add(1),
+            player.bh.mass.add(1).log10().add(1).log10().add(1).log10().add(1)
         ).mul(2.25);
         if (hasTree("en1")) s1 = s1.add(s1.pow(2)).add(s1.pow(3).div(3));
         else s1 = s1.add(s1.pow(2).div(2));
@@ -326,7 +311,7 @@ function calcEntropy(dt) {
                 player.supernova.radiation.hz
                     .max(1)
                     .pow(dt)
-                    .pow(player.qu.en.eth[3] ** (2 / 3)),
+                    .pow(player.qu.en.eth[3] ** (2 / 3))
             )
             .sub(1);
         if (isNaN(s.mag)) s = E(1);
@@ -341,7 +326,7 @@ function calcEntropy(dt) {
                 player.bh.mass
                     .max(1)
                     .pow(dt)
-                    .pow(player.qu.en.hr[3] ** (2 / 3)),
+                    .pow(player.qu.en.hr[3] ** (2 / 3))
             )
             .sub(1);
         if (isNaN(s.mag)) s = E(1);
@@ -355,7 +340,7 @@ function calcEntropy(dt) {
 
     for (let x = 0; x < ENTROPY.rewards.length; x++)
         player.qu.en.rewards[x] = player.qu.en.rewards[x].max(
-            tmp.en.rewards[x],
+            tmp.en.rewards[x]
         );
 }
 
@@ -392,12 +377,12 @@ function updateEntropyHTML() {
 
     tmp.el.enAmt1.setTxt(player.qu.en.eth[2].format());
     tmp.el.enAmt2.setTxt(
-        player.qu.en.amt.format(1) + " / " + tmp.en.cap.format(1),
+        player.qu.en.amt.format(1) + " / " + tmp.en.cap.format(1)
     );
     tmp.el.enAmt3.setTxt(player.qu.en.hr[2].format());
 
     tmp.el.enGain.setTxt(
-        player.qu.en.amt.formatGain(tmp.en.gain.amt.mul(inf_gs)),
+        player.qu.en.amt.formatGain(tmp.en.gain.amt.mul(inf_gs))
     );
 
     tmp.el.enEff1.setTxt(tmp.en.eff.eth.format(1));
@@ -406,12 +391,12 @@ function updateEntropyHTML() {
     tmp.el.evaBtn1.setHTML(
         player.qu.en.eth[0]
             ? `Stop Evaporating to get<br>${player.qu.en.eth[1].format()}<br>best Enthalpy`
-            : `Evaporate your frequency to gain Enthalpy`,
+            : `Evaporate your frequency to gain Enthalpy`
     );
     tmp.el.evaBtn2.setHTML(
         player.qu.en.hr[0]
             ? `Stop Evaporating to get<br>${player.qu.en.hr[1].format()}<br>best Hawking Radiation`
-            : `Evaporate your mass of Black Hole to gain Hawking Radiation`,
+            : `Evaporate your mass of Black Hole to gain Hawking Radiation`
     );
 
     for (let x = 0; x < ENTROPY.rewards.length; x++) {
@@ -419,7 +404,7 @@ function updateEntropyHTML() {
         let rc = ENTROPY.rewards[x];
         tmp.el["en_reward" + x].setTxt(rs.format(0));
         tmp.el["en_scale" + x].setTxt(
-            rc.scale ? (rs.gte(rc.scale.s) ? "2" : "") : "",
+            rc.scale ? (rs.gte(rc.scale.s) ? "2" : "") : ""
         );
         tmp.el["en_reward_next" + x].setTxt(ENTROPY.nextReward(x).format());
         tmp.el["en_reward_eff" + x].setHTML(rc.desc(getEnRewardEff(x)));

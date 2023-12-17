@@ -118,8 +118,8 @@ const RANKS = {
             90: "rank 40 reward is stronger.",
             180: "Mass gain is raised by 1.025.",
             220: "rank 40 reward is overpowered.",
-            300: "rank multiplies Quark gain.",
-            380: "rank multiplies Mass gain.",
+            300: "rank boosts Quark gain.",
+            380: "rank boosts Mass gain.",
             800: "make Mass gain softcap 0.25% weaker based on rank. Hardcaps at 25%.",
         },
         tier: {
@@ -686,7 +686,7 @@ const PRESTIGES = {
                         .pow(2);
                     return x;
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             382: [
                 () => {
@@ -712,7 +712,7 @@ const PRESTIGES = {
                         .min("e50000");
                     return x;
                 },
-                (x) => "x" + format(x) + softcapHTML(x, "e7500"),
+                (x) => formatMult(x) + softcapHTML(x, "e7500"),
             ],
             1337: [
                 () => {
@@ -726,14 +726,6 @@ const PRESTIGES = {
                 },
                 (x) => "+" + format(x),
             ],
-            /*
-            "1": [()=>{
-                let x = E(1)
-                return x
-            },x=>{
-                return x.format()+"x"
-            }],
-            */
         },
         {
             3: [
@@ -813,7 +805,7 @@ const PRESTIGES = {
                     let x = player.prestiges[2].root(2).div(10).add(1);
                     return x;
                 },
-                (x) => "x" + format(x, 2),
+                (x) => formatMult(x, 2),
             ],
             8: [
                 () => {
@@ -827,14 +819,14 @@ const PRESTIGES = {
                     let x = Decimal.pow(2, player.prestiges[2].pow(0.5));
                     return x;
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             28: [
                 () => {
                     let x = player.prestiges[1].root(2).div(10).add(1);
                     return x;
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             34: [
                 () => {
@@ -845,7 +837,7 @@ const PRESTIGES = {
                         .pow(1.5);
                     return x;
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             45: [
                 () => {
@@ -1365,7 +1357,7 @@ const BEYOND_RANKS = {
 
                     return x.add(1);
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             7: [
                 () => {
@@ -1380,7 +1372,7 @@ const BEYOND_RANKS = {
 
                     return x;
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             17: [
                 () => {
@@ -1435,7 +1427,7 @@ const BEYOND_RANKS = {
 
                     return x;
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
             18: [
                 () => {
@@ -1472,7 +1464,7 @@ const BEYOND_RANKS = {
 
                     return Decimal.max(1, x);
                 },
-                (x) => "x" + format(x),
+                (x) => formatMult(x),
             ],
         },
         5: {

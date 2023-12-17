@@ -836,11 +836,11 @@ const FORMS = {
     },
     reset_msg: {
         msgs: {
-            rp: "Reach over 1e9 tonne of mass to reset previous features for gain Rage Powers",
+            rp: "Reach over 1e9 tonnes of mass to reset previous features for gain Rage Powers",
             dm: "Reach over 1e20 Rage Power to reset all previous features for gain Dark Matters",
             atom: "Reach over 1e100 uni of black hole to reset all previous features for gain Atoms & Quarks",
             md: "Dilate mass, then cancel",
-            br: "Big Rip the Dimension, then go back",
+            br: "Big Rip the Dimension.",
             dark: "Require Oganesson-118 to go Dark",
         },
         set(id) {

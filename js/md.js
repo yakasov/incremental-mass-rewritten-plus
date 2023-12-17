@@ -103,7 +103,7 @@ const MASS_DILATION = {
                     .div(tmp.md.rp_mult_gain)
                     .root(tmp.md.rp_exp_gain)
                     .add(14)
-                    .mul(40),
+                    .mul(40)
             )
             .mul(1.50005e56);
         return x;
@@ -199,14 +199,14 @@ const MASS_DILATION = {
                                     tmp.c16active ||
                                     inDarkRun()
                                     ? 3
-                                    : 2,
+                                    : 2
                             )
                             .mul(
                                 player.qu.rip.active ||
                                     tmp.c16active ||
                                     inDarkRun()
                                     ? 0.05
-                                    : 0.1,
+                                    : 0.1
                             )
                             .add(1);
                     if (hasElement(83)) return expMult(x, 2, 1.5).add(1);
@@ -253,7 +253,7 @@ const MASS_DILATION = {
                         .pow(
                             x
                                 .softcap(2.5e26, 0.1, 0)
-                                .mul(tmp.md.upgs[11].eff || 1),
+                                .mul(tmp.md.upgs[11].eff || 1)
                         )
                         .softcap(1e25, 0.75, 0);
                 },
@@ -506,7 +506,7 @@ const MASS_DILATION = {
                             bd.upgs[x] = E(0);
 
                         QUANTUM.enter(false, true, false, true);
-                    },
+                    }
                 );
             else bd.active = true;
         },
@@ -546,7 +546,7 @@ const MASS_DILATION = {
                             .sub(this.ids[x].cost(tmp.bd.upgs[x].bulk.sub(1)))
                             .max(0);
                     player.md.break.upgs[x] = player.md.break.upgs[x].max(
-                        tmp.bd.upgs[x].bulk,
+                        tmp.bd.upgs[x].bulk
                     );
 
                     if (x == 2) {
@@ -657,7 +657,7 @@ const MASS_DILATION = {
                         return x;
                     },
                     effDesc(x) {
-                        return "x" + format(x) + " later";
+                        return formatMult(x) + " later";
                     },
                 },
                 {
@@ -739,7 +739,7 @@ const MASS_DILATION = {
                     },
                     effect(y) {
                         let x = E(1.75).pow(
-                            player.md.mass.add(1).log10().add(1).log10(),
+                            player.md.mass.add(1).log10().add(1).log10()
                         );
 
                         return x;
@@ -823,20 +823,6 @@ const MASS_DILATION = {
         },
     },
 };
-
-/*
-{
-    desc: `Placeholder.`,
-    cost(x) { return E(10).pow(x.pow(1.1)).mul(1e5) },
-    bulk() { return player.md.break.mass.gte(1e5)?player.md.break.mass.div(1e5).max(1).log10().root(1.1).add(1).floor():E(0) },
-    effect(y) {
-        let x = E(1)
-
-        return x
-    },
-    effDesc(x) { return format(x,0)+"x"},
-},
-*/
 
 function setupMDHTML() {
     let md_upg_table = new Element("md_upg_table");
@@ -941,16 +927,16 @@ function updateMDHTML() {
                 ? " " +
                   formatGain(
                       player.md.particles,
-                      tmp.md.passive_rp_gain.mul(tmp.preQUGlobalSpeed),
+                      tmp.md.passive_rp_gain.mul(tmp.preQUGlobalSpeed)
                   )
-                : ""),
+                : "")
     );
     tmp.el.md_eff.setTxt(
         tmp.md.bd3
             ? "^" + tmp.md.mass_eff.format()
             : tmp.md.mass_eff.gte(10)
-              ? format(tmp.md.mass_eff) + "x"
-              : format(tmp.md.mass_eff.sub(1).mul(100)) + "%",
+            ? format(tmp.md.mass_eff) + "x"
+            : format(tmp.md.mass_eff.sub(1).mul(100)) + "%"
     );
     tmp.el.md_mass.setTxt(
         formatMass(player.md.mass) +
@@ -958,20 +944,20 @@ function updateMDHTML() {
             formatGain(
                 player.md.mass,
                 tmp.md.mass_gain.mul(tmp.preQUGlobalSpeed),
-                true,
-            ),
+                true
+            )
     );
     tmp.el.md_btn.setTxt(
         player.md.active
             ? tmp.md.rp_gain.gte(1)
                 ? `Cancel for ${format(
                       tmp.md.rp_gain,
-                      0,
+                      0
                   )} Relativistic particles`
                 : `Reach ${formatMass(
-                      tmp.md.mass_req,
+                      tmp.md.mass_req
                   )} to gain Relativistic particles, or cancel dilation`
-            : "Dilate Mass",
+            : "Dilate Mass"
     );
     for (let x = 0; x < MASS_DILATION.upgs.ids.length; x++) {
         let upg = MASS_DILATION.upgs.ids[x];
@@ -989,17 +975,17 @@ function updateMDHTML() {
                     format(player.md.upgs[x], 0) +
                         (upg.maxLvl !== undefined
                             ? " / " + format(upg.maxLvl, 0)
-                            : ""),
+                            : "")
                 );
             if (upg.effDesc) {
                 tmp.el["md_upg" + x + "_eff"].setHTML(
-                    upg.effDesc(tmp.md.upgs[x].eff),
+                    upg.effDesc(tmp.md.upgs[x].eff)
                 );
             }
             tmp.el["md_upg" + x + "_cost"].setTxt(
                 player.md.upgs[x].lt(upg.maxLvl || EINF)
                     ? "Cost: " + formatMass(tmp.md.upgs[x].cost)
-                    : "",
+                    : ""
             );
         }
     }
@@ -1010,8 +996,8 @@ function updateMDHTML() {
     tmp.el.dmOverflow.setDisplay(player.md.mass.gte(tmp.overflow_start.dm));
     tmp.el.dmOverflow.setHTML(
         `Because of dilated mass overflow at <b>${formatMass(
-            tmp.overflow_start.dm,
-        )}</b>, your dilated mass is ${overflowFormat(tmp.overflow.dm || 1)}!`,
+            tmp.overflow_start.dm
+        )}</b>, your dilated mass is ${overflowFormat(tmp.overflow.dm || 1)}!`
     );
 }
 
@@ -1025,12 +1011,12 @@ function updateBDHTML() {
     tmp.el.bd_energy.setTxt(
         bd.energy.format(1) +
             " " +
-            bd.energy.formatGain(tmp.bd.energyGain.mul(inf_gs)),
+            bd.energy.formatGain(tmp.bd.energyGain.mul(inf_gs))
     );
     tmp.el.bd_mass.setTxt(
         formatMass(bd.mass) +
             " " +
-            bd.mass.formatGain(tmp.bd.massGain.mul(inf_gs), true),
+            bd.mass.formatGain(tmp.bd.massGain.mul(inf_gs), true)
     );
 
     for (let x = 0; x < MASS_DILATION.break.upgs.ids.length; x++) {
@@ -1050,16 +1036,16 @@ function updateBDHTML() {
                     format(bd.upgs[x], 0) +
                         (upg.maxLvl !== undefined
                             ? " / " + format(upg.maxLvl, 0)
-                            : ""),
+                            : "")
                 );
             if (upg.effDesc)
                 tmp.el["bd_upg" + x + "_eff"].setHTML(
-                    upg.effDesc(tmp.bd.upgs[x].eff),
+                    upg.effDesc(tmp.bd.upgs[x].eff)
                 );
             tmp.el["bd_upg" + x + "_cost"].setTxt(
                 bd.upgs[x].lt(upg.maxLvl || EINF)
                     ? "Cost: " + formatMass(tmp.bd.upgs[x].cost)
-                    : "",
+                    : ""
             );
         }
     }

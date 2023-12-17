@@ -9,14 +9,6 @@ const TOOLTIP_RES = {
                     tmp.overflowBefore.mass
                 )}</b> gained before <b>overflow</b>)`;
 
-            /*
-            if (quUnl())
-            h += `
-            <br class='line'>You have <b class='red'>${player.rp.points.format(0)} ${player.rp.points.formatGain(tmp.rp.gain.mul(tmp.preQUGlobalSpeed))}</b> Rage Power. (after Quantum)
-            <br class='line'>You have <b class='yellow'>${player.bh.dm.format(0)} ${player.bh.dm.formatGain(tmp.bh.dm_gain.mul(tmp.preQUGlobalSpeed))}</b> Dark Matter. (after Quantum)
-            `;
-            */
-
             return h;
         },
     },
@@ -66,13 +58,6 @@ const TOOLTIP_RES = {
                     true
                 )}</b> of Unstable Black Hole.
             `;
-
-            /*
-            if (quUnl())
-            h += `
-            <br class='line'>You have <b class='cyan'>${player.atom.points.format(0)} ${player.atom.points.formatGain(tmp.atom.gain.mul(tmp.preQUGlobalSpeed))}</b> Atom. (after Quantum)
-            `;
-            */
 
             return h;
         },
@@ -162,7 +147,7 @@ const TOOLTIP_RES = {
         full: "Supernova",
         desc() {
             let h = `
-            You have exploded into a ${getScalingName(
+            You have imploded into a ${getScalingName(
                 "supernova"
             )}Supernova <b>${player.supernova.times.format(0)}</b> times
             <br class='line'>
@@ -210,7 +195,11 @@ const TOOLTIP_RES = {
         full: "Death Shard",
         desc() {
             let h = `<i>
-            Big Rip the Dimension, then go back. Gain <b>Death Shards</b> based on your normal mass while in Big Rip, and unlock various new upgrades.
+            ${
+                player.qu.rip.active
+                    ? "Our dimension is Big Ripped. Click to undo."
+                    : "Big Rip the Dimension."
+            }. Gain <b>Death Shards</b> based on your normal mass while in Big Rip, and unlock various new upgrades.
             <br><br>
             While in Big Rip:<br>
             • Entropy rewards are disabled.<br>
@@ -326,14 +315,6 @@ const TOOLTIP_RES = {
             return h;
         },
     },
-
-    /**
-     * desc() {
-            let h = ``
-
-            return h
-        },
-    */
 };
 
 function updateTooltipResHTML(start = false) {

@@ -30,7 +30,6 @@ const CHROMA = {
     ],
     eff: [
         (i) => {
-            //if (tmp.c16active) return E(1)
             let c = hasElement(13, 1);
             let x = c
                 ? expMult(i.add(1).log10().add(1), 2)
@@ -134,8 +133,8 @@ function updateChromaHTML() {
                 " " +
                 formatGain(
                     player.qu.chroma[x],
-                    tmp.qu.chroma_gain[x].mul(inf_gs),
-                ),
+                    tmp.qu.chroma_gain[x].mul(inf_gs)
+                )
         );
         tmp.el[id + "_eff"].setHTML(CHROMA.effDesc[x](tmp.qu.chroma_eff[x]));
     }

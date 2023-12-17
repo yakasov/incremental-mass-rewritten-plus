@@ -454,7 +454,7 @@ const INF = {
         [
             {
                 title: "Break Infinity",
-                desc: "Reaching Infinity no longer plays animation. You can lift beyond normal mass limit and get Infinity Theorems freely. There is a 10% higher chance to gain dots on Theorems. Finally, unlock Element Tier 3, more Muonic Elements.",
+                desc: "Remove the mass limit (can lift limitlessly). Unlock Element Tier 3 and new Muonic Elements.",
                 cost: E(1e12),
             },
         ],
@@ -471,12 +471,12 @@ const INF = {
             },
             {
                 title: "Blackest Challenges",
-                desc: "Remove the cap of Challenge 13-15's completion.",
+                desc: "Remove the cap of Challenge 13-15 completions.",
                 cost: E(1e190),
             },
             {
                 title: "Better Infinity",
-                desc: "The formula of Infinity Points gain is improved.",
+                desc: "Improve Infinity Points formula.",
                 cost: E(1e225),
             },
         ],
@@ -502,7 +502,7 @@ const INF = {
 
             if (hasElement(289)) x = x.pow(1.2);
 
-            return x.div(10); //.softcap(10,0.5,0)
+            return x.div(10);
         },
     },
     pe: {
@@ -604,7 +604,6 @@ function getInfSave() {
         cs_double: [E(0), E(0)],
     };
     for (let i in CORE) s.fragment[i] = E(0);
-    //for (let i = 0; i < 4; i++) s.pre_theorem.push(createPreTheorem())
     return s;
 }
 
@@ -614,13 +613,6 @@ function infUpgEffect(i, def = 1) {
 
 function updateInfTemp() {
     updateCSTemp();
-
-    /*
-    tmp.peCost = INF.pe.cost(player.inf.pe)
-    tmp.peBulk = E(0)
-    if (player.inf.points.gte(100)) tmp.peBulk = player.inf.points.div(1000).log(1.2).scaleEvery('pe',true).add(1).floor()
-    tmp.peEffect = INF.pe.effect()
-    */
 
     tmp.dim_mass_gain = INF.dim_mass.gain();
     tmp.dim_mass_eff = INF.dim_mass.effect();
@@ -747,16 +739,6 @@ function updateInfHTML() {
         tmp.el.dim_mass_eff.setHTML("+" + tmp.dim_mass_eff.format());
 
         BUILDINGS.update("pe");
-
-        /*
-        let pe_eff = tmp.peEffect
-		tmp.el.pe_scale.setTxt(getScalingName('pe'))
-		tmp.el.pe_lvl.setTxt(format(player.inf.pe,0)+(pe_eff.bonus.gte(1)?" + "+format(pe_eff.bonus,0):""))
-		tmp.el.pe_btn.setClasses({btn: true, locked: !INF.pe.can()})
-		tmp.el.pe_cost.setTxt(format(tmp.peCost,0))
-		tmp.el.pe_step.setHTML(formatMult(pe_eff.step))
-		tmp.el.pe_eff.setTxt(formatMult(pe_eff.eff))
-        */
     } else if (tmp.tab == 8) {
         if (tmp.stab[8] == 0) updateCoreHTML();
         else if (tmp.stab[8] == 1) {
