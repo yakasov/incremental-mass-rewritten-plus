@@ -169,7 +169,7 @@ const TOOLTIP_RES = {
             ${
                 "Reach over <b>" +
                 format(tmp.supernova.maxlimit) +
-                "</b> collapsed stars to explode into a Supernova"
+                "</b> collapsed stars to implode into a Supernova"
             }.
             </i>`;
 
