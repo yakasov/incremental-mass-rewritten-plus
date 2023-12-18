@@ -4,6 +4,29 @@
 
 -   Implemented changes (display, balance changes, but not new features) from v0.8-beta
 
+    -   Changed 'explode' to 'implode' in relation to supernovas
+    -   Changed 'multiplies' to 'boosts' everywhere
+    -   Particle gain decreased (divided by 10)
+    -   Mass Muscler effect initial power doubled (1 -> 2)
+    -   Anti-Tickspeed reward boosted (7.5% -> 9%)
+    -   Weakened Rage reward multiplier boosted (0.01 -> 0.02)
+    -   Weakened Rage overflow softcap adjusted
+    -   Dark Matter second effect starts earlier (1e12 -> 1e9)
+    -   Radiation Hz gain multiplied (x1 -> x5)
+    -   Radiation Ds gain multiplied (x1 -> x5)
+    -   Supernova tree upgrade [c] boosted (0.1 -> 1 Neutron Star /s)
+    -   Rage upgrade 'Strongers add Boosters' is cheaper (10 -> 2 Rage Power)
+    -   Rage upgrade 'You can automatically buy mass upgrades' is more expensive (25 -> 30 Rage Power)
+    -   Rage upgrade 'You can automatically rank up' is cheaper (1e4 -> 1e3 Rage Power)
+    -   Rage upgrade 'Tickspeed adds Stronger' is cheaper (1e7 -> 1e5 Rage Power)
+    -   Rage upgrade 'Super and Hyper mass upgrade scalings are weaker based on Rage Power' (1e15 -> 1e12 Rage Power)
+    -   Big Rip upgrade 'Pre-Quantum Global Speed is raised based on Death Shards (before division)' is cheaper (50 -> 20 Death Shards)
+    -   Big Rip upgrade 'Start with 2 tiers of each Fermion in Big Rip' is cheaper (250 -> 100 Death Shards)
+    -   Big Rip upgrade 'Start with all Radiation features unlocked' is cheaper (15000 -> 5000 Death Shards)
+    -   Many CSS tweaks
+    -   Removed some debug functions
+    -   General fixes
+
 ## v -plus.3
 
 -   Corrupted text display is more subtle
