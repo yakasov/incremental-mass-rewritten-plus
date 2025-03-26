@@ -6,7 +6,7 @@ const FERMIONS = {
   gain(i) {
     if (!player.supernova.fermions.unl) return E(0);
     let x = E(1);
-    let base = E(1.25).add(tmp.prim.eff[5][0]);
+    let base = E(1.3).add(tmp.prim.eff[5][0]);
     if (tmp.radiation.unl) x = x.mul(tmp.radiation.hz_effect);
     for (let j = 0; j < FERMIONS.types[i].length; j++)
       x = x.mul(base.pow(player.supernova.fermions.tiers[i][j]));
@@ -91,12 +91,12 @@ const FERMIONS = {
       {
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e50").pow(t.pow(1.25)).mul("e800");
+          return E("e50").pow(t.pow(1.25)).mul("e745");
         },
         calcTier() {
           let res = player.atom.atomic;
-          if (res.lt("e800")) return E(0);
-          let x = res.div("e800").max(1).log("e50").max(0).root(1.25);
+          if (res.lt("e745")) return E(0);
+          let x = res.div("e745").max(1).log("e50").max(0).root(1.25);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -112,12 +112,12 @@ const FERMIONS = {
       {
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e50").pow(t.pow(1.25)).mul("e400");
+          return E("e30").pow(t.pow(1.25)).mul("e390");
         },
         calcTier() {
           let res = player.md.particles;
-          if (res.lt("e400")) return E(0);
-          let x = res.div("e400").max(1).log("e50").max(0).root(1.25);
+          if (res.lt("e390")) return E(0);
+          let x = res.div("e390").max(1).log("e30").max(0).root(1.25);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -136,12 +136,12 @@ const FERMIONS = {
       {
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("ee3").pow(t.pow(1.5)).mul(uni("e36000"));
+          return E("ee3").pow(t.pow(1.5)).mul(uni("e32975"));
         },
         calcTier() {
           let res = player.mass;
-          if (res.lt(uni("e36000"))) return E(0);
-          let x = res.div(uni("e36000")).max(1).log("ee3").max(0).root(1.5);
+          if (res.lt(uni("e32975"))) return E(0);
+          let x = res.div(uni("e32975")).max(1).log("ee3").max(0).root(1.5);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -332,7 +332,7 @@ const FERMIONS = {
             .mul(t)
             .div(100)
             .add(1)
-            .softcap(1.5, hasTree("fn5") ? 0.75 : 0.25, 0);
+            .softcap(1.6, hasTree("fn5") ? 0.75 : 0.25, 0);
           if (hasTree("fn10")) x = x.pow(4.5);
           return x; //.softcap(1e18,0.1,0)
         },
@@ -348,12 +348,12 @@ const FERMIONS = {
       {
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e4e4").pow(t.pow(1.25)).mul("e6e5");
+          return E("e4e4").pow(t.pow(1.25)).mul("e5e5");
         },
         calcTier() {
           let res = player.bh.mass;
-          if (res.lt("e6e5")) return E(0);
-          let x = res.div("e6e5").max(1).log("e4e4").max(0).root(1.25);
+          if (res.lt("e5e5")) return E(0);
+          let x = res.div("e5e5").max(1).log("e4e4").max(0).root(1.25);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -378,12 +378,12 @@ const FERMIONS = {
       {
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e5e3").pow(t.pow(1.5)).mul("e4.5e5");
+          return E("e5e3").pow(t.pow(1.5)).mul("e3.645e5");
         },
         calcTier() {
           let res = player.bh.dm;
-          if (res.lt("e4.5e5")) return E(0);
-          let x = res.div("e4.5e5").max(1).log("e5e3").max(0).root(1.5);
+          if (res.lt("e3.645e5")) return E(0);
+          let x = res.div("e3.645e5").max(1).log("e5e3").max(0).root(1.5);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {

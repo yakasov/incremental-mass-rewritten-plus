@@ -888,7 +888,7 @@ function simulateTime(sec) {
     // console.log(player.bh.mass.div(player_before.bh.mass).log10().format())
   }
 
-  let h = `You were gone offline for <b>${formatTime(sec)}</b>.<br>`;
+  let h = `You were offline for <b>${formatTime(sec)}</b>.<br>`;
 
   let s = {
     mass: player.mass.max(1).div(player_before.mass.max(1)).log10(),
@@ -921,35 +921,37 @@ function simulateTime(sec) {
       .log10(),
   };
 
-  // console.log(s2)
+  if (sec < 300) return;
 
   if (s2.mass.gte(10))
-    h += `<br>Your mass's exponent<sup>2</sup> is increased by <b>${s2.mass.format(
+    h += `<br>Your mass's exponent<sup>2</sup> has increased by <b>${s2.mass.format(
       2
     )}</b>.`;
   else if (s.mass.gte(10))
-    h += `<br>Your mass's exponent is increased by <b>${s.mass.format(2)}</b>.`;
+    h += `<br>Your mass's exponent has increased by <b>${s.mass.format(
+      2
+    )}</b>.`;
 
   if (s2.bh_mass.gte(10))
-    h += `<br>Your exponent<sup>2</sup> of mass of black hole is increased by <b>${s2.bh_mass.format(
+    h += `<br>Your exponent<sup>2</sup> of mass of black hole has increased by <b>${s2.bh_mass.format(
       2
     )}</b>.`;
   else if (s.bh_mass.gte(10))
-    h += `<br>Your exponent of mass of black hole is increased by <b>${s.bh_mass.format(
+    h += `<br>Your exponent of mass of black hole has increased by <b>${s.bh_mass.format(
       2
     )}</b>.`;
 
   if (s2.quarks.gte(10))
-    h += `<br>Your quark's exponent<sup>2</sup> is increased by <b>${s2.quarks.format(
+    h += `<br>Your quark's exponent<sup>2</sup> has increased by <b>${s2.quarks.format(
       2
     )}</b>.`;
   else if (s.quarks.gte(10))
-    h += `<br>Your quark's exponent is increased by <b>${s.quarks.format(
+    h += `<br>Your quark's exponent has increased by <b>${s.quarks.format(
       2
     )}</b>.`;
 
   if (s.sn.gte(1e3))
-    h += `<br>You were becomed <b>${s.sn.format(0)}</b> more supernovas.`;
+    h += `<br>You were exploded into <b>${s.sn.format(0)}</b> more supernovas.`;
 
   createPopup(h, "offline");
 }

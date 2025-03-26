@@ -26,7 +26,7 @@ const TOOLTIP_RES = {
       let h = `<i>
             Reach over <b>${formatMass(
               1e15
-            )}</b> of normal mass to reset previous features for gain Rage Powers.
+            )}</b> of Mass to reset previous features and gain Rage Powers.
             </i>`;
 
       return h;
@@ -38,7 +38,7 @@ const TOOLTIP_RES = {
       let h = `<i>
             Reach over <b>${format(
               1e20
-            )}</b> Rage Power to reset all previous features for gain Dark Matters.
+            )}</b> Rage Power to reset all previous features and gain Dark Matter.
             </i>`;
 
       return h;
@@ -47,7 +47,9 @@ const TOOLTIP_RES = {
   bh: {
     full: "Black Hole",
     desc() {
-      let h = `You have <b>${formatMass(player.bh.mass)}</b> of black hole.`;
+      let h = `You have <b>${formatMass(
+        player.bh.mass
+      )}</b> of Black Hole Mass.`;
 
       if (tmp.overflowBefore.bh.gte(tmp.overflow_start.bh[0]))
         h += `<br>(<b>+${formatMass(
@@ -62,7 +64,7 @@ const TOOLTIP_RES = {
           player.bh.unstable,
           UNSTABLE_BH.calcProduction(),
           true
-        )}</b> of Unstable Black Hole.
+        )}</b> of Unstable Black Hole Mass.
             `;
 
       /*
@@ -81,7 +83,7 @@ const TOOLTIP_RES = {
       let h = `<i>
             Reach over <b>${formatMass(
               uni(1e100)
-            )}</b> of black hole to reset all previous features for gain Atoms & Quarks.
+            )}</b> of Black Hole Mass to reset all previous features and gain Atoms & Quarks.
             </i>`;
 
       return h;
@@ -90,7 +92,7 @@ const TOOLTIP_RES = {
   quarks: {
     full: "Quark",
     desc() {
-      let h = `You have <b>${format(player.atom.quarks, 0)}</b> Quark.`;
+      let h = `You have <b>${format(player.atom.quarks, 0)}</b> Quarks.`;
 
       if (tmp.overflowBefore.quark.gte(tmp.overflow_start.quark))
         h += `<br>(<b>+${format(
@@ -118,7 +120,7 @@ const TOOLTIP_RES = {
             )} ${player.md.mass.formatGain(
         tmp.md.mass_gain.mul(tmp.preQUGlobalSpeed),
         true
-      )}</b> of dilated mass.
+      )}</b> of Dilated Mass.
             `;
 
       if (tmp.overflowBefore.dm.gte(tmp.overflow_start.dm))
@@ -148,9 +150,9 @@ const TOOLTIP_RES = {
               player.md.active
                 ? `Reach <b>${formatMass(
                     tmp.md.mass_req
-                  )}</b> of normal mass to gain Relativistic Particles, or cancel dilation.`
+                  )}</b> of Mass to gain Relativistic Particles, or cancel Dilation.`
                 : "Dilate mass, then cancel."
-            }<br><br>Dilating mass will force an atom reset. While mass is dilated, all pre-atom resources and atomic power gain will get their multipliers' exponents raised to 0.8<br>
+            }<br><br>Dilating Mass will force an Atom reset. While Mass is dilated, all pre-atom resources and Atomic Power gain will get their multipliers' exponents raised to 0.8<br>
             </i>`;
 
       return h;
@@ -160,20 +162,20 @@ const TOOLTIP_RES = {
     full: "Supernova",
     desc() {
       let h = `
-            You have becomed <b>${player.supernova.times.format(
+            You have exploded into <b>${player.supernova.times.format(
               0
-            )}</b> ${getScalingName("supernova")}Supernova
+            )}</b> ${getScalingName("supernova")}Supernovas.
             <br class='line'>
             You have <b>${player.stars.points.format(
               0
             )} ${player.stars.points.formatGain(
         tmp.stars.gain.mul(tmp.preQUGlobalSpeed)
-      )}</b> Collapsed Star.<br>
+      )}</b> Collapsed Stars.<br>
             You have <b>${player.supernova.stars.format(
               0
             )} ${player.supernova.stars.formatGain(
         tmp.supernova.star_gain.mul(tmp.preQUGlobalSpeed)
-      )}</b> Neutron Star.
+      )}</b> Neutron Stars.
             `;
 
       if (!tmp.SN_passive)
@@ -182,7 +184,7 @@ const TOOLTIP_RES = {
             ${
               "Reach over <b>" +
               format(tmp.supernova.maxlimit) +
-              "</b> collapsed stars to go Supernova"
+              "</b> Collapsed Stars to go Supernova"
             }.
             </i>`;
 

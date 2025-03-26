@@ -690,7 +690,7 @@ const TREE_UPGS = {
       },
       branch: ["bs1"],
       desc: `Tickspeed affects Fermions gain at a reduced rate.`,
-      cost: E(1e27),
+      cost: E(1e26),
       effect() {
         let x = E(1.25).pow(
           player.build.tickspeed.amt.softcap(1e24, 0.5, 2).pow(0.4)
@@ -738,7 +738,7 @@ const TREE_UPGS = {
       },
       branch: ["fn1"],
       desc: `2nd Photon & Gluon upgrades are slightly stronger.`,
-      cost: E(1e39),
+      cost: E(1e38),
     },
     fn5: {
       unl() {
@@ -769,7 +769,7 @@ const TREE_UPGS = {
         )} while in [Charm] & Challenge 5.`;
       },
       desc: `Unlock 2 more types of U-Quark & U-Fermion.`,
-      cost: E(1e48),
+      cost: E(2e47),
     },
     fn7: {
       branch: ["fn6"],
