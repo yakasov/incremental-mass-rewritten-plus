@@ -4,6 +4,13 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 2
+
+- Removed the 'reset without Supernova' button. Supernovas can now be reset for at any time on the right icon
+- Supernova tree upgrade [c] boosted (0.1 -> 1 Neutron Star /s)
+- Atom upgrade 2x4 'Stronger effect softcap is 15% weaker.' cost slightly reduced
+- String grammar pass on Upgrades
+
 ### v0.7.1.6-plus 1
 
 - Challenge 10 start is slightly lower

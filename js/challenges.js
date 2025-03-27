@@ -915,7 +915,7 @@ const CHALS = {
     title: "Yin Yang Malfunction",
     get desc() {
       return `
-        You cannot explode into/generate Supernovas, produce Star resources, Dark Rays (they are capped at ${format(
+        You cannot implode into/generate Supernovas, produce Star resources, Dark Rays (they are capped at ${format(
           1e12
         )}), Dark Shadows and Abyssal Blot, nor purchase tree upgrades. You are stuck in dark run with 1000 of all glyphs (unaffected by weakness). This challenge resets Supernova.
         `;

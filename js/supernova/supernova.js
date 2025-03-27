@@ -1,9 +1,10 @@
 const SUPERNOVA = {
-  reset(force = false, chal = false, post = false, fermion = false) {
+  reset(chal = false, post = false, fermion = false) {
+    const force = tmp.supernova.bulk.sub(player.supernova.times).max(0).eq(0);
     if (!chal && !post && !fermion) {
       if (force && player.confirms.sn)
         createConfirm(
-          "Are you sure to reset without being Supernova?",
+          "Are you sure to reset without exploding into a Supernova?",
           "sn",
           () => CONFIRMS_FUNCTION.sn(force, chal, post, fermion)
         );
@@ -74,7 +75,7 @@ const SUPERNOVA = {
     tmp.pass = 2;
   },
   starGain() {
-    let x = E(hasTree("c") ? 0.1 : 0);
+    let x = E(hasTree("c") ? 1 : 0);
     if (hasTree("sn1")) x = x.mul(tmp.supernova.tree_eff.sn1);
     if (hasTree("sn2")) x = x.mul(tmp.supernova.tree_eff.sn2);
     if (hasTree("sn3")) x = x.mul(tmp.supernova.tree_eff.sn3);

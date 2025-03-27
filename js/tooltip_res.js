@@ -162,7 +162,7 @@ const TOOLTIP_RES = {
     full: "Supernova",
     desc() {
       let h = `
-            You have exploded into <b>${player.supernova.times.format(
+            You have imploded into <b>${player.supernova.times.format(
               0
             )}</b> ${getScalingName("supernova")}Supernovas.
             <br class='line'>
