@@ -23,10 +23,8 @@ const DARK_RUN = {
 
     if (i < 4) x = g.root(2).div(100).add(1).pow(-1); // 1/(g**0.5/100+1)
     else if (i == 4)
-      x = [
-        g.root(2).div(100).add(1).pow(-1),
-        Decimal.pow(1.1, g.pow(0.75)),
-      ]; // [1/(g**0.5/100+1),1.1**(g**0.75)]
+      x = [g.root(2).div(100).add(1).pow(-1), Decimal.pow(1.1, g.pow(0.75))];
+    // [1/(g**0.5/100+1),1.1**(g**0.75)]
     else x = Decimal.pow(1.1, g.pow(0.75)); // 1.1**(g**0.75)
 
     return x;
@@ -34,13 +32,13 @@ const DARK_RUN = {
 
   mass_glyph_effDesc: [
     (x) =>
-      `Reduce the exponent of normal mass’s multiplier, multiplier from mass of black hole by <b>^${format(
+      `Reduce the exponent of normal mass’s multiplier, multiplier from Black Hole Mass by <b>^${format(
         x
       )}</b> in dark run.<br class='line'>Earn more glyphs based on normal mass.`,
     (x) =>
       `Reduce the exponent of dark matter’s multiplier, rage power’s multiplier by <b>^${format(
         x
-      )}</b> in dark run.<br class='line'>Earn more glyphs based on mass of black hole.`,
+      )}</b> in dark run.<br class='line'>Earn more glyphs based on Black Hole Mass.`,
     (x) =>
       `Reduce the exponent of atom, atomic power and quark multiplier by <b>^${format(
         x
@@ -156,7 +154,7 @@ const DARK_RUN = {
     },
     {
       max: 10,
-      desc: `Raise mass of black hole gain by 1.5 every level.`,
+      desc: `Raise Black Hole Mass gain by 1.5 every level.`,
       cost(i) {
         i *= Math.max(1, i - 4) ** 0.5;
         return { 0: Math.floor(6 * i + 10), 1: Math.floor(6 * i + 5) };

@@ -121,7 +121,7 @@ const NO_REQ_QU = [
 const TREE_UPGS = {
   buy(x, auto = false) {
     if (
-      (tmp.supernova.tree_choosed == x || auto) &&
+      (tmp.supernova.tree_chosen == x || auto) &&
       tmp.supernova.tree_afford[x]
     ) {
       if (this.ids[x].qf)
@@ -1017,7 +1017,7 @@ const TREE_UPGS = {
 
       branch: ["qu7"],
       desc: `Chromas are affected by Quantum Shard’s effect.`,
-      cost: E(1e21),
+      cost: E(1e27),
       effect() {
         let x = tmp.qu.qc_s_eff.max(1);
         return x;
@@ -1033,7 +1033,7 @@ const TREE_UPGS = {
       qf: true,
       branch: ["qu8"],
       desc: `Gain more Quantizes based on total Primordium Particles.`,
-      cost: E(1e24),
+      cost: E(1e33),
       effect() {
         let x = player.qu.prim.theorems.add(1);
         if (hasBeyondRank(2, 17)) x = x.mul(beyondRankEffect(2, 17)[0]);
@@ -1047,7 +1047,7 @@ const TREE_UPGS = {
       qf: true,
       branch: ["qu9"],
       desc: `Higgs Boson's effect is increased by 3.3% for every OoM of Blueprint Particles.`,
-      cost: E(1e32),
+      cost: E(1e37),
       effect() {
         let x = E(1.0333).pow(player.qu.bp.add(1).log10().softcap(70, 0.5, 0));
         return overflow(x, "e450", 0.5);
@@ -1213,7 +1213,7 @@ const TREE_UPGS = {
       },
       branch: ["qu5"],
       desc: `Mass gain softcap^4 starts later based on Quantum Shards.`,
-      cost: E(1e10),
+      cost: E(1e15),
       effect() {
         let x = (player.qu.qc.shard + 1) ** 0.75;
         return x;
@@ -1267,7 +1267,7 @@ const TREE_UPGS = {
       },
       qf: true,
       branch: ["qu5"],
-      desc: `Evaporating frequency & mass of black hole is twice as effective, and its effects are stronger.`,
+      desc: `Evaporating frequency & Black Hole Mass is twice as effective, and its effects are stronger.`,
       cost: E(1e55),
     },
     br1: {
@@ -1319,7 +1319,7 @@ const TREE_UPGS = {
       },
       reqDesc: `Quantize 20 times.`,
       desc: `Unlock Primordium.`,
-      cost: E(50),
+      cost: E(1e5),
     },
     unl3: {
       qf: true,
@@ -1329,7 +1329,7 @@ const TREE_UPGS = {
       },
       reqDesc: `Quantize 200 times.`,
       desc: `Unlock Quantum Challenge.`,
-      cost: E(1e6),
+      cost: E(1e13),
     },
     unl4: {
       qf: true,
@@ -1375,7 +1375,7 @@ const TREE_UPGS = {
     // Corrupted Tree
 
     ct1: {
-      desc: `Best mass of black hole in C16 boosts normal mass gain.`,
+      desc: `Best Black Hole Mass in C16 boosts normal mass gain.`,
       cost: E(10),
 
       effect() {
@@ -1389,7 +1389,7 @@ const TREE_UPGS = {
     ct2: {
       branch: ["ct1"],
 
-      desc: `Best mass of black hole in C16 boosts bosonic resources gain.`,
+      desc: `Best Black Hole Mass in C16 boosts bosonic resources gain.`,
       cost: E(50),
 
       effect() {
@@ -1403,13 +1403,13 @@ const TREE_UPGS = {
     ct3: {
       branch: ["ct1"],
 
-      desc: `Best mass of black hole in C16 adds free fermion tiers.`,
+      desc: `Best Black Hole Mass in C16 adds free fermion tiers.`,
       cost: E(50),
 
       req() {
         return (
           tmp.c16active &&
-          player.supernova.fermions.choosed == "06" &&
+          player.supernova.fermions.chosen == "06" &&
           player.bh.mass.gte("1e81")
         );
       },
@@ -1430,7 +1430,7 @@ const TREE_UPGS = {
     ct4: {
       branch: ["ct1"],
 
-      desc: `Best mass of black hole in C16 adds to the base of all matter's upgrade.`,
+      desc: `Best Black Hole Mass in C16 adds to the base of all matter's upgrade.`,
       cost: E(100),
 
       req() {
@@ -1475,7 +1475,7 @@ const TREE_UPGS = {
     ct6: {
       branch: ["ct1"],
 
-      desc: `Mass overflow starts later based on best mass of black hole in C16.`,
+      desc: `Mass overflow starts later based on best Black Hole Mass in C16.`,
       cost: E(300),
 
       req() {
@@ -1509,7 +1509,7 @@ const TREE_UPGS = {
     ct8: {
       branch: ["ct2"],
 
-      desc: `Keep pre-C16 tree on entering C16. Best mass of black hole in C16 boosts all radiation gains.`,
+      desc: `Keep pre-C16 tree on entering C16. Best Black Hole Mass in C16 boosts all radiation gains.`,
       cost: E(2500),
 
       effect() {
@@ -1523,13 +1523,13 @@ const TREE_UPGS = {
     ct9: {
       branch: ["ct3"],
 
-      desc: `Best mass of black hole in C16 adds free radiation boosts.`,
+      desc: `Best Black Hole Mass in C16 adds free radiation boosts.`,
       cost: E(5000),
 
       req() {
         return (
           tmp.c16active &&
-          player.supernova.fermions.choosed == "16" &&
+          player.supernova.fermions.chosen == "16" &&
           player.bh.mass.gte("1e400") &&
           player.build.bhc.amt.lte(0)
         );
@@ -1569,7 +1569,7 @@ const TREE_UPGS = {
     ct11: {
       branch: ["ct6"],
 
-      desc: `Mass of black hole overflow starts later based on best mass of black hole in C16. (weaker during C16)`,
+      desc: `Black Hole Mass overflow starts later based on best Black Hole Mass in C16. (weaker during C16)`,
       cost: E(1e6),
 
       req() {
@@ -1593,13 +1593,13 @@ const TREE_UPGS = {
     ct12: {
       branch: ["ct9"],
 
-      desc: `Best mass of black hole in C16 adds free primordium particles.`,
+      desc: `Best Black Hole Mass in C16 adds free primordium particles.`,
       cost: E(5e7),
 
       req() {
         return (
           tmp.c16active &&
-          player.supernova.fermions.choosed == "06" &&
+          player.supernova.fermions.chosen == "06" &&
           player.bh.mass.gte("1e1960") &&
           player.build.bhc.amt.lte(0)
         );
@@ -1638,7 +1638,7 @@ const TREE_UPGS = {
     ct14: {
       branch: ["ct11"],
 
-      desc: `Dilated mass overflow starts later based on best mass of black hole in C16.`,
+      desc: `Dilated mass overflow starts later based on best Black Hole Mass in C16.`,
       cost: E(1e10),
 
       req() {
@@ -1674,7 +1674,7 @@ const TREE_UPGS = {
       unl: () => tmp.eaUnl,
       branch: ["ct10"],
 
-      desc: `Best mass of black hole in C16 boosts Kaon & Pion gain.`,
+      desc: `Best Black Hole Mass in C16 boosts Kaon & Pion gain.`,
       cost: E(5e16),
 
       effect() {
@@ -1767,7 +1767,7 @@ function setupTreeHTML() {
         let img = TREE_UPGS.ids[id]
           ? `<img src="images/tree/${u.icon || id}.png">`
           : "";
-        table += `<button id="treeUpg_${id}" class="btn_tree" onclick="TREE_UPGS.buy('${id}'); tmp.supernova.tree_choosed = '${id}'" ${option}>${img}</button>`;
+        table += `<button id="treeUpg_${id}" class="btn_tree" onclick="TREE_UPGS.buy('${id}'); tmp.supernova.tree_chosen = '${id}'" ${option}>${img}</button>`;
       }
       table += `</div>`;
     }
@@ -1893,8 +1893,8 @@ function changeTreeAnimation() {
 function updateTreeHTML() {
   let c16 = tmp.c16active;
   let req = "";
-  let t_ch = TREE_UPGS.ids[tmp.supernova.tree_choosed];
-  if (tmp.supernova.tree_choosed != "")
+  let t_ch = TREE_UPGS.ids[tmp.supernova.tree_chosen];
+  if (tmp.supernova.tree_chosen != "")
     req = t_ch.req
       ? `<span class="${t_ch.req() ? "green" : "red"}">${
           t_ch.reqDesc
@@ -1906,11 +1906,11 @@ function updateTreeHTML() {
         }</span>`
       : "";
   tmp.el.tree_desc.setHTML(
-    tmp.supernova.tree_choosed == ""
+    tmp.supernova.tree_chosen == ""
       ? `<div style="font-size: 12px; font-weight: bold;"><span class="gray">(click any tree upgrade to show)</span></div>`
       : `<div style="font-size: 12px; font-weight: bold;"><span class="gray">(click again to buy if affordable)</span>${req}</div>
-        ${`<span class="sky"><b>[${tmp.supernova.tree_choosed}]</b> ${t_ch.desc}</span>`.corrupt(
-          c16 && CORRUPTED_TREE.includes(tmp.supernova.tree_choosed)
+        ${`<span class="sky"><b>[${tmp.supernova.tree_chosen}]</b> ${t_ch.desc}</span>`.corrupt(
+          c16 && CORRUPTED_TREE.includes(tmp.supernova.tree_chosen)
         )}<br>
         <span>Cost: ${format(t_ch.cost, 2)} ${
           t_ch.qf
@@ -1922,7 +1922,7 @@ function updateTreeHTML() {
         <span class="green">${
           t_ch.effDesc
             ? "Currently: " +
-              t_ch.effDesc(tmp.supernova.tree_eff[tmp.supernova.tree_choosed])
+              t_ch.effDesc(tmp.supernova.tree_eff[tmp.supernova.tree_chosen])
             : ""
         }</span>
         `
@@ -1949,14 +1949,14 @@ function updateTreeHTML() {
               ? {
                   btn_tree: true,
                   corrupted: true,
-                  choosed: id == tmp.supernova.tree_choosed,
+                  chosen: id == tmp.supernova.tree_chosen,
                 }
               : {
                   btn_tree: true,
                   qu_tree: TREE_UPGS.ids[id].qf,
                   locked: !tmp.supernova.tree_afford[id],
                   bought: bought,
-                  choosed: id == tmp.supernova.tree_choosed,
+                  chosen: id == tmp.supernova.tree_chosen,
                 }
           );
       }

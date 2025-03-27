@@ -328,7 +328,7 @@ function getPlayerData() {
     chal: {
       unl: false,
       active: 0,
-      choosed: 0,
+      chosen: 0,
       comps: {},
     },
     atom: {
@@ -392,7 +392,7 @@ function getPlayerData() {
           [E(0), E(0), E(0), E(0), E(0), E(0), E(0)],
           [E(0), E(0), E(0), E(0), E(0), E(0), E(0)],
         ],
-        choosed: "",
+        chosen: "",
       },
       radiation: {
         hz: E(0),
@@ -468,7 +468,7 @@ function loadPlayer(load) {
   player.qu.qc.presets = player.qu.qc.presets.slice(0, 5);
   player.reset_msg = "";
   player.main_upg_msg = [0, 0];
-  player.chal.choosed = 0;
+  player.chal.chosen = 0;
   if (
     player.dark.c16.first &&
     player.dark.c16.totalS.eq(0) &&
@@ -615,7 +615,7 @@ function save() {
 
 function load(x) {
   if ((typeof x == "string") & (x != "")) {
-    loadPlayer(JSON.parse(atob(x)));
+    loadPlayer(JSON.parse(atob(x).replaceAll("choosed", "chosen")));
   } else {
     wipe();
   }
@@ -933,11 +933,11 @@ function simulateTime(sec) {
     )}</b>.`;
 
   if (s2.bh_mass.gte(10))
-    h += `<br>Your exponent<sup>2</sup> of mass of black hole has increased by <b>${s2.bh_mass.format(
+    h += `<br>Your exponent<sup>2</sup> of Black Hole Mass has increased by <b>${s2.bh_mass.format(
       2
     )}</b>.`;
   else if (s.bh_mass.gte(10))
-    h += `<br>Your exponent of mass of black hole has increased by <b>${s.bh_mass.format(
+    h += `<br>Your exponent of Black Hole Mass has increased by <b>${s.bh_mass.format(
       2
     )}</b>.`;
 

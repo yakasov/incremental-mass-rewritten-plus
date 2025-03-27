@@ -1,6 +1,6 @@
 const FERMIONS = {
   onActive(id) {
-    let i = player.supernova.fermions.choosed;
+    let i = player.supernova.fermions.chosen;
     return i == id || (i[1] == "6" && i[0] == id[0]);
   },
   gain(i) {
@@ -17,8 +17,8 @@ const FERMIONS = {
     return x;
   },
   backNormal() {
-    if (player.supernova.fermions.choosed != "") {
-      player.supernova.fermions.choosed = "";
+    if (player.supernova.fermions.chosen != "") {
+      player.supernova.fermions.chosen = "";
       SUPERNOVA.reset(false, false, false, true);
     }
   },
@@ -372,7 +372,7 @@ const FERMIONS = {
           );
         },
         isMass: true,
-        inc: "Mass of Black Hole",
+        inc: "Black Hole Mass",
         cons: "The power from the mass of the BH formula is always -1",
       },
       {
@@ -578,10 +578,10 @@ function setupFermionsHTML() {
             <button id="${id}_div" class="fermion_btn ${FERMIONS.names[i]}" onclick="FERMIONS.choose(${i},${x})">
                 <b>[${FERMIONS.sub_names[i][x]}]</b><br>[<span id="${id}_tier_scale"></span>Tier <span id="${id}_tier">0</span>]<br>
                 <span id="${id}_cur">Currently: X</span><br>
-                Next Tier at: <span id="${id}_nextTier">X</span><br>
+                <span class="basic-bold">Next Tier<br></span> <span id="${id}_nextTier">X</span><br>
                 (Increased by ${f.inc})<br><br>
-                Effect: <span id="${id}_desc">X</span><br>
-                On Active: ${f.cons}
+                <span class="basic-bold">Effect<br></span> <span class="green" id="${id}_desc">X</span><br><br>
+                <span class="basic-bold">On Active<br></span> <span class="red">${f.cons}</span>
             </button>
             `;
     }
@@ -594,11 +594,11 @@ function updateFermionsTemp() {
 
   tf.prod = [FERMIONS.productF(0), FERMIONS.productF(1)];
   tf.ch =
-    player.supernova.fermions.choosed == ""
+    player.supernova.fermions.chosen == ""
       ? [-1, -1]
       : [
-          Number(player.supernova.fermions.choosed[0]),
-          Number(player.supernova.fermions.choosed[1]),
+          Number(player.supernova.fermions.chosen[0]),
+          Number(player.supernova.fermions.chosen[1]),
         ];
   tf.fp = FERMIONS.fp();
   tf.fp2 = FERMIONS.fp2();
@@ -671,7 +671,7 @@ function updateFermionsHTML() {
         tmp.el[id + "_div"].setClasses({
           fermion_btn: true,
           [FERMIONS.names[i]]: true,
-          choosed: active,
+          chosen: active,
         });
         tmp.el[id + "_nextTier"].setTxt(
           fm(f.nextTierAt(player.supernova.fermions.tiers[i][x]))

@@ -402,7 +402,7 @@ function updateEntropyHTML() {
   tmp.el.evaBtn2.setHTML(
     player.qu.en.hr[0]
       ? `Stop Evaporating to get<br>${player.qu.en.hr[1].format()}<br>best Hawking Radiation`
-      : `Evaporate your mass of Black Hole to gain Hawking Radiation`
+      : `Evaporate your Black Hole Mass to gain Hawking Radiation`
   );
 
   for (let x = 0; x < ENTROPY.rewards.length; x++) {

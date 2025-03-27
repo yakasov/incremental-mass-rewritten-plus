@@ -627,7 +627,7 @@ const BUILDINGS_DATA = {
     },
 
     get_power: (x) => formatMult(x.power),
-    get_effect: (x) => formatMult(x.effect) + " to mass of black hole",
+    get_effect: (x) => formatMult(x.effect) + " to Black Hole Mass",
   },
   fvm: {
     name: "False Vacuum Manipulator",

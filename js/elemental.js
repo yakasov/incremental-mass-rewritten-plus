@@ -659,7 +659,7 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Collapsed star's effect boosts mass of black hole gain at a reduced rate.`,
+      desc: `Collapsed star's effect boosts Black Hole Mass gain at a reduced rate.`,
       cost: E("e510"),
       effect() {
         let x = tmp.stars ? tmp.stars.effect.add(1).pow(0.02) : E(1);
@@ -697,7 +697,7 @@ const ELEMENTS = {
       cost: E("e2400"),
     },
     {
-      desc: `Mass of black hole boosts atomic powers gain at a reduced rate.`,
+      desc: `Black Hole Mass boosts atomic powers gain at a reduced rate.`,
       cost: E("e2800"),
       effect() {
         let x = expMult(player.bh.mass.add(1), 0.6);
@@ -928,7 +928,7 @@ const ELEMENTS = {
       cost: E("e500"),
     },
     {
-      desc: `Mass of Black Hole effect raises itself at a reduced logarithmic rate.`,
+      desc: `Black Hole Mass effect raises itself at a reduced logarithmic rate.`,
       cost: E("e1100"),
       effect() {
         let x = player.bh.mass
@@ -1417,7 +1417,7 @@ const ELEMENTS = {
       cost: E("1e96"),
     },
     {
-      desc: `Collapsed star’s effect now provide an exponential boost at a reduced rate. It now applies to mass of black hole gain. But nullify Palladium-46, Cadmium-48, Thulium-69 & Osmium-76.`,
+      desc: `Collapsed star’s effect now provide an exponential boost at a reduced rate. It now applies to Black Hole Mass gain. But nullify Palladium-46, Cadmium-48, Thulium-69 & Osmium-76.`,
       cost: E("e2e69"),
     },
     {
@@ -1907,7 +1907,7 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `Mass of black hole boosts mass overflow^1-2 starting.`,
+      desc: `Black Hole Mass boosts mass overflow^1-2 starting.`,
       cost: E("e1e26"),
       effect() {
         let x = player.bh.mass.add(10).log10().root(20);
@@ -1920,7 +1920,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `Passively generate 100% of corrupted shards gained by best mass of black hole in C16.`,
+      desc: `Passively generate 100% of corrupted shards gained by best Black Hole Mass in C16.`,
       cost: E("1.25e19"),
     },
     {
@@ -2519,7 +2519,7 @@ function setupElementsHTML() {
                 num == 118 ? "final" : ""
               }" id="elementID_${num}" onclick="buyElement(${num}); ssf[0]('${
                 ELEMENTS.names[num]
-              }')" onmouseover="tmp.elements.choosed = ${num}" onmouseleave="tmp.elements.choosed = 0">
+              }')" onmouseover="tmp.elements.chosen = ${num}" onmouseleave="tmp.elements.chosen = 0">
                 <div style="font-size: 12px;">${num}</div><sup class="muon-symbol"></sup>${
                 ELEMENTS.names[num]
               }
@@ -2584,7 +2584,7 @@ function updateElementsHTML() {
 
   let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];
 
-  let ch = tElem.choosed;
+  let ch = tElem.chosen;
   tmp.el.elem_ch_div.setVisible(ch > 0);
   if (ch) {
     let eu = elem_const.upgs[ch];

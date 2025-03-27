@@ -39,8 +39,8 @@ const CONFIRMS_FUNCTION = {
   },
   switchF(i, x) {
     let id = i + "" + x;
-    if (player.supernova.fermions.choosed != id) {
-      player.supernova.fermions.choosed = id;
+    if (player.supernova.fermions.chosen != id) {
+      player.supernova.fermions.chosen = id;
       if (x == 6) QUANTUM.doReset(true, false, true);
       else SUPERNOVA.reset(false, false, false, true);
     }
@@ -56,7 +56,7 @@ const CONFIRMS_FUNCTION = {
       !inDarkRun() &&
       !tmp.c16active
     ) {
-      player.qu.qc.shard = tmp.qu.qc_s + tmp.qu.qc_s_bouns;
+      player.qu.qc.shard = tmp.qu.qc_s + tmp.qu.qc_s_bonus;
       player.qu.qc.active = false;
     }
     if (player.qu.times.gte(10) || force) {
@@ -124,15 +124,15 @@ const CONFIRMS_FUNCTION = {
     addQuote(9);
   },
   inf(limit) {
-    if (limit || player.inf.pt_choosed >= 0) {
+    if (limit || player.inf.pt_chosen >= 0) {
       if (player.inf.theorem.eq(0))
         addTheorem("mass", [0, 1, 1, 1, 1, 1, 1, 1], E(1), E(1));
       else {
         let td =
           player.inf.pre_theorem[
-            player.inf.pt_choosed == -1
+            player.inf.pt_chosen == -1
               ? Math.floor(Math.random() * 4)
-              : player.inf.pt_choosed
+              : player.inf.pt_chosen
           ];
 
         addTheorem(
@@ -142,7 +142,7 @@ const CONFIRMS_FUNCTION = {
           getPowerMult().mul(td.power_m).add(1)
         );
       }
-    } else if (hasElement(239) && player.inf.pt_choosed < 0) {
+    } else if (hasElement(239) && player.inf.pt_chosen < 0) {
       let fl = Decimal.floor(tmp.core_lvl),
         pm = getPowerMult();
       for (let i in player.inf.pre_theorem) {

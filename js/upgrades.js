@@ -1126,7 +1126,7 @@ const UPGS = {
         unl() {
           return tmp.mass4Unl || tmp.inf_unl;
         },
-        desc: `Neutron Power's second effect now provides an expontial boost and applies to Black Hole Mass.`,
+        desc: `Neutron Power's second effect now provides an exponential boost and applies to Black Hole Mass.`,
         cost: E("e4.2e120"),
       },
       19: {
@@ -1235,9 +1235,9 @@ const UPGS = {
       },
       3: {
         desc: `Pre-Quantum Global Speed is raised based on Death Shards (before division).`,
-        cost: E(50),
+        cost: E(20),
         effect() {
-          let x = player.qu.rip.amt.add(1).log10().div(25).add(1);
+          let x = player.qu.rip.amt.add(1).log10().div(20).add(1);
           return x.softcap(30, 0.5, 0);
         },
         effDesc(x = this.effect()) {
@@ -1246,7 +1246,7 @@ const UPGS = {
       },
       4: {
         desc: `Start with 2 tiers of each Fermion in Big Rip.`,
-        cost: E(250),
+        cost: E(100),
       },
       5: {
         desc: `Root Star Booster’s starting cost by 10. Star Booster’s base is increased based on Death Shards.`,
@@ -1261,7 +1261,7 @@ const UPGS = {
       },
       6: {
         desc: `Start with all Radiation features unlocked.`,
-        cost: E(15000),
+        cost: E(5000),
       },
       7: {
         desc: `Hybridized Uran-Astatine is twice as effective in Big Rip.`,

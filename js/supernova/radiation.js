@@ -282,7 +282,7 @@ const RADIATION = {
       },
     },
     {
-      title: `Neturon-Star Boost`,
+      title: `Neutron-Star Boost`,
       eff(b) {
         let x = player.supernova.radiation.hz.add(1).log10().add(1).pow(b);
         return x;
@@ -454,14 +454,14 @@ function setupRadiationHTML() {
     table += `
         <div id="${id}_div" class="table_center radiation">
             <div class="sub_rad" style="width: 450px">
-                Your distance of ${name}'s wave is <span id="${id}_distance">0</span> meters.<br>Which multiples ${
-      x == 0 ? "Frequency" : "distance of " + RADIATION.names[x - 1]
+                Your distance of ${name}'s wave is <span id="${id}_distance">0</span> meters<br>which multiples ${
+      x == 0 ? "Frequency" : RADIATION.names[x - 1] + " wave"
     } gain by <span id="${id}_disEff">1</span>x
             </div><div class="table_center sub_rad" style="align-items: center">
                 <button id="${b1}_btn" class="btn rad" onclick="RADIATION.buyBoost(${
       2 * x
     })">
-                    Aplitude: <span id="${b1}_lvl1">0</span><br>
+                    Amplitude: <span id="${b1}_lvl1">0</span><br>
                     Cost: <span id="${b1}_cost">0</span> meters
                 </button><button id="${b2}_btn" class="btn rad" onclick="RADIATION.buyBoost(${
       2 * x + 1
@@ -469,16 +469,20 @@ function setupRadiationHTML() {
                     Velocity: <span id="${b2}_lvl1">0</span><br>
                     Cost: <span id="${b2}_cost">0</span> meters
                 </button>
-            </div><div class="sub_rad" style="width: 100%">
+            </div><div class="sub_rad" style="width: 100%"><span class="basic_bold">
                 ${RADIATION.boosts[3 * x].title} [<span id="rad_level_${
       3 * x
-    }">0</span>]: <span id="rad_level_${3 * x}_desc">0</span><br>
+    }">0</span>]:</span> <span id="rad_level_${
+      3 * x
+    }_desc">0</span><br><span class="basic_bold">
                 ${RADIATION.boosts[3 * x + 1].title} [<span id="rad_level_${
       3 * x + 1
-    }">0</span>]: <span id="rad_level_${3 * x + 1}_desc">0</span><br>
+    }">0</span>]:</span> <span id="rad_level_${
+      3 * x + 1
+    }_desc">0</span><br><span class="basic_bold">
                 ${RADIATION.boosts[3 * x + 2].title} [<span id="rad_level_${
       3 * x + 2
-    }">0</span>]: <span id="rad_level_${3 * x + 2}_desc">0</span>
+    }">0</span>]:</span> <span id="rad_level_${3 * x + 2}_desc">0</span>
             </div>
         </div>
         `;

@@ -106,7 +106,7 @@ const QUANTUM = {
         player.supernova.b_upgs[BOSONS.upgs.ids[x]][y] = E(0);
 
     player.supernova.fermions.points = [E(0), E(0)];
-    if (!metaF) player.supernova.fermions.choosed = "";
+    if (!metaF) player.supernova.fermions.chosen = "";
 
     for (let x = 0; x < 2; x++)
       if (!hasTree("qu_qol" + (2 + 4 * x)) || force)

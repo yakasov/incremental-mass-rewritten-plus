@@ -54,7 +54,7 @@ function resetTemp() {
     },
 
     elements: {
-      choosed: 0,
+      chosen: 0,
       effect: [null],
       mu_effect: [null],
       cannot: [],
@@ -78,7 +78,7 @@ function resetTemp() {
 
     supernova: {
       time: 0,
-      tree_choosed: "",
+      tree_chosen: "",
       tree_had: [],
       tree_had2: [],
       auto_tree: [],

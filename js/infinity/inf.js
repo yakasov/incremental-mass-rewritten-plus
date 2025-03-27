@@ -217,7 +217,7 @@ const INF = {
 
     updateTemp();
 
-    player.inf.pt_choosed = -1;
+    player.inf.pt_chosen = -1;
 
     generatePreTheorems();
 
@@ -243,7 +243,7 @@ const INF = {
   },
   goInf(limit = false) {
     if (player.mass.gte(this.req)) {
-      if (limit || player.inf.pt_choosed >= 0 || hasElement(239))
+      if (limit || player.inf.pt_chosen >= 0 || hasElement(239))
         CONFIRMS_FUNCTION.inf(limit);
       else if (player.confirms.inf)
         createConfirm(
@@ -580,7 +580,7 @@ function getInfSave() {
     pre_theorem: [],
     upg: [],
     fragment: {},
-    pt_choosed: -1,
+    pt_chosen: -1,
 
     dim_mass: E(0),
 

@@ -150,7 +150,7 @@ const QCs_len = 8;
 
 function addQCPresetAs() {
   if (player.qu.qc.presets.length >= 5) {
-    addNotify("You cannot add QC Preset because of maxmium length of presets");
+    addNotify("You already have the maximum amount of presets.");
     return;
   }
 
@@ -269,16 +269,16 @@ function updateQCTemp() {
     if (hasTree("qc2") && m >= 10) bs++;
   }
   tmp.qu.qc_s = s;
-  tmp.qu.qc_s_bouns = bs;
+  tmp.qu.qc_s_bonus = bs;
 }
 
 function updateQCHTML() {
   tmp.el.qc_shard.setTxt(
     player.qu.qc.shard +
-      (tmp.qu.qc_s + tmp.qu.qc_s_bouns != player.qu.qc.shard
+      (tmp.qu.qc_s + tmp.qu.qc_s_bonus != player.qu.qc.shard
         ? ` (${
-            tmp.qu.qc_s + tmp.qu.qc_s_bouns >= player.qu.qc.shard ? "+" : ""
-          }${tmp.qu.qc_s + tmp.qu.qc_s_bouns - player.qu.qc.shard})`
+            tmp.qu.qc_s + tmp.qu.qc_s_bonus >= player.qu.qc.shard ? "+" : ""
+          }${tmp.qu.qc_s + tmp.qu.qc_s_bonus - player.qu.qc.shard})`
         : "")
   );
   tmp.el.qc_shard_b.setTxt(tmp.qu.qc_s_b.format(1));

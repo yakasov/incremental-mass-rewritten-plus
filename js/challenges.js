@@ -32,41 +32,41 @@ function updateChalHTML() {
         );
       }
     }
-    tmp.el.chal_enter.setVisible(player.chal.active != player.chal.choosed);
+    tmp.el.chal_enter.setVisible(player.chal.active != player.chal.chosen);
     tmp.el.chal_exit.setVisible(player.chal.active != 0);
     tmp.el.chal_exit.setTxt(
       tmp.chal.canFinish && !hasTree("qol6")
         ? "Finish Challenge for +" + tmp.chal.gain + " Completions"
         : "Exit Challenge"
     );
-    tmp.el.chal_desc_div.setDisplay(player.chal.choosed != 0);
-    if (player.chal.choosed != 0) {
-      let chal = CHALS[player.chal.choosed];
+    tmp.el.chal_desc_div.setDisplay(player.chal.chosen != 0);
+    if (player.chal.chosen != 0) {
+      let chal = CHALS[player.chal.chosen];
       tmp.el.chal_ch_title.setTxt(
-        `[${player.chal.choosed}]${CHALS.getScaleName(player.chal.choosed)} ${
+        `[${player.chal.chosen}]${CHALS.getScaleName(player.chal.chosen)} ${
           chal.title
         } [${
-          format(player.chal.comps[player.chal.choosed], 0) +
-          (tmp.chal.max[player.chal.choosed].gte(EINF)
+          format(player.chal.comps[player.chal.chosen], 0) +
+          (tmp.chal.max[player.chal.chosen].gte(EINF)
             ? ""
-            : "/" + format(tmp.chal.max[player.chal.choosed], 0))
+            : "/" + format(tmp.chal.max[player.chal.chosen], 0))
         } Completions]`
       );
       tmp.el.chal_ch_desc.setHTML(chal.desc);
-      tmp.el.chal_ch_reset.setTxt(CHALS.getReset(player.chal.choosed));
+      tmp.el.chal_ch_reset.setTxt(CHALS.getReset(player.chal.chosen));
       tmp.el.chal_ch_goal.setTxt(
         "Goal: " +
-          CHALS.getFormat(player.chal.choosed)(
-            tmp.chal.goal[player.chal.choosed]
+          CHALS.getFormat(player.chal.chosen)(
+            tmp.chal.goal[player.chal.chosen]
           ) +
-          CHALS.getResName(player.chal.choosed)
+          CHALS.getResName(player.chal.chosen)
       );
       tmp.el.chal_ch_reward.setHTML(
         "Reward: " +
           (typeof chal.reward == "function" ? chal.reward() : chal.reward)
       );
       tmp.el.chal_ch_eff.setHTML(
-        "Currently: " + chal.effDesc(tmp.chal.eff[player.chal.choosed])
+        "Currently: " + chal.effDesc(tmp.chal.eff[player.chal.chosen])
       );
     }
   }
@@ -76,7 +76,7 @@ function updateChalHTML() {
 }
 
 function enterChal() {
-  if (player.chal.choosed == 16) startC16();
+  if (player.chal.chosen == 16) startC16();
   else CHALS.enter();
 }
 
@@ -135,11 +135,11 @@ function updateChalTemp() {
 
 const CHALS = {
   choose(x) {
-    if (player.chal.choosed == x) {
+    if (player.chal.chosen == x) {
       this.exit();
       this.enter();
     }
-    player.chal.choosed = x;
+    player.chal.chosen = x;
   },
   inChal(x) {
     return (
@@ -175,7 +175,7 @@ const CHALS = {
       }
     }
   },
-  enter(ch = player.chal.choosed) {
+  enter(ch = player.chal.chosen) {
     if (player.chal.active == 0) {
       if (ch == 16) {
         player.dark.c16.first = true;

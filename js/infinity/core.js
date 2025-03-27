@@ -95,7 +95,7 @@ const CORE = {
       `Boost the effect of Unstable BH.`,
       `Weaken BH mass overflows.`,
     ],
-    res: `Mass of Black Hole`,
+    res: `Black Hole Mass`,
     boost() {
       return player.bh.mass.add(1).log10().add(1).log10().add(1).log10().add(1);
     },
@@ -488,7 +488,7 @@ function resetCoreTemp() {
 
 resetCoreTemp();
 
-var t_choosed = "-";
+var t_chosen = "-";
 
 debug.generateTheorem = (chance = CORE_CHANCE_MIN) => {
   let c = [];
@@ -680,7 +680,7 @@ function updateCoreHTML() {
         theorem_div: true,
         tooltip: true,
         [p.type]: true,
-        choosed: player.inf.pt_choosed == i,
+        chosen: player.inf.pt_chosen == i,
       });
       pt.setHTML(
         getTheoremHTML({ type: p.type, level: fl, power, star: s }, true)
@@ -721,7 +721,7 @@ function updateTheoremCore() {
             theorem_div: true,
             tooltip: true,
             [p.type]: true,
-            choosed: i + "c" == t_choosed,
+            chosen: i + "c" == t_chosen,
           }
         : { theorem_div: true }
     );
@@ -763,7 +763,7 @@ function updateTheoremInv() {
             theorem_div: true,
             tooltip: true,
             [p.type]: true,
-            choosed: i == t_choosed,
+            chosen: i == t_chosen,
           }
         : { theorem_div: true }
     );
@@ -784,15 +784,15 @@ function updateTheoremInv() {
 }
 
 function removeTheorem() {
-  if (t_choosed.includes("c") || t_choosed == "-") return;
+  if (t_chosen.includes("c") || t_chosen == "-") return;
 
   createConfirm(
     "Are you sure you want to remove the selected theorem?",
     "remove_selected",
     () => {
-      delete player.inf.inv[t_choosed];
+      delete player.inf.inv[t_chosen];
 
-      t_choosed = "-";
+      t_chosen = "-";
 
       updateTheoremInv();
     }
@@ -800,17 +800,17 @@ function removeTheorem() {
 }
 
 function formTheorem() {
-  if (t_choosed.includes("c") || t_choosed == "-" || !tmp.tfUnl) return;
+  if (t_chosen.includes("c") || t_chosen == "-" || !tmp.tfUnl) return;
 
-  let inv = player.inf.inv[t_choosed];
+  let inv = player.inf.inv[t_chosen];
 
   player.inf.fragment[inv.type] = player.inf.fragment[inv.type].add(
     calcFragmentBase(inv, inv.star, inv.power)
   );
 
-  delete player.inf.inv[t_choosed];
+  delete player.inf.inv[t_chosen];
 
-  t_choosed = "-";
+  t_chosen = "-";
 
   updateTheoremInv();
 }
@@ -831,7 +831,7 @@ function createPreTheorem() {
 }
 
 function choosePreTheorem(i) {
-  player.inf.pt_choosed = i;
+  player.inf.pt_chosen = i;
 }
 
 function addTheorem(type, star, level, power) {
@@ -865,53 +865,53 @@ function chooseTheorem(id, is_core = false) {
 
   if (popups.includes("pickout")) return;
 
-  if (t_choosed == (is_core ? id + "c" : id)) t_choosed = "-";
-  else if (t_choosed == "-") {
-    if (is_core ? core[id] : inv[id]) t_choosed = is_core ? id + "c" : id;
+  if (t_chosen == (is_core ? id + "c" : id)) t_chosen = "-";
+  else if (t_chosen == "-") {
+    if (is_core ? core[id] : inv[id]) t_chosen = is_core ? id + "c" : id;
   } else {
-    // console.log(id,t_choosed)
+    // console.log(id,t_chosen)
 
-    if (inv[t_choosed]) {
+    if (inv[t_chosen]) {
       if (is_core) {
         if (core[id] !== undefined && core[id] !== null) {
-          if (checkSwitchingCore(t_choosed, id)) {
-            if (isTheoremHigher(core[id], inv[t_choosed]))
-              switchTheorems(t_choosed, id);
+          if (checkSwitchingCore(t_chosen, id)) {
+            if (isTheoremHigher(core[id], inv[t_chosen]))
+              switchTheorems(t_chosen, id);
             else
               createConfirm(
                 `Are you sure you want to pick theorem out of core?`,
                 "pickout",
                 () => {
-                  switchTheorems(t_choosed, id, true);
+                  switchTheorems(t_chosen, id, true);
                 }
               );
             return;
           }
-        } else if (checkSwitchingCore(t_choosed, id))
-          [inv[t_choosed], core[id]] = [core[id], inv[t_choosed]];
-      } else [inv[id], inv[t_choosed]] = [inv[t_choosed], inv[id]];
-    } else if (core[t_choosed.split("c")[0]]) {
+        } else if (checkSwitchingCore(t_chosen, id))
+          [inv[t_chosen], core[id]] = [core[id], inv[t_chosen]];
+      } else [inv[id], inv[t_chosen]] = [inv[t_chosen], inv[id]];
+    } else if (core[t_chosen.split("c")[0]]) {
       if (is_core)
-        [core[id], core[t_choosed.split("c")[0]]] = [
-          core[t_choosed.split("c")[0]],
+        [core[id], core[t_chosen.split("c")[0]]] = [
+          core[t_chosen.split("c")[0]],
           core[id],
         ];
-      else if (checkSwitchingCore(id, t_choosed.split("c")[0])) {
-        if (isTheoremHigher(core[t_choosed.split("c")[0]], inv[id]))
-          switchTheorems(id, t_choosed.split("c")[0]);
+      else if (checkSwitchingCore(id, t_chosen.split("c")[0])) {
+        if (isTheoremHigher(core[t_chosen.split("c")[0]], inv[id]))
+          switchTheorems(id, t_chosen.split("c")[0]);
         else
           createConfirm(
             `Are you sure you want to pick theorem out of core?`,
             "pickout",
             () => {
-              switchTheorems(id, t_choosed.split("c")[0], true);
+              switchTheorems(id, t_chosen.split("c")[0], true);
             }
           );
         return;
       }
     }
 
-    t_choosed = "-";
+    t_chosen = "-";
   }
 
   updateTheoremCore();
@@ -952,7 +952,7 @@ function switchTheorems(id1, id2, force = false) {
 
   [inv[id1], core[id2]] = [core[id2], inv[id1]];
 
-  t_choosed = "-";
+  t_chosen = "-";
 
   if (force) {
     INF.doReset();

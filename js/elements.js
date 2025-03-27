@@ -248,7 +248,7 @@ function updateTabsHTML() {
       tmp.el["tab" + x].setClasses({
         btn_tab: true,
         [tab.style ? tab.style : "normal"]: true,
-        choosed: x == tmp.tab,
+        chosen: x == tmp.tab,
       });
     }
 
@@ -263,7 +263,7 @@ function updateTabsHTML() {
           tmp.el["stab" + x + "_" + y].setClasses({
             btn_tab: true,
             [stab.style ? stab.style : "normal"]: true,
-            choosed: y == tmp.stab[x],
+            chosen: y == tmp.stab[x],
           });
           if (tmp.el["stab_frame" + x + "_" + y])
             tmp.el["stab_frame" + x + "_" + y].setDisplay(y == tmp.stab[x]);
@@ -577,7 +577,7 @@ function updateBlackHoleHTML() {
   tmp.el.bhOverflow.setHTML(
     `Because of black hole mass overflow at <b>${formatMass(
       tmp.overflow_start.bh[0]
-    )}</b>, your mass of black hole gain is ${overflowFormat(
+    )}</b>, your Black Hole Mass gain is ${overflowFormat(
       tmp.overflow.bh || 1
     )}!`
   );
