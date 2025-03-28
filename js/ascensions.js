@@ -3,15 +3,13 @@ const ASCENSIONS = {
   fullNames: ["Ascension", "Transcension"],
   resetName: ["Ascend", "Transcend"],
   baseExponent() {
-    let x = theoremEff("mass", 5, 0);
+    let x = theoremEff("mass", 5, E(0));
 
     if (hasElement(284)) x = x.add(elemEffect(284, 0));
     if (hasElement(44, 1)) x = x.add(muElemEff(44, 0));
     if (hasBeyondRank(16, 1)) x = x.add(beyondRankEffect(16, 1, 0));
 
-    x = x.add(1);
-
-    return x;
+    return x.add(1);
   },
   base() {
     let x = E(1),
@@ -116,7 +114,7 @@ const ASCENSIONS = {
       1: `Prestige Base Exponent is doubled. Big Rip Upgrade 19 now affects Renown.`,
       2: `Super Infinity Theorem is 10% weaker.`,
       3: `Super and Hyper Overpower starts +50 later.`,
-      4: `Meta-Prestige Level starts 2x later.`,
+      4: `Meta-Prestige starts 2x later.`,
       7: `MCF tier requirements are reduced by 10%.`,
       9: `Increase prestige tiers exponent for ascension base by +0.333.`,
     },
@@ -158,7 +156,7 @@ const ASCENSIONS = {
 };
 
 function hasAscension(i, x) {
-  return player.ascensions[i].gte(x);
+  return tmp.inf_unl && player.ascensions[i].gte(x);
 }
 function ascensionEff(i, x, def = 1) {
   return tmp.ascensions.eff[i][x] || def;
@@ -201,7 +199,8 @@ function setupAscensionsHTML() {
 function updateAscensionsHTML() {
   tmp.el.asc_base.setHTML(
     `${tmp.ascensions.baseMul.format(0)}<sup>${format(
-      tmp.ascensions.baseExp
+      tmp.ascensions.baseExp,
+      4
     )}</sup> = ${tmp.ascensions.base.format(0)}`
   );
   tmp.el.asc_texp.setHTML(tmp.ascensions.tierExp.format(2));
@@ -215,9 +214,10 @@ function updateAscensionsHTML() {
       let desc = "";
       for (let i = 0; i < keys.length; i++) {
         if (p.lt(keys[i]) && (tmp.chal13comp || p.lte(Infinity))) {
-          desc = ` At ${ASCENSIONS.fullNames[x]} ${format(keys[i], 0)} - ${
-            ASCENSIONS.rewards[x][keys[i]]
-          }`;
+          desc = `<br class="line">${ASCENSIONS.fullNames[x]} ${format(
+            keys[i],
+            0
+          )} - ${ASCENSIONS.rewards[x][keys[i]]}`;
           break;
         }
       }
@@ -251,7 +251,7 @@ function updateAscensionsTemp() {
   for (let x = 0; x < ASCENSIONS.names.length; x++) {
     tmp.ascensions.req[x] = ASCENSIONS.req(x);
     for (let y in ASCENSIONS.rewardEff[x]) {
-      if (ASCENSIONS.rewardEff[x][y])
+      if (hasAscension(x, y) && ASCENSIONS.rewardEff[x][y])
         tmp.ascensions.eff[x][y] = ASCENSIONS.rewardEff[x][y][0]();
     }
   }

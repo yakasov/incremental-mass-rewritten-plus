@@ -67,7 +67,7 @@ const CONFIRMS_FUNCTION = {
       ENTROPY.reset(0);
       ENTROPY.reset(1);
       updateQuantumTemp();
-      QUANTUM.doReset(force);
+      QUANTUM.doReset(force, false, false);
       if (rip) {
         if (hasUpgrade("br", 4))
           for (let x = 0; x < 2; x++)
@@ -91,7 +91,7 @@ const CONFIRMS_FUNCTION = {
 
         updateQuantumTemp();
 
-        QUANTUM.doReset(force);
+        QUANTUM.doReset(force, false, false);
       }, 1000);
       setTimeout(() => {
         document.body.style.animation = "";

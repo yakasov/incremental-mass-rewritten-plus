@@ -4,6 +4,16 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 3
+
+- Boosted Dark Shadow gain and Dark Ray from Dark Shadow gain
+- Added a Quarks display on the Tier 1 Normal Elemental Layer
+- Added a Dark Shadows display on Tier 2 and 3 of the Normal Elemental Layers
+- Challenge 1, 2, 4 and 8 have lower starting goals
+- Challenge 2 reward bonus increased
+- First Corruption Charger is cheaper and has a lower unlock requirement
+- Element 190, 191, 192, 193, 195, 198 and 203 costs increased
+
 ### v0.7.1.6-plus 2
 
 - Removed the 'reset without Supernova' button. Supernovas can now be reset for at any time on the right icon

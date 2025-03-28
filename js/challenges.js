@@ -451,12 +451,12 @@ const CHALS = {
     desc: "Super Rank and Mass upgrade scaling starts at 25. Super Tickspeed scaling starts at 50.",
     reward: () =>
       hasBeyondRank(2, 20)
-        ? `Supercritical Rank & all Fermion Tier scaling starts later, and Super Overpower scales weaker based on completions.`
-        : `Super Rank starts later, and Super Tickspeed scales weaker based on completions.`,
+        ? `Supercritical Rank & all Fermion Tier scaling starts later, and Super Overpower scales later based on completions.`
+        : `Super Rank starts later, and Super Tickspeed scales later based on completions.`,
     max: E(100),
     inc: E(5),
     pow: E(1.3),
-    start: E(1.5e58),
+    start: E(1e35),
     effect(x) {
       let c = hasBeyondRank(2, 20);
       let rank = c ? E(0) : x.softcap(20, 4, 1).floor();
@@ -484,16 +484,16 @@ const CHALS = {
     },
     title: "Anti-Tickspeed",
     desc: "You cannot buy Tickspeed.",
-    reward: `Each completion adds +7.5% to Tickspeed Power.`,
+    reward: `Each completion adds +9% to Tickspeed Power.`,
     max: E(100),
     inc: E(10),
     pow: E(1.3),
-    start: E(1.989e40),
+    start: E(1e30),
     effect(x) {
       let sp = E(0.5);
       if (hasElement(8)) sp = sp.pow(0.25);
       if (hasElement(39)) sp = E(1);
-      let ret = x.mul(0.075).add(1).softcap(1.3, sp, 0).sub(1);
+      let ret = x.mul(0.09).add(1).softcap(1.3, sp, 0).sub(1);
       return ret;
     },
     effDesc(x) {
@@ -544,7 +544,7 @@ const CHALS = {
     max: E(100),
     inc: E(30),
     pow: E(1.25),
-    start: E(1.736881338559743e133),
+    start: E(1e120),
     effect(x) {
       if (hasElement(64)) x = x.mul(1.5);
       let ret = hasElement(133)
@@ -670,7 +670,7 @@ const CHALS = {
     max: E(50),
     inc: E(80),
     pow: E(1.3),
-    start: E(1.989e38),
+    start: E(1e30),
     effect(x) {
       if (hasElement(64)) x = x.mul(1.5);
       let ret = hasElement(133)

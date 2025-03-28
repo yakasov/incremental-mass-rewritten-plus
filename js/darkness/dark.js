@@ -152,7 +152,7 @@ const DARK = {
 
     let x = E(1);
 
-    x = x.mul(tmp.dark.rayEff.shadow);
+    x = x.add(1).mul(tmp.dark.rayEff.shadow);
     x = x.mul(tmp.bd.upgs[11].eff || 1);
     if (hasElement(119)) x = x.mul(elemEffect(119));
     if (hasElement(135)) x = x.mul(elemEffect(135));
@@ -170,8 +170,8 @@ const DARK = {
     let a = player.dark.shadow;
 
     x.ray = hasElement(143)
-      ? a.add(1).log2().add(1).pow(1.5)
-      : a.add(1).log10().add(1);
+      ? a.add(1).log2().add(1).pow(1.75)
+      : a.add(1).log10().add(1).pow(1.25);
     x.mass = hasCharger(4)
       ? overflow(a.add(1), 10, 0.25)
       : a.add(1).log10().add(1).root(2);
@@ -385,25 +385,26 @@ function updateDarkHTML() {
       let e =
         getNextDarkEffectFromID(1) +
         `
-                Boosts mass gain by <b>^${eff.mass.format(3)}</b><br>
-                Boosts dark ray gain by <b>x${eff.ray.format(3)}</b>
+                Boosts Mass gain by <b>^${eff.mass.format(3)}</b><br>
+                Boosts Dark Ray gain by <b>x${eff.ray.format(3)}</b>
             `;
 
       if (eff.bp)
-        e += `<br>Boosts blueprint particles gain by <b>x${eff.bp.format(
+        e += `<br>Boosts Blueprint Particles gain by <b>x${eff.bp.format(
           3
         )}</b>`;
       if (eff.sn)
         e +=
-          `<br>Makes you becoming <b>x${eff.sn.format(3)}</b> more supernovas` +
-          eff.sn.softcapHTML(7.5, hasElement(9, 1));
+          `<br>Makes you implode into <b>x${eff.sn.format(
+            3
+          )}</b> more Supernovas` + eff.sn.softcapHTML(7.5, hasElement(9, 1));
       if (eff.en)
-        e += `<br>Boosts entropy earned by <b>x${eff.en.format(3)}</b>`;
+        e += `<br>Boosts Entropy earned by <b>x${eff.en.format(3)}</b>`;
       if (eff.ab)
-        e += `<br>Boosts abyssal blots earned by <b>x${eff.ab.format(3)}</b>`;
+        e += `<br>Boosts Abyssal Blots earned by <b>x${eff.ab.format(3)}</b>`;
       if (eff.bhp)
         e +=
-          `<br>Boosts exponent from the mass of BH formula by <b>+${eff.bhp.format(
+          `<br>Boosts exponent from the Black Hole Mass formula by <b>+${eff.bhp.format(
             3
           )}</b><br>Uncaps BH-Exponent Boost's effect`.corrupt(c16);
 
@@ -422,22 +423,22 @@ function updateDarkHTML() {
         e =
           getNextDarkEffectFromID(2) +
           `
-                    Boosts dark shadows gain by <b>x${eff.shadow.format(3)}</b>
-                    <br>Makes mass gain softcaps 4-${
+                    Boosts Dark Shadow gain by <b>x${eff.shadow.format(3)}</b>
+                    <br>Makes Mass gain softcaps 4-${
                       hasElement(159) ? 8 : 6
                     } start <b>^${eff.msoftcap.format(3)}</b> later
                 `;
 
         if (eff.hr)
-          e += `<br>Boosts hawking radiation gain by <b>x${eff.hr.format(
+          e += `<br>Boosts Hawking Radiation gain by <b>x${eff.hr.format(
             3
           )}</b>`;
         if (eff.pb)
-          e += `<br>Boosts prestige base's multiplier by <b>x${eff.pb.format(
+          e += `<br>Boosts Prestige base's multiplier by <b>x${eff.pb.format(
             3
           )}</b>`;
         if (eff.csp)
-          e += `<br>Boosts cosmic string's power by <b>x${eff.csp.format(
+          e += `<br>Boosts Cosmic String's power by <b>x${eff.csp.format(
             3
           )}</b>`;
         if (eff.mexp)
@@ -448,11 +449,11 @@ function updateDarkHTML() {
             );
         if (eff.accelPow)
           e +=
-            `<br>Boosts accelerator power by <b>x${eff.accelPow.format(
+            `<br>Boosts Accelerator Power by <b>x${eff.accelPow.format(
               3
             )}</b>` + eff.accelPow.softcapHTML(5, hasElement(234));
         if (eff.ApQ_Overflow)
-          e += `<br>Atomic power & quark overflows start <b>^${eff.ApQ_Overflow.format(
+          e += `<br>Atomic Power & Quark overflows start <b>^${eff.ApQ_Overflow.format(
             3
           )}</b> later`;
         if (eff.fss)
@@ -472,15 +473,15 @@ function updateDarkHTML() {
       e =
         getNextDarkEffectFromID(0) +
         `
-                Boosts dark shadows gain by <b>x${eff.shadow.format(2)}</b>
+                Boosts Dark Shadow gain by <b>x${eff.shadow.format(2)}</b>
             `;
 
       if (eff.passive)
         e += `<br>Passively gains <b>${formatPercent(
           eff.passive
-        )}</b> of dark rays gained on reset per second`;
+        )}</b> of Dark Rays gained on reset per second`;
       if (eff.glyph)
-        e += `<br>Earns <b>x${format(eff.glyph, 3)}</b> more glyphic mass`;
+        e += `<br>Earns <b>x${format(eff.glyph, 3)}</b> more Glyphic Mass`;
       if (eff.dChal)
         e +=
           `<br>Adds <b>${format(
@@ -512,7 +513,7 @@ function getNextDarkEffectFromID(i) {
         return (
           "Next " +
           ["Ray", "Shadow", "Abyssal Blot"][i] +
-          "'s effect at <b>" +
+          " effect at <b>" +
           format(q[s]) +
           "</b><br><br>"
         );

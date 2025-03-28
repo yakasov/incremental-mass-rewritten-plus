@@ -224,7 +224,7 @@ const ATOM = {
     },
   },
   particles: {
-    names: ["Protons", "Neutrons", "Electrons"],
+    names: ["Proton", "Neutron", "Electron"],
     assign(x) {
       if (
         player.atom.quarks.lt(1) ||
@@ -457,9 +457,9 @@ function setupAtomHTML() {
     table += `
         <div style="width: 30%"><button class="btn" onclick="ATOM.particles.assign(${x})">Assign</button><br><br>
             <div style="color: ${ATOM.particles.colors[x]}; min-height: 120px">
-                <h2><span id="particle_${x}_amt">X</span> ${ATOM.particles.names[x]}</h2><br>
-                Which generates <span id="particle_${x}_amtEff">X</span> ${ATOM.particles.names[x]} Powers<br>
-                You have <span id="particle_${x}_power">X</span> ${ATOM.particles.names[x]} Powers, which:
+                <h2><span id="particle_${x}_amt">X</span> ${ATOM.particles.names[x]}s</h2><br>
+                Which generates <span id="particle_${x}_amtEff">X</span> ${ATOM.particles.names[x]} Power<br>
+                You have <span id="particle_${x}_power">X</span> ${ATOM.particles.names[x]} Power, which:
             </div><br><div id="particle_${x}_powerEff"></div>
         </div>
         `;

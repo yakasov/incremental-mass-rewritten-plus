@@ -1607,11 +1607,11 @@ const ELEMENTS = {
     },
     {
       desc: `Chromas gain is raised to 1.1th power.`,
-      cost: E("e1.8e91"),
+      cost: E("e1.8e93"),
     },
     {
       desc: `Z0 Boson’s first effect raises tickspeed power at a reduced rate.`,
-      cost: E("e3.5e92"),
+      cost: E("e3.5e93"),
       effect() {
         let x = tmp.bosons.effect.z_boson[0]
           .add(1)
@@ -1628,7 +1628,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Each Matter’s gain is increased by 10% for every OoM^2 of Dark Matter. Unlock more main upgrades.`,
-      cost: E(1e303),
+      cost: E("1e318"),
       effect() {
         let x = Decimal.pow(1.1, player.bh.dm.add(1).log10().add(1).log10());
         return x;
@@ -1639,7 +1639,7 @@ const ELEMENTS = {
     },
     {
       desc: `Hybridized Uran-Astatine’s first effect makes Exotic Rank and Meta-Tier start later at ^0.5 rate.`,
-      cost: E("e3.3e93"),
+      cost: E("e1e94"),
       effect() {
         let x = tmp.qu.chroma_eff[1][0].max(1).root(2);
         return x;
@@ -1655,7 +1655,7 @@ const ELEMENTS = {
     },
     {
       desc: `Fermium-100 is slightly stronger. Automate each matter’s upgrade.`,
-      cost: E("e1.2e94"),
+      cost: E("e5e94"),
     },
     {
       br: true,
@@ -1669,7 +1669,7 @@ const ELEMENTS = {
     },
     {
       desc: `Particle powers’ first effect is better.`,
-      cost: E("e1.6e94"),
+      cost: E("e1e95"),
     },
     {
       desc: `Unlock Accelerators, tickspeed now provides an exponential boost, but nullify Argon-18 and Unpentnilium-150 (except in 15th Challenge).`,
@@ -1691,7 +1691,7 @@ const ELEMENTS = {
     },
     {
       desc: `Booster boosts its effect.`,
-      cost: E("e4e99"),
+      cost: E("e2e100"),
       effect() {
         let m = player.build.mass_2.amt;
         let x = m.add(10).log10().pow(0.8);
@@ -2583,6 +2583,18 @@ function updateElementsHTML() {
   tmp.el.elemTierDiv.setDisplay(tElem.max_tier[elayer] > 1);
 
   let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];
+
+  let elem_resource_display =
+    player.atom.elemTier[player.atom.elemLayer] === 1
+      ? player.atom.quarks.format(0)
+      : player.dark.shadow.format(0);
+  tmp.el.elem_amount_div.setHTML(
+    `<br />You have <b>${elem_resource_display}</b> ${
+      player.atom.elemTier[player.atom.elemLayer] === 1
+        ? "Quarks"
+        : "Dark Shadows"
+    }.`
+  );
 
   let ch = tElem.chosen;
   tmp.el.elem_ch_div.setVisible(ch > 0);
