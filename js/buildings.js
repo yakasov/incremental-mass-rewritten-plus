@@ -37,7 +37,7 @@ const BUILDINGS_DATA = {
     },
 
     effect(x) {
-      let power = E(1);
+      let power = E(2);
       if (player.ranks.rank.gte(3)) power = power.add(RANKS.effect.rank[3]());
       power = power.mul(BUILDINGS.eff("mass_2"));
 

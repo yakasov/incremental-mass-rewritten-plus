@@ -147,7 +147,7 @@ function getCSUpgRequirement(i, lvl = player.inf.cs_double[i]) {
       x = Decimal.pow(1e3, lvl.add(1)).div(tmp.csu_div);
       break;
     case 1:
-      x = Decimal.pow(10, lvl).mul(1e36).div(tmp.csu_div);
+      x = Decimal.pow(10, lvl).mul(1e35).div(tmp.csu_div);
       break;
   }
 
@@ -162,7 +162,7 @@ function bulkCSUpgRequirement(i, amt) {
       x = amt.mul(tmp.csu_div).log(1e3).sub(1);
       break;
     case 1:
-      x = amt.mul(tmp.csu_div).div(1e36).max(1).log(10);
+      x = amt.mul(tmp.csu_div).div(1e35).max(1).log(10);
       break;
   }
 

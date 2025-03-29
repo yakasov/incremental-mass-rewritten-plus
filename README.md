@@ -4,6 +4,23 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 4
+
+- Boosted power of the Muscler building
+- Dark Matter second effect starts earlier
+- Boosted first Muonic Element upgrade effect
+- Element 1, 151, 215, 235, 241, 243 and 270 costs reduced
+- Corrupted Star upgrade 2 requirement scaling slightly reduced
+- Infinity 'Tree Automation', 'Self Infinity', 'Stop Big Rip Switching', 'Dark Passive', 'Corrupted Construction' and 'Better Infinity' upgrade costs greatly reduced
+- Reduce Infinity upgrade preceding row upgrade requirements
+- Decreased Rank scaling
+- Main upgrade 1x2 effect increased
+- Main upgrade 1x2 and 2x3 costs reduced
+- Black Hole upgrade 2x1, 2x2 and 2x3 costs reduced
+- Atom upgrade 1x3, 2x2, 2x3 and 2x4 costs reduced
+- Big Rip upgrade 1x5 cost reduced
+- Improved story strings
+
 ### v0.7.1.6-plus 3
 
 - Boosted Dark Shadow gain and Dark Ray from Dark Shadow gain

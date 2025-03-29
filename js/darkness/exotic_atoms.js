@@ -21,8 +21,7 @@ const MUONIC_ELEM = {
       desc: `Mass of unstable black hole boosts Pion gain.`,
       cost: E(1000),
       eff() {
-        let x = player.bh.unstable.add(1).root(3);
-        return x;
+        return player.bh.unstable.add(1).root(2);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -42,11 +41,10 @@ const MUONIC_ELEM = {
       desc: `Kaon & Pion are doubled every muonic element bought.`,
       cost: E(1e15),
       eff() {
-        let x = Decimal.pow(
+        return Decimal.pow(
           hasElement(26, 1) ? 3 : 2,
           player.atom.muonic_el.length
         );
-        return x;
       },
       effDesc: (x) => formatMult(x),
     },
@@ -76,8 +74,7 @@ const MUONIC_ELEM = {
       desc: `Remove the softcap of dark shadow’s fourth reward. Supernovas boost Pion gain`,
       cost: E(1e42),
       eff() {
-        let x = player.supernova.times.div(1e6).add(1);
-        return x;
+        return player.supernova.times.div(1e6).add(1);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -101,8 +98,7 @@ const MUONIC_ELEM = {
       desc: `Final Star Shards increase Matter formula.`,
       cost: E(1e100),
       eff() {
-        let x = player.dark.matters.final.root(2).div(5);
-        return x;
+        return player.dark.matters.final.root(2).div(5);
       },
       effDesc: (x) => "+" + format(x),
     },
@@ -111,10 +107,9 @@ const MUONIC_ELEM = {
       cost: E(1e111),
       eff() {
         if (!tmp.chal) return E(1);
-        let x = hasElement(26, 1)
+        return hasElement(26, 1)
           ? tmp.chal.eff[15].root(2)
           : overflow(tmp.chal.eff[15], 10, 0.5).pow(2);
-        return x;
       },
       effDesc: (x) => "^" + format(x),
     },
@@ -126,8 +121,7 @@ const MUONIC_ELEM = {
       desc: `Quantum times boost infinity points gain. De-nullify [Tau]’s effect, but its formula is changed.`,
       cost: E(1e150),
       eff() {
-        let x = player.qu.times.add(1).log10().add(1);
-        return x;
+        return player.qu.times.add(1).log10().add(1);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -135,8 +129,7 @@ const MUONIC_ELEM = {
       desc: `Accelerators raise the Argon-18's effect at an extremely reduced rate (after first overflow).`,
       cost: E(1e170),
       eff() {
-        let x = player.build.accelerator.amt.add(10).log10();
-        return x;
+        return player.build.accelerator.amt.add(10).log10();
       },
       effDesc: (x) => "^" + format(x),
     },
@@ -155,12 +148,11 @@ const MUONIC_ELEM = {
       desc: `Exotic atoms boost infinity points gain, starting at 1.798e308.`,
       cost: E(Number.MAX_VALUE),
       eff() {
-        let x = tmp.exotic_atom.amount
+        return tmp.exotic_atom.amount
           .div(Number.MAX_VALUE)
           .max(1)
           .log(1.1)
           .add(1);
-        return x;
       },
       effDesc: (x) => formatMult(x),
     },
@@ -172,8 +164,7 @@ const MUONIC_ELEM = {
       desc: `Total infinity points boost kaon & pion gains.`,
       cost: E("e470"),
       eff() {
-        let x = player.inf.total.add(1).root(4);
-        return x;
+        return player.inf.total.add(1).root(4);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -189,8 +180,7 @@ const MUONIC_ELEM = {
       desc: `Increase exotic atom’s reward strength by +1.25% per infinity theorem.`,
       cost: E("e778").mul(7 / 9),
       eff() {
-        let x = player.inf.theorem.mul(0.0125);
-        return x;
+        return player.inf.theorem.mul(0.0125);
       },
       effDesc: (x) => "+" + formatPercent(x),
     },
@@ -202,8 +192,7 @@ const MUONIC_ELEM = {
       desc: `Prestige Base multiplies stronger overflow^1-2 starting.`,
       cost: E("e1050"),
       eff() {
-        let x = overflow(tmp.prestiges.base.add(1), 1e10, 0.5, 2);
-        return x;
+        return overflow(tmp.prestiges.base.add(1), 1e10, 0.5, 2);
       },
       effDesc: (x) => formatMult(x) + " later",
     },
@@ -231,10 +220,9 @@ const MUONIC_ELEM = {
       desc: `Corrupted Star’s speed is increased by pre-Infinity global speed at a reduced rate.`,
       cost: E("e2600"),
       eff() {
-        let x = hasElement(59, 1)
+        return hasElement(59, 1)
           ? expMult(tmp.preInfGlobalSpeed.max(1), 0.5).pow(2)
           : tmp.preInfGlobalSpeed.max(1).log10().add(1).pow(2);
-        return x;
       },
       effDesc: (x) => formatMult(x),
     },
@@ -243,8 +231,7 @@ const MUONIC_ELEM = {
       desc: `Muon-Catalyzed Fusion speeds Corrupted Star.`,
       cost: E("e20"),
       eff() {
-        let x = Decimal.pow(1.5, player.dark.exotic_atom.tier);
-        return x;
+        return Decimal.pow(1.5, player.dark.exotic_atom.tier);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -261,8 +248,7 @@ const MUONIC_ELEM = {
       desc: `The growth reductions of corrupted stars start later based on supernovas.`,
       cost: E("e3500"),
       eff() {
-        let x = player.supernova.times.add(1).overflow(10, 0.5);
-        return x;
+        return player.supernova.times.add(1).overflow(10, 0.5);
       },
       effDesc: (x) => formatMult(x) + " later",
     },
@@ -295,8 +281,7 @@ const MUONIC_ELEM = {
       desc: `Double corrupted star’s speed per infinity theorem.`,
       cost: E("e8100"),
       eff() {
-        let x = Decimal.pow(2, player.inf.theorem);
-        return x;
+        return Decimal.pow(2, player.inf.theorem);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -309,8 +294,7 @@ const MUONIC_ELEM = {
       desc: `The exponent of ascension base is increased by Renown at a reduced rate.`,
       cost: E("e8600"),
       eff() {
-        let x = player.prestiges[3].root(2).div(100);
-        return x;
+        return player.prestiges[3].root(2).div(100);
       },
       effDesc: (x) => "+^" + format(x),
     },
@@ -322,8 +306,7 @@ const MUONIC_ELEM = {
       desc: `Boost Supernova Generation based on beyond-ranks' maximum tier.`,
       cost: E("e12100"),
       eff() {
-        let x = Decimal.pow(2.5, tmp.beyond_ranks.max_tier);
-        return x;
+        return Decimal.pow(2.5, tmp.beyond_ranks.max_tier);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -332,8 +315,7 @@ const MUONIC_ELEM = {
       desc: `Corrupted star boosts its speed at a reduced rate. Keep Supernovas on Infinity.`,
       cost: E("e150"),
       eff() {
-        let x = player.inf.cs_amount.add(1).overflow(10, 0.5);
-        return x;
+        return player.inf.cs_amount.add(1).overflow(10, 0.5);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -345,8 +327,7 @@ const MUONIC_ELEM = {
       desc: `Pre-Infinity global speed now affects supernova generation.`,
       cost: E("e15900"),
       eff() {
-        let x = expMult(tmp.preInfGlobalSpeed.max(1), 0.5).pow(2);
-        return x;
+        return expMult(tmp.preInfGlobalSpeed.max(1), 0.5).pow(2);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -355,8 +336,7 @@ const MUONIC_ELEM = {
       desc: `Corrupted star boosts its reductions starting at a reduced rate.`,
       cost: E("e230"),
       eff() {
-        let x = player.inf.cs_amount.add(1).log10().add(1).pow(3);
-        return x;
+        return player.inf.cs_amount.add(1).log10().add(1).pow(3);
       },
       effDesc: (x) => formatMult(x),
     },
@@ -419,8 +399,7 @@ const MUONIC_ELEM = {
       desc: `Muonic Iodine-53 is stronger based on Infinity Theorem.`,
       cost: E("e112800"),
       eff() {
-        let x = player.inf.theorem.div(10).add(1).root(2);
-        return x;
+        return player.inf.theorem.div(10).add(1).root(2);
       },
       effDesc: (x) => "^" + format(x),
     },
@@ -442,8 +421,7 @@ const MUONIC_ELEM = {
       desc: `The growth reductions of corrupted stars start later based on Normal Energy.`,
       cost: E("e161800"),
       eff() {
-        let x = expMult(player.gp_resources[4].add(1), 0.5);
-        return x;
+        return expMult(player.gp_resources[4].add(1), 0.5);
       },
       effDesc: (x) => formatMult(x) + " later",
     },

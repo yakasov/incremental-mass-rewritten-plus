@@ -880,7 +880,7 @@ function updateRanksTemp() {
   let rooted_fp = GPEffect(3);
 
   let fp = RANKS.fp.rank().mul(ffp);
-  tmp.ranks.rank.req = E(10)
+  tmp.ranks.rank.req = E(9)
     .pow(
       player.ranks.rank
         .div(ffp2)
@@ -891,11 +891,11 @@ function updateRanksTemp() {
     )
     .mul(10);
   tmp.ranks.rank.bulk = E(0);
-  if (player.mass.gte(10))
+  if (player.mass.gte(5))
     tmp.ranks.rank.bulk = player.mass
-      .div(10)
+      .div(5)
       .max(1)
-      .log10()
+      .log(9)
       .root(1.15)
       .mul(fp)
       .root(rooted_fp)

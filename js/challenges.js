@@ -202,12 +202,13 @@ const CHALS = {
     return formatMass;
   },
   getReset(x) {
-    if (x < 5) return "Entering this challenge will force a Dark Matter reset.";
-    else if (x < 9) return "Entering this challenge will force an Atom reset.";
-    else if (x < 13) return "Entering challenge will force a Supernova reset.";
-    else if (x < 16) return "Entering challenge will force a Darkness reset.";
-    else if (x == 16) return "Entering challenge will force an FSS reset.";
-    return "Entering challenge will force an Infinity reset.";
+    let h = `a <b class='bh'>Black Hole</b>`;
+    if (x > 4) h = `an <b class='cyan'>Atomic</b>`;
+    if (x > 8) h = `a <b class='magenta'>Supernova</b>`;
+    if (x > 12) h = `a <b class='gray'>Darkness</b>`;
+    if (x == 16) h = `a <b>Final Star Shard</b>`;
+
+    return `Entering will force ${h} reset!`;
   },
   getMax(i) {
     if (i <= 12 && hasPrestige(2, 25)) return EINF;

@@ -298,7 +298,7 @@ const ELEMENTS = {
     null,
     {
       desc: `Quark gain formula is better.`,
-      cost: E(5e8),
+      cost: E(1e6),
     },
     {
       desc: `Hardened Challenge scaling is 25% weaker.`,
@@ -1128,7 +1128,7 @@ const ELEMENTS = {
     },
     {
       dark: true,
-      desc: `Pre-Quantum global speed affects dark shadow gain at a logarithmic reduced rate.`,
+      desc: `Pre-Quantum Speed boosts Dark Shadows`,
       cost: E("500"),
       effect() {
         let s = tmp.preQUGlobalSpeed || E(1);
@@ -1339,7 +1339,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Add 75 more C13 maximum completions.`,
-      cost: E("1e68"),
+      cost: E("e67"),
     },
     {
       desc: `Boost Dark Ray gain based on quarks.`,
@@ -1810,7 +1810,7 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Entropic Evaporation^2 and Condenser^2 scale another 15% weaker.`,
-      cost: E("e3.1e123"),
+      cost: E("ee123"),
     },
     {
       desc: `Strengthen Unseptoctium-178 slightly.`,
@@ -1991,7 +1991,7 @@ const ELEMENTS = {
     },
     {
       desc: `Binilennium-209 is overpowered.`,
-      cost: E("ee1291"),
+      cost: E("ee1234"),
     },
     {
       dark: true,
@@ -2026,7 +2026,7 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `Unlock the Corrupted Star.`,
-      cost: E("e35"),
+      cost: E("e34"),
     },
     {
       desc: `Black Hole’s Mass Overflow^2 starts ^1.5 later to exponent.`,
@@ -2035,7 +2035,7 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `Passively gain 1% of fragment formed from theorem in the core.`,
-      cost: E("e41"),
+      cost: E("e35"),
     },
     {
       c16: true,
@@ -2199,7 +2199,7 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `You can now buy false vacuum manipulator outside C16.`,
+      desc: `You can now buy False Vacuum Manipulator outside ofvC16.`,
       cost: E("ee6170"),
     },
     {
@@ -2221,7 +2221,7 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `Unlock 19th Challenge.`,
-      cost: E("1e110"),
+      cost: E("e105"),
     },
     {
       desc: `Supernovas boost galactic prestige’s resources at a reduced rate.`,
@@ -2236,7 +2236,7 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `Total corrupted shards boost infinity points gain.`,
+      desc: `Total Corrupted Shards boost Infinity Points.`,
       cost: E("ee6700"),
       effect() {
         let x = player.dark.c16.totalS.add(10).log10();

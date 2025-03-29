@@ -360,12 +360,12 @@ const INF = {
       {
         title: "Tree Automation",
         desc: "Automate pre-corrupted tree.",
-        cost: E(100),
+        cost: E(3),
       },
       {
         title: "Self-Infinity",
         desc: "Infinity theorem boosts infinity points gain.",
-        cost: E(100),
+        cost: E(10),
         effect() {
           let x = Decimal.pow(hasBeyondRank(6, 1) ? 3 : 2, player.inf.theorem);
 
@@ -376,19 +376,19 @@ const INF = {
       {
         title: "Stop Big Rip Switching",
         desc: "Pre-218 big rip elements are now affordable outside Big Rip. Automate elements tier 2 (119th-218th).",
-        cost: E(100),
+        cost: E(3),
       },
       {
         title: "Dark Passive",
         desc: "Start with more dark rays (like dark ray’s first reward unlocked).",
-        cost: E(100),
+        cost: E(3),
       },
     ],
     [
       {
         title: "Corrupted Construction",
         desc: "Start with rows of upgrades bought in corrupted tree (based on infinity theorems, starting at 2, ending at 5).",
-        cost: E(2e3),
+        cost: E(100),
         effect() {
           let x = Math.min(Math.max(1, player.inf.theorem - 1), 4);
 
@@ -404,12 +404,12 @@ const INF = {
       {
         title: "Final Star Automation",
         desc: "Automate final star shard, and it doesn’t reset anything. Also, start with beyond-ranks automation.",
-        cost: E(2e3),
+        cost: E(100),
       },
       {
         title: "Lethal Universe",
         desc: "Keep big rip upgrades and breaking dilation on infinity.",
-        cost: E(2e3),
+        cost: E(50),
       },
     ],
     [
@@ -443,7 +443,7 @@ const INF = {
     [
       {
         title: "Break Infinity",
-        desc: "Reaching infinity no longer plays animation. You can lift beyond normal mass limit and get infinity theorems freely. Finally, unlock Element Tier 3, more Muonic Elements.",
+        desc: "Remove the mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.",
         cost: E(1e12),
       },
     ],
@@ -455,23 +455,23 @@ const INF = {
       },
       {
         title: `'Permanent' Upgrades`,
-        desc: "Keep main upgrades on reset.",
+        desc: "Keep main upgrades on Infinity reset.",
         cost: E(1e155),
       },
       {
         title: "Blackest Challenges",
-        desc: "Remove the cap of Challenge 13-15's completion.",
+        desc: "Remove the cap of Challenge 13-15 completions.",
         cost: E(1e190),
       },
       {
         title: "Better Infinity",
-        desc: "The formula of Infinity Points gain is improved.",
-        cost: E(1e225),
+        desc: "Improve Infinity Points formula.",
+        cost: E(1e204),
       },
     ],
   ],
 
-  upg_row_req: [1, 2, 3, 6, 9, 22],
+  upg_row_req: [1, 2, 2, 6, 9, 20],
 
   dim_mass: {
     gain() {

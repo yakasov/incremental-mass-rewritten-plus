@@ -366,10 +366,9 @@ const UPGS = {
       },
       2: {
         desc: "Strongers add Boosters.",
-        cost: E(10),
+        cost: E(2),
         effect() {
-          let ret = player.build.mass_3.amt;
-          return ret;
+          return player.build.mass_3.amt.mul(2);
         },
         effDesc(x = this.effect()) {
           return "+" + format(x, 0) + " Boosters";
@@ -411,7 +410,7 @@ const UPGS = {
       },
       8: {
         desc: "Super and Hyper Mass upgrade scalings are weaker based on Rage Power.",
-        cost: E(1e15),
+        cost: E(1e12),
         effect() {
           let ret = E(0.9).pow(
             player.rp.points
@@ -708,7 +707,7 @@ const UPGS = {
       },
       6: {
         desc: "Gain 100% of Rage Power gained from reset per second. Rage Powers are boosted by Black Hole Mass.",
-        cost: E(2e6),
+        cost: E(1e5),
         effect() {
           let ret = player.bh.mass.max(1).log10().add(1).pow(2);
           return ret;
@@ -722,7 +721,7 @@ const UPGS = {
           return player.chal.unl;
         },
         desc: "Mass gain softcap starts later based on Black Hole Mass.",
-        cost: E(1e13),
+        cost: E(1e12),
         effect() {
           let ret = player.bh.mass.add(1).root(3);
           return ret;
@@ -736,7 +735,7 @@ const UPGS = {
           return player.chal.unl;
         },
         desc: "Raise Rage Power gain by 1.15.",
-        cost: E(1e17),
+        cost: E(1e14),
       },
       9: {
         unl() {
@@ -988,7 +987,7 @@ const UPGS = {
       },
       3: {
         desc: "[Tetr Era] Unlock Tetr.",
-        cost: E(25000),
+        cost: E(1e4),
       },
       4: {
         desc: "Keep challenges 1-4 on reset. BH Condensers add Cosmic Rays Power at a reduced rate.",
@@ -1018,7 +1017,7 @@ const UPGS = {
       },
       7: {
         desc: "Tickspeed boosts each particle powers gain.",
-        cost: E(1e25),
+        cost: E(1e24),
         effect() {
           let ret = E(1.025).pow(player.build.tickspeed.amt);
           return ret;
@@ -1029,7 +1028,7 @@ const UPGS = {
       },
       8: {
         desc: "Atomic Powers boost Quark gain.",
-        cost: E(1e35),
+        cost: E(1e31),
         effect() {
           let ret = player.atom.atomic.max(1).log10().add(1);
           return ret;
@@ -1040,7 +1039,7 @@ const UPGS = {
       },
       9: {
         desc: "Stronger effect softcap is 15% weaker.",
-        cost: E(5e42),
+        cost: E(1e42),
       },
       10: {
         desc: "Tier requirement is halved. Hyper Rank starts later based on Tiers you have.",
@@ -1250,7 +1249,7 @@ const UPGS = {
       },
       5: {
         desc: `Root Star Booster’s starting cost by 10. Star Booster’s base is increased based on Death Shards.`,
-        cost: E(2500),
+        cost: E(1000),
         effect() {
           let x = player.qu.rip.amt.add(1).log10().add(1).pow(3);
           return x;

@@ -196,37 +196,37 @@ const QUOTES = [
   `
     <h2>Chapter 3: The Black Hole</h2><br>
     <img class='quote' src='images/quotes/3.png'><br>
-    You pulled up a hidden mystery of cosmos. The force was so strong, it forms a black hole!
+    You pulled up a hidden mystery of cosmos. The force was so strong that it formed a black hole!
     `,
   `
     <h2>Chapter 4: The Atom</h2><br>
     <img class='quote' src='images/quotes/4.png'><br>
-    You discovered a Atom! You decompose it to find a physical miracle: Gravity. This helps you to go further!
+    You discovered an Atom! You decompose it to find a physical miracle: Gravity. This helps you to go further!
     `,
   `
     <h2>Chapter 5: Supernova Born</h2><br>
     <img class='quote' src='images/quotes/5.png'><br>
-    A new age of stars rises, while the stars collapsed.  Neutron stars felt elder...
+    Stars have collapsed. A dwarf age begins
     `,
   `
     <h2>Chapter 6: The Radiation</h2><br>
     <img class='quote' src='images/quotes/6.png'><br>
-    As stars radiate, you dig deeper: Radiation.
+    The stars begin to radiate...
     `,
   `
     <h2>Chapter 7: Scale to Quantum</h2><br>
     <img class='quote' src='images/quotes/7.png'><br>
-    Mass has collapsed in quantum scale! Good luck on new features!
+    Mass has collapsed into quantum fluctuations!
     `,
   `
     <h2>Chapter 8: Ripping Universe</h2><br>
     <img class='quote' src='images/quotes/8.png'><br>
-    All the spacetime rips before your eyes!
+    All of space-time rips before your eyes!
     `,
   `
     <h2>Chapter 9: Trapped in Darkness</h2><br>
     <img class='quote' src='images/quotes/9.png'><br>
-    You rose up the darkness. Time to research the mysteries of matter!
+    You rose up within the darkness. Time to research the mysteries of matter!
     `,
   `
     <h2>Chapter 10: The Corruption</h2><br>
@@ -236,7 +236,7 @@ const QUOTES = [
   `
     <h2>Chapter 11: The Infinity</h2><br>
     <img class='quote' src='images/quotes/11.png'><br>
-    Infinity. You have been evolved to a god.
+    Infinity. You have evolved into a god.
     `,
   `
     <h2>Chapter 12: Broken Infinity</h2><br>

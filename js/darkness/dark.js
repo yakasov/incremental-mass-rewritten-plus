@@ -1,6 +1,6 @@
 const DARK = {
   nextEffectAt: [
-    [0, 1e12, 1e22, 1e130],
+    [0, 1e9, 1e22, 1e130],
     [1e6, 1e11, 1e25, 1e130],
     [1e120, 1e180, "e345", "e800", "e2500", "e56000", "e125500", "ee7"],
   ],
@@ -34,8 +34,8 @@ const DARK = {
       .pow(tmp.c16active ? 1 : tmp.fermions.effs[0][6] || 1)
       .overflow("ee10", 0.5);
 
-    if (a.gte(1e12))
-      x.passive = a.div(1e12).max(1).log10().add(1).pow(2).div(1e3);
+    if (a.gte(1e9))
+      x.passive = a.div(1e9).max(1).log10().add(1).pow(2).div(100);
     if (a.gte(1e22))
       x.glyph = a.div(1e22).max(1).log10().add(1).root(2).sub(1).div(10).add(1);
     if (a.gte(1e130))
