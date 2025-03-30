@@ -140,6 +140,10 @@ const TREE_UPGS = {
 
       if (x == "unl1") addQuote(6);
     }
+
+    if (tmp.supernova.tree_chosen === x && !auto && !tmp.supernova.tree_afford[x] && this.ids[x].startReqs) {
+      this.ids[x].startReqs();
+    }
   },
   ids: {
     c: {
@@ -1426,6 +1430,13 @@ const TREE_UPGS = {
       effDesc(x) {
         return "+" + format(x);
       },
+
+      startReqs() {
+        if (!tmp.c16active || player.supernova.fermions.chosen !== "16") {
+          reset_res_btn('corrupt');
+          FERMIONS.choose(0, 6);
+        } 
+      }
     },
     ct4: {
       branch: ["ct1"],
@@ -1455,6 +1466,10 @@ const TREE_UPGS = {
       effDesc(x) {
         return "+" + format(x);
       },
+
+      startReqs() {
+        if (!tmp.c16active) reset_res_btn('corrupt');
+      }
     },
     ct5: {
       branch: ["ct1"],
@@ -1492,6 +1507,10 @@ const TREE_UPGS = {
       effDesc(x) {
         return "^" + format(x) + " later";
       },
+
+      startReqs() {
+        if (!tmp.c16active) reset_res_btn('corrupt');
+      }
     },
     ct7: {
       branch: ["ct5"],
@@ -1547,6 +1566,16 @@ const TREE_UPGS = {
       effDesc(x) {
         return "+" + format(x);
       },
+
+      startReqs() {
+        if (!tmp.c16active || player.supernova.fermions.chosen !== "16" || player.build.bhc.amt.gt(0) || player.build.bhc.auto) {
+          player.build.bhc.auto = false;
+          reset_res_btn('corrupt');
+          FERMIONS.choose(1, 6);
+        } else {
+          player.build.bhc.auto = true;
+        }
+      }
     },
     ct10: {
       branch: ["ct4"],
@@ -1589,6 +1618,10 @@ const TREE_UPGS = {
       effDesc(x) {
         return "^" + format(x) + " later";
       },
+
+      startReqs() {
+        if (!tmp.c16active) reset_res_btn('corrupt');
+      }
     },
     ct12: {
       branch: ["ct9"],
@@ -1621,6 +1654,16 @@ const TREE_UPGS = {
       effDesc(x) {
         return "+" + format(x);
       },
+
+      startReqs() {
+        if (!tmp.c16active || player.supernova.fermions.chosen !== "06" || player.build.bhc.amt.gt(0) || player.build.bhc.auto) {
+          player.build.bhc.auto = false;
+          reset_res_btn('corrupt');
+          FERMIONS.choose(0, 6);
+        } else {
+          player.build.bhc.auto = true;
+        }
+      }
     },
     ct13: {
       branch: ["ct7"],
@@ -1655,6 +1698,10 @@ const TREE_UPGS = {
       effDesc(x) {
         return "^" + format(x) + " later";
       },
+
+      startReqs() {
+        if (!tmp.c16active) reset_res_btn('corrupt');
+      }
     },
     ct15: {
       branch: ["ct8"],

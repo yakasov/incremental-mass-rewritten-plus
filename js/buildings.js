@@ -1122,8 +1122,6 @@ const BUILDINGS = {
       b.level = b.level.add(1);
     }
 
-    console.log();
-
     if (!b.noSpend && b.res.gt(cost)) {
       b.res = b.res.sub(cost).max(0); // without .max(0) causes NaN because of negative amount
     }

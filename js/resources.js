@@ -188,7 +188,7 @@ const RESOURCES_DIS = {
     },
   },
   corrupt: {
-    unl: () => player.dark.c16.first,
+    unl: () => player.dark.c16.first || hasElement(218),
     icon: "corrupted",
     class: "corrupted_text",
 

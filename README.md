@@ -7,9 +7,11 @@ Personal tweaks to IMR.
 ### v0.7.1.6-plus 5
 
 - Final Star Shard button is available on the sidebar as soon as it can be reset for
+- Corrupted Shard button is available on the sidebar as soon as Challenge 16 is available
 - Added an Exotic Atoms display to the Muonic Element Layer
 - Removed the unused 'Max All Matters' button from The Matters tab
 - Increased The Matters columns from 2 to 3
+- If a Supernova tree upgrade has a specific requirement (eg 'whilst in U-Quark and without buying BH Condensers') then clicking it whilst selected and not meeting those requirements will activate those requirements for you
 
 ### v0.7.1.6-plus 4
 
