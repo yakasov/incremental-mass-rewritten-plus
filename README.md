@@ -4,6 +4,13 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 5
+
+- Final Star Shard button is available on the sidebar as soon as it can be reset for
+- Added an Exotic Atoms display to the Muonic Element Layer
+- Removed the unused 'Max All Matters' button from The Matters tab
+- Increased The Matters columns from 2 to 3
+
 ### v0.7.1.6-plus 4
 
 - Boosted power of the Muscler building

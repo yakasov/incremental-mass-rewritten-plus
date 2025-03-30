@@ -53,7 +53,7 @@ function updateChalHTML() {
         } Completions]`
       );
       tmp.el.chal_ch_desc.setHTML(chal.desc);
-      tmp.el.chal_ch_reset.setTxt(CHALS.getReset(player.chal.chosen));
+      tmp.el.chal_ch_reset.setHTML(CHALS.getReset(player.chal.chosen));
       tmp.el.chal_ch_goal.setTxt(
         "Goal: " +
           CHALS.getFormat(player.chal.chosen)(

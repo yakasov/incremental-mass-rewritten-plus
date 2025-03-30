@@ -959,8 +959,8 @@ h4 {
 }
 
 .matter_div {
-  width: calc(33.3% - 10px);
-  min-width: 400px;
+  width: calc(30% - 10px);
+  min-width: calc(800px / 3);
   height: 200px;
   padding: 10px 5px;
 }

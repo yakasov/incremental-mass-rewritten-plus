@@ -2585,12 +2585,16 @@ function updateElementsHTML() {
   let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];
 
   let elem_resource_display =
-    player.atom.elemTier[player.atom.elemLayer] === 1
+    player.atom.elemLayer === 1
+      ? tmp.exotic_atom.amount.format(0)
+      : player.atom.elemTier[player.atom.elemLayer] === 1
       ? player.atom.quarks.format(0)
       : player.dark.shadow.format(0);
   tmp.el.elem_amount_div.setHTML(
     `<br />You have <b>${elem_resource_display}</b> ${
-      player.atom.elemTier[player.atom.elemLayer] === 1
+      player.atom.elemLayer === 1
+        ? "Exotic Atoms"
+        : player.atom.elemTier[player.atom.elemLayer] === 1
         ? "Quarks"
         : "Dark Shadows"
     }.`

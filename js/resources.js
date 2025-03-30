@@ -174,7 +174,7 @@ const RESOURCES_DIS = {
   },
   fss: {
     unl: () =>
-      player.dark.matters.final.gt(0) || (tmp.inf_unl && hasElement(188)),
+      player.dark.matters.final.gt(0) || (tmp.inf_unl && hasElement(188)) || tmp.matters.FSS_base.gte(tmp.matters.FSS_req),
     icon: "fss",
 
     desc: (gs) =>
