@@ -302,16 +302,16 @@ button {
 @keyframes corrupted_text {
   0%,
   100% {
-    text-shadow: -2px -2px 0px #5555ff, 2px 2px 0px #ff5555;
+    text-shadow: -1px -1px 0px #5555ff, 1px 1px 0px #ff5555;
   }
   25% {
-    text-shadow: -2px 2px 0px #5555ff, 2px -2px 0px #ff5555;
+    text-shadow: -1px 1px 0px #5555ff, 1px -1px 0px #ff5555;
   }
   50% {
-    text-shadow: 2px 2px 0px #5555ff, -2px -2px 0px #ff5555;
+    text-shadow: 1px 1px 0px #5555ff, -1px -1px 0px #ff5555;
   }
   75% {
-    text-shadow: 2px -2px 0px #5555ff, -2px 2px 0px #ff5555;
+    text-shadow: 1px -1px 0px #5555ff, -1px 1px 0px #ff5555;
   }
 }
 
@@ -605,22 +605,22 @@ button {
   100% {
     box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
       3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
-    text-shadow: -2px -2px 0px #5555ff, 2px 2px 0px #ff5555;
+    text-shadow: -1px -1px 0px #5555ff, 1px 1px 0px #ff5555;
   }
   25% {
     box-shadow: -3px 3px 3px #ff5555, 3px -3px 3px #5555ff,
       -3px 3px 3px #ff5555 inset, 3px -3px 3px #5555ff inset;
-    text-shadow: -2px 2px 0px #5555ff, 2px -2px 0px #ff5555;
+    text-shadow: -1px 1px 0px #5555ff, 1px -1px 0px #ff5555;
   }
   50% {
     box-shadow: -3px -3px 3px #ff5555, 3px 3px 3px #5555ff,
       -3px -3px 3px #ff5555 inset, 3px 3px 3px #5555ff inset;
-    text-shadow: 2px 2px 0px #5555ff, -2px -2px 0px #ff5555;
+    text-shadow: 1px 1px 0px #5555ff, -1px -1px 0px #ff5555;
   }
   75% {
     box-shadow: 3px -3px 3px #ff5555, -3px 3px 3px #5555ff,
       3px -3px 3px #ff5555 inset, -3px 3px 3px #5555ff inset;
-    text-shadow: 2px -2px 0px #5555ff, -2px 2px 0px #ff5555;
+    text-shadow: 1px -1px 0px #5555ff, -1px 1px 0px #ff5555;
   }
 }
 

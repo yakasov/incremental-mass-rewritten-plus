@@ -231,7 +231,7 @@ function updateAscensionsHTML() {
             ? tmp.ascensions.base.lt(tmp.ascensions.req[x])
             : player.ascensions[x - 1].lt(tmp.ascensions.req[x]),
       });
-      tmp.el["asc_desc_" + x].setTxt(desc);
+      tmp.el["asc_desc_" + x].setHTML(desc);
       tmp.el["asc_req_" + x].setTxt(
         x == 0
           ? format(tmp.ascensions.req[x], 0) + " of Ascension Base"

@@ -1011,8 +1011,8 @@
                   tooltip-html="Based on normal mass, best Black Hole Mass in C16"
                   >???</span
                 ><br />
-                <div class="table_center">
-                  <div style="width: 50%; min-width: 500px">
+                <div>
+                  <div style="margin: 24px 0">
                     <h2>The Core</h2>
                     <div id="theorem_table" class="table_center"></div>
                     <i
@@ -1020,12 +1020,15 @@
                       Core at the same time]</i
                     >
                   </div>
-                  <div style="width: 50%; min-width: 500px">
+                  <div>
                     <h2>Inventory</h2>
                     <br />
                     <button onclick="removeTheorem()">Remove selected</button>
                     <button onclick="formTheorem()" id="formTBtn">
                       Form selected into fragments
+                    </button>
+                    <button onclick="formAllTheorems()" id="formAllTBtn">
+                      Form ALL Theorems into fragments
                     </button>
                     <div id="theorem_inv_table" class="table_center"></div>
                   </div>

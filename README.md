@@ -4,6 +4,18 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 6
+
+- Improved the Infinity Theorem tab styling
+- Protoversal Theorem 'cheaper cosmic strings' and 'entropy scaling', and Einstein Theorem 'glyphic mass' effects boosted
+- Minimum dot chance on a Theorem doubled
+- Element 222 Theorem level softcap increase doubled
+- Added a 'Form ALL Theorems into fragments' button
+- Element 255 cost increased
+- Element 283 automates Parallel Extruder in addition to its normal effect
+- Reduced the corrupted glitching effect on text
+- Fixed Ascensions display not setting HTML properly
+
 ### v0.7.1.6-plus 5
 
 - Final Star Shard button is available on the sidebar as soon as it can be reset for

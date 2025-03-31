@@ -950,10 +950,10 @@ const BUILDINGS_DATA = {
       return hasInfUpgrade(9);
     },
     get autoUnlocked() {
-      return false;
+      return hasElement(283);
     },
     get noSpend() {
-      return false;
+      return hasElement(283);
     },
 
     get res() {

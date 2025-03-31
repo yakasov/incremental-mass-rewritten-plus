@@ -290,7 +290,7 @@ const CORE = {
     },
     eff: [
       (s) => {
-        let x = s.add(1).log10().div(2).add(1); // Math.log10(s+1)/2+1
+        let x = s.add(1).log10().div(2).add(1).mul(1.25); // Math.log10(s+1)/2+1
 
         return x;
       },
@@ -300,7 +300,7 @@ const CORE = {
         return x;
       },
       (s) => {
-        let x = s.add(1).log10().div(100).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
+        let x = s.add(1).log10().div(100).add(1).mul(1.25).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
 
         return x;
       },
@@ -382,7 +382,7 @@ const CORE = {
         return x;
       },
       (s) => {
-        let x = s.add(1).log10().div(100).add(1).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
+        let x = s.add(1).log10().div(100).add(1).mul(1.25).pow(-1); // Math.pow(1+Math.log10(s+1)/100,-1)
 
         return x;
       },
@@ -445,7 +445,7 @@ const MAX_CORE_LENGTH = 8;
 const MIN_CORE_LENGTH = 4;
 const MAX_INV_LENGTH = 100;
 
-const CORE_CHANCE_MIN = 0.1;
+const CORE_CHANCE_MIN = 0.2;
 const CORE_TYPE = Object.keys(CORE);
 const MIN_STAR_CHANCES = [0.1, 0.1, 0.1, 0.1, 0.01, 0.01, 0.0025, 0.000125]; // new Array(MAX_STARS).fill(0.1)
 
@@ -701,6 +701,7 @@ function updateCoreHTML() {
   }
 
   tmp.el.formTBtn.setDisplay(tmp.tfUnl);
+  tmp.el.formAllTBtn.setDisplay(tmp.tfUnl);
 }
 
 function updateTheoremCore() {
@@ -812,6 +813,19 @@ function formTheorem() {
 
   t_chosen = "-";
 
+  updateTheoremInv();
+}
+
+function formAllTheorems() {
+  player.inf.inv.forEach((inv) => {
+    if (inv == "-") return;
+
+    player.inf.fragment[inv.type] = player.inf.fragment[inv.type].add(
+      calcFragmentBase(inv, inv.star, inv.power)
+    );
+  });
+
+  player.inf.inv = [];
   updateTheoremInv();
 }
 

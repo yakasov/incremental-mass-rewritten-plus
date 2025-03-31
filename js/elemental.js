@@ -1841,7 +1841,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `The softcap of theorem’s level starts +5 later.`,
+      desc: `The softcap of theorem’s level starts +10 later.`,
       cost: E("1e13"),
     },
     {
@@ -1934,7 +1934,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `Passively gain 1% of best IP gained on infinity. The softcap of theorem’s level starts +5 later again.`,
+      desc: `Passively gain 1% of best IP gained on infinity. The softcap of theorem’s level starts +5 later.`,
       cost: E("5e22"),
     },
     {
@@ -2045,7 +2045,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `C17’s completions boost Super Parallel Extruder.`,
-      cost: E("e1.9e8"),
+      cost: E("e5e8"),
       effect() {
         let x = (player.chal.comps[17] || E(0)).pow(2).div(4).floor();
         return x;
@@ -2199,7 +2199,7 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `You can now buy False Vacuum Manipulator outside ofvC16.`,
+      desc: `You can now buy False Vacuum Manipulator outside of C16.`,
       cost: E("ee6170"),
     },
     {
@@ -2247,7 +2247,7 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Parallel Extruder is thrice as effective.`,
+      desc: `Automate Parallel Extruder in addition to making it thrice as effective.`,
       cost: E("ee46000"),
     },
     {
