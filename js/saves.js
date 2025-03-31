@@ -326,6 +326,45 @@ function getPlayerData() {
         bs: [],
       },
     },
+    ouro: {
+      apple: E(0),
+      berry: E(0),
+      energy: 0,
+      purify: E(0),
+    },
+    evo: {
+      times: 0,
+
+      cp: {
+        m_time: 0,
+        points: E(0),
+        best: E(0),
+        level: E(0),
+      },
+      wh: {
+        fabric: E(0),
+        mass: [],
+        auto: {},
+        origin: 0,
+        rate: 1,
+      },
+      proto: {
+        star: E(0),
+        dust: E(0),
+        exotic_atoms: E(0),
+        nebula: {},
+      },
+      const: {
+        tier: 0,
+        upg: {},
+      },
+      cosmo: {
+        elixir: E(0),
+        roll_time: 15,
+        uni: [],
+        score: E(0),
+      },
+    },
     reset_msg: "",
     options: {
       font: "Verdana",
@@ -475,6 +514,10 @@ function destroyOldData() {
   delete player.atom.auto_gr;
   delete player.qu.auto_cr;
 
+  if (player.evo == undefined) {
+    Object.assign(player, OURO.save);
+  }
+
   let evo = EVO.amt;
   if (evo >= 1) {
     if (player.rp.unl) player.evo.cp.unl = player.rp.unl;
@@ -515,9 +558,9 @@ function cannotSave() {
 function save() {
   let str = btoa(JSON.stringify(player));
   if (cannotSave() || findNaN(str, true)) return;
-  if (localStorage.getItem("betaSave2") == "") wipe();
-  localStorage.setItem("betaSave2", str);
-  tmp.prevSave = localStorage.getItem("betaSave2");
+  if (localStorage.getItem("testSave") == "") wipe();
+  localStorage.setItem("testSave", str);
+  tmp.prevSave = localStorage.getItem("testSave");
   if (tmp.saving < 1) tmp.saving++;
 }
 

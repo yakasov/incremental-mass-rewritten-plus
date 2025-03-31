@@ -2972,7 +2972,7 @@ function updateElementsHTML() {
 
   let elem_resource_display =
     player.atom.elemLayer === 1
-      ? tmp.exotic_atom.amount.format(0)
+      ? tmp.ea.amount.format(0)
       : player.atom.elemTier[player.atom.elemLayer] === 1
       ? player.atom.quarks.format(0)
       : player.dark.shadow.format(0);
