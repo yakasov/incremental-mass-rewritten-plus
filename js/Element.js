@@ -1,127 +1,129 @@
 class Element {
-	constructor(el) {
-		this.id = typeof el == "string" ? el : el.id;
-		this.el = document.getElementById(this.id);
-	}
+  constructor(el) {
+    this.id = typeof el == "string" ? el : el.id;
+    this.el = document.getElementById(this.id);
+  }
 
-	get style() {
-		return this.el.style;
-	}
+  get style() {
+    return this.el.style;
+  }
 
-	setTxt(txt) {
-		this.el.textContent = txt;
-	}
-	static setTxt(id, txt) {
-		new Element(id).setTxt(txt);
-	}
+  setTxt(txt) {
+    this.el.textContent = txt;
+  }
+  static setTxt(id, txt) {
+    new Element(id).setTxt(txt);
+  }
 
-	setHTML(html) {
-		this.el.innerHTML = html;
-	}
-	static setHTML(id, html) {
-		new Element(id).setHTML(html);
-	}
-	
-	addHTML(html) {
-		this.el.innerHTML += html;
-	}
-	static addHTML(id, html) {
-		new Element(id).addHTML(html);
-	}
+  setHTML(html) {
+    this.el.innerHTML = html;
+  }
+  static setHTML(id, html) {
+    new Element(id).setHTML(html);
+  }
 
-	setDisplay(bool) {
-		this.el.style.display = bool ? "" : "none";
-	}
-	static setDisplay(id, bool) {
-		new Element(id).setDisplay(bool);
-	}
+  addHTML(html) {
+    this.el.innerHTML += html;
+  }
+  static addHTML(id, html) {
+    new Element(id).addHTML(html);
+  }
 
-	addClass(name) {
-		this.el.classList.add(name);
-	}
-	static addClass(id, name) {
-		new Element(id).addClass(name);
-	}
+  setDisplay(bool) {
+    this.el.style.display = bool ? "" : "none";
+  }
+  static setDisplay(id, bool) {
+    new Element(id).setDisplay(bool);
+  }
 
-	removeClass(name) {
-		this.el.classList.remove(name);
-	}
-	static removeClass(id, name) {
-		new Element(id).removeClass(name);
-	}
+  addClass(name) {
+    this.el.classList.add(name);
+  }
+  static addClass(id, name) {
+    new Element(id).addClass(name);
+  }
 
-	clearClasses() {
-		this.el.className = "";
-	}
-	static clearClasses(id) {
-		new Element(id).clearClasses();
-	}
+  removeClass(name) {
+    this.el.classList.remove(name);
+  }
+  static removeClass(id, name) {
+    new Element(id).removeClass(name);
+  }
 
-	setClasses(data) {
-		this.clearClasses();
-		let list = Object.keys(data).filter(x => data[x]);
-		for (let i = 0; i < list.length; i++) this.addClass(list[i]);
-	}
-	static setClasses(id, data) {
-		new Element(id).setClasses(data);
-	}
+  clearClasses() {
+    this.el.className = "";
+  }
+  static clearClasses(id) {
+    new Element(id).clearClasses();
+  }
 
-	setVisible(bool) {
-		var s = this.el.style
-		s.visibility = bool ? "visible" : "hidden";
-		s.opacity = bool ? 1 : 0
-		s.pointerEvents = bool ? "all" : "none"
-	}
-	static setVisible(id, bool) {
-		new Element(id).setVisible(bool);
-	}
+  setClasses(data) {
+    this.clearClasses();
+    let list = Object.keys(data).filter((x) => data[x]);
+    for (let i = 0; i < list.length; i++) this.addClass(list[i]);
+  }
+  static setClasses(id, data) {
+    new Element(id).setClasses(data);
+  }
 
-	setOpacity(value) {
-		this.el.style.opacity = value;
-	}
-	static setOpacity(id, value) {
-		new Element(id).setOpacity(value);
-	}
+  setVisible(bool) {
+    var s = this.el.style;
+    s.visibility = bool ? "visible" : "hidden";
+    s.opacity = bool ? 1 : 0;
+    s.pointerEvents = bool ? "all" : "none";
+  }
+  static setVisible(id, bool) {
+    new Element(id).setVisible(bool);
+  }
 
-	changeStyle(type, input) {
-		this.el.style[type] = input;
-	}
-	static changeStyle(id, type, input) {
-		new Element(id).changeStyle(type, input);
-	}
+  setOpacity(value) {
+    this.el.style.opacity = value;
+  }
+  static setOpacity(id, value) {
+    new Element(id).setOpacity(value);
+  }
 
-	isChecked() {
-		return this.el.checked;
-	}
-	static isChecked(id) {
-		return new Element(id).isChecked();
-	}
+  changeStyle(type, input) {
+    this.el.style[type] = input;
+  }
+  static changeStyle(id, type, input) {
+    new Element(id).changeStyle(type, input);
+  }
 
-	static allFromClass(name) {
-		return Array.from(document.getElementsByClassName(name)).map(x => new Element(x.id));
-	}
+  isChecked() {
+    return this.el.checked;
+  }
+  static isChecked(id) {
+    return new Element(id).isChecked();
+  }
 
-	setAttr(name, input) {
-		this.el.setAttribute(name, input);
-	}
-	static setAttr(id, name, input) {
-		new Element(id).setAttribute(name, input);
-	}
+  static allFromClass(name) {
+    return Array.from(document.getElementsByClassName(name)).map(
+      (x) => new Element(x.id)
+    );
+  }
 
-	setTooltip(input) {
-		this.setAttr("tooltip-html", input);
-	}
-	static setTooltip(id, input) {
-		new Element(id).setAttr("tooltip-html", input);
-	}
+  setAttr(name, input) {
+    this.el.setAttribute(name, input);
+  }
+  static setAttr(id, name, input) {
+    new Element(id).setAttribute(name, input);
+  }
 
-	setSize(h, w) {
-		this.el.style["min-height"] = h + "px";
-		this.el.style["min-width"] = w + "px";
-	}
-	static setSize(id, h, w) {
-		new Element(id).setSize(h, w);
-	}
+  setTooltip(input) {
+    this.setAttr("tooltip-html", input);
+  }
+  static setTooltip(id, input) {
+    new Element(id).setAttr("tooltip-html", input);
+  }
+
+  setSize(h, w) {
+    this.el.style["min-height"] = h + "px";
+    this.el.style["min-width"] = w + "px";
+  }
+  static setSize(id, h, w) {
+    new Element(id).setSize(h, w);
+  }
 }
 
-var el = x => document.getElementById(x);
+var el = (x) => document.getElementById(x);
