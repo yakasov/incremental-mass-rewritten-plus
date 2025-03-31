@@ -14,7 +14,7 @@ const INF = {
         fragment: {},
 
         pre_theorem: [],
-        pt_choosed: -1,
+        pt_chosen: -1,
         reroll: E(0),
 
         dim_mass: E(0),
@@ -312,7 +312,7 @@ const INF = {
     player.inf.dim_mass = E(0);
     player.inf.cs_amount = E(0);
 
-    player.inf.pt_choosed = -1;
+    player.inf.pt_chosen = -1;
     generatePreTheorems();
 
     for (let i = 0; i < GAL_PRESTIGE.res_length; i++)
@@ -332,7 +332,7 @@ const INF = {
   },
   goInf(limit = false) {
     if (player.mass.gte(this.req)) {
-      if (limit || player.inf.pt_choosed >= 0 || hasElement(239))
+      if (limit || player.inf.pt_chosen >= 0 || hasElement(239))
         CONFIRMS_FUNCTION.inf(limit);
       else
         createConfirm(
@@ -524,7 +524,7 @@ const INF = {
     [
       {
         title: "Break Infinity",
-        desc: "Remove the mass limit (can lift limitlessly). Unlock Element Tier 3 and new Muonic Elements.",
+        desc: "Remove the mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.",
         cost: E(1e12),
       },
     ],
@@ -646,7 +646,7 @@ function updateInfTemp() {
   updateCoreTemp();
 
   tmp.inf_level_ss = E(5);
-  if (hasElement(222)) tmp.inf_level_ss = tmp.inf_level_ss.add(5);
+  if (hasElement(222)) tmp.inf_level_ss = tmp.inf_level_ss.add(10);
   if (hasElement(235)) tmp.inf_level_ss = tmp.inf_level_ss.add(5);
   if (tmp.chal) tmp.inf_level_ss = tmp.inf_level_ss.add(tmp.chal.eff[17] || 0);
 }

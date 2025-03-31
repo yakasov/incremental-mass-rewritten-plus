@@ -371,7 +371,7 @@ function updateBlackHoleHTML() {
   tmp.el.bhOverflow.setHTML(
     `Because of black hole mass overflow at <b>${formatMass(
       tmp.overflow_start.bh[0]
-    )}</b>, your mass of black hole gain is ${overflowFormat(
+    )}</b>, your Black Hole Mass gain is ${overflowFormat(
       tmp.overflow.bh || 1
     )}!`
   );

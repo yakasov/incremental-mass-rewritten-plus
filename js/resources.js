@@ -269,7 +269,9 @@ const RESOURCES_DIS = {
   },
   fss: {
     unl: () =>
-      player.dark.matters.final.gt(0) || (tmp.inf_unl && hasElement(188)),
+      player.dark.matters.final.gt(0) ||
+      (tmp.inf_unl && hasElement(188)) ||
+      tmp.matters.FSS_base.gte(tmp.matters.FSS_req),
     icon: "fss",
     class: "quark_color",
 
@@ -284,7 +286,7 @@ const RESOURCES_DIS = {
     },
   },
   corrupt: {
-    unl: () => player.dark.c16.first,
+    unl: () => player.dark.c16.first || hasElement(218),
     icon: "corrupted",
     class: "corrupted_text",
 

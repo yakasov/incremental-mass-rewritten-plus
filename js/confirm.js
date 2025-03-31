@@ -51,8 +51,8 @@ const CONFIRMS_FUNCTION = {
   },
   switchF(i, x) {
     let id = i + "" + x;
-    if (player.supernova.fermions.choosed != id) {
-      player.supernova.fermions.choosed = id;
+    if (player.supernova.fermions.chosen != id) {
+      player.supernova.fermions.chosen = id;
       if (x == 6) QUANTUM.doReset(true, false, true);
       else SUPERNOVA.reset(false, false, false, true);
     }
@@ -69,7 +69,7 @@ const CONFIRMS_FUNCTION = {
   },
   enterQC() {
     player.qu.qc.active = !player.qu.qc.active;
-    QUANTUM.doReset(player.qu.qc.active);
+    QUANTUM.doReset(player.qu.qc.active, false, false);
   },
   dark() {
     player.dark.unl = true;
@@ -83,11 +83,11 @@ const CONFIRMS_FUNCTION = {
   inf(limit) {
     if (!tmp.inf_unl) INF.load(true);
 
-    if (limit || player.inf.pt_choosed >= 0) {
+    if (limit || player.inf.pt_chosen >= 0) {
       if (player.inf.theorem.eq(0))
         addTheorem("mass", [0, 1, 1, 1, 1, 1, 1, 1], E(1), E(1));
       else addSelectedTheorem(true);
-    } else if (hasElement(239) && player.inf.pt_choosed < 0) {
+    } else if (hasElement(239) && player.inf.pt_chosen < 0) {
       let fl = Decimal.floor(tmp.core_lvl);
       for (let i in player.inf.pre_theorem) {
         let t = player.inf.pre_theorem[i];

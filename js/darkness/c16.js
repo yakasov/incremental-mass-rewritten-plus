@@ -3,8 +3,8 @@ const CHARGERS = [
     get req() {
       return E(EVO.amt >= 1 ? 1e65 : 1e90);
     },
-    cost: E(3),
-    desc: `Multiply all matters gain by 1e10, and square mass of black hole gain.`,
+    cost: E(1),
+    desc: `Multiply all matters gain by 1e10, and square Black Hole Mass gain.`,
   },
   {
     req: E("e1000"),

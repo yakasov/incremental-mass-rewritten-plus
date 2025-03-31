@@ -664,7 +664,7 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Collapsed star's effect boosts mass of black hole gain at a reduced rate.`,
+      desc: `Collapsed star's effect boosts Black Hole Mass gain at a reduced rate.`,
       cost: E("e510"),
       effect() {
         let x = tmp.star_unl ? tmp.stars.effect[0].add(1).pow(0.02) : E(1);
@@ -706,7 +706,7 @@ const ELEMENTS = {
       cost: E("e2400"),
     },
     {
-      desc: `Mass of black hole boosts atomic powers gain at a reduced rate.`,
+      desc: `Black Hole Mass boosts atomic powers gain at a reduced rate.`,
       cost: E("e2800"),
       effect: () => (tmp.bh.unl ? expMult(player.bh.mass.add(1), 0.6) : E(1)),
       effDesc(x) {
@@ -957,7 +957,7 @@ const ELEMENTS = {
       cost: E("e500"),
     },
     {
-      desc: `Mass of Black Hole effect raises itself at a reduced logarithmic rate.`,
+      desc: `Black Hole Mass effect raises itself at a reduced logarithmic rate.`,
       cost: E("e1100"),
       effect: () =>
         tmp.bh.unl
@@ -1476,7 +1476,7 @@ const ELEMENTS = {
       cost: E("e96"),
     },
     {
-      desc: `Collapsed star’s effect raises normal mass. This exponent also raises mass of black hole.`,
+      desc: `Collapsed star’s effect raises normal mass. This exponent also raises Black Hole Mass.`,
       get cost() {
         return E(EVO.amt >= 1 ? "ee69" : "e2e69");
       },
@@ -1677,11 +1677,11 @@ const ELEMENTS = {
     },
     {
       desc: `Chromas gain is raised to 1.1th power.`,
-      cost: E("e1.8e91"),
+      cost: E("e1.8e93"),
     },
     {
       desc: `Z0 Boson’s first effect raises tickspeed power at a reduced rate.`,
-      cost: E("e3.5e92"),
+      cost: E("e3.5e93"),
       effect() {
         if (!tmp.sn.boson) return E(1);
         return tmp.sn.boson.effect.z_boson[0]
@@ -1698,7 +1698,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Each Matter’s gain is increased by 10% for every OoM^2 of Dark Matter. Unlock more main upgrades.`,
-      cost: E(1e303),
+      cost: E("e318"),
       effect: () =>
         tmp.bh.unl
           ? Decimal.pow(1.1, player.bh.dm.add(1).log10().add(1).log10())
@@ -1709,7 +1709,7 @@ const ELEMENTS = {
     },
     {
       desc: `Hybridized Uran-Astatine’s first effect makes Exotic Rank and Meta-Tier start later at ^0.5 rate.`,
-      cost: E("e3.3e93"),
+      cost: E("ee94"),
       effect() {
         let x = tmp.qu.chroma_eff[1][0].max(1).root(2);
         return x;
@@ -1725,7 +1725,7 @@ const ELEMENTS = {
     },
     {
       desc: `Fermium-100 is slightly stronger. Automate each matter’s upgrade.`,
-      cost: E("e1.2e94"),
+      cost: E("e5e94"),
     },
     {
       br: true,
@@ -1739,7 +1739,7 @@ const ELEMENTS = {
     },
     {
       desc: `Particle powers’ first effect is better.`,
-      cost: E("e1.6e94"),
+      cost: E("ee95"),
     },
     {
       desc: `Unlock Accelerators, tickspeed now provides an exponential boost, but nullify Argon-18 and Unpentnilium-150 (except in 15th Challenge).`,
@@ -1765,7 +1765,7 @@ const ELEMENTS = {
     },
     {
       desc: `Booster boosts its effect.`,
-      cost: E("e4e99"),
+      cost: E("e2e100"),
       effect() {
         let m = player.build.mass_2.amt;
         let x = m.add(10).log10().pow(0.8);
@@ -1913,7 +1913,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `The softcap of theorem’s level starts +5 later.`,
+      desc: `The softcap of theorem’s level starts +10 later.`,
       cost: E("e13"),
     },
     {
@@ -1979,7 +1979,7 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `Mass of black hole boosts mass overflow^1-2 starting.`,
+      desc: `Black Hole Mass boosts mass overflow^1-2 starting.`,
       cost: E("ee26"),
       effect() {
         if (!tmp.bh.unl) return E(1);
@@ -1993,7 +1993,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `Passively generate 100% of corrupted shards gained by best mass of black hole in C16.`,
+      desc: `Passively generate 100% of corrupted shards gained by best Black Hole Mass in C16.`,
       cost: E("1.25e19"),
     },
     {
@@ -2097,7 +2097,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `Unlock the Corrupted Star. Automate Parallel Extruder.`,
+      desc: `Unlock the Corrupted Star.`,
       get cost() {
         return E(EVO.amt >= 3 ? 1e32 : 1e34);
       },
@@ -2119,7 +2119,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `C17’s completions boost Super Parallel Extruder.`,
-      cost: E("e1.9e8"),
+      cost: E("e5e8"),
       effect() {
         let x = (player.chal.comps[17] || E(0)).pow(2).div(4).floor();
         return x;
@@ -2271,7 +2271,7 @@ const ELEMENTS = {
       cost: E("ee6170"),
     },
     {
-      desc: `Bonus cosmic string strengthens its power at a reduced rate.`,
+      desc: `Bonus Cosmic Strings strengthen its power at a reduced rate.`,
       cost: E("ee23500"),
       effect: () => tmp.build.cosmic_string.bonus.add(1).pow(0.75),
       effDesc(x) {
@@ -2280,7 +2280,7 @@ const ELEMENTS = {
     },
     {
       dark: true,
-      desc: `The base of collapsed star’s effect for supernova generation is slightly stronger.`,
+      desc: `The base of collapsed star’s effect for Supernova generation is slightly stronger.`,
       get cost() {
         return E(EVO.amt >= 1 ? "ee12" : "e1.13e12");
       },
@@ -2321,7 +2321,7 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Parallel Extruder is thrice as effective.`,
+      desc: `Automate Parallel Extruder in addition to making it thrice as effective.`,
       get cost() {
         return E(EVO.amt >= 4 ? "ee42000" : "ee46000");
       },
@@ -2906,7 +2906,7 @@ function setupElementsHTML() {
                 num == 118 ? "final" : ""
               }" id="elementID_${num}" onclick="buyElement(${num}); ssf[0]('${
                 ELEMENTS.names[num]
-              }')" onmouseover="tmp.elements.choosed = ${num}" onmouseleave="tmp.elements.choosed = 0">
+              }')" onmouseover="tmp.elements.chosen = ${num}" onmouseleave="tmp.elements.chosen = 0">
                 <div style="font-size: 12px;">${num}</div><sup class="muon-symbol"></sup>${
                 ELEMENTS.names[num]
               }
@@ -2970,7 +2970,23 @@ function updateElementsHTML() {
 
   let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];
 
-  let ch = tElem.choosed;
+  let elem_resource_display =
+    player.atom.elemLayer === 1
+      ? tmp.exotic_atom.amount.format(0)
+      : player.atom.elemTier[player.atom.elemLayer] === 1
+      ? player.atom.quarks.format(0)
+      : player.dark.shadow.format(0);
+  tmp.el.elem_amount_div.setHTML(
+    `<br />You have <b>${elem_resource_display}</b> ${
+      player.atom.elemLayer === 1
+        ? "Exotic Atoms"
+        : player.atom.elemTier[player.atom.elemLayer] === 1
+        ? "Quarks"
+        : "Dark Shadows"
+    }.`
+  );
+
+  let ch = tElem.chosen;
   tmp.el.elem_ch_div.setDisplay(ch > 0);
   tmp.el.elem_next_div.setDisplay(ch == 0);
   if (ch) {

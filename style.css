@@ -454,7 +454,7 @@ button * {
   border-color: #fe5;
 }
 .btn_tab.bh:hover,
-.btn_tab.bh.choosed {
+.btn_tab.bh.chosen {
   background-color: #542;
 }
 
@@ -463,7 +463,7 @@ button * {
   border-color: #07f;
 }
 .btn_tab.atom:hover,
-.btn_tab.atom.choosed {
+.btn_tab.atom.chosen {
   background-color: #124;
 }
 
@@ -472,7 +472,7 @@ button * {
   border-color: #f08;
 }
 .btn_tab.sn:hover,
-.btn_tab.sn.choosed {
+.btn_tab.sn.chosen {
   background-color: #500031;
 }
 
@@ -481,7 +481,7 @@ button * {
   border-color: lightgreen;
 }
 .btn_tab.qu:hover,
-.btn_tab.qu.choosed {
+.btn_tab.qu.chosen {
   background-color: #005a00;
 }
 
@@ -490,7 +490,7 @@ button * {
   border-color: #666;
 }
 .btn_tab.dark:hover,
-.btn_tab.dark.choosed {
+.btn_tab.dark.chosen {
   background-color: #222;
 }
 
@@ -499,7 +499,7 @@ button * {
   border-color: #fb0;
 }
 .btn_tab.inf:hover,
-.btn_tab.inf.choosed {
+.btn_tab.inf.chosen {
   background-color: #220;
 }
 
@@ -511,7 +511,7 @@ button * {
   border-color: #227f33;
 }
 .btn_tab.snake:hover,
-.btn_tab.snake.choosed {
+.btn_tab.snake.chosen {
   background-color: #0e4a2d;
 }
 
@@ -520,7 +520,7 @@ button * {
   border-color: #357;
 }
 .btn_tab.space:hover,
-.btn_tab.space.choosed {
+.btn_tab.space.chosen {
   background-color: #123;
 }
 
@@ -529,7 +529,7 @@ button * {
   border-color: #25ff30;
 }
 .btn_tab.dilation:hover,
-.btn_tab.dilation.choosed {
+.btn_tab.dilation.chosen {
   background-color: #0a470d;
 }
 
@@ -538,7 +538,7 @@ button * {
   border-color: #00cea1;
 }
 .btn_tab.break_dilation:hover,
-.btn_tab.break_dilation.choosed {
+.btn_tab.break_dilation.chosen {
   background-color: #0a4735;
 }
 
@@ -652,7 +652,7 @@ button * {
   border-color: #00520b;
 }
 
-.btn_tree.choosed {
+.btn_tree.chosen {
   transform: scale(1.25) !important;
 }
 
@@ -835,6 +835,10 @@ h4 {
   font-size: 18px;
 }
 
+.basic_bold {
+  font-weight: bold;
+}
+
 *::-webkit-scrollbar {
   width: 10px;
 }
@@ -994,7 +998,7 @@ h4 {
   background-color: hsl(39, 100%, 6%);
 }
 
-.fermion_btn.quark.choosed {
+.fermion_btn.quark.chosen {
   background: repeating-linear-gradient(
     45deg,
     #0005 0%,
@@ -1015,7 +1019,7 @@ h4 {
   background-color: hsl(120, 100%, 6%);
 }
 
-.fermion_btn.lepton.choosed {
+.fermion_btn.lepton.chosen {
   background: repeating-linear-gradient(
     45deg,
     #0005 0%,
@@ -1204,16 +1208,16 @@ h4 {
 }
 
 #tabs .btn_tab:hover > iconify-icon,
-#tabs .btn_tab.choosed > iconify-icon {
+#tabs .btn_tab.chosen > iconify-icon {
   transform: scale(1.3) rotate(-25deg);
 }
 
-#tabs .btn_tab.choosed {
+#tabs .btn_tab.chosen {
   border-left-width: 10px;
   border-bottom-width: 2px;
 }
 
-.btn_tab.choosed {
+.btn_tab.chosen {
   border-bottom-width: 6px;
 }
 
@@ -1508,7 +1512,7 @@ h4 {
   cursor: pointer;
 }
 
-.theorem_div.choosed {
+.theorem_div.chosen {
   box-shadow: inset white 0 0 15px;
 }
 

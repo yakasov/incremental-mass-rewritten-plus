@@ -45,7 +45,7 @@ function getTempData() {
     bh: {},
     atom: {},
     elements: {
-      choosed: 0,
+      chosen: 0,
       effect: [null],
       mu_effect: [null],
       cannot: [],

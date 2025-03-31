@@ -225,7 +225,7 @@ const CHALS = {
     if (x > 8) h = `a <b class='magenta'>Supernova</b>`;
     if (x > 12) h = `a <b class='gray'>Darkness</b>`;
     if (x == 16) h = `a <b>Final Star Shard</b>`;
-    if (x > 16) h = `a <b class='yellow'>Infinity</b>`;
+    if (x > 16) h = `an <b class='yellow'>Infinity</b>`;
 
     return `Entering will force ${h} reset!`;
   },
@@ -534,7 +534,7 @@ const CHALS = {
       return EVO.amt < 2 && (player.chal.comps[2].gte(1) || player.atom.unl);
     },
     title: "Melted Mass",
-    desc: "Mass gain softcap starts 150 OoMs eariler, and is stronger.",
+    desc: "Mass gain softcap starts 150 OoMs earlier, and is stronger.",
     reward: `Raise Mass gain. (nullified in this challenge)`,
     max: E(100),
     inc: E(25),
@@ -637,7 +637,7 @@ const CHALS = {
     reward: () =>
       EVO.amt >= 2
         ? `Gain +10% more Fabric per completion.`
-        : `Every completion adds 10% to tickspeed and BH condenser power.`,
+        : `Every completion adds 10% to Tickspeed and BH Condenser power.`,
     max: E(50),
     inc: E(64),
     pow: E(1.25),
@@ -671,15 +671,15 @@ const CHALS = {
     title: "No Rage Powers",
     get desc() {
       return `You cannot gain ${
-        EVO.amt >= 2 ? "calm powers" : "rage powers"
+        EVO.amt >= 2 ? "Calm Powers" : "Rage Powers"
       }. Instead, ${
-        EVO.amt >= 2 ? "fabric" : "dark matters"
-      } are gained from mass at a reduced rate. Additionally, mass gain softcap is stronger.`;
+        EVO.amt >= 2 ? "Fabric" : "Dark Matter"
+      } is gained from Mass at a reduced rate. The Mass gain softcap is stronger.`;
     },
     reward: () =>
       (betterC7Effect()
-        ? `Pre-Impossible challenges scale weaker by completions, but this reward doesn't affect C7.`
-        : `Each completion increases challenges 1-4 cap by 2.`) +
+        ? `Pre-Impossible challenges scale weaker by completions (this does not affect C7).`
+        : `Each completion increases challenge 1-4 caps by 2.`) +
       `<br><span class="gold">On 1st completion, unlock Elements</span>`,
     max: E(50),
     inc: E(64),
@@ -777,16 +777,16 @@ const CHALS = {
       return hasTree("chal5");
     },
     title: "The Reality I",
-    desc: "You are trapped in mass dilation and challenges 1-8.",
+    desc: "You are trapped in Mass Dilation and challenges 1-8.",
     reward: () =>
       (EVO.amt >= 3
         ? `Gain +10% more protostars per completion.`
-        : `The exponent of the RP formula is multiplied by completions. (this effect doesn't work while in this challenge)`) +
+        : `The exponent of the RP formula is multiplied by completions (doesn't apply in this challenge).`) +
       `<br><span class="gold">On 1st completion, unlock Fermions</span>`,
     max: E(100),
     inc: E("e2000"),
     pow: E(2),
-    start: E("e3e4").mul(1.5e56),
+    start: E("e2.85e4").mul(1.5e56),
     effect(x) {
       let ret =
         EVO.amt >= 3
@@ -806,8 +806,8 @@ const CHALS = {
       return hasTree("chal6");
     },
     title: "Absolutism",
-    desc: "You cannot gain dilated mass, and you are stuck in mass dilation.",
-    reward: `Star boosters are stronger based on completions.`,
+    desc: "You cannot gain Dilated Mass, and you are stuck in Mass Dilation.",
+    reward: `Star Boosters are stronger based on completions.`,
     max: E(100),
     inc: E("ee6"),
     pow: E(2),
@@ -846,8 +846,8 @@ const CHALS = {
       return hasElement(132);
     },
     title: "Absolutely Black Mass",
-    desc: "Normal mass and mass of black hole gains are set to lg(x)^^1.5.",
-    reward: `Increase dark ray earned based on completions.<br><span class="gold">On 1st completion, unlock more features!</span>`,
+    desc: "Normal Mass and Black Hole Mass gains are set to lg(x)^^1.5.",
+    reward: `Increase Dark Rays earned based on completions.<br><span class="gold">On 1st completion, unlock more features!</span>`,
     max: E(25),
     inc: E("e2e4"),
     pow: E(8),
@@ -866,11 +866,11 @@ const CHALS = {
     },
     title: "No Dmitri Mendeleev",
     get desc() {
-      return `You cannot purchase any pre-118 elements. Additionally, you are trapped in quantum challenge with modifiers ${getQCForceDisp(
+      return `You cannot purchase any pre-118 Elements. Additionally, you are trapped in quantum challenge with modifiers ${getQCForceDisp(
         14
       )}.`;
     },
-    reward: `Gain more primordium theorems.<br><span class="gold">On 1st completion, unlock more features!</span>`,
+    reward: `Gain more Primordium Theorems.<br><span class="gold">On 1st completion, unlock more features!</span>`,
     max: E(100),
     inc: E("e2e19"),
     pow: E(3),
@@ -889,7 +889,7 @@ const CHALS = {
     },
     title: "The Reality II",
     get desc() {
-      return `You are trapped in c1-12 and quantum challenge with modifiers ${getQCForceDisp(
+      return `You are trapped in C1-12 and Quantum Challenge with modifiers ${getQCForceDisp(
         15
       )}.`;
     },
@@ -915,11 +915,11 @@ const CHALS = {
       return `
         • You cannot gain rage powers, and all matters' formulas are disabled, and they generate each other. Red matter generates dark matter.<br>
         • Pre-C16 features, such as rank, prestige tiers, main upgrades, elements, tree upgrades, etc. may be corrupted (disabled).<br>
-        • You are trapped in Mass Dilation & Dark Run with 100 all glyphs (10 slovak glyphs).<br>
+        • You are trapped in Mass Dilation & a Dark Run with 100 of all glyphs (10 slovak glyphs).<br>
         • Primordium particles are disabled.<br>
         • Pre-Quantum global speed is always set to /100.
 		<br class='line'>
-        You can earn Corrupted Shards based on your mass of black hole, when exiting the challenge${
+        You can earn Corrupted Shards based on your Black Hole Mass, when exiting the challenge${
           EVO.amt >= 2
             ? ""
             : `with more than <b>${formatMass(
@@ -946,7 +946,7 @@ const CHALS = {
       return hasElement(240);
     },
     title: "Unnatural Tickspeed",
-    desc: `Tickspeeds, Accelerators, BHC, FVM, Cosmic Rays, Star Boosters, and Cosmic Strings (including bonuses) don't work, they are unaffordable or unobtainable. Second neutron effect doesn't work until Atom Upgrade 18. Black Hole's effect doesn't work until Binilunium-201. You are stuck in dark run with 250 all glyphs (unaffected by weakness).`,
+    desc: `Tickspeeds, Accelerators, BHC, FVM, Cosmic Rays, Star Boosters, and Cosmic Strings (including bonuses) don't work and are unaffordable or unobtainable. Second neutron effect doesn't work until Atom Upgrade 18. Black Hole's effect doesn't work until Binilunium-201. You are stuck in a Dark Run with 250 of all glyphs (unaffected by weakness).`,
     reward: `Per completion, increase the softcap of theorem's level starting by +3.<br><span class="yellow">On 4th completion, unlock Ascensions and more elements.</span>`,
     max: E(100),
     get start() {
@@ -969,7 +969,7 @@ const CHALS = {
     },
     title: "Reinforced Scaling",
     desc: `
-        You cannot weaken nor remove pre-Infinity scalings. You are stuck in dark run with 500 all glyphs (unaffected by weakness).
+        You cannot weaken nor remove pre-Infinity scalings. You are stuck in Dark Run with 500 of all glyphs (unaffected by weakness).
         `,
     get reward() {
       return (
@@ -1013,18 +1013,18 @@ const CHALS = {
     title: "Yin Yang Malfunction",
     get desc() {
       return `
-        You cannot become/generate supernovas, produce star resources, dark ray (it is capped at ${format(
+        You cannot implode into/generate supernovas, produce star resources, Dark Rays (they are capped at ${format(
           1e12
-        )}), dark shadow, and abyssal blot, nor purchase tree upgrades. You are stuck in dark run with 1000 all glyphs (unaffected by weakness). This challenge resets supernova.
+        )}), Dark Shadow, and Abyssal Blots, nor purchase tree upgrades. You are stuck in a Dark Run with 1000 of all glyphs (unaffected by weakness). This challenge resets Supernova.
         `;
     },
     get reward() {
       return `
         Generate more ${
-          EVO.amt >= 4 ? "stardust" : "supernovas"
-        } by completions.<br><span class="gold">On ${
+          EVO.amt >= 4 ? "Stardust" : "Supernovas"
+        } based on completions.<br><span class="gold">On ${
         ["10th", "4th", "2nd", "3rd", "2nd"][EVO.amt]
-      } completion, unlock sixth row of infinity upgrades${
+      } completion, unlock sixth row of Infinity upgrades${
         EVO.amt == 3 ? " and seventh star in the theorem" : ""
       }.</span>
         `;
@@ -1060,7 +1060,7 @@ const CHALS = {
       return hasElement(290);
     },
     title: "The Reality III",
-    desc: "You are trapped in C1-19 and dark run with 1500 all glyphs. Theorems in the Core don't work. This challenge resets main upgrades.",
+    desc: "You are trapped in C1-19 and a Dark Run with 1500 of all glyphs. Theorems in the Core don't work. This challenge resets main upgrades.",
     get reward() {
       return (
         `<span class="gold">Break the loop and evolve!</span>` +

@@ -280,10 +280,6 @@ function getMatterUpgrade(i) {
     player.dark.matters.upg[i] = tu.bulk;
 }
 
-function buyMaxMatters() {
-  for (let i = 0; i < player.dark.matters.unls - 1; i++) getMatterUpgrade(i);
-}
-
 function resetMatters() {
   for (let i = 0; i < 13; i++) {
     player.dark.matters.amt[i] = E(0);

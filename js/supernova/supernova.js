@@ -87,7 +87,7 @@ const SUPERNOVA = {
     ATOM.doReset();
   },
   starGain() {
-    let x = E(hasTree("c") ? 0.2 : 0);
+    let x = E(hasTree("c") ? 1 : 0);
     if (hasTree("sn1")) x = x.mul(treeEff("sn1"));
     if (hasTree("sn2")) x = x.mul(treeEff("sn2"));
     if (hasTree("sn3")) x = x.mul(treeEff("sn3"));
@@ -161,7 +161,7 @@ function calcSupernova(dt) {
   if (tmp.sn.reached && (tmp.start || su.times.gte(1)) && !su.post_10) {
     if (supernovaAni()) tmp.sn.time += dt;
     else {
-      addNotify("You become Supernova!");
+      addNotify("You imploded into a Supernova!");
       SUPERNOVA.reset();
     }
   }
@@ -252,7 +252,7 @@ function updateSupernovaTemp() {
   if (tsn.tree_eff == undefined) {
     tsn.time = 0;
     tsn.tree_tab = 0;
-    tsn.tree_choosed = "";
+    tsn.tree_chosen = "";
     tsn.tree_had = [];
     tsn.tree_had2 = [];
     tsn.auto_tree = [];

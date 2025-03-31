@@ -368,7 +368,7 @@ const UPGS = {
         },
       },
       3: {
-        desc: "Super Mass Upgrade scales later based on mass of Black Hole.",
+        desc: "Super Mass Upgrade scales later based on Black Hole Mass.",
         cost: E(100),
         effect() {
           let ret = player.bh.mass
@@ -400,7 +400,7 @@ const UPGS = {
         cost: E(1e4),
       },
       6: {
-        desc: "Gain 100% of Rage Power gained from reset per second. Rage Powers are boosted by mass of Black Hole.",
+        desc: "Gain 100% of Rage Power gained from reset per second. Rage Powers are boosted by Black Hole Mass.",
         cost: E(1e5),
         effect() {
           let ret = player.bh.mass.max(1).log10().add(1).pow(2);
@@ -414,7 +414,7 @@ const UPGS = {
         unl() {
           return player.chal.unl;
         },
-        desc: "Mass gain softcap starts later based on mass of Black Hole.",
+        desc: "Mass gain softcap starts later based on Black Hole Mass.",
         cost: E(1e12),
         effect() {
           let ret = player.bh.mass.add(1).root(3);
@@ -492,7 +492,7 @@ const UPGS = {
         unl() {
           return player.atom.unl;
         },
-        desc: "Neutron Powers boost mass of Black Hole gain.",
+        desc: "Neutron Powers boost Black Hole Mass gain.",
         cost: E(1e210),
         effect() {
           let ret = player.atom.powers[1].add(1).pow(2);
@@ -565,7 +565,7 @@ const UPGS = {
         unl() {
           return tmp.brUnl || tmp.inf_unl;
         },
-        desc: `Mass of black hole boosts accelerator power at an extremely reduced rate.`,
+        desc: `Black Hole Mass boosts accelerator power at an extremely reduced rate.`,
         cost: E("e3e201"),
         effect() {
           let x = player.bh.mass.add(1).log10().add(1).log10().add(1).root(6);
@@ -579,7 +579,7 @@ const UPGS = {
         unl() {
           return player.dark.c16.first || tmp.inf_unl;
         },
-        desc: `Corrupted Shards boost mass of black hole gain.`,
+        desc: `Corrupted Shards boost Black Hole Mass gain.`,
         cost: E("ee273"),
         effect() {
           if (tmp.c16.in) return E(1);
@@ -635,7 +635,7 @@ const UPGS = {
         unl() {
           return tmp.fifthRowUnl;
         },
-        desc: `Best mass of black hole in C16 boosts Infinity Points gain.`,
+        desc: `Best Black Hole Mass in C16 boosts Infinity Points gain.`,
         cost: E("ee261500"),
         effect() {
           let x = expMult(tmp.c16.best_bh_eff, 0.4);
@@ -826,7 +826,7 @@ const UPGS = {
         unl() {
           return (tmp.mass4Unl || tmp.inf_unl) && EVO.amt < 2;
         },
-        desc: `Neutron Power's second effect now provides an expontial boost and applies to mass of black hole.`,
+        desc: `Neutron Power's second effect now provides an expontial boost and applies to Black Hole Mass.`,
         cost: E("e4.2e120"),
       },
       19: {
@@ -1242,7 +1242,7 @@ function goUpgNotify() {
   if (tmp.upg_notify[0] == "sn") {
     goToTab("sn-tree");
     tmp.sn.tree_tab = tmp.sn.tree_loc[tmp.upg_notify[1]];
-    tmp.sn.tree_choosed = tmp.upg_notify[1];
+    tmp.sn.tree_chosen = tmp.upg_notify[1];
   }
   if (tmp.upg_notify[0] == "el") {
     goToTab("elements");

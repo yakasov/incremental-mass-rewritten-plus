@@ -29,7 +29,7 @@ const DARK_RUN = {
 
   mass_glyph_effDesc: [
     (x) =>
-      `Reduce the exponent of normal mass’s multiplier, multiplier from mass of black hole by <b>^${format(
+      `Reduce the exponent of normal mass’s multiplier, multiplier from Black Hole Mass by <b>^${format(
         x
       )}</b> in dark run.<br class='line'>Earn more glyphs based on normal mass.`,
     (x) =>
@@ -39,7 +39,7 @@ const DARK_RUN = {
           )}</b>.<br class='line'>Earn more glyphs based on Fabric.`
         : `Reduce the exponent of dark matter’s multiplier, rage power’s multiplier by <b>^${format(
             x
-          )}</b> in dark run.<br class='line'>Earn more glyphs based on mass of black hole.`,
+          )}</b> in dark run.<br class='line'>Earn more glyphs based on Black Hole Mass.`,
     (x) =>
       `Reduce the exponent of atom, atomic power and quark multiplier by <b>^${format(
         x
@@ -166,7 +166,7 @@ const DARK_RUN = {
       get desc() {
         return EVO.amt >= 2
           ? `Raise Wormhole by 1.5 every level.`
-          : `Raise mass of black hole gain by 1.5 every level.`;
+          : `Raise Black Hole Mass gain by 1.5 every level.`;
       },
       cost(i) {
         i *= Math.max(1, i - 4) ** 0.5;

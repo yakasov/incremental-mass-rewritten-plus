@@ -2,13 +2,13 @@ const FERMIONS = {
   onActive(id) {
     if (!tmp.sn.unl) return;
 
-    let i = player.supernova.fermions.choosed;
+    let i = player.supernova.fermions.chosen;
     return i == id || (i[1] == "6" && i[0] == id[0]);
   },
   gain(i) {
     if (!player.supernova.fermions.unl) return E(0);
     let x = E(10);
-    let base = E(1.25).add(tmp.qu.prim.eff[5][0]);
+    let base = E(1.3).add(tmp.qu.prim.eff[5][0]);
     if (hasTree("unl1")) x = x.mul(tmp.sn.rad.hz_effect);
     for (let j = 0; j < FERMIONS.types[i].length; j++)
       x = x.mul(base.pow(player.supernova.fermions.tiers[i][j]));
@@ -19,8 +19,8 @@ const FERMIONS = {
     return x;
   },
   backNormal() {
-    if (player.supernova.fermions.choosed != "") {
-      player.supernova.fermions.choosed = "";
+    if (player.supernova.fermions.chosen != "") {
+      player.supernova.fermions.chosen = "";
       SUPERNOVA.reset(false, false, false, true);
     }
   },
@@ -90,12 +90,12 @@ const FERMIONS = {
         unl: () => tmp.atom.unl,
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e50").pow(t.pow(1.25)).mul("e800");
+          return E("e50").pow(t.pow(1.25)).mul("e745");
         },
         calcTier() {
           let res = player.atom.atomic;
-          if (res.lt("e800")) return E(0);
-          let x = res.div("e800").max(1).log("e50").max(0).root(1.25);
+          if (res.lt("e745")) return E(0);
+          let x = res.div("e745").max(1).log("e50").max(0).root(1.25);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -112,12 +112,12 @@ const FERMIONS = {
         unl: () => tmp.atom.unl,
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e50").pow(t.pow(1.25)).mul("e400");
+          return E("e30").pow(t.pow(1.25)).mul("e390");
         },
         calcTier() {
           let res = player.md.particles;
-          if (res.lt("e400")) return E(0);
-          let x = res.div("e400").max(1).log("e50").max(0).root(1.25);
+          if (res.lt("e390")) return E(0);
+          let x = res.div("e390").max(1).log("e30").max(0).root(1.25);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -136,12 +136,12 @@ const FERMIONS = {
       {
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("ee3").pow(t.pow(1.5)).mul(uni("e36000"));
+          return E("ee3").pow(t.pow(1.5)).mul(uni("e32975"));
         },
         calcTier() {
           let res = player.mass;
-          if (res.lt(uni("e36000"))) return E(0);
-          let x = res.div(uni("e36000")).max(1).log("ee3").max(0).root(1.5);
+          if (res.lt(uni("e32975"))) return E(0);
+          let x = res.div(uni("e32975")).max(1).log("ee3").max(0).root(1.5);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -349,7 +349,7 @@ const FERMIONS = {
             .mul(t)
             .div(100)
             .add(1)
-            .softcap(1.5, hasTree("fn5") ? 0.75 : 0.25, 0);
+            .softcap(1.6, hasTree("fn5") ? 0.75 : 0.25, 0);
           if (hasTree("fn10")) x = x.pow(4.5);
           return x; //.softcap(1e18,0.1,0)
         },
@@ -395,7 +395,7 @@ const FERMIONS = {
           return EVO.amt < 2;
         },
         get inc() {
-          return EVO.amt >= 2 ? "2^Fabric^0.5" : "Mass of Black Hole";
+          return EVO.amt >= 2 ? "2^Fabric^0.5" : "Black Hole Mass";
         },
         cons: "The power from the mass of the BH formula is always -1",
       },
@@ -403,12 +403,12 @@ const FERMIONS = {
         unl: () => EVO.amt == 0,
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x);
-          return E("e5e3").pow(t.pow(1.5)).mul("e4.5e5");
+          return E("e5e3").pow(t.pow(1.5)).mul("e3.645e5");
         },
         calcTier() {
           let res = player.bh.dm;
-          if (res.lt("e4.5e5")) return E(0);
-          let x = res.div("e4.5e5").max(1).log("e5e3").max(0).root(1.5);
+          if (res.lt("e3.645e5")) return E(0);
+          let x = res.div("e3.645e5").max(1).log("e5e3").max(0).root(1.5);
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
@@ -603,10 +603,10 @@ function setupFermionsHTML() {
             <button id="${id}_div" class="fermion_btn ${FERMIONS.names[i]}" onclick="FERMIONS.choose(${i},${x})">
                 <b>[${FERMIONS.sub_names[i][x]}]</b><br>[<span id="${id}_tier_scale"></span>Tier <span id="${id}_tier">0</span>]<br>
                 <span id="${id}_cur">Currently: X</span><br>
-                Next Tier at: <span id="${id}_nextTier">X</span><br>
+                <span class="basic-bold">Next Tier<br></span> <span id="${id}_nextTier">X</span><br>
                 (Increased by ${f.inc})<br><br>
-                Effect: <span id="${id}_desc">X</span><br>
-                On Active: ${f.cons}
+                <span class="basic-bold">Effect<br></span> <span class="green" id="${id}_desc">X</span><br><br>
+                <span class="basic-bold">On Active<br></span> <span class="red">${f.cons}</span>
             </button>
             `;
     }
@@ -629,11 +629,11 @@ function updateFermionsTemp() {
   let tf = tmp.sn.ferm;
   tf.prod = [FERMIONS.productF(0), FERMIONS.productF(1)];
   tf.ch =
-    player.supernova.fermions.choosed == ""
+    player.supernova.fermions.chosen == ""
       ? [-1, -1]
       : [
-          Number(player.supernova.fermions.choosed[0]),
-          Number(player.supernova.fermions.choosed[1]),
+          Number(player.supernova.fermions.chosen[0]),
+          Number(player.supernova.fermions.chosen[1]),
         ];
   tf.fp = FERMIONS.fp();
   tf.fp2 = FERMIONS.fp2();
@@ -710,7 +710,7 @@ function updateFermionsHTML() {
         tmp.el[id + "_div"].setClasses({
           fermion_btn: true,
           [FERMIONS.names[i]]: true,
-          choosed: active,
+          chosen: active,
         });
         tmp.el[id + "_nextTier"].setTxt(
           fm(f.nextTierAt(player.supernova.fermions.tiers[i][x]))

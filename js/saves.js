@@ -318,7 +318,7 @@ function getPlayerData() {
           [E(0), E(0), E(0), E(0), E(0), E(0), E(0)],
           [E(0), E(0), E(0), E(0), E(0), E(0), E(0)],
         ],
-        choosed: "",
+        chosen: "",
       },
       radiation: {
         hz: E(0),
@@ -717,7 +717,7 @@ let OFFLINE = {
   bh: {
     res: (p) => p.bh?.mass ?? E(0),
     res_mass: true,
-    disp: "Mass of Black Hole",
+    disp: "Black Hole Mass",
   },
   qk: {
     res: (p) => p.atom.quarks,
@@ -777,6 +777,8 @@ function simulateTime(sec) {
     updateTemp();
     calc(speed);
   }
+
+  if (sec < 300) return;
 
   let h2 = "";
   for (var [i, r] of Object.entries(OFFLINE)) {

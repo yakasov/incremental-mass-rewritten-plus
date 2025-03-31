@@ -158,7 +158,7 @@ const QCs_len = 11;
 
 function addQCPresetAs() {
   if (player.qu.qc.presets.length >= 5) {
-    addNotify("You cannot add QC Preset because of maxmium length of presets");
+    addNotify("You already have the maximum amount of presets!");
     return;
   }
 

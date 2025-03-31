@@ -289,7 +289,7 @@ function updateTabsHTML() {
       tmp.el["tab" + x].setClasses({
         btn_tab: true,
         [tab.style ?? "normal"]: true,
-        choosed: x == tmp.tab,
+        chosen: x == tmp.tab,
       });
     }
 
@@ -316,7 +316,7 @@ function updateTabsHTML() {
             tmp.el["stab" + x + "_" + y].setClasses({
               btn_tab: true,
               [td.style ?? "normal"]: true,
-              choosed: y == tmp.stab[x],
+              chosen: y == tmp.stab[x],
             });
           }
         }
@@ -408,7 +408,7 @@ const PINS = {
       tmp.el["pin" + i].setClasses({
         btn_tab: true,
         [TABS_DATA[p]?.style]: true,
-        choosed: tmp.tab_name == p,
+        chosen: tmp.tab_name == p,
       });
     }
   },
