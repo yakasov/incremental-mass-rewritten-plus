@@ -666,11 +666,10 @@ function appleEffects() {
     a.div(1e8).add(1).pow(2),
   ];
   eff.cp = a
-    .div(10)
+    .div(5)
     .add(1)
     .pow(hasElement(90, 1) ? 0.7 : hasElement(76, 1) ? 0.6 : 0.5);
-  if (player.atom.unl)
-    eff.cp_lvl = a.add(1).pow(hasElement(90, 1) ? 0.25 : 0.1);
+  if (player.atom.unl) eff.cp_lvl = a.add(1).pow(hasElement(90, 1) ? 0.4 : 0.2);
 
   if (evo >= 2 && FORMS.bh.unl()) {
     eff.fabric = a

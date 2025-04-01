@@ -4,6 +4,16 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 8
+
+- Boosted all Meditation effects
+- Boosted Apple Boost effects to Calm Powers and Meditation levels
+- Added an 'Unpin requirement' button on Supernova tree
+- Fixed Primordium theorems not being spent
+- Fixed (very roughly) Theorems updating so fast that they're hard to click
+- Fixed loading not working properly (this was my fault)
+- Removed April 1st stuff
+
 ### v0.7.1.6-plus 7
 
 - Merge with 'unstable' branch

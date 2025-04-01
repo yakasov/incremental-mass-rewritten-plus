@@ -546,8 +546,6 @@ function loop() {
 }
 
 function format(ex, acc = 2, type = player.options.notation) {
-  if (tmp.aprilEnabled && Math.random() < 0.9) return "Troll";
-
   ex = E(ex);
   neg = ex.lt(0) ? "-" : "";
   if (neg) ex = ex.mul(-1);

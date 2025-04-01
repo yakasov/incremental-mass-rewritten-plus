@@ -28,7 +28,7 @@ const PRIM = {
   spentTheorems() {
     let x = E(0);
     for (let i = 0; i < player.qu.prim.particles.length; i++) {
-      if (tmp.qu.prim.w[i] == 0) x = x.add(player.qu.prim.particles[i]);
+      x = x.add(player.qu.prim.particles[i]);
     }
     return x;
   },

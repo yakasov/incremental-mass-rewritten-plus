@@ -368,9 +368,6 @@ var changeCoreFromBestLevel = () => {
       if (lvl.gt(player.inf.core[i].level)) player.inf.core[i].level = lvl;
       if (power.gt(player.inf.core[i].power)) player.inf.core[i].power = power;
     }
-
-  updateTheoremCore();
-  updateCoreHTML();
 };
 
 function theoremEff(t, i, def = 1) {
@@ -452,7 +449,8 @@ function setupCoreHTML() {
   new Element("theorem_inv_table").setHTML(h);
 }
 
-function updateCoreHTML() {
+let ykCoreTick = 0;
+function updateCoreHTML(force = false) {
   let reached = player.inf.reached;
 
   let lvl = tmp.core_lvl,
@@ -464,29 +462,32 @@ function updateCoreHTML() {
   );
 
   if (TS_visible) {
-    for (let i = 0; i < player.inf.pre_theorem.length; i++) {
-      let pt = tmp.el["preT" + i];
-      pt.setDisplay(reached);
+    if (force || ykCoreTick % 10 === 0) {
+      for (let i = 0; i < player.inf.pre_theorem.length; i++) {
+        let pt = tmp.el["preT" + i];
+        pt.setDisplay(reached);
 
-      if (!reached) continue;
+        if (!reached) continue;
 
-      let p = player.inf.pre_theorem[i],
-        s = chanceToBool(p.star_c),
-        power = getPower(p.power_m).max(p.min_pow || 0);
-      pt.setClasses({
-        theorem_div: true,
-        tooltip: true,
-        [p.type]: true,
-        chosen: player.inf.pt_chosen == i,
-      });
-      pt.setHTML(
-        getTheoremHTML({ type: p.type, level: fl, power, star: s }, true)
-      );
+        let p = player.inf.pre_theorem[i],
+          s = chanceToBool(p.star_c),
+          power = getPower(p.power_m).max(p.min_pow || 0);
+        pt.setClasses({
+          theorem_div: true,
+          tooltip: true,
+          [p.type]: true,
+          chosen: player.inf.pt_chosen == i,
+        });
+        pt.setHTML(
+          getTheoremHTML({ type: p.type, level: fl, power, star: s }, true)
+        );
 
-      pt.setTooltip(`<h3>${CORE[p.type].title}</h3>
-            <br class='line'>
-            ${getTheoremPreEffects(p, s, power, fl)}`);
+        pt.setTooltip(`<h3>${CORE[p.type].title}</h3>
+              <br class='line'>
+              ${getTheoremPreEffects(p, s, power, fl)}`);
+      }
     }
+    ykCoreTick++;
 
     tmp.el.preTReq.setHTML(
       `Reach over <b>${formatMass(
@@ -634,6 +635,7 @@ function savageTheorem() {
   t_chosen = "-";
   updateTheoremInv();
   generatePreTheorems();
+  updateCoreHTML(true);
 }
 
 function createPreTheorem() {
@@ -665,6 +667,7 @@ function createPreTheorem() {
 
 function choosePreTheorem(i) {
   player.inf.pt_chosen = i;
+  updateCoreHTML(true);
 }
 
 function addTheorem(type, star, level, power, min_pow) {

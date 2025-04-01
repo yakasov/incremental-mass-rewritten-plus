@@ -434,9 +434,9 @@ function updateOuroborosHTML() {
       h += `<br>Apple boosts Dark Rays (<b>${formatMult(eff.dark, 2)}</b>)`;
 
     if (eff.apple)
-      h += `${
+      h += `<br>${
         [null, "Meditation", "Wormhole", "Protostar", "Stardust"][evo]
-      } boosts apple feeded (<b>^${format(eff.apple)}</b>)<br>`;
+      } boosts Apples eaten (<b>^${format(eff.apple)}</b>)<br>`;
 
     tmp.el.escrow_boosts.setHTML(h);
     tmp.el.escrow_boosts_div.setDisplay(h != "");

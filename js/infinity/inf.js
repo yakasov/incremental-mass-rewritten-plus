@@ -85,6 +85,7 @@ const INF = {
   },
 
   doReset() {
+    ykCoreTick = 0;
     player.mass = E(0);
 
     // QoL

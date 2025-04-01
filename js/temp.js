@@ -153,9 +153,6 @@ function getTempData() {
 
     prevSave: "",
 
-    april: d.getDate() == 1 && d.getMonth() == 3,
-    aprilEnabled: false,
-
     inf_reached: false,
     inf_time: 0,
     inf_limit: E(10).pow(Number.MAX_VALUE),

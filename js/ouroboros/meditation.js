@@ -34,20 +34,20 @@ const MEDITATION = {
       weak_mult = E(1);
     if (QCs.active() && EVO.amt >= 4) lvl = lvl.mul(tmp.qu.qc.eff[10]);
 
-    eff.mass1 = lvl.add(1);
-    if (hasElement(67, 1)) eff.mass2 = lvl.div(100).add(1);
+    eff.mass1 = lvl.mul(1.5).add(1);
+    if (hasElement(67, 1)) eff.mass2 = lvl.div(50).add(1);
     if (hasElement(69, 1)) {
       let x = lvl.add(1).log10().div(10).add(1);
       if (hasElement(73, 1)) x = x.mul(muElemEff(73));
-      eff.mass3 = x.mul(escrowBoost("md_m3"));
+      eff.mass3 = x.mul(escrowBoost("md_m3")).mul(2);
     }
 
     if (EVO.amt >= 2) weak_mult = wormholeEffect(3).mul(glyphUpgEff(8));
     if (hasElement(75, 1))
-      eff.mass3_softcap = Decimal.pow(0.95, lvl.add(1).log10()).mul(weak_mult);
+      eff.mass3_softcap = Decimal.pow(0.925, lvl.add(1).log10()).mul(weak_mult);
     if (hasElement(76, 1))
       eff.mass_softcap = Decimal.pow(
-        EVO.amt >= 2 ? 0.95 : 0.9,
+        EVO.amt >= 2 ? 0.9125 : 0.875,
         lvl.add(1).log10().root(2)
       ).mul(weak_mult);
 
