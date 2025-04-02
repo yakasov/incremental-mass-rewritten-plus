@@ -266,6 +266,13 @@ button * {
   background-color: #00520b;
 }
 
+.disabled_chal {
+  background-color: #444;
+  filter: grayscale(1);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .light_red {
   color: #f55;
 }
@@ -833,6 +840,7 @@ h4 {
   display: inline;
   font-weight: bold;
   font-size: 18px;
+  line-height: 48px;
 }
 
 .basic_bold {

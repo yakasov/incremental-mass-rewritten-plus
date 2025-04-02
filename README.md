@@ -4,6 +4,12 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 9
+
+- Boosted 'Better Infinity' effect slightly
+- Improved Challenge styling
+- String and grammar pass
+
 ### v0.7.1.6-plus 8
 
 - Boosted all Meditation effects

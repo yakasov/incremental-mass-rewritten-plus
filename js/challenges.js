@@ -17,19 +17,23 @@ function updateChalHTML() {
     for (let x = 1; x <= CHALS.cols; x++) {
       let chal = CHALS[x];
       let unl = chal.unl ? chal.unl() : true;
+      let disabled = chal.disabled ? chal.disabled() : false;
       tmp.el["chal_div_" + x].setDisplay(unl);
       tmp.el["chal_btn_" + x].setClasses({
         img_chal: true,
         ch: tmp.chal.ch == x,
         in: CHALS.inChal(x),
         comp: player.chal.comps[x].gte(tmp.chal.max[x]),
+        disabled_chal: disabled,
       });
       if (unl)
-        tmp.el["chal_comp_" + x].setTxt(
-          format(player.chal.comps[x], 0) +
-            (tmp.chal.max[x].gte(EINF)
-              ? ""
-              : " / " + format(tmp.chal.max[x], 0))
+        tmp.el["chal_comp_" + x].setHTML(
+          disabled
+            ? `<span style="color: grey; font-style: italic">Disabled!</span>`
+            : format(player.chal.comps[x], 0) +
+                (tmp.chal.max[x].gte(EINF)
+                  ? ""
+                  : " / " + format(tmp.chal.max[x], 0))
         );
     }
     tmp.el.chal_enter.setVisible(
@@ -466,10 +470,10 @@ const CHALS = {
   },
   1: {
     unl() {
-      return (
-        EVO.amt < 2 &&
-        (player.mass.gte(1e125) || player.chal.unl || player.atom.unl)
-      );
+      return player.mass.gte(1e125) || player.chal.unl || player.atom.unl;
+    },
+    disabled() {
+      return EVO.amt >= 2;
     },
     title: "Instant Scale",
     desc: "Super Ranks and Mass Upgrades start at 25 and Super Tickspeed starts at 50.",
@@ -504,7 +508,10 @@ const CHALS = {
   },
   2: {
     unl() {
-      return EVO.amt < 2 && (player.chal.comps[1].gte(1) || player.atom.unl);
+      return player.chal.comps[1].gte(1) || player.atom.unl;
+    },
+    disabled() {
+      return EVO.amt >= 2;
     },
     title: "Anti-Tickspeed",
     desc: "You cannot buy Tickspeed.",
@@ -531,7 +538,10 @@ const CHALS = {
   },
   3: {
     unl() {
-      return EVO.amt < 2 && (player.chal.comps[2].gte(1) || player.atom.unl);
+      return player.chal.comps[2].gte(1) || player.atom.unl;
+    },
+    disabled() {
+      return EVO.amt >= 2;
     },
     title: "Melted Mass",
     desc: "Mass gain softcap starts 150 OoMs earlier, and is stronger.",
@@ -559,7 +569,10 @@ const CHALS = {
   },
   4: {
     unl() {
-      return EVO.amt < 2 && (player.chal.comps[3].gte(1) || player.atom.unl);
+      return player.chal.comps[3].gte(1) || player.atom.unl;
+    },
+    disabled() {
+      return EVO.amt >= 2;
     },
     title: "Weakened Rage",
     get desc() {

@@ -120,7 +120,10 @@ const ENTROPY = {
       eff(i) {
         if (tmp.c16.in) return [E(0), E(1)];
         let x = i.div(QCs.active() ? 100 : 5).softcap(2, 0.5, 0);
-        let y = BUILDINGS.eff("tickspeed", "power").pow(x);
+        let y =
+          EVO.amt >= 2
+            ? BUILDINGS.eff("star_booster", "power").mul(10).pow(x)
+            : BUILDINGS.eff("tickspeed", "power").pow(x);
         return [x, y];
       },
       desc(x) {

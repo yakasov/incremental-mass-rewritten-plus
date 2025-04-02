@@ -601,7 +601,7 @@ function setupFermionsHTML() {
       let id = `f${FERMIONS.names[i]}${x}`;
       table += `
             <button id="${id}_div" class="fermion_btn ${FERMIONS.names[i]}" onclick="FERMIONS.choose(${i},${x})">
-                <b>[${FERMIONS.sub_names[i][x]}]</b><br>[<span id="${id}_tier_scale"></span>Tier <span id="${id}_tier">0</span>]<br>
+                <b style="line-height: 24px">[${FERMIONS.sub_names[i][x]}]</b><br>[<span id="${id}_tier_scale"></span>Tier <span id="${id}_tier">0</span>]<br>
                 <span id="${id}_cur">Currently: X</span><br>
                 <span class="basic-bold">Next Tier<br></span> <span id="${id}_nextTier">X</span><br>
                 (Increased by ${f.inc})<br><br>
@@ -727,7 +727,7 @@ function updateFermionsHTML() {
 
         tmp.el[id + "_cur"].setDisplay(active);
         if (active) {
-          tmp.el[id + "_cur"].setTxt(`Currently: ${fm(r[i][x])}`);
+          tmp.el[id + "_cur"].setHTML(`<br>Currently: ${fm(r[i][x])}<br>`);
         }
       }
     }

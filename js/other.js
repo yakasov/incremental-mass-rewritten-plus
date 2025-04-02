@@ -107,9 +107,9 @@ const POPUP_GROUPS = {
   },
   supernova10: {
     html: `
-            Congratulations!<br><br>You got 10 Supernovas!<br>
-            And you can manualy supernova!<br><br>
-            <b>Bosons are unlocked in Supernova tab!</b>
+            Congratulations!<br><br>You have reached 10 Supernovas!<br>
+            You can now manually Supernova.<br><br>
+            <b>Bosons are unlocked in the Supernova tab!</b>
         `,
     width: 400,
     height: 150,
@@ -119,8 +119,8 @@ const POPUP_GROUPS = {
   },
   fermions: {
     html: `
-            Congratulations!<br><br>You have beated Challenge 10!<br><br>
-            <b>Fermions are unlocked in Supernova tab!</b>
+            Congratulations!<br><br>You have beaten Challenge 10!<br><br>
+            <b>Fermions are unlocked in the Supernova tab!</b>
         `,
     width: 400,
     height: 150,
@@ -134,7 +134,7 @@ const POPUP_GROUPS = {
             Congratulations!<br><br>You have reached ${formatMass(
               mlt(7.5e6)
             )} of mass!<br><br>
-            <b>Entropy is unlocked in Quantum tab!</b>
+            <b>Entropy is unlocked in the Quantum tab!</b>
         `;
     },
     width: 400,
