@@ -447,6 +447,8 @@ function setupCoreHTML() {
         </div>`;
   }
   new Element("theorem_inv_table").setHTML(h);
+
+  if (player.inf && player.inf.theorem) updateCoreTemp();
 }
 
 let ykCoreTick = 0;

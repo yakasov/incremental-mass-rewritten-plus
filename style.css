@@ -840,7 +840,6 @@ h4 {
   display: inline;
   font-weight: bold;
   font-size: 18px;
-  line-height: 48px;
 }
 
 .basic_bold {
@@ -1237,7 +1236,7 @@ h4 {
   position: absolute;
   height: 20px;
   left: 0;
-  top: -20px;
+  top: -13px;
 }
 
 #resources_table {
@@ -1688,7 +1687,7 @@ h4 {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: linear-gradient(transparent, #0f3f27);
+  background: linear-gradient(rgba(15, 63, 39, 0.6), #0f3f27);
 }
 #ouro_scene > *:not(#ouro_quotes) {
   position: fixed;

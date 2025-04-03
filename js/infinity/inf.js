@@ -378,7 +378,7 @@ const INF = {
       .add(1)
       .log10()
       .sub(307)
-      .root(hasInfUpgrade(20) ? 1.895 : 2)
+      .root(hasInfUpgrade(20) ? 1.89 : 2)
       .div(2);
     x = E(10).pow(x.sub(1));
 

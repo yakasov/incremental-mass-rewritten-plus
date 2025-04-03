@@ -25,7 +25,10 @@ const ATOM = {
       return x;
     } else if (evo >= 2) {
       if (player.evo.wh.fabric.lt(300)) return E(0);
-      x = player.evo.wh.fabric.div(150).sub(1).sqrt();
+      x = player.evo.wh.fabric
+        .div(150)
+        .sub(1)
+        .pow(1 / 1.9);
       if (!tmp.c16.in) x = E(2).pow(x).mul(5);
     } else {
       x = player.bh.mass.div(hasUpgrade("br", 1) ? 1.5e156 ** 0.5 : 1.5e156);

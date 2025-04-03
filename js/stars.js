@@ -217,7 +217,7 @@ function setupStarsHTML() {
     if (i > 0)
       table += `<div id="star_gen_arrow_${i}" style="width: 30px; font-size: 30px"><br>←</div>`;
     table += `
-            <div id="star_gen_div_${i}" style="width: 250px;">
+            <div id="star_gen_div_${i}" style="margin-bottom: 20px; width: 250px;">
                 <img src="images/star_${i}.png"><br><br>
                 <div id="star_gen_${i}">X</div>
             </div>

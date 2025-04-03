@@ -19,7 +19,7 @@ const TOOLTIP_RES = {
       let h = `<i>
             Reach over <b>${formatMass(
               1e14
-            )}</b> of normal mass to reset previous features for gain Rage Powers.
+            )}</b> of normal mass to reset previous features to gain Rage Powers.
             </i>`;
 
       return h;
@@ -30,7 +30,7 @@ const TOOLTIP_RES = {
     desc: () =>
       `<i>Reach over <b>${formatMass(
         1e14
-      )}</b> of normal mass to reset previous features for gain Calm Powers.</i>`,
+      )}</b> of normal mass to reset previous features to gain Calm Powers.</i>`,
   },
   dm: {
     full: "Dark Matter",
@@ -39,7 +39,7 @@ const TOOLTIP_RES = {
         EVO.amt >= 1
           ? `<b>${format(5e3)}</b> Calm Power`
           : `<b>${format(1e25)}</b> Rage Power`;
-      return `<i>Reach over ${r} to reset all previous features for gain Dark Matters.</i>`;
+      return `<i>Reach over ${r} to reset all previous features to gain Dark Matters.</i>`;
     },
   },
   fabric: {
@@ -47,7 +47,7 @@ const TOOLTIP_RES = {
     desc() {
       return `<i>Reach over <b>${format(
         1e5
-      )}</b> Calm Power to reset all previous features for gain Fabrics.</i>`;
+      )}</b> Calm Power to reset all previous features to gain Fabrics.</i>`;
     },
   },
   bh: {
@@ -90,7 +90,7 @@ const TOOLTIP_RES = {
           ? `<b>${format(300, 0)}</b> Fabric`
           : `<b>${formatMass(uni(1e100))}</b> of black hole`;
 
-      return `<i>Reach over ${r} to reset all previous features for gain Atoms & Quarks.</i>`;
+      return `<i>Reach over ${r} to reset all previous features to gain Atoms & Quarks.</i>`;
     },
   },
   protostar: {
@@ -99,7 +99,7 @@ const TOOLTIP_RES = {
       `Reach over <b>${format(
         1e3,
         0
-      )}</b> Fabric to reset all previous features for gain Protostars & Quarks.`,
+      )}</b> Fabric to reset all previous features to gain Protostars & Quarks.`,
   },
   quarks: {
     full: "Quark",

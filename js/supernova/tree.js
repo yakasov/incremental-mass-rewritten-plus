@@ -125,16 +125,15 @@ const TREE_UPGS = {
       (tmp.sn.tree_chosen == x || auto) &&
       tmp.sn.tree_afford[x]
     ) {
+      let nodeCost =
+        typeof this.ids[x].cost === "function"
+          ? this.ids[x].cost()
+          : this.ids[x].cost;
       if (this.ids[x].qf)
-        player.qu.points = player.qu.points.sub(this.ids[x].cost).max(0);
+        player.qu.points = player.qu.points.sub(nodeCost).max(0);
       else if (this.ids[x].cs)
-        player.dark.c16.shard = player.dark.c16.shard
-          .sub(this.ids[x].cost)
-          .max(0);
-      else
-        player.supernova.stars = player.supernova.stars
-          .sub(this.ids[x].cost)
-          .max(0);
+        player.dark.c16.shard = player.dark.c16.shard.sub(nodeCost).max(0);
+      else player.supernova.stars = player.supernova.stars.sub(nodeCost).max(0);
 
       if (CS_TREE.includes(x)) player.dark.c16.tree.push(x);
       else player.supernova.tree.push(x);
@@ -1277,7 +1276,7 @@ const TREE_UPGS = {
         return `Get 15 Quantum Shards.`;
       },
       desc: `You can now automatically get all Fermions Tiers outside any Fermion, except during Quantum Challenge.`,
-      cost: E(1e11),
+      cost: E(1e20),
     },
     qu_qol8a: {
       unl() {
@@ -1449,7 +1448,9 @@ const TREE_UPGS = {
       },
       reqDesc: `Quantize 200 times.`,
       desc: `Unlock Quantum Challenge.`,
-      cost: E(1e13),
+      cost() {
+        return EVO.amt >= 2 ? E(1e11) : E(1e13);
+      },
     },
     unl4: {
       qf: true,
@@ -1876,7 +1877,7 @@ function updateTreeTemp() {
           : t.cs
           ? player.dark.c16.shard
           : player.supernova.stars
-        ).gte(t.cost);
+        ).gte(typeof t.cost === "function" ? t.cost() : t.cost);
       tsn.tree_loc[id] = i;
       tsn.tree_unlocked[id] = unl;
       tsn.tree_afford[id] = can;
@@ -2073,7 +2074,10 @@ function updateTreeHTML() {
             ${`<span class="sky"><b>[${tmp.sn.tree_chosen}]</b> ${desc}</span>`.corrupt(
               c16 && CORRUPTED_TREE.includes(tmp.sn.tree_chosen)
             )}<br>
-            <span>Cost: ${format(t_ch.cost, 2)} ${
+            <span>Cost: ${format(
+              typeof t_ch.cost === "function" ? t_ch.cost() : t_ch.cost,
+              2
+            )} ${
         t_ch.qf
           ? "Quantum foam"
           : t_ch.cs

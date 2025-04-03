@@ -7,7 +7,18 @@ Personal tweaks to IMR.
 ### v0.7.1.6-plus 9
 
 - Boosted 'Better Infinity' effect slightly
+- Boosted Evo 2+ multiplier to Quantum Foam
+- Boost Atom gain in Evo 2+ slightly
+- Element 288 cost reduced in Evo 2+
+- Supernova tree upgrade [unl3] cost decreased when in Evo 2+
+- Supernova tree upgrade [qu_qol8] cost increased
 - Improved Challenge styling
+- Improved Star Generator styling
+- Changed Ouroboros screen CSS to make text more legible
+- Challenges now say what they unlock (as opposed to 'more features')
+- Increased header bar min-height to prevent jittering when a new notification appears
+- Fixed five Theorem slots appearing on first load when only four should be visible
+- Improved Ouroboros story strings
 - String and grammar pass
 
 ### v0.7.1.6-plus 8

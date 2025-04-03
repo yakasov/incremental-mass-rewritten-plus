@@ -693,7 +693,7 @@ const CHALS = {
       (betterC7Effect()
         ? `Pre-Impossible challenges scale weaker by completions (this does not affect C7).`
         : `Each completion increases challenge 1-4 caps by 2.`) +
-      `<br><span class="gold">On 1st completion, unlock Elements</span>`,
+      `<br><span class="gold">On 1st completion, unlock Elements!</span>`,
     max: E(50),
     inc: E(64),
     pow: E(1.25),
@@ -724,7 +724,7 @@ const CHALS = {
       (EVO.amt >= 2
         ? `Gain +20% more Fabric per completion.`
         : `Dark Matter & Mass from Black Hole gains are raised by completions.`) +
-      `<br><span class="gold">On 1st completion, unlock 3 rows of Elements</span>`,
+      `<br><span class="gold">On 1st completion, unlock 3 rows of Elements!</span>`,
     max: E(50),
     inc: E(80),
     pow: E(1.3),
@@ -795,7 +795,7 @@ const CHALS = {
       (EVO.amt >= 3
         ? `Gain +10% more protostars per completion.`
         : `The exponent of the RP formula is multiplied by completions (doesn't apply in this challenge).`) +
-      `<br><span class="gold">On 1st completion, unlock Fermions</span>`,
+      `<br><span class="gold">On 1st completion, unlock Fermions!</span>`,
     max: E(100),
     inc: E("e2000"),
     pow: E(2),
@@ -839,7 +839,7 @@ const CHALS = {
     },
     title: "Decay of Atom",
     desc: "You cannot gain Atoms or Quarks.",
-    reward: `Completions add free Radiation Boosters.<br><span class="gold">On 1st completion, unlock <b class='light_green'>Quantum</b></span>`,
+    reward: `Completions add free Radiation Boosters.<br><span class="gold">On 1st completion, unlock <b class='light_green'>Quantum!</b></span>`,
     max: E(100),
     inc: E("e2e7"),
     pow: E(2),
@@ -860,7 +860,7 @@ const CHALS = {
     },
     title: "Absolutely Black Mass",
     desc: "Normal Mass and Black Hole Mass gains are set to lg(x)^^1.5.",
-    reward: `Increase Dark Rays earned based on completions.<br><span class="gold">On 1st completion, unlock more features!</span>`,
+    reward: `Increase Dark Rays earned based on completions.<br><span class="gold">On 1st completion, unlock 12 more elements, a new Supernova tree upgrade, Hex ranks, and automatically Prestige up!</span>`,
     max: E(25),
     inc: E("e2e4"),
     pow: E(8),
@@ -883,7 +883,7 @@ const CHALS = {
         14
       )}.`;
     },
-    reward: `Gain more Primordium Theorems.<br><span class="gold">On 1st completion, unlock more features!</span>`,
+    reward: `Gain more Primordium Theorems.<br><span class="gold">On 1st completion, unlock 17 more elements, Glory ranks, Abyssal Blots, and automatically Honor up!</span>`,
     max: E(100),
     inc: E("e2e19"),
     pow: E(3),
@@ -906,7 +906,7 @@ const CHALS = {
         15
       )}.`;
     },
-    reward: `Mass, Atomic & Quark overflows scale later.<br><span class="gold">On 1st completion, unlock more features!</span>`,
+    reward: `Mass, Atomic & Quark overflows scale later.<br><span class="gold">On 1st completion, unlock 20 more elements and automatically Glory up!</span>`,
     max: E(100),
     inc: E("ee6"),
     pow: E(2),
@@ -941,7 +941,7 @@ const CHALS = {
         }.
         `;
     },
-    reward: `Improve Hybridized Uran-Astatine.<br><span class="gold">On 1st completion, unlock <b class='yellow'>Infinity</b></span>`,
+    reward: `Improve Hybridized Uran-Astatine.<br><span class="gold">On 1st completion, unlock <b class='yellow'>Infinity!</b></span>`,
     max: E(1),
     start: E("e1.25e11"),
     effect(x) {
@@ -960,7 +960,7 @@ const CHALS = {
     },
     title: "Unnatural Tickspeed",
     desc: `Tickspeeds, Accelerators, BHC, FVM, Cosmic Rays, Star Boosters, and Cosmic Strings (including bonuses) don't work and are unaffordable or unobtainable. Second neutron effect doesn't work until Atom Upgrade 18. Black Hole's effect doesn't work until Binilunium-201. You are stuck in a Dark Run with 250 of all glyphs (unaffected by weakness).`,
-    reward: `Per completion, increase the softcap of theorem's level starting by +3.<br><span class="yellow">On 4th completion, unlock Ascensions and more elements.</span>`,
+    reward: `Per completion, increase the softcap of theorem's level starting by +3.<br><span class="yellow">On 4th completion, unlock Ascensions, 9 more elements and 6 more Muonic elements!.</span>`,
     max: E(100),
     get start() {
       return E(EVO.amt >= 4 ? "ee210" : "ee92");
@@ -982,12 +982,12 @@ const CHALS = {
     },
     title: "Reinforced Scaling",
     desc: `
-        You cannot weaken nor remove pre-Infinity scalings. You are stuck in Dark Run with 500 of all glyphs (unaffected by weakness).
+        You cannot weaken nor remove pre-Infinity scalings. You are stuck in a Dark Run with 500 of all glyphs (unaffected by weakness).
         `,
     get reward() {
       return (
         (EVO.amt >= 2 ? `Corrupted Stars` : `Hybridized Uran-Astatine`) +
-        ` weaken pre-Hex Exotic scalings, and strengthen C16's reward.<br><span class="yellow">On 4th completion, unlock fifth star in the theorem and more features.</span>`
+        ` weaken pre-Hex Exotic scalings, and strengthen C16's reward.<br><span class="yellow">On 4th completion, unlock Transcensions, an extra star in Theorems, 12 more elements and 10 more Muonic elements!</span>`
       );
     },
     max: E(100),

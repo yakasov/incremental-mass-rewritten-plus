@@ -2361,9 +2361,9 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `Challenge 5’s reward is twice as stronger.`,
+      desc: `Challenge 5’s reward is twice as strong.`,
       get cost() {
-        return E("ee23700");
+        return EVO.amt >= 2 ? E("ee13700") : E("ee23700");
       },
     },
     {

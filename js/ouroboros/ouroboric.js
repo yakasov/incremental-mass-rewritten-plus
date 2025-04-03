@@ -223,23 +223,23 @@ const EVO = {
     null,
     [
       `<img src="images/rp.png"> Rage ➜ Calm <img src="images/evolution/calm_power.png">`,
-      `Break the madness of Infinity. Reincarnate as a serpent.`,
+      `Break the madness of Infinity. Find your inner peace. Reincarnate.`,
     ],
     [
       `<img src="images/dm.png"> Dark Matter ➜ Fabric <img src="images/evolution/fabric.png">`,
-      `Evaporate what causes destruction. Black Hole.`,
+      `Evaporate that which causes destruction. Destroy the Black Hole.`,
     ],
     [
       `<img src="images/atom.png"> Atoms ➜ Protostars <img src="images/evolution/protostar.png">`,
-      `The first glimpses of shattering, all starts small.`,
+      `The molecules of this universe begin to shatter and turn to dust.`,
     ],
     [
       `<img src="images/sn.png"> Supernova ➜ Constellation <img src="images/evolution/constellation.png">`,
-      `No longer exploding, now start exploring.`,
+      `The explosions turn into art as they are embraced rather than feared..`,
     ],
     [
       `<img src="images/qu.png"> Quantum ➜ Cosmic <img src="images/evolution/universal_elixir.png">`,
-      `The universe is relinquishing with you.`,
+      `The universe is pleased.`,
     ],
   ],
 

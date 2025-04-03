@@ -168,11 +168,12 @@
               <iconify-icon icon="mdi:eye" width="35"></iconify-icon>
             </button>
           </div>
-          <div style="min-height: 60px">
+          <div style="margin-top: 12px; min-height: 81px">
             <div id="chal_upper"></div>
             <div id="requirement"></div>
             <div id="upg_notify">
               <h4 class="red" id="upg_notify_msg"></h4>
+              <br />
               <br />
               <button class="btn" onclick="goUpgNotify()">
                 Go to upgrade!
@@ -185,7 +186,9 @@
           </div>
           <div class="main-line"></div>
           <div id="stabs_div">
-            <button id="pin_btn" onclick="PINS.pin()">Pin</button>
+            <button id="pin_btn" onclick="PINS.pin()" style="line-height: 0">
+              Pin
+            </button>
             <div class="table_center stab_btn" id="pins_stabs"></div>
             <div id="stabs"></div>
           </div>
@@ -1161,7 +1164,7 @@
                   <button onclick="recordMovement(1)">→</button><br />
                   <button
                     class="tooltip"
-                    tooltip-html="Get 200 energy to perform a boom."
+                    tooltip-html="Spend 200 energy to let out a collecting wave."
                     id="snake_boom"
                     onclick="boomSnake()"
                   >
