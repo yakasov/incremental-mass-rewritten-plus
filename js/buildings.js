@@ -254,7 +254,7 @@ const BUILDINGS_DATA = {
       if (post_x)
         ret = ret.mul(
           x
-            .div(tmp.c16.in ? 1 : 1e135)
+            .div(tmp.c16.in ? 1 : 1e140)
             .max(1)
             .sqrt()
         );

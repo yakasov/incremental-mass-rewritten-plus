@@ -4,6 +4,14 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 11
+
+- Challenge 4 effect softcapped slightly earlier
+- Challenges 1-4 properly disabled in Evo 2+
+- Boosted Quark gain in Evo 2
+- Stronger building effect is slightly weaker
+- Formatting run
+
 ### v0.7.1.6-plus 10
 
 - Boosted Challenge 9 and 10 rewards in Evo 3+

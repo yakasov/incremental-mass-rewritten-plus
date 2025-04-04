@@ -81,7 +81,11 @@ const ATOM = {
       x = expMult(x.overflow(s, hasElement(299) ? 2 / 3 : 0.5).sub(1), k);
       x = E(1.01).pow(x);
     } else if (hasElement(1)) x = E(1.25).pow(x.max(1).log10());
-    else x = x.log10().pow(1.5).add(1);
+    else
+      x = x
+        .log10()
+        .pow(evo >= 2 ? 2 : 1.5)
+        .add(1);
 
     if (!tmp.c16.in) x = x.pow(escrowBoost("qk"));
 

@@ -473,7 +473,10 @@ const CHALS = {
   },
   1: {
     unl() {
-      return player.mass.gte(1e125) || player.chal.unl || player.atom.unl;
+      return (
+        EVO.amt < 2 &&
+        (player.mass.gte(1e125) || player.chal.unl || player.atom.unl)
+      );
     },
     title: "Instant Scale",
     desc: "Super Ranks and Mass Upgrades start at 25 and Super Tickspeed starts at 50.",
@@ -508,7 +511,7 @@ const CHALS = {
   },
   2: {
     unl() {
-      return player.chal.comps[1].gte(1) || player.atom.unl;
+      return EVO.amt < 2 && (player.chal.comps[1].gte(1) || player.atom.unl);
     },
     title: "Anti-Tickspeed",
     desc: "You cannot buy Tickspeed.",
@@ -535,7 +538,7 @@ const CHALS = {
   },
   3: {
     unl() {
-      return player.chal.comps[2].gte(1) || player.atom.unl;
+      return EVO.amt < 2 && (player.chal.comps[2].gte(1) || player.atom.unl);
     },
     title: "Melted Mass",
     desc: "Mass gain softcap starts 150 OoMs earlier, and is stronger.",
@@ -563,7 +566,7 @@ const CHALS = {
   },
   4: {
     unl() {
-      return player.chal.comps[3].gte(1) || player.atom.unl;
+      return EVO.amt < 2 && (player.chal.comps[3].gte(1) || player.atom.unl);
     },
     title: "Weakened Rage",
     get desc() {
@@ -585,7 +588,7 @@ const CHALS = {
             .mul(0.02)
             .add(1)
         : x.root(1.5).mul(0.01).add(1);
-      return overflow(ret.softcap(3, 0.25, 0), 1e12, 0.5);
+      return overflow(ret.softcap(1.2, 2, 1).softcap(3, 0.25, 0), 1e12, 0.5);
     },
     effDesc(x) {
       return (
