@@ -4,6 +4,16 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 10
+
+- Boosted Challenge 9 and 10 rewards in Evo 3+
+- Decoupled Element 291 and 292 effects from Quark gain, so they only affect Protostar gain without massively boosting Quark gain directly
+- Boson 'Supernova requirement is decreased based on Gluons' enabled in Evo 2 and 3
+- Improved Challenge logic when deciding which challenges should show as 'Disabled'
+- Improved Fermion styling to show disabled Fermions
+- Fixed Element 291 and 292 effect formulas
+- Fixed Elements 291 and 292 not doing anything
+
 ### v0.7.1.6-plus 9
 
 - Boosted 'Better Infinity' effect slightly
