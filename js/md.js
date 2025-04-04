@@ -1,12 +1,12 @@
 const MASS_DILATION = {
   unlocked() {
-    return hasElement(21) && EVO.amt < 3;
+    return hasElement(21) && OURO.evo < 3;
   },
   penalty() {
     let x = 0.8;
     if (FERMIONS.onActive("02")) x **= 2;
     if (QCs.active() && (brokeDil() ? !player.qu.rip.active : true))
-      x **= tmp.qu.qc.eff[6];
+      x **= tmp.qu.qc_eff[6];
     return x;
   },
   onactive() {
@@ -22,7 +22,7 @@ const MASS_DILATION = {
       .mul(tmp.chal && !CHALS.inChal(10) ? tmp.chal.eff[10] : 1);
     if (!inMD() && hasTree("d1")) x = x.mul(1.25);
     if (FERMIONS.onActive("01")) x = x.div(10);
-    if (QCs.active()) x = x.mul(tmp.qu.qc.eff[4]);
+    if (QCs.active()) x = x.mul(tmp.qu.qc_eff[4]);
     if (hasElement(24) && hasPrestige(0, 40))
       x = x.mul(tmp.elements.effect[24]);
     if (tmp.dark.run) x = x.pow(mgEff(3));
@@ -56,15 +56,15 @@ const MASS_DILATION = {
     let pow = E(2).add(mdEff(1, true, 0));
     let x = player.md.particles.pow(pow);
     x = x.mul(mdEff(0));
-    if (hasElement(22)) x = x.mul(elemEffect(22));
-    if (hasElement(35)) x = x.mul(elemEffect(22));
-    if (hasElement(40)) x = x.mul(elemEffect(40, [1, 1])[0]);
+    if (hasElement(22)) x = x.mul(tmp.elements.effect[22]);
+    if (hasElement(35)) x = x.mul(tmp.elements.effect[35]);
+    if (hasElement(40)) x = x.mul(tmp.elements.effect[40][0]);
     if (hasElement(32)) x = x.pow(1.05);
-    if (QCs.active()) x = x.pow(tmp.qu.qc.eff[4]);
+    if (QCs.active()) x = x.pow(tmp.qu.qc_eff[4]);
 
     x = x.softcap(tmp.md.massSoftcap1, 0.5, 0);
 
-    if (hasElement(40)) x = x.pow(elemEffect(40, [1, 1])[1]);
+    if (hasElement(40)) x = x.pow(tmp.elements.effect[40][1]);
 
     x = expMult(x, theoremEff("atom", 5));
 
@@ -74,7 +74,7 @@ const MASS_DILATION = {
     let os = E("ee30").pow(glyphUpgEff(8));
     if (hasUpgrade("atom", 19)) os = os.pow(upgEffect(3, 19));
     if (hasTree("ct14")) os = os.pow(treeEff("ct14"));
-    if (EVO.amt >= 1 || hasAscension(0, 7)) os = EINF;
+    if (OURO.evo >= 1 || hasAscension(0, 7)) os = EINF;
 
     x = overflow(x, os, 0.5);
 
@@ -85,7 +85,7 @@ const MASS_DILATION = {
     return x;
   },
   gainSoftcap1() {
-    return EVO.amt >= 2 ? EINF : mlt(1e12);
+    return OURO.evo >= 2 ? EINF : mlt(1e12);
   },
   mass_req() {
     let x = E(10)
@@ -95,7 +95,7 @@ const MASS_DILATION = {
           .div(tmp.md.rp_mult_gain)
           .root(tmp.md.rp_exp_gain)
           .add(14)
-          .mul(40)
+          .mul(40),
       )
       .mul(1.50005e56);
     return x;
@@ -179,8 +179,8 @@ const MASS_DILATION = {
           if (tmp.md.bd3)
             return x
               .mul(mdEff(11))
-              .root(tmp.qu.rip.in ? 3 : 2)
-              .mul(tmp.qu.rip.in ? 0.05 : 0.1)
+              .root(tmp.rip.in ? 3 : 2)
+              .mul(tmp.rip.in ? 0.05 : 0.1)
               .add(1);
           if (hasElement(83)) return expMult(x, 2, 1.5).add(1);
           return hasMDUpg(7)
@@ -217,17 +217,17 @@ const MASS_DILATION = {
             : E(0);
         },
         effect(x) {
-          if (EVO.amt < 2)
+          if (OURO.evo < 2)
             return E(2)
               .pow(x.softcap(2.5e26, 0.1, 0).mul(tmp.md.upgs[11].eff || 1))
               .softcap(1e25, 0.75, 0);
-          if (EVO.amt >= 2) return E(2).pow(x.softcap(500, 0.1, 0));
+          if (OURO.evo >= 2) return E(2).pow(x.softcap(500, 0.1, 0));
         },
         effDesc(x) {
           return (
             format(x, 0) +
             "x" +
-            (x.gte(1e25) && EVO.amt < 2
+            (x.gte(1e25) && OURO.evo < 2
               ? " <span class='soft'>(softcapped)</span>"
               : "")
           );
@@ -244,7 +244,7 @@ const MASS_DILATION = {
         },
         effect(x) {
           let r = player.md.mass.max(1).log(100).root(3).div(8).add(1);
-          if (EVO.amt >= 2) r = r.min(100);
+          if (OURO.evo >= 2) r = r.min(100);
           return r;
         },
         effDesc(x) {
@@ -334,7 +334,7 @@ const MASS_DILATION = {
       {
         unl() {
           return (
-            (tmp.star_unl || player.supernova.times.gte(1)) && EVO.amt == 0
+            (tmp.star_unl || player.supernova.times.gte(1)) && OURO.evo == 0
           );
         },
         desc: `Tickspeed affects all-star resources at a reduced rate.`,
@@ -367,14 +367,14 @@ const MASS_DILATION = {
         },
         effect(x) {
           let r = E(2).pow(x);
-          if (EVO.amt < 2) r = r.softcap(1e25, 2 / 3, 0);
+          if (OURO.evo < 2) r = r.softcap(1e25, 2 / 3, 0);
           return r;
         },
         effDesc(x) {
           return (
             format(x) +
             "x" +
-            (x.gte(1e25) && EVO.amt < 2
+            (x.gte(1e25) && OURO.evo < 2
               ? " <span class='soft'>(softcapped)</span>"
               : "")
           );
@@ -403,14 +403,14 @@ const MASS_DILATION = {
         effect(i) {
           if (hasMDUpg(3, true)) i = i.pow(1.5).softcap(1e18, 1 / 1.5, 0);
           let x = i.mul(0.015).add(1).softcap(1.2, 0.75, 0).sub(1);
-          if (EVO.amt < 2) x = x.add(1).softcap(1.2, 0.75, 0).sub(1);
+          if (OURO.evo < 2) x = x.add(1).softcap(1.2, 0.75, 0).sub(1);
           return x;
         },
         effDesc(x) {
           return (
             "+" +
             format(x) +
-            (x.gte(0.2) && EVO.amt < 2
+            (x.gte(0.2) && OURO.evo < 2
               ? " <span class='soft'>(softcapped)</span>"
               : "")
           );
@@ -418,7 +418,7 @@ const MASS_DILATION = {
       },
       {
         unl() {
-          return player.supernova.post_10 && EVO.amt == 0;
+          return player.supernova.post_10 && OURO.evo == 0;
         },
         desc: `First 3 Mass Dilation upgrades are stronger.`,
         cost(x) {
@@ -448,7 +448,20 @@ const MASS_DILATION = {
 
   break: {
     toggle() {
-      player.md.break.active = true;
+      let bd = player.md.break;
+
+      if (bd.active)
+        createConfirm("Are you sure you want to fix Dilation?", "bd", () => {
+          bd.active = false;
+
+          bd.energy = E(0);
+          bd.mass = E(0);
+          for (let x = 0; x < MASS_DILATION.break.upgs.ids.length; x++)
+            bd.upgs[x] = E(0);
+
+          QUANTUM.enter(false, true, false, true);
+        });
+      else bd.active = true;
     },
     energyGain() {
       if (!brokeDil()) return E(0);
@@ -461,7 +474,7 @@ const MASS_DILATION = {
       x = x.add(1).pow(p).sub(1);
       if (hasPrestige(0, 10)) x = x.mul(prestigeEff(0, 10));
       x = x.mul(mdEff(5, true));
-      if (hasElement(116)) x = x.mul(elemEffect(116));
+      if (hasElement(116)) x = x.mul(tmp.elements.effect[116] || 1);
 
       return x;
     },
@@ -482,7 +495,7 @@ const MASS_DILATION = {
               .sub(this.ids[x].cost(tmp.bd.upgs[x].bulk.sub(1)))
               .max(0);
           player.md.break.upgs[x] = player.md.break.upgs[x].max(
-            tmp.bd.upgs[x].bulk
+            tmp.bd.upgs[x].bulk,
           );
 
           if (x == 2) {
@@ -679,7 +692,7 @@ const MASS_DILATION = {
             return player.md.break.mass.gte(uni(1e100)) ? E(1) : E(0);
           },
           effect(y) {
-            let x = (tmp.qu.speed || E(1)).add(1).root(10);
+            let x = (tmp.preQUGlobalSpeed || E(1)).add(1).root(10);
 
             return x;
           },
@@ -688,7 +701,7 @@ const MASS_DILATION = {
           },
         },
         {
-          desc: `Super Prestige starts 10 later.`,
+          desc: `Super Prestige Level starts 10 later.`,
           maxLvl: 1,
           cost(x) {
             return uni(1e120);
@@ -717,7 +730,7 @@ const MASS_DILATION = {
           },
           bulk() {
             if (player.md.break.mass.lt(uni(1e300))) return E(0);
-            let y = player.md.break.mass.div(uni(1e300)).max(1).log10().root(2);
+            let y = player.md.break.mass.div(uni(1e300)).max(1).log(10).root(2);
             y = y.scale(17, hasPrestige(2, 3) ? 1.5 : 3, 0, true);
             return y.add(1).floor();
           },
@@ -743,11 +756,7 @@ function setupMDHTML() {
     table += `
         <button onclick="MASS_DILATION.upgs.buy(${i})" class="btn full md" id="md_upg${i}_div" style="font-size: 11px;">
         <div style="min-height: 80px">
-            ${
-              (upg.maxLvl || 1 / 0) > 1
-                ? `[Level <span id="md_upg${i}_lvl"></span>]<br>`
-                : ""
-            }
+            ${(upg.maxLvl || 1 / 0) > 1 ? `[Level <span id="md_upg${i}_lvl"></span>]<br>` : ""}
             ${upg.desc}<br>
             ${upg.effDesc ? `Currently: <span id="md_upg${i}_eff"></span>` : ""}
         </div>
@@ -764,11 +773,7 @@ function setupMDHTML() {
     table += `
         <button onclick="MASS_DILATION.break.upgs.buy(${i})" class="btn full bd" id="bd_upg${i}_div" style="font-size: 11px;">
         <div style="min-height: 80px">
-            ${
-              (upg.maxLvl || 1 / 0) > 1
-                ? `[Level <span id="bd_upg${i}_lvl"></span>]<br>`
-                : ""
-            }
+            ${(upg.maxLvl || 1 / 0) > 1 ? `[Level <span id="bd_upg${i}_lvl"></span>]<br>` : ""}
             ${upg.desc}<br>
             ${upg.effDesc ? `Currently: <span id="bd_upg${i}_eff"></span>` : ""}
         </div>
@@ -845,55 +850,56 @@ function updateMDHTML() {
         ? " " +
           formatGain(
             player.md.particles,
-            tmp.md.passive_rp_gain.mul(tmp.qu.speed)
+            tmp.md.passive_rp_gain.mul(tmp.preQUGlobalSpeed),
           )
-        : "")
+        : ""),
   );
   tmp.el.md_eff.setTxt(
     tmp.md.bd3
       ? "^" + tmp.md.mass_eff.format()
       : tmp.md.mass_eff.gte(10)
-      ? format(tmp.md.mass_eff) + "x"
-      : format(tmp.md.mass_eff.sub(1).mul(100)) + "%"
+        ? format(tmp.md.mass_eff) + "x"
+        : format(tmp.md.mass_eff.sub(1).mul(100)) + "%",
   );
   tmp.el.md_mass.setTxt(
     formatMass(player.md.mass) +
       " " +
-      formatGain(player.md.mass, tmp.md.mass_gain.mul(tmp.qu.speed), true)
+      formatGain(
+        player.md.mass,
+        tmp.md.mass_gain.mul(tmp.preQUGlobalSpeed),
+        true,
+      ),
   );
   tmp.el.md_btn.setTxt(
     inMD()
       ? tmp.md.rp_gain.gte(1)
         ? `Cancel for ${format(tmp.md.rp_gain, 0)} Relativistic particles`
-        : `Reach ${formatMass(
-            tmp.md.mass_req
-          )} to gain Relativistic particles, or cancel dilation`
-      : "Dilate Mass"
+        : `Reach ${formatMass(tmp.md.mass_req)} to gain Relativistic particles, or cancel dilation`
+      : "Dilate Mass",
   );
   for (let x = 0; x < MASS_DILATION.upgs.ids.length; x++) {
     let upg = MASS_DILATION.upgs.ids[x];
     let unl = upg.unl ? upg.unl() : true;
     tmp.el["md_upg" + x + "_div"].setVisible(unl);
     if (unl) {
-      let has = player.md.upgs[x].gte(upg.maxLvl || 1 / 0);
       tmp.el["md_upg" + x + "_div"].setClasses({
         btn: true,
         full: true,
         md: true,
-        bought: has,
-        locked: !has && !tmp.md.upgs[x].can,
+        locked: !tmp.md.upgs[x].can,
       });
       if ((upg.maxLvl || 1 / 0) > 1)
         tmp.el["md_upg" + x + "_lvl"].setTxt(
           format(player.md.upgs[x], 0) +
-            (upg.maxLvl !== undefined ? " / " + format(upg.maxLvl, 0) : "")
+            (upg.maxLvl !== undefined ? " / " + format(upg.maxLvl, 0) : ""),
         );
-      if (upg.effDesc)
+      if (upg.effDesc) {
         tmp.el["md_upg" + x + "_eff"].setHTML(upg.effDesc(tmp.md.upgs[x].eff));
+      }
       tmp.el["md_upg" + x + "_cost"].setTxt(
         player.md.upgs[x].lt(upg.maxLvl || EINF)
           ? "Cost: " + formatMass(tmp.md.upgs[x].cost)
-          : ""
+          : "",
       );
     }
   }
@@ -903,9 +909,7 @@ function updateMDHTML() {
 
   tmp.el.dmOverflow.setDisplay(player.md.mass.gte(tmp.overflow_start.dm));
   tmp.el.dmOverflow.setHTML(
-    `Because of dilated mass overflow at <b>${formatMass(
-      tmp.overflow_start.dm
-    )}</b>, your dilated mass is ${overflowFormat(tmp.overflow.dm || 1)}!`
+    `Because of dilated mass overflow at <b>${formatMass(tmp.overflow_start.dm)}</b>, your dilated mass is ${overflowFormat(tmp.overflow.dm || 1)}!`,
   );
 }
 
@@ -914,16 +918,17 @@ function updateBDHTML() {
   let bd = player.md.break;
   let c16 = tmp.c16.in;
 
-  tmp.el.bd_btn.setDisplay(!bd.active);
+  tmp.el.bd_btn.setTxt(bd.active ? "Fix Dilation" : "Break Dilation");
+
   tmp.el.bd_energy.setTxt(
     bd.energy.format(1) +
       " " +
-      bd.energy.formatGain(tmp.bd.energyGain.mul(inf_gs))
+      bd.energy.formatGain(tmp.bd.energyGain.mul(inf_gs)),
   );
   tmp.el.bd_mass.setTxt(
     formatMass(bd.mass) +
       " " +
-      bd.mass.formatGain(tmp.bd.massGain.mul(inf_gs), true)
+      bd.mass.formatGain(tmp.bd.massGain.mul(inf_gs), true),
   );
 
   for (let x = 0; x < MASS_DILATION.break.upgs.ids.length; x++) {
@@ -931,26 +936,24 @@ function updateBDHTML() {
     let unl = upg.unl ? upg.unl() : true;
     tmp.el["bd_upg" + x + "_div"].setVisible(unl);
     if (unl) {
-      let has = player.md.break.upgs[x].gte(upg.maxLvl || 1 / 0);
       tmp.el["bd_upg" + x + "_div"].setClasses({
         btn: true,
         full: true,
         bd: true,
-        bought: has,
-        locked: !has && !tmp.bd.upgs[x].can,
+        locked: !tmp.bd.upgs[x].can,
         corrupted_text2: x == 2 && c16,
       });
       if ((upg.maxLvl || 1 / 0) > 1)
         tmp.el["bd_upg" + x + "_lvl"].setTxt(
           format(bd.upgs[x], 0) +
-            (upg.maxLvl !== undefined ? " / " + format(upg.maxLvl, 0) : "")
+            (upg.maxLvl !== undefined ? " / " + format(upg.maxLvl, 0) : ""),
         );
       if (upg.effDesc)
         tmp.el["bd_upg" + x + "_eff"].setHTML(upg.effDesc(tmp.bd.upgs[x].eff));
       tmp.el["bd_upg" + x + "_cost"].setTxt(
         bd.upgs[x].lt(upg.maxLvl || EINF)
           ? "Cost: " + formatMass(tmp.bd.upgs[x].cost)
-          : ""
+          : "",
       );
     }
   }

@@ -6,16 +6,19 @@ const CORRUPTED_STAR = {
       amt = amt.add(w).min(1);
     }
 
-    let b = Decimal.pow(2, tmp.cs.reduce_power);
+    let b = Decimal.pow(2, tmp.cs_reduce_power);
+
     if (amt.gte(1)) {
       amt = amt.log(2);
 
-      let rss1 = tmp.cs.reduce_start1.log(2),
-        rss2 = tmp.cs.reduce_start2.log(2);
+      let rss1 = tmp.cs_reduce_start1.log(2),
+        rss2 = tmp.cs_reduce_start2.log(2);
+
       let rs1 = amt.gte(rss1),
         rs2 = amt.gte(rss2);
       if (rs2) amt = amt.div(rss2).pow(b).mul(rss2);
       if (rs1) amt = Decimal.pow(2, amt.div(rss1)).sub(1).mul(rss1);
+
       amt = amt.add(tick);
 
       rs1 = rs1 || amt.gte(rss1);
@@ -46,8 +49,9 @@ const CORRUPTED_STAR = {
     },
     theorem_luck: {
       unl: () => true,
-      eff: (cs) => cs.add(1).log10().div(10).add(1).root(3),
-      eff_desc: (i) => `Increase Theorem Star luck. <h4>${formatMult(i)}</h4>`,
+      eff: (cs) => cs.add(1).log10().root(2).div(10).add(1),
+      eff_desc: (i) =>
+        `Increase luck on Theorem Stars 1-4. <h4>${formatMult(i)}</h4>`,
     },
     inf_speed: {
       unl: () => true,
@@ -61,20 +65,14 @@ const CORRUPTED_STAR = {
       eff_desc: (i) =>
         `Increase passive Supernova generation. <h4>${formatMult(i)}</h4>`,
     },
-    sd_mult: {
-      unl: () => EVO.amt >= 4 && hasElement(38, 1),
-      eff: (cs) => cs.add(1).log10().div(1).add(1).pow(2),
-      eff_desc: (i) =>
-        `Increase stardust generation. <h4>${formatMult(i)}</h4>`,
-    },
     ea_reward: {
       unl: () => hasElement(43, 1),
       eff: (cs) => cs.add(1).log10().root(2).div(20),
       eff_desc: (i) => `Strengthen Exotic Atom rewards. <h4>+${format(i)}</h4>`,
     },
     c16_exp: {
-      unl: () => EVO.amt >= 3 && hasElement(43, 1),
-      eff: (cs) => cs.add(1).log10().div(5).add(1).log10().add(1),
+      unl: () => OURO.evo >= 3 && hasElement(43, 1),
+      eff: (cs) => cs.add(1).log10().root(2).div(25).add(1),
       eff_desc: (i) => `Raise corrupted shards gain. <h4>${formatPow(i)}</h4>`,
     },
     prim_reduce: {
@@ -88,43 +86,43 @@ const CORRUPTED_STAR = {
 };
 
 function updateCSTemp() {
-  let tcs = tmp.cs;
-  tcs.unl = hasElement(251);
-
   let ss_mul = E(1);
   if (hasElement(37, 1)) ss_mul = ss_mul.mul(muElemEff(37));
   if (hasElement(40, 1)) ss_mul = ss_mul.mul(muElemEff(40));
   if (hasElement(50, 1)) ss_mul = ss_mul.mul(muElemEff(50));
   if (hasElement(65, 1)) ss_mul = ss_mul.mul(muElemEff(65));
+
   if (hasElement(300)) ss_mul = ss_mul.pow(elemEffect(300));
-  if (hasElement(312)) ss_mul = ss_mul.mul(elemEffect(312));
 
   let ss1 = E(1e3).mul(ss_mul),
     ss2 = E(1e10).mul(ss_mul);
-  tcs.reduce_start1 = ss1;
-  tcs.reduce_start2 = ss2;
+  tmp.cs_reduce_start1 = ss1;
+  tmp.cs_reduce_start2 = ss2;
 
   let s = Decimal.pow(2, player.inf.cs_double[0].add(player.inf.cs_double[1]));
+
   if (hasElement(33, 1)) s = s.mul(muElemEff(33));
   if (hasElement(34, 1)) s = s.mul(muElemEff(34));
   if (hasElement(42, 1)) s = s.mul(muElemEff(42));
   if (hasElement(47, 1)) s = s.mul(muElemEff(47));
+
   if (hasElement(300)) s = s.pow(elemEffect(300));
 
-  tcs.reduce_power = GPEffect(4, 1);
-  tcs.speed = s;
-  tcs.sale = E(1);
-  if (hasPrestige(4, 7)) tcs.sale = tcs.sale.mul(1e10);
-  if (hasElement(53, 1)) tcs.sale = tcs.sale.mul(muElemEff(53));
+  tmp.cs_reduce_power = GPEffect(4, 1);
+  tmp.cs_speed = s;
 
-  tcs.eff = CORRUPTED_STAR.eff();
+  tmp.csu_div = E(1);
+  if (hasPrestige(4, 7)) tmp.csu_div = tmp.csu_div.mul(1e10);
+  if (hasElement(53, 1)) tmp.csu_div = tmp.csu_div.mul(muElemEff(53));
+
+  tmp.cs_effect = CORRUPTED_STAR.eff();
 }
 
 function hasCSEffect(i) {
-  return tmp.cs.eff[i] !== undefined;
+  return tmp.cs_effect[i] !== undefined;
 }
 function CSEffect(i, def = E(1)) {
-  return EVO.isFed("cs_" + i) || !tmp.inf_unl ? def : tmp.cs.eff[i] ?? def;
+  return EVO.isFed("cs_" + i) ? def : (tmp.cs_effect[i] ?? def);
 }
 
 function buyCSUpg(i) {
@@ -134,7 +132,7 @@ function buyCSUpg(i) {
     case 0:
       if (player.inf.cs_amount.gte(getCSUpgRequirement(0))) {
         bulk = bulkCSUpgRequirement(0, player.inf.cs_amount).max(
-          player.inf.cs_double[0]
+          player.inf.cs_double[0],
         );
         player.inf.cs_double[0] = bulk;
 
@@ -146,7 +144,7 @@ function buyCSUpg(i) {
     case 1:
       if (player.inf.points.gte(getCSUpgRequirement(1))) {
         bulk = bulkCSUpgRequirement(1, player.inf.points).max(
-          player.inf.cs_double[1]
+          player.inf.cs_double[1],
         );
         player.inf.cs_double[1] = bulk;
 
@@ -165,10 +163,10 @@ function getCSUpgRequirement(i, lvl = player.inf.cs_double[i]) {
 
   switch (i) {
     case 0:
-      x = Decimal.pow(1e3, lvl.add(1)).div(tmp.cs.sale);
+      x = Decimal.pow(1e3, lvl.add(1)).div(tmp.csu_div);
       break;
     case 1:
-      x = E(10).pow(lvl).mul(1e35).div(tmp.cs.sale);
+      x = Decimal.pow(10, lvl).mul(1e36).div(tmp.csu_div);
       break;
   }
 
@@ -180,10 +178,10 @@ function bulkCSUpgRequirement(i, amt) {
 
   switch (i) {
     case 0:
-      x = amt.mul(tmp.cs.sale).log(1e3).sub(1);
+      x = amt.mul(tmp.csu_div).log(1e3).sub(1);
       break;
     case 1:
-      x = amt.mul(tmp.cs.sale).div(1e35).max(1).log10();
+      x = amt.mul(tmp.csu_div).div(1e36).max(1).log(10);
       break;
   }
 
@@ -194,14 +192,14 @@ function bulkCSUpgRequirement(i, amt) {
 
 function updateCSHTML() {
   let cs = player.inf.cs_amount,
-    cs_growth = CORRUPTED_STAR.calcNextGain(cs, tmp.cs.speed.div(FPS))
+    cs_growth = CORRUPTED_STAR.calcNextGain(cs, tmp.cs_speed.div(FPS))
       .div(cs)
       .pow(FPS);
 
   tmp.el.cs_amount.setHTML(
-    cs.format(2) + (cs.gt(1) ? ` (×${cs_growth.format()}/sec)` : "")
+    cs.format(2) + (cs.gt(1) ? ` (×${cs_growth.format()}/sec)` : ""),
   );
-  tmp.el.cs_speed.setHTML(formatMult(tmp.cs.speed));
+  tmp.el.cs_speed.setHTML(formatMult(tmp.cs_speed));
 
   let cost = [getCSUpgRequirement(0), getCSUpgRequirement(1)];
 
@@ -228,18 +226,14 @@ function updateCSHTML() {
   });
 
   tmp.el.cs_overflow.setHTML(
-    cs_growth.eq(1)
-      ? "Corrupted Star's growth is stalled!"
-      : cs.gte(tmp.cs.reduce_start1)
-      ? `Corrupted Star's Growth is rooted by <b>${Decimal.log(2, cs_growth)
-          .mul(tmp.cs.speed)
-          .format()}</b>!`
-      : ""
+    cs.gte(tmp.cs_reduce_start1)
+      ? `Corrupted Star's Growth is rooted by <b>${Decimal.log(2, cs_growth).mul(tmp.cs_speed).format()}</b>!`
+      : "",
   );
 
   let h = "";
-  for (var [i, eff] of Object.entries(tmp.cs.eff)) {
-    let fed = EVO.fed_msg[tmp.ouro.fed["cs_" + i]],
+  for (var [i, eff] of Object.entries(tmp.cs_effect)) {
+    let fed = EVO.fed_msg[tmp.evo.fed["cs_" + i]],
       line = CORRUPTED_STAR.effects[i].eff_desc(eff);
     if (fed) line = line.strike() + " " + fed;
     h += line + "<br>";

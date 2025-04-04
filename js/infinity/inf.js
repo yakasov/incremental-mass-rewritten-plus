@@ -14,7 +14,7 @@ const INF = {
         fragment: {},
 
         pre_theorem: [],
-        pt_chosen: -1,
+        pt_choosed: -1,
         reroll: E(0),
 
         dim_mass: E(0),
@@ -23,6 +23,7 @@ const INF = {
         cs_double: [E(0), E(0)],
       },
       ascensions: new Array(ASCENSIONS.names.length).fill(E(0)),
+      auto_asc: [],
       asc_reward: 0,
 
       gal_prestige: E(0),
@@ -36,7 +37,7 @@ const INF = {
     if (unl) player = deepUndefinedAndDecimal(player, this.save);
     else
       for (var i in this.save) {
-        if (!["asc_reward"].includes(i)) delete player[i];
+        if (!["auto_asc", "asc_reward"].includes(i)) delete player[i];
       }
 
     tmp.inf_unl = unl;
@@ -85,7 +86,6 @@ const INF = {
   },
 
   doReset() {
-    ykCoreTick = 0;
     player.mass = E(0);
 
     // QoL
@@ -99,7 +99,7 @@ const INF = {
     if (!iu11) resetMainUpgs(4, [8]);
 
     let e = [14, 18, 24, 30, 122, 124, 131, 136, 143, 194];
-    keepElementsOnOuroboric(e);
+    if (OURO.evo >= 3) e.push(293);
     if (hasInfUpgrade(2)) e.push(202);
     if (hasInfUpgrade(3)) e.push(161);
     if (iu15) e.push(218);
@@ -108,7 +108,7 @@ const INF = {
 
     player.atom.elements = e;
     player.atom.muonic_el = unchunkify(player.atom.muonic_el).filter(
-      (x) => MUONIC_ELEM.upgs[x].cs || x > 66
+      (x) => MUONIC_ELEM.upgs[x].cs || MUONIC_ELEM.upgs[x].berry,
     );
 
     for (let x = 1; x <= (hasElement(229) ? 15 : 16); x++)
@@ -118,7 +118,21 @@ const INF = {
     for (let x = 0; x < PRESTIGES.names.length; x++) player.prestiges[x] = E(0);
 
     // Ouroboric
-    if (OURO.unl) resetEvolutionSave("inf");
+    if (OURO.unl())
+      player.evo = deepUndefinedAndDecimal(
+        {
+          times: player.evo.times,
+          cp: { unl: OURO.evo >= 1 },
+          wh: {
+            unl: OURO.evo >= 2,
+            auto: player.evo.wh.auto,
+            origin: player.evo.wh.origin,
+            rate: player.evo.wh.rate,
+          },
+          const: player.evo.const,
+        },
+        OURO.save.evo,
+      );
 
     // Reset
     player.ranks[RANKS.names[RANKS.names.length - 1]] = E(0);
@@ -293,7 +307,7 @@ const INF = {
 
     // Other
     if (!hasInfUpgrade(11)) {
-      tmp.ranks.tab = 0;
+      tmp.rank_tab = 0;
       tmp.stab[4] = 0;
     }
 
@@ -313,36 +327,39 @@ const INF = {
     player.inf.dim_mass = E(0);
     player.inf.cs_amount = E(0);
 
-    player.inf.pt_chosen = -1;
+    player.inf.pt_choosed = -1;
     generatePreTheorems();
 
     for (let i = 0; i < GAL_PRESTIGE.res_length; i++)
       player.gp_resources[i] = E(0);
   },
-  req: E(10).pow(Number.MAX_VALUE),
+  req: Decimal.pow(10, Number.MAX_VALUE),
   limit() {
     if (!tmp.inf_unl) return this.req;
-    return E(10).pow(
-      E(10).pow(
+    return Decimal.pow(
+      10,
+      Decimal.pow(
+        10,
         Decimal.pow(
           1.05,
-          player.inf.theorem.scaleEvery("inf_theorem").pow(1.25)
-        ).mul(Math.log10(Number.MAX_VALUE))
-      )
+          player.inf.theorem.scaleEvery("inf_theorem").pow(1.25),
+        ).mul(Math.log10(Number.MAX_VALUE)),
+      ),
     );
   },
   goInf(limit = false) {
     if (player.mass.gte(this.req)) {
-      if (limit || player.inf.pt_chosen >= 0 || hasElement(239))
+      if (limit || player.inf.pt_choosed >= 0 || hasElement(239))
         CONFIRMS_FUNCTION.inf(limit);
-      else
+      else if (player.confirms.inf)
         createConfirm(
           `Are you sure you want to go infinity without selecting any theorem?`,
           "inf",
           () => {
             CONFIRMS_FUNCTION.inf(limit);
-          }
+          },
         );
+      else CONFIRMS_FUNCTION.inf(limit);
     }
   },
   level() {
@@ -360,7 +377,7 @@ const INF = {
         .div(3.5e6)
         .max(1)
         .log(1.1)
-        .add(1)
+        .add(1),
     );
 
     if (hasElement(16, 1))
@@ -378,9 +395,9 @@ const INF = {
       .add(1)
       .log10()
       .sub(307)
-      .root(hasInfUpgrade(20) ? 1.89 : 2)
+      .root(hasInfUpgrade(20) ? 1.9 : 2)
       .div(2);
-    x = E(10).pow(x.sub(1));
+    x = Decimal.pow(10, x.sub(1));
 
     if (hasInfUpgrade(5)) x = x.mul(infUpgEffect(5));
     if (hasElement(17, 1)) x = x.mul(muElemEff(17));
@@ -510,9 +527,7 @@ const INF = {
       {
         title: "Muonic Automation",
         get desc() {
-          return `Automate muonic elements and ${
-            EVO.amt >= 3 ? `exotic nebulae` : `muon-catalyzed fusion`
-          }.`;
+          return `Automate muonic elements and ${OURO.evo >= 3 ? `exotic nebulae` : `muon-catalyzed fusion`}.`;
         },
         cost: E(6e6),
       },
@@ -525,7 +540,7 @@ const INF = {
     [
       {
         title: "Break Infinity",
-        desc: "Remove the mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.",
+        desc: "Remove the mass limit (can lift limitlessly). Unlock Element Tier 3 and new Muonic Elements.",
         cost: E(1e12),
       },
     ],
@@ -549,7 +564,7 @@ const INF = {
         title: "Better Infinity",
         desc: "Improve Infinity Points formula.",
         get cost() {
-          return EVO.amt == 3 ? E(1e220) : EVO.amt == 2 ? E(1e204) : E(1e225);
+          return OURO.evo == 3 ? E(1e220) : OURO.evo == 2 ? E(1e204) : E(1e225);
         },
       },
     ],
@@ -623,8 +638,10 @@ function updateInfTemp() {
   tmp.inf_reached = player.mass.gte(tmp.inf_limit);
   if (!tmp.inf_unl) return;
 
+  //Bonus
   updateAscensionsTemp();
   updateGPTemp();
+
   updateCSTemp();
   tmp.dim_mass_gain = INF.dim_mass.gain();
   tmp.dim_mass_eff = INF.dim_mass.effect();
@@ -647,7 +664,7 @@ function updateInfTemp() {
   updateCoreTemp();
 
   tmp.inf_level_ss = E(5);
-  if (hasElement(222)) tmp.inf_level_ss = tmp.inf_level_ss.add(10);
+  if (hasElement(222)) tmp.inf_level_ss = tmp.inf_level_ss.add(5);
   if (hasElement(235)) tmp.inf_level_ss = tmp.inf_level_ss.add(5);
   if (tmp.chal) tmp.inf_level_ss = tmp.inf_level_ss.add(tmp.chal.eff[17] || 0);
 }
@@ -677,11 +694,11 @@ function calcInf(dt) {
       0: "You have reached the limit of lifting where only gods withstand... You need to condense all your progress to evolve!",
       2: "<b class='corrupted_text'>Conflictingly, corruption spreads to Infinity. It's up to you to proceed.</b>",
     };
-    if (tmp.inf_unl || !INF_MSGS[EVO.amt]) {
+    if (tmp.inf_unl || !INF_MSGS[OURO.evo]) {
       INF.goInf(true);
       addNotify("You've gone Infinity!");
     } else {
-      tmp.el.inf_msg.setHTML(INF_MSGS[EVO.amt]);
+      tmp.el.inf_msg.setHTML(INF_MSGS[OURO.evo]);
       tmp.inf_time += 1;
       document.body.style.animation = "inf_reset_1 5s 1";
 
@@ -692,7 +709,6 @@ function calcInf(dt) {
       }, 3000);
     }
   }
-  if (tmp.inf_time) player.mass = tmp.inf_limit;
   if (!tmp.inf_unl) return;
 
   if (!player.inf.reached && player.mass.gte(INF.req))
@@ -705,7 +721,7 @@ function calcInf(dt) {
 
   player.inf.dim_mass = player.inf.dim_mass.add(tmp.dim_mass_gain.mul(dt));
 
-  if (hasElement(232) && !tmp.pass) {
+  if (hasElement(232)) {
     let cs = tmp.c16.shardGain;
     player.dark.c16.shard = player.dark.c16.shard.add(cs.mul(dt));
     player.dark.c16.totalS = player.dark.c16.totalS.add(cs.mul(dt));
@@ -720,35 +736,29 @@ function calcInf(dt) {
     player.inf.total = player.inf.total.add(ig);
   }
 
-  if (tmp.cs.unl) {
+  if (tmp.CS_unl)
     player.inf.cs_amount = CORRUPTED_STAR.calcNextGain(
       player.inf.cs_amount,
-      tmp.cs.speed.mul(dt)
+      tmp.cs_speed.mul(dt),
     );
-    if (hasElement(285)) {
-      buyCSUpg(0);
-      buyCSUpg(1);
-    }
-  }
 
   if (hasElement(253)) {
     for (let i in player.inf.core) {
       let p = player.inf.core[i];
-      if (p)
+      if (p) {
         player.inf.fragment[p.type] = player.inf.fragment[p.type].add(
-          calcFragmentBase(p, p.star, p.power).mul(dt / 100)
+          calcFragmentBase(p, p.star, p.power).mul(dt / 100),
         );
+      }
     }
   }
 
   for (let x = 0; x < ASCENSIONS.names.length; x++)
-    if (ASCENSIONS.autoUnl[x]()) ASCENSIONS.reset(x, true);
-
-  if (hasElement(304) && tmp.gp.res.gte(tmp.gp.req))
-    player.gal_prestige = player.gal_prestige.add(1);
+    if (ASCENSIONS.autoUnl[x]() && player.auto_asc[x])
+      ASCENSIONS.reset(x, true);
   for (let i = 0; i < GAL_PRESTIGE.res_length; i++)
     player.gp_resources[i] = player.gp_resources[i].add(
-      tmp.gp.res_gain[i].mul(dt)
+      tmp.gp.res_gain[i].mul(dt),
     );
 }
 
@@ -762,7 +772,7 @@ function updateInfHTML() {
     tmp.el.dim_mass.setTxt(
       formatMass(player.inf.dim_mass) +
         " " +
-        player.inf.dim_mass.formatGain(tmp.dim_mass_gain, true)
+        player.inf.dim_mass.formatGain(tmp.dim_mass_gain, true),
     );
     tmp.el.dim_mass_eff.setHTML("+" + tmp.dim_mass_eff.format());
 
@@ -789,20 +799,15 @@ function updateInfHTML() {
       }
       let f = player.inf.fragment[t];
       if (f.gt(0))
-        hh += `<br>${f.format(0)} ${
-          ct.title.split(" ")[0]
-        } Fragments | ${ct.fragment[1](tmp.fragment_eff[t])}<br>`;
+        hh += `<br>${f.format(0)} ${ct.title.split(" ")[0]} Fragments | ${ct.fragment[1](tmp.fragment_eff[t])}<br>`;
       if (hh != "")
         h +=
-          `<h2>${ct.title} <b>(${format(
-            core_tmp[t].total_p.mul(100),
-            0
-          )}%)</b></h2><br>` +
+          `<h2>${ct.title} <b>(${format(core_tmp[t].total_p.mul(100), 0)}%)</b></h2><br>` +
           hh +
           "<br>";
     }
     tmp.el.core_eff_div.setHTML(
-      h || "Place any theorem in core to show effects!"
+      h || "Place any theorem in core to show effects!",
     );
   } else if (tmp.tab_name == "inf-upgs") {
     tmp.el.ip_amt.setHTML(
@@ -810,9 +815,9 @@ function updateInfHTML() {
         (hasElement(235)
           ? " " +
             player.inf.points.formatGain(
-              player.inf.best.div(1e2).mul(CSEffect("inf_speed"))
+              player.inf.best.div(1e2).mul(CSEffect("inf_speed")),
             )
-          : "")
+          : ""),
     );
 
     for (let r in INF.upgs) {
@@ -820,7 +825,7 @@ function updateInfHTML() {
 
       let unl =
         (r == 0 || player.inf.theorem.gte(INF.upg_row_req[r - 1])) &&
-        (r < 5 || player.chal.comps[19].gte([10, 4, 2, 3, 2][EVO.amt]));
+        (r < 5 || player.chal.comps[19].gte([10, 4, 2, 3][OURO.evo]));
 
       tmp.el["iu_row" + r].setDisplay(unl);
 
@@ -852,7 +857,7 @@ function updateInfHTML() {
               ? u.effectDesc
                 ? "<br>Effect: " + u.effectDesc(infUpgEffect(id))
                 : ""
-              : "<br>Cost: <b>" + u.cost.format(0) + "</b> Infinity Points"
+              : "<br>Cost: <b>" + u.cost.format(0) + "</b> Infinity Points",
           );
         }
       }

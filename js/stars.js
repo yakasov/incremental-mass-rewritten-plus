@@ -1,9 +1,9 @@
 const STARS = {
   unlocked() {
-    return EVO.amt >= 3 ? EVO.amt < 4 : hasElement(36);
+    return OURO.evo >= 3 ? OURO.evo < 4 : hasElement(36);
   },
   gain() {
-    if (EVO.amt >= 4) return E(0);
+    if (OURO.evo >= 4) return E(0);
 
     let x = player.stars.generators[0];
     if (hasMDUpg(8)) x = x.mul(mdEff(8));
@@ -14,7 +14,7 @@ const STARS = {
     if (hasElement(182)) x = x.pow(10);
     if (hasUpgrade("bh", 17)) x = x.pow(upgEffect(2, 17));
 
-    let os = E(EVO.amt >= 2 ? "eee7" : "eee5"),
+    let os = E(OURO.evo >= 2 ? "eee7" : "eee5"),
       op = E(0.5);
     if (hasUpgrade("atom", 24)) os = expMult(os, 2);
 
@@ -28,7 +28,7 @@ const STARS = {
     return x;
   },
   softGain() {
-    if (hasUpgrade("atom", 22) || EVO.amt >= 3) return EINF;
+    if (hasUpgrade("atom", 22) || OURO.evo >= 3) return EINF;
     let s = E("e1000").pow(fermEff(1, 0));
     return s;
   },
@@ -41,7 +41,7 @@ const STARS = {
     let [p, pp] = [E(1), E(1)];
     if (hasElement(48)) p = p.mul(1.1);
     if (hasElement(76))
-      [p, pp] = tmp.qu.rip.in
+      [p, pp] = tmp.rip.in
         ? [p.mul(1.1), pp.mul(1.1)]
         : [p.mul(1.25), pp.mul(1.25)];
     let [s, r, t1, t2, t3] = [
@@ -63,15 +63,15 @@ const STARS = {
           .add(1)
           .pow(5 / 9)
           .mul(0.25)
-          .mul(t3.pow(0.85).mul(0.0125).add(1))
+          .mul(t3.pow(0.85).mul(0.0125).add(1)),
       );
-    if (EVO.amt >= 2) r = r.softcap(1e40, 3, 3);
+    if (OURO.evo >= 2) r = r.softcap(1e40, 3, 3);
     x = s.max(1).log10().add(1).pow(r);
     x = x
       .softcap("ee15", 0.95, 2)
       .softcap("e5e22", 0.95, 2)
-      .softcap("ee24", 0.91, 2);
-    if (tmp.qu.rip.in || EVO.amt >= 2) x = x.softcap("ee33", 0.9, 2);
+      .softcap("e1e24", 0.91, 2);
+    if (tmp.rip.in || OURO.evo >= 2) x = x.softcap("ee33", 0.9, 2);
     if (tmp.c16.in) x = E(1);
 
     return [x.min("ee70"), hasElement(162) ? this.expEffect() : E(1)];
@@ -91,7 +91,7 @@ const STARS = {
           .add(1)
           .mul(player.stars.points.add(1).log10().add(1).log10().add(1))
           .root(2)
-          .sub(1)
+          .sub(1),
       );
     } else {
       x = pp
@@ -103,7 +103,7 @@ const STARS = {
     }
     if (tmp.c16.in) x = overflow(x, 10, 0.5);
 
-    x = x.overflow(EVO.amt >= 2 ? "e1000" : "e3000", 0.5);
+    x = x.overflow(OURO.evo >= 2 ? "e1000" : "e3000", 0.5);
     return x;
   },
   generators: {
@@ -132,21 +132,21 @@ const STARS = {
       if (FERMIONS.onActive("13")) pow = E(0.5);
       else {
         if (hasElement(50)) pow = pow.mul(1.05);
-        if (hasTree("s3")) pow = pow.mul(treeEff("s3"));
+        if (hasTree("s3")) pow = pow.mul(tmp.sn.tree_eff.s3);
         pow = pow.mul(glyphUpgEff(9));
       }
-      if (QCs.active() && pow.gte(1)) pow = pow.pow(tmp.qu.qc.eff[0][1]);
+      if (QCs.active() && pow.gte(1)) pow = pow.pow(tmp.qu.qc_eff[0][1]);
 
       let x = E(player.stars.unls > i ? 1 : 0)
         .add(player.stars.generators[i + 1] || 0)
         .pow(pow)
         .mul(5);
       if (hasElement(49) && i == tmp.stars.max_unlocks - 1)
-        x = x.mul(elemEffect(49));
+        x = x.mul(tmp.elements.effect[49]);
       if (hasTree("s1") && i == tmp.stars.max_unlocks - 1)
-        x = x.mul(treeEff("s1"));
+        x = x.mul(tmp.sn.tree_eff.s1);
       if (hasMDUpg(8)) x = x.mul(mdEff(8));
-      if (hasElement(54)) x = x.mul(elemEffect(54));
+      if (hasElement(54)) x = x.mul(tmp.elements.effect[54]);
       x = x.mul(BUILDINGS.eff("star_booster"));
 
       let ne = nebulaEff("yellow");
@@ -160,7 +160,7 @@ const STARS = {
 
       x = expMult(x, GPEffect(0));
       x = expMult(x, ne[1] ?? 1);
-      if (QCs.active()) x = expMult(x, tmp.qu.qc.eff[0][0]);
+      if (QCs.active()) x = expMult(x, tmp.qu.qc_eff[0][0]);
       return x;
     },
   },
@@ -175,7 +175,7 @@ function calcStars(dt) {
     player.stars.points = player.stars.points.min(tmp.sn.maxlimit);
   for (let x = 0; x < tmp.stars.max_unlocks; x++)
     player.stars.generators[x] = player.stars.generators[x].add(
-      tmp.stars.generators_gain[x].mul(dt)
+      tmp.stars.generators_gain[x].mul(dt),
     );
 }
 
@@ -217,7 +217,7 @@ function setupStarsHTML() {
     if (i > 0)
       table += `<div id="star_gen_arrow_${i}" style="width: 30px; font-size: 30px"><br>←</div>`;
     table += `
-            <div id="star_gen_div_${i}" style="margin-bottom: 20px; width: 250px;">
+            <div id="star_gen_div_${i}" style="width: 250px;">
                 <img src="images/star_${i}.png"><br><br>
                 <div id="star_gen_${i}">X</div>
             </div>
@@ -253,19 +253,13 @@ function updateStarsScreenHTML() {
         .min(1)
         .toNumber();
     let size = Math.min(window.innerWidth, window.innerHeight) * percent * 0.9;
-    let color = `rgb(${(percent / 0.4) * 191}, ${
-      (percent / 0.4) * 91 + 133
-    }, 255)`;
+    let color = `rgb(${(percent / 0.4) * 191}, ${(percent / 0.4) * 91 + 133}, 255)`;
     if (percent > 0.4)
-      color = `rgb(${((percent - 0.4) / 0.2) * 64 + 191}, ${
-        224 - ((percent - 0.4) / 0.2) * 11
-      }, ${255 - ((percent - 0.4) / 0.2) * 255})`;
+      color = `rgb(${((percent - 0.4) / 0.2) * 64 + 191}, ${224 - ((percent - 0.4) / 0.2) * 11}, ${255 - ((percent - 0.4) / 0.2) * 255})`;
     if (percent > 0.6)
       color = `rgb(255, ${213 - ((percent - 0.6) / 0.1) * 131}, 0)`;
     if (percent > 0.7)
-      color = `rgb(${255 - ((percent - 0.7) / 0.1) * 102}, ${
-        82 - ((percent - 0.7) / 0.1) * 82
-      }, 0)`;
+      color = `rgb(${255 - ((percent - 0.7) / 0.1) * 102}, ${82 - ((percent - 0.7) / 0.1) * 82}, 0)`;
     if (percent > 0.8) color = `rgb(153, 0, 0)`;
     tmp.el.star.changeStyle("background-color", color);
     tmp.el.star.changeStyle("width", size + "px");
@@ -280,20 +274,20 @@ function updateStarsHTML() {
     format(player.stars.points, 2) +
       (tmp.sn.gen ? "" : " / " + format(tmp.sn.maxlimit, 2)) +
       " " +
-      formatGain(player.stars.points, tmp.stars.gain.mul(tmp.qu.speed))
+      formatGain(player.stars.points, tmp.stars.gain.mul(tmp.preQUGlobalSpeed)),
   );
   tmp.el.stars_Eff.setHTML(
     `<h4>${formatMult(tmp.stars.effect[0])}</h4>` +
       (hasElement(162) ? `, <h4>^${format(tmp.stars.effect[1])}</h4>` : ``) +
       (tmp.sn.gen
         ? `, +<h4>${tmp.sn.passive.format(0)}</h4>/s to supernova gain`
-        : "")
+        : ""),
   );
   tmp.el.stars_Eff.setClasses({ corrupted_text2: tmp.c16.in });
 
   tmp.el.star_btn.setDisplay(player.stars.unls < tmp.stars.max_unlocks);
   tmp.el.star_btn.setHTML(
-    `Unlock new type of Stars, require ${format(tmp.stars.generator_req)} Quark`
+    `Unlock new type of Stars, require ${format(tmp.stars.generator_req)} Quark`,
   );
 
   tmp.el.star_btn.setClasses({
@@ -312,21 +306,17 @@ function updateStarsHTML() {
           "<br>" +
           formatGain(
             player.stars.generators[x],
-            tmp.stars.generators_gain[x].mul(tmp.qu.speed)
-          )
+            tmp.stars.generators_gain[x].mul(tmp.preQUGlobalSpeed),
+          ),
       );
   }
 
   BUILDINGS.update("star_booster");
 
   tmp.el.starSiltation.setDisplay(
-    player.stars.points.gte(tmp.overflow_start.star[0])
+    player.stars.points.gte(tmp.overflow_start.star[0]),
   );
   tmp.el.starSiltation.setHTML(
-    `Because of star siltation at <b>${format(
-      tmp.overflow_start.star[0]
-    )}</b>, the exponent of collapsed stars is ${overflowFormat(
-      tmp.overflow.star || 1
-    )}!`
+    `Because of star siltation at <b>${format(tmp.overflow_start.star[0])}</b>, the exponent of collapsed stars is ${overflowFormat(tmp.overflow.star || 1)}!`,
   );
 }

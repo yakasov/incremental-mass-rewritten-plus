@@ -10,7 +10,8 @@
       "src": "images/mass.png",
       "sizes": "40x40",
       "type": "image/png"
-    },{
+    },
+    {
       "src": "images/mass_manifest.png",
       "sizes": "160x160",
       "type": "image/png"

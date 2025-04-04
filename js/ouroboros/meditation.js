@@ -12,7 +12,7 @@ const MEDITATION = {
     return (
       player.evo.cp.m_time >= 1 &&
       player.evo.cp.points.gt(0) &&
-      !(EVO.amt >= 2 && CHALS.inChal(6))
+      !(OURO.evo >= 2 && CHALS.inChal(6))
     );
   },
   get level_gain() {
@@ -22,33 +22,31 @@ const MEDITATION = {
 
     cp = cp.mul(appleEffect("cp_lvl"));
     cp = cp.mul(wormholeEffect(0));
+    if (hasZodiacUpg("aries", "u2")) cp = cp.mul(zodiacUpgEff("aries", "u2"));
 
-    if (EVO.amt >= 2) cp = cp.pow(wormholeEffect(5));
+    if (OURO.evo >= 2) cp = cp.pow(wormholeEffect(5));
     else if (hasElement(158)) cp = cp.pow(1.5);
-    if (hasZodiacUpg("aries", "u2")) cp = cp.pow(zodiacEff("aries", "u2"));
-
     return cp.floor();
   },
   eff(lvl) {
     let eff = {},
       weak_mult = E(1);
-    if (QCs.active() && EVO.amt >= 4) lvl = lvl.mul(tmp.qu.qc.eff[10]);
 
-    eff.mass1 = lvl.mul(1.5).add(1);
-    if (hasElement(67, 1)) eff.mass2 = lvl.div(50).add(1);
+    eff.mass1 = lvl.add(1);
+    if (hasElement(67, 1)) eff.mass2 = lvl.div(100).add(1);
     if (hasElement(69, 1)) {
       let x = lvl.add(1).log10().div(10).add(1);
       if (hasElement(73, 1)) x = x.mul(muElemEff(73));
-      eff.mass3 = x.mul(escrowBoost("md_m3")).mul(2);
+      eff.mass3 = x.mul(escrowBoost("md_m3"));
     }
 
-    if (EVO.amt >= 2) weak_mult = wormholeEffect(3).mul(glyphUpgEff(8));
+    if (OURO.evo >= 2) weak_mult = wormholeEffect(3).mul(glyphUpgEff(8));
     if (hasElement(75, 1))
-      eff.mass3_softcap = Decimal.pow(0.925, lvl.add(1).log10()).mul(weak_mult);
+      eff.mass3_softcap = Decimal.pow(0.95, lvl.add(1).log10()).mul(weak_mult);
     if (hasElement(76, 1))
       eff.mass_softcap = Decimal.pow(
-        EVO.amt >= 2 ? 0.9125 : 0.875,
-        lvl.add(1).log10().root(2)
+        OURO.evo >= 2 ? 0.95 : 0.9,
+        lvl.add(1).log10().root(2),
       ).mul(weak_mult);
 
     return eff;

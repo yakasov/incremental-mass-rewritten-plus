@@ -2,7 +2,7 @@ const WORMHOLE = {
   step(x, t, i) {
     if (i != player.evo.wh.origin && x.eq(0)) return E(0);
 
-    let p = tmp.evo.wh.power,
+    let p = tmp.evo.wormhole_power,
       pp = Decimal.mul(2, p);
     if (CHALS.inChal(8)) pp = pp.div(2);
 
@@ -18,12 +18,12 @@ const WORMHOLE = {
     return this.step(x, dt).sub(x);
   },
   calc(dt) {
-    const evo = EVO.amt,
-      unls = tmp.evo.wh.unls,
+    const evo = OURO.evo,
+      unls = tmp.evo.wormhole_unls,
       mass = player.evo.wh.mass;
     if (player.qu.en.hr[0])
       player.evo.wh.fabric = player.evo.wh.fabric.div(
-        E(10).pow(dt).pow(player.qu.en.hr[3])
+        E(10).pow(dt).pow(player.qu.en.hr[3]),
       );
     else if (tmp.passive >= 2)
       player.evo.wh.fabric = player.evo.wh.fabric.add(tmp.bh.dm_gain.mul(dt));
@@ -34,7 +34,7 @@ const WORMHOLE = {
         i < Math.min(unls, player.evo.wh.origin == 6 ? 7 : 6);
         i++
       )
-        mass[i] = WORMHOLE.step(mass[i], tmp.evo.wh.mult[i].mul(dt), i);
+        mass[i] = WORMHOLE.step(mass[i], tmp.evo.wormhole_mult[i].mul(dt), i);
     }
   },
   mult(i) {
@@ -47,41 +47,46 @@ const WORMHOLE = {
 
     if (hasTree("bh1")) r = r.pow(treeEff("bh1"));
     if (tmp.sn.boson) r = r.pow(tmp.sn.boson.upgs.photon[5].effect);
-    r = r.pow(glyphUpgEff(2)).pow(wormholeEffect(6));
 
     let ne = nebulaEff("cyan");
-    r = expMult(r.pow(ne[0] ?? 1), ne[1] ?? 1);
+
+    r = r
+      .pow(glyphUpgEff(2))
+      .pow(wormholeEffect(6))
+      .pow(ne[0] ?? 1);
+
+    r = expMult(r, ne[1] ?? 1);
 
     if (i == 6) {
       r = r.add(1).log10();
-      r = r.mul(player.evo.wh.mass[6].add(10).log10());
-      if (hasCharger(6))
-        r = r.mul(player.dark.c16.shard.max(1).log10().div(2).max(1));
+      if (hasCharger(6)) r = r.mul(3);
+      if (hasElement(88, 1)) r = r.mul(3);
     }
 
     return r;
   },
   total() {
     let r = E(0);
-    if (EVO.amt >= 2) for (let m of player.evo.wh.mass) r = r.add(m);
+    if (OURO.evo >= 2) for (let m of player.evo.wh.mass) r = r.add(m);
     return r;
   },
   temp() {
     const unls = this.unlLength;
-    tmp.evo.wh.unls = unls;
+    tmp.evo.wormhole_unls = unls;
 
     let p = appleEffect("wh_loss", E(1));
+    if (tmp.upgs.effect) p = p.mul(upgEffect(3, 6));
     if (hasElement(63)) p = p.mul(1.2);
-    tmp.evo.wh.power = p;
+    tmp.evo.wormhole_power = p;
 
-    tmp.evo.wh.mult = [];
+    tmp.evo.wormhole_mult = [];
     for (let [i, e] of Object.entries(this.effects)) {
-      tmp.evo.wh.eff[i] = e[0](i < unls ? player.evo.wh.mass[i] : E(1));
-      tmp.evo.wh.mult[i] = this.mult(i);
+      tmp.evo.wormhole_eff[i] = e[0](i < unls ? player.evo.wh.mass[i] : E(1));
+      tmp.evo.wormhole_mult[i] = this.mult(i);
     }
   },
   html() {
-    const unls = tmp.evo.wh.unls,
+    const unls = tmp.evo.wormhole_unls,
       wh = player.evo.wh,
       mass = wh.mass;
 
@@ -102,7 +107,7 @@ const WORMHOLE = {
           tmp.el[id + "-mass"].setHTML("#" + (i + 1));
         } else {
           const m = mass[i],
-            mult = tmp.evo.wh.mult[i];
+            mult = tmp.evo.wormhole_mult[i];
           tmp.el[id + "-div"].setClasses({
             ["wormhole-div"]: true,
             anti: i == 6,
@@ -112,38 +117,31 @@ const WORMHOLE = {
           tmp.el[id + "-id"].setHTML(
             i == 6
               ? ``
-              : `#${i + 1} - Click to ${
-                  i != wh.origin
-                    ? this.canAuto(i)
-                      ? "toggle automation"
-                      : "merge with #" + (wh.origin + 1)
-                    : "split"
-                }`
+              : `#${i + 1} - Click to ${i != wh.origin ? (this.canAuto(i) ? "toggle automation" : "merge with #" + (wh.origin + 1)) : "split"}`,
           );
-          tmp.el[id + "-mult"].setHTML(formatMult(tmp.evo.wh.mult[i]));
-          tmp.el[id + "-effect"].setHTML(this.effects[i][1](tmp.evo.wh.eff[i]));
+          tmp.el[id + "-mult"].setHTML(formatMult(tmp.evo.wormhole_mult[i]));
+          tmp.el[id + "-effect"].setHTML(
+            this.effects[i][1](tmp.evo.wormhole_eff[i]),
+          );
 
           let h = ``;
           if (i < 6)
-            h = `${formatMass(m)}<br>${m.formatGain(
-              this.calcGain(m, mult.div(FPS), i).mul(FPS),
-              1
-            )}`;
+            h = `${formatMass(m)}<br>${m.formatGain(this.calcGain(m, mult.div(FPS), i).mul(FPS), 1)}`;
           else h = `<b class='saved_text'>${formatMass(m)} anti-mass</b>`;
           tmp.el[id + "-mass"].setHTML(h);
         }
       }
     }
 
-    tmp.el["wormhole_origin"].setDisplay(player.atom.unl || EVO.amt >= 3);
-    tmp.el["wormhole_rate_div"].setDisplay(tmp.sn.unl || EVO.amt >= 3);
+    tmp.el["wormhole_origin"].setDisplay(player.atom.unl || OURO.evo >= 3);
+    tmp.el["wormhole_rate_div"].setDisplay(tmp.sn.unl || OURO.evo >= 3);
     tmp.el["wormhole_rate"].setHTML(formatPercent(wh.rate, 0));
   },
 
   get unlLength() {
     if (hasCharger(1)) return 7;
     if (player.dark.unl) return 6;
-    if (quUnl() || player.evo.cosmo.unl) return 5;
+    if (quUnl()) return 5;
     if (tmp.sn.boson) return 4;
     if (player.atom.unl) return 3;
     return 2;
@@ -163,9 +161,7 @@ const WORMHOLE = {
     [
       (m) => (hasElement(133) ? m.div(1e15).add(1).root(5) : m.add(1).root(5)),
       (x) =>
-        `Boost ${
-          hasElement(133) ? "Stronger" : "Booster"
-        }'s power by <b>${formatMult(x, 2)}</b>`,
+        `Boost ${hasElement(133) ? "Stronger" : "Booster"}'s power by <b>${formatMult(x, 2)}</b>`,
     ],
     [
       (m) => m.add(1).root(hasUpgrade("atom", 12) ? 5 : 10),
@@ -191,7 +187,7 @@ const WORMHOLE = {
               .log10()
               .div(hasElement(player.qu.rip.active ? 149 : 133) ? 40 : 50)
               .add(1)
-              .pow(-0.4)
+              .pow(-0.4),
           )
           .mul(1.1)
           .toNumber(),
@@ -205,13 +201,14 @@ const WORMHOLE = {
     [
       (m) => {
         m = m
-          .mul(tmp.c16.in && EVO.amt < 4 ? 1e-3 : 1e-4)
-          .pow(tmp.c16.in || EVO.amt >= 4 ? 0.5 : 1)
+          .add(1)
+          .mul(tmp.c16active ? 1e-3 : 1e-4)
+          .pow(tmp.c16.in ? 0.5 : 1)
           .add(1);
-        if (EVO.amt == 3) m = expMult(m, 0.5);
+        if (OURO.evo >= 3) m = expMult(m, 0.5);
         return m;
       },
-      (x) => `Raise Wormhole formula. <b>^${format(x, 2)}</b>`,
+      (x) => `Raise Wormhole formula. <b>^${format(x, 2)} to exponent</b>`,
     ],
   ],
 
@@ -230,7 +227,9 @@ const WORMHOLE = {
 };
 
 function wormholeEffect(id, def = E(1)) {
-  return id < tmp.evo.wh.unls && tmp.evo.wh.eff[id] ? tmp.evo.wh.eff[id] : def;
+  return id < tmp.evo.wormhole_unls && tmp.evo.wormhole_eff[id]
+    ? tmp.evo.wormhole_eff[id]
+    : def;
 }
 
 function activateWormhole(id, auto) {
@@ -269,19 +268,21 @@ function splitWormhole(origin, mode) {
     mass[x] = mass[x].max(toAdd);
   }
   mass[origin] = mass[origin].sub(sum);
-  if (tmp.evo.wh.unls > 6 && tmp.c16.in)
-    mass[6] = mass[6].add(sum.add(1).log10().mul(tmp.evo.wh.mult[6]));
+  if (tmp.evo.wormhole_unls > 6 && tmp.c16.in)
+    mass[6] = mass[6].add(sum.add(1).log10().mul(tmp.evo.wormhole_mult[6]));
 }
 
 function setupWormholeHTML() {
   let h = "";
   for (let i = 0; i < WORMHOLE.maxLength; i++) {
-    h += `<div class='wormhole-div' id='wormhole${i}-div' onclick="activateWormhole(${i})">
+    h += `
+        <div class='wormhole-div' id='wormhole${i}-div' onclick="activateWormhole(${i})">
             <div id='wormhole${i}-id' class='wh-id'></div>
             <div id='wormhole${i}-mult' class='wh-mult'>A</div>
             <div id='wormhole${i}-mass' class='wh-mass'>B</div>
             <div id='wormhole${i}-effect' class='wh-effect'>C</div>
-        </div>`;
+        </div>
+        `;
   }
 
   new Element("wormhole_table").setHTML(h);

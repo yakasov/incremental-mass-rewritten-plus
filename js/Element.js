@@ -99,7 +99,7 @@ class Element {
 
   static allFromClass(name) {
     return Array.from(document.getElementsByClassName(name)).map(
-      (x) => new Element(x.id)
+      (x) => new Element(x.id),
     );
   }
 

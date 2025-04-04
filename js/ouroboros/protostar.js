@@ -1,18 +1,14 @@
 const PROTOSTAR = {
   temp() {
-    let tu_1 = hasZodiacUpg("taurus", "u1");
-    let tu_3 = hasZodiacUpg("taurus", "u3"),
-      tu_3_eff = zodiacEff("taurus", "u3");
-
-    let tt = tmp.evo.neb;
-    tt.dust_prod = E(tu_1 ? 1 : 0);
-    tt.res = {};
-    tt.eff = {};
-    tt.undim = {};
+    let tt = tmp.evo;
+    tt.dust_prod = E(0);
+    tt.nebula_res = {};
+    tt.nebula_eff = {};
+    tt.nebula_undim = {};
 
     let dim_mult = Decimal.mul(
       appleEffect("ps_dim", E(1)).pow(-1),
-      nebulaEff("ext1", [1])[0]
+      nebulaEff("ext1", [1])[0],
     );
     let protostar = player.evo.proto.star,
       dust = player.evo.proto.dust;
@@ -22,34 +18,22 @@ const PROTOSTAR = {
         nb = player.evo.proto.nebula,
         nbv = nb[ni],
         ext = ni.includes("ext");
-      tt.eff[ni] = n.eff(nbv);
-      tt.res[ni] = n.res ? n.res(nb) : ext ? dust : protostar;
-
-      let dim = n.undiminish(nb).mul(dim_mult);
-      if (tu_3 && !ext) dim = dim.mul(tu_3_eff);
-      tt.undim[ni] = dim;
-
-      tt.dust_prod = tu_1
-        ? tt.dust_prod.mul(nbv.add(1).log10().add(1))
-        : tt.dust_prod.add(nbv.add(1).log10());
+      tt.nebula_eff[ni] = n.eff(nbv);
+      tt.nebula_res[ni] = n.res ? n.res(nb) : ext ? dust : protostar;
+      tt.nebula_undim[ni] = n.undiminish(nb).mul(dim_mult);
+      tt.dust_prod = tt.dust_prod.add(nbv.add(1).log10());
     }
-    tt.dust_prod = tt.dust_prod.mul(this.dust_mult()).sub(tu_1 ? 1 : 0);
+    tt.dust_prod = tt.dust_prod.mul(this.dust_mult());
 
     tt.eaGain = this.eaGain();
   },
   calc(dt) {
-    if (EVO.amt >= 4 && player.qu.en.eth[0])
-      player.evo.proto.dust = player.evo.proto.dust.div(
-        E(10).pow(dt).pow(player.qu.en.eth[3])
-      );
-    else if (player.atom.unl)
+    if (player.atom.unl)
       player.evo.proto.dust = player.evo.proto.dust.add(
-        tmp.evo.neb.dust_prod.mul(dt)
+        tmp.evo.dust_prod.mul(dt),
       );
-
-    if (tmp.passive >= 3)
+    if (hasElement(24))
       player.evo.proto.star = player.evo.proto.star.add(tmp.atom.gain.mul(dt));
-
     if (hasTree("qol1"))
       for (let x = 291; x <= Math.min(tmp.elements.unl_length[0], 362); x++)
         buyElement(x, 0);
@@ -58,27 +42,26 @@ const PROTOSTAR = {
         if (!x.includes("ext") || hasInfUpgrade(14)) this.nebula_click(x);
     if (tmp.epUnl)
       player.evo.proto.exotic_atoms = player.evo.proto.exotic_atoms.add(
-        tmp.evo.neb.eaGain.mul(dt)
+        tmp.evo.eaGain.mul(dt),
       );
   },
 
   eaGain() {
     let x = nebulaEff("ext1", [1, E(1)])[1],
-      g = tmp.ea.gain;
+      g = tmp.exotic_atom.gain;
 
     x = x.mul(g[0]).mul(g[1]).mul(25);
     if (hasElement(298)) x = x.mul(elemEffect(298));
 
     x = x.pow(tmp.dark.abEff.ea || 1).pow(nebulaEff("ext2"));
     if (tmp.inf_unl) x = x.pow(theoremEff("atom", 4));
+
     return x;
   },
 
   dust_mult() {
-    let x = Decimal.mul(CSEffect("sd_mult"), tmp.chal?.eff[19] ?? 1);
+    let x = E(1);
     if (tmp.sn.boson) x = x.mul(tmp.sn.boson.upgs.gluon[5].effect);
-    if (hasZodiacUpg("aries", "u1")) x = x.mul(zodiacEff("aries", "u1"));
-    if (hasZodiacUpg("taurus", "u2")) x = x.mul(zodiacEff("taurus", "u2"));
     if (tmp.inf_unl) x = x.pow(theoremEff("atom", 6));
     return x;
   },
@@ -93,16 +76,11 @@ const PROTOSTAR = {
     if (i.includes("ext") && t == 1) {
       return Decimal.pow(
         2,
-        player.evo.proto.nebula[i]
-          .sub(tmp.evo.neb.undim[i])
-          .max(0)
-          .add(1)
-          .pow(1.5)
-      ).mul(EVO.amt >= 4 ? 5e15 : 5e49);
+        player.evo.proto.nebula[i].sub(tmp.evo.nebula_undim[i]).add(1).pow(1.5),
+      ).mul(5e49);
     }
     return player.evo.proto.nebula[i]
-      .sub(tmp.evo.neb.undim[i])
-      .max(0)
+      .sub(tmp.evo.nebula_undim[i])
       .add(1)
       .pow(1 + t)
       .mul(10 ** t);
@@ -111,75 +89,62 @@ const PROTOSTAR = {
     let t = NEBULAE_TIER[i],
       ext = i.includes("ext");
     if (ext && t == 1) {
-      if (tmp.c16.in) return E(0);
-      return tmp.evo.neb.res[i]
-        .div(EVO.amt >= 4 ? 5e15 : 5e49)
+      if (tmp.c16active) return E(0);
+      return tmp.evo.nebula_res[i]
+        .div(5e49)
         .max(1)
         .log(2)
         .root(1.5)
-        .add(tmp.evo.neb.undim[i])
+        .add(tmp.evo.nebula_undim[i])
         .floor();
     }
-    if (!ext && EVO.amt < 4) {
-      let cond1 = tmp.c16.in || player.qu.rip.active;
-      let cond2 = !hasElement(169) || NEBULAE_TIER[i] > 1;
-      if (cond1 && cond2) return E(0);
-    }
-    return tmp.evo.neb.res[i]
+    if (!ext)
+      if (
+        tmp.c16active ||
+        (player.qu.rip.active && (!hasElement(169) || NEBULAE_TIER[i] > 1))
+      )
+        return E(0);
+    return tmp.evo.nebula_res[i]
       .div(10 ** t)
       .root(1 + t)
-      .add(tmp.evo.neb.undim[i])
+      .add(tmp.evo.nebula_undim[i])
       .floor();
   },
   nebula_gain(i) {
     return this.nebula_bulk(i).sub(player.evo.proto.nebula[i]).max(0);
   },
   nebulae: {
+    //Rows: 4 [3 normal + 1 exotic]
     //Tier 1
     red: {
-      color: "#f00",
       undiminish: (n) => n.green.mul(n.blue).cbrt(),
       undiminishDisp: "green and blue",
-      eff: (n) =>
-        n.add(1).pow(hasElement(294) ? (EVO.amt >= 4 ? 0.2 : 0.5) : 0.1),
+      eff: (n) => n.add(1).pow(hasElement(294) ? 0.5 : 0.1),
       effDisp: (e) => formatMult(e) + " Stronger Power",
     },
     green: {
-      color: "#0f0",
       undiminish: (n) => n.red.mul(n.blue).cbrt(),
       undiminishDisp: "red and blue",
-      eff: (n) =>
-        n
-          .add(1)
-          .pow(
-            hasZodiacUpg("gemini", "u1") ? 2 : hasElement(294) ? 2 / 3 : 1 / 3
-          ),
+      eff: (n) => n.add(1).root(hasElement(294) ? 1.5 : 3),
       effDisp: (e) => formatMult(e) + " Calm Power",
     },
     blue: {
-      color: "#07f",
       undiminish: (n) => n.red.mul(n.green).cbrt(),
       undiminishDisp: "red and green",
-      eff: (n) =>
-        n
-          .add(1)
-          .pow(
-            hasZodiacUpg("gemini", "u2") ? 1.5 : hasElement(294) ? 2 / 3 : 1 / 3
-          ),
+      eff: (n) => n.add(1).root(hasElement(294) ? 1.5 : 3),
       effDisp: (e) => formatMult(e) + " Fabric",
     },
     ext1: {
       name: "Exotic I",
-      color: "#f30",
       undiminish: (n) =>
         player.dark.c16.totalS
           .mul(expMult(player.evo.proto.exotic_atoms, 0.5))
           .add(1)
-          .log10()
-          .div(EVO.amt >= 4 ? 50 : 1),
+          .log10(),
       undiminishDisp: "corrupted shards and exotic atoms",
-      resDisp: "stardust",
-
+      get resDisp() {
+        return OURO.evo >= 4 ? "stardust" : "nebular dust";
+      },
       unl: () => tmp.epUnl,
       eff: (n) => [
         n.add(1).root(3),
@@ -191,40 +156,28 @@ const PROTOSTAR = {
         format(e[1], 0) +
         " Exotic Atom's generation",
     },
-
     //Tier 2
     yellow: {
-      color: "#fb0",
       undiminish: (n) => n.cyan.mul(n.magenta).root(4),
       undiminishDisp: "cyan and magenta",
       res: (n) => n.red.add(n.green),
       resDisp: "red and green",
-
-      unl: () => tmp.sn.unl || player.evo.const.tier >= 1,
-      eff: (n) =>
-        player.evo.const.tier >= 1
-          ? n.add(1).log10().add(1).pow(0.5)
-          : [
-              n.cbrt().div(10).add(1),
-              hasElement(301)
-                ? n.add(1).log10().cbrt().div(60).add(1)
-                : undefined,
-            ],
+      unl: () => tmp.sn.unl,
+      eff: (n) => [
+        n.cbrt().div(10).add(1),
+        hasElement(301) ? n.add(1).log10().cbrt().div(60).add(1) : undefined,
+      ],
       effDisp: (e) =>
-        player.evo.const.tier >= 1
-          ? formatMult(e) + " Zodiac"
-          : formatPow(e[0]) +
-            " Star Generators" +
-            (e[1] ? ", " + formatPow(e[1]) + " to exponent" : ""),
+        formatPow(e[0]) +
+        " Star Generators" +
+        (e[1] ? ", " + formatPow(e[1]) + " to exponent" : ""),
     },
     cyan: {
-      color: "#0bf",
       undiminish: (n) => n.yellow.mul(n.magenta).root(4),
       undiminishDisp: "yellow and magenta",
       res: (n) => n.green.add(n.blue),
       resDisp: "green and blue",
-
-      unl: () => tmp.sn.unl || player.evo.const.tier >= 1,
+      unl: () => tmp.sn.unl,
       eff: (n) => [
         n.add(1).root(4),
         hasElement(301) ? n.add(1).log10().cbrt().div(80).add(1) : undefined,
@@ -235,87 +188,29 @@ const PROTOSTAR = {
         (e[1] ? ", " + formatPow(e[1]) + " to exponent" : ""),
     },
     magenta: {
-      color: "#d0f",
       undiminish: (n) => n.yellow.mul(n.cyan).root(4),
       undiminishDisp: "yellow and cyan",
       res: (n) => n.red.add(n.blue),
       resDisp: "red and blue",
-
-      unl: () => quUnl() || player.evo.cosmo.unl,
-      eff: (n) =>
-        E(0.95).pow(
-          n
-            .add(1)
-            .log10()
-            .pow(hasElement(309) ? elemEffect(309, 0.6) : 0.5)
-        ),
+      unl: () => quUnl(),
+      eff: (n) => Decimal.pow(0.95, n.add(1).log10().root(2)),
       effDisp: (e) => formatReduction(e) + " Pre-Darkness Scalings",
     },
     ext2: {
       name: "Exotic II",
-      color: "#f30",
       undiminish: (n) =>
-        EVO.amt >= 4
-          ? E(0)
-          : player.evo.wh.mass[6]
-              .add(1)
-              .log10()
-              .mul(player.dark.matters.final)
-              .root(4)
-              .div(10),
+        player.evo.wh.mass[6]
+          .add(1)
+          .log10()
+          .mul(player.dark.matters.final)
+          .root(4)
+          .div(10),
       undiminishDisp: "anti-wormhole and FSS",
       res: (n) => n.ext1,
       resDisp: "Exotic I",
       unl: () => tmp.epUnl,
       eff: (n) => n.add(1).root(2),
       effDisp: (e) => formatPow(e) + " Exotic Atoms",
-    },
-
-    //Tier 3
-    orange: {
-      color: "#f70",
-      unl: () => [4, 5].includes(EVO.amt) && player.dark.unl,
-      undiminish: (n) => n.turquoise.mul(n.purple).root(5),
-      undiminishDisp: "turquoise and purple",
-      res: (n) =>
-        n.red
-          .add(1)
-          .log2()
-          .add(1)
-          .mul(n.yellow.add(1).log2().add(1))
-          .pow(2)
-          .sub(1),
-      resDisp: "product of log2(red) and log2(yellow)",
-      eff: (n) => n.div(5).add(1).log10().add(1).pow(0.75),
-      effDisp: (e) => formatPow(e) + " Dark Rays & Shadows",
-    },
-    turquoise: {
-      color: "#0f9",
-      unl: () => [4, 5, 6].includes(EVO.amt) && tmp.matterUnl,
-      undiminish: (n) => n.orange.mul(n.purple).root(5),
-      undiminishDisp: "orange and purple",
-      res: (n) =>
-        n.green
-          .add(1)
-          .log2()
-          .add(1)
-          .mul(n.cyan.add(1).log2().add(1))
-          .pow(2)
-          .sub(1),
-      resDisp: "product of log2(green) and log2(cyan)",
-      eff: (n) => n.add(1).pow(0.05),
-      effDisp: (e) => formatMult(e) + " Matter's Exponent",
-    },
-    purple: {
-      color: "#70f",
-      unl: () => [4, 5, 6].includes(EVO.amt) && player.dark.c16.first,
-      undiminish: (n) => player.dark.c16.shard.max(1).log10().div(10).add(1),
-      undiminishDisp: "corrupted shard",
-      res: (n) =>
-        n.blue.add(1).log2().add(1).mul(n.magenta.add(1).log2().add(1)).sub(1),
-      resDisp: "product of log2(blue) and log2(magenta)",
-      eff: (n) => n.add(1).log10().div(15).add(1),
-      effDisp: (e) => formatPow(e) + " Corrupted Shard",
     },
   },
 
@@ -326,10 +221,8 @@ const PROTOSTAR = {
       h += `<div class='table_center proto_table'>`;
       for (var i = r * 4; i < r * 4 + 4; i++) {
         if (n[i] === undefined) break;
-        h += `<button id="proto${i}" onclick="PROTOSTAR.nebula_click('${
-          n[i]
-        }')">
-					<h4 style='color: ${this.nebulae[n[i]].color}' id="proto_amt${i}"></h4>
+        h += `<button id="proto${i}" onclick="PROTOSTAR.nebula_click('${n[i]}')">
+					<h4 id="proto_amt${i}"></h4>
 					<span id="proto_gain${i}"></span>
 					<br>
 					<b id="proto_eff${i}"></b><br>
@@ -344,36 +237,26 @@ const PROTOSTAR = {
     tmp.el.proto_star.setTxt(player.evo.proto.star.format(0));
     tmp.el.proto_dust.setHTML(player.evo.proto.dust.format(0));
     tmp.el.proto_dust_prod.setTxt(
-      player.evo.proto.dust.formatGain(tmp.evo.neb.dust_prod)
+      player.evo.proto.dust.formatGain(tmp.evo.dust_prod),
     );
     tmp.el.ea_amount.setHTML(
       tmp.epUnl
-        ? `<h4>${format(
-            player.evo.proto.exotic_atoms,
-            0
-          )}</h4> Exotic Atoms <span>${player.evo.proto.exotic_atoms.formatGain(
-            tmp.evo.neb.eaGain
-          )}</span>`
-        : ""
+        ? `<h4>${format(player.evo.proto.exotic_atoms, 0)}</h4> Exotic Atoms <span>${player.evo.proto.exotic_atoms.formatGain(tmp.evo.eaGain)}</span>`
+        : "",
     );
     for (var [i, ni] of Object.entries(Object.keys(this.nebulae))) {
-      let nb = this.nebulae[ni],
-        amt = player.evo.proto.nebula[ni];
+      let nb = this.nebulae[ni];
       tmp.el["proto" + i].setDisplay(nb.unl ? nb.unl() : true);
       tmp.el["proto_amt" + i].setTxt(
-        `${amt.format(0)} ${nb.name ?? capitalFirst(ni)} Nebulae`
+        `${player.evo.proto.nebula[ni].format(0)} ${nb.name ?? capitalFirst(ni)} Nebulae`,
       );
       tmp.el["proto_gain" + i].setTxt(
-        amt.lt(1e5) ? "(+" + this.nebula_gain(ni).format(0) + ")" : ""
+        "(+" + this.nebula_gain(ni).format(0) + ")",
       );
       tmp.el["proto_dim" + i].setHTML(
-        (amt.lt(1e5)
-          ? `Next: ${this.nebula_req(ni).format(0)} ${
-              nb.resDisp ?? "Protostars"
-            }<br>`
-          : ``) + `Reduced on ${this.nebulae[ni].undiminishDisp}`
+        `Next: ${this.nebula_req(ni).format(0)} ${nb.resDisp ?? "Protostars"}<br>Reduced on ${this.nebulae[ni].undiminishDisp}`,
       );
-      tmp.el["proto_eff" + i].setHTML(nb.effDisp(tmp.evo.neb.eff[ni]));
+      tmp.el["proto_eff" + i].setHTML(nb.effDisp(tmp.evo.nebula_eff[ni]));
     }
   },
 };
@@ -386,5 +269,5 @@ const NEBULAE_TIER = (() => {
 })();
 
 function nebulaEff(i, def = 1) {
-  return tmp.evo.neb.eff[i] ?? def;
+  return tmp.evo.nebula_eff[i] ?? def;
 }

@@ -1,22 +1,20 @@
 const QUANTUM = {
   gain() {
-    let x = player.mass
-      .max(1)
-      .log10()
-      .div(EVO.amt >= 4 ? 1e12 : 1e13);
+    let x = player.mass.max(1).log10().div(1e13);
     if (x.lt(1)) return E(0);
-    if (EVO.amt >= 5) return x.max(1).log10().add(1);
-
     x = x.max(0).pow(hasTree("qu11") ? 3 : 1.5);
-    x = x.mul(tmp.qu.qc.s_eff);
+
+    x = x.mul(tmp.qu.qc_s_eff);
+    x = x.mul(tmp.qu.qc_s_eff);
     if (tmp.qu.mil_reached[4]) x = x.mul(2);
     if (hasTree("qf1")) x = x.mul(treeEff("qf1"));
     if (hasTree("qf2")) x = x.mul(treeEff("qf2"));
     if (hasTree("qf3")) x = x.mul(treeEff("qf3"));
-    if (hasElement(80) && EVO.amt >= 2) x = x.mul(1e4);
+    if (hasElement(80) && OURO.evo >= 2) x = x.mul(100);
     if (hasPrestige(0, 2)) x = x.mul(4);
 
     x = x.pow(theoremEff("proto", 5));
+
     return x.floor();
   },
   gainTimes() {
@@ -24,47 +22,22 @@ const QUANTUM = {
     if (hasTree("qu7")) x = x.mul(treeEff("qu7"));
     if (hasTree("qu9")) x = x.mul(treeEff("qu9"));
     if (hasElement(139)) x = x.mul(elemEffect(139, 1));
-    if (tmp.qu.mil_reached[7] && EVO.amt >= 4)
-      x = x.mul(player.qu.points.add(1).log10());
-    if (tmp.qu.mil_reached[8] && EVO.amt >= 4)
-      x = x.mul(E(2).pow(player.qu.qc.shard));
     return x;
   },
-  enter(auto = false, force = false, rip = false) {
-    if (tmp.qu.gain.gte(1) || force)
-      getResetConfirm("qu", () => CONFIRMS_FUNCTION.qu(auto, force, rip));
-  },
-  performReset(force, rip) {
-    if (!force) {
-      if (EVO.amt >= 5) {
-        player.evo.cosmo.unl = 1;
-        player.evo.cosmo.elixir = player.evo.cosmo.elixir.add(tmp.qu.gain);
-      } else {
-        player.qu.points = player.qu.points.add(tmp.qu.gain);
-        player.qu.times = player.qu.times.add(tmp.qu.gainTimes);
-      }
-      if (player.qu.qc.active) {
-        player.qu.qc.shard = Math.max(
-          player.qu.qc.shard,
-          tmp.qu.qc.s + tmp.qu.qc.s_bonus
+  enter(auto = false, force = false, rip = false, bd = false) {
+    if (tmp.qu.gain.gte(1) || force) {
+      if (player.confirms.qu && !auto && !force)
+        createConfirm(
+          "Are you sure to go Quantum? Going Quantum will reset all previous except QoL mechanicals",
+          "quReset",
+          () => {
+            createConfirm("ARE YOU SURE ABOUT IT???", "quReset", () =>
+              CONFIRMS_FUNCTION.qu(auto, force, rip, bd),
+            );
+          },
         );
-        player.qu.qc.active = false;
-      }
+      else CONFIRMS_FUNCTION.qu(auto, force, rip, bd);
     }
-
-    QUANTUM.doReset(force);
-    addQuote(7);
-    if (EVO.amt < 5) return;
-
-    ENTROPY.reset(0);
-    ENTROPY.reset(1);
-    if (rip && tmp.sn.unl) {
-      if (hasUpgrade("br", 4))
-        for (let x = 0; x < 2; x++)
-          for (let y = 0; y < 6; y++)
-            player.supernova.fermions.tiers[x][y] = E(2);
-    }
-    updateQuantumTemp();
   },
   doReset(force = false, dark = false, metaF = false) {
     if (!tmp.sn.unl) {
@@ -111,7 +84,7 @@ const QUANTUM = {
           "qol7",
           "chal4b",
           "chal7a",
-          "chal8"
+          "chal8",
         );
       if (tmp.qu.mil_reached[3]) {
         if (!force) keep.push("unl1");
@@ -120,9 +93,9 @@ const QUANTUM = {
       if (!c16 && hasUpgrade("br", 6) && !keep.includes("unl1"))
         keep.push("unl1");
 
-      let k = [];
-      for (let x in keep) if (hasTree(keep[x])) k.push(keep[x]);
-      player.supernova.tree = k;
+      let save_keep = [];
+      for (let x in keep) if (hasTree(keep[x])) save_keep.push(keep[x]);
+      player.supernova.tree = save_keep;
     }
 
     player.supernova.bosons = {
@@ -139,7 +112,7 @@ const QUANTUM = {
         player.supernova.b_upgs[BOSONS.upgs.ids[x]][y] = E(0);
 
     player.supernova.fermions.points = [E(0), E(0)];
-    if (!metaF) player.supernova.fermions.chosen = "";
+    if (!metaF) player.supernova.fermions.choosed = "";
 
     for (let x = 0; x < 2; x++)
       if (!hasTree("qu_qol" + (2 + 4 * x)) || force)
@@ -163,7 +136,7 @@ const QUANTUM = {
   bpGain() {
     let x = E(1);
     if (tmp.qu.mil_reached[5])
-      x = x.mul(tmp.qu.speed.max(1).root(2).softcap(1e50, 0.95, 2));
+      x = x.mul(tmp.preQUGlobalSpeed.max(1).root(2).softcap(1e50, 0.95, 2));
     if (hasTree("qu5")) x = x.mul(treeEff("qu5"));
     if (hasElement(138)) x = x.mul(elemEffect(138, 1));
     x = x.mul(BUILDINGS.eff("cosmic_string"));
@@ -198,9 +171,11 @@ const QUANTUM = {
       if (hasTree("qu6")) pow = pow.mul(treeEff("qu6"));
       pow = pow.mul(tmp.dark.abEff.csp || 1);
       pow = pow.pow(exoticAEff(1, 3));
+
       if (CHALS.inChal(17)) pow = E(1);
 
       let b = E(0);
+
       if (hasElement(19, 1)) b = b.add(muElemEff(19, 0));
 
       let x = pow.pow(player.qu.cosmic_str.add(b));
@@ -221,12 +196,6 @@ const QUANTUM = {
       E(10),
       `Supernova stars are boosted by Quantizes (capped at 1e10). Unlock Auto-Quantum.`,
     ],
-    [
-      E(20),
-      `Unlock Primordium. Quantum Foam boosts Quantizes at a logarithmic rate.`,
-    ],
-    [E(200), `Unlock Quantum Challenge. Quantum Shard boosts Quantizes.`],
-    [E(2e5), `Unlock Big Rip.`],
   ],
   auto: {
     mode: ["Amount", "Time"],
@@ -255,7 +224,7 @@ const QUANTUM = {
 };
 
 function quUnl() {
-  return EVO.amt < 5 && player.qu.times.gte(1);
+  return player.qu.times.gte(1);
 }
 
 function getQUSave() {
@@ -283,7 +252,7 @@ function getQUSave() {
     qc: {
       shard: 0,
       presets: [],
-      mods: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      mods: [0, 0, 0, 0, 0, 0, 0, 0],
       active: false,
     },
 
@@ -306,22 +275,28 @@ function getQUSave() {
 }
 
 function calcQuantum(dt) {
-  if (EVO.amt >= 5) return;
-
   let inf_gs = tmp.preInfGlobalSpeed.mul(dt);
+
+  if (
+    player.mass.gte(mlt(1e4)) &&
+    !player.qu.reached &&
+    player.chal.comps[12].gte(1)
+  ) {
+    player.qu.reached = true;
+    createPopup(POPUP_GROUPS.qu.html(), "quReached");
+  }
+
   if (quUnl()) {
     player.qu.bp = player.qu.bp.add(tmp.qu.bpGain.mul(inf_gs));
     for (let x = 0; x < CHROMA_LEN; x++)
       player.qu.chroma[x] = player.qu.chroma[x].add(
-        tmp.qu.chroma_gain[x].mul(inf_gs)
+        tmp.qu.chroma_gain[x].mul(inf_gs),
       );
 
     if (player.qu.auto_cr) QUANTUM.cosmic_str.buyMax();
 
     if (PRIM.unl()) {
-      player.qu.prim.theorems = player.qu.prim.theorems.max(
-        tmp.qu.prim.theorems
-      );
+      player.qu.prim.theorems = player.qu.prim.theorems.max(tmp.prim.theorems);
     }
 
     if (player.qu.auto.enabled) {
@@ -338,7 +313,7 @@ function calcQuantum(dt) {
       player.qu.points = player.qu.points.add(tmp.qu.gain.mul(inf_gs).div(10));
       if (player.qu.rip.active || hasElement(147))
         player.qu.rip.amt = player.qu.rip.amt.add(
-          tmp.qu.rip.gain.mul(inf_gs).div(10)
+          tmp.rip.gain.mul(inf_gs).div(10),
         );
     }
 
@@ -349,6 +324,15 @@ function calcQuantum(dt) {
   if (player.mass.gte(mlt(7.5e6)) && !player.qu.en.unl) {
     player.qu.en.unl = true;
     createPopup(POPUP_GROUPS.en.html(), "enReached");
+  }
+
+  if (hasUpgrade("br", 9) && tmp.atom.unl) {
+    player.md.break.energy = player.md.break.energy.add(
+      tmp.bd.energyGain.mul(inf_gs),
+    );
+    player.md.break.mass = player.md.break.mass.add(
+      tmp.bd.massGain.mul(inf_gs),
+    );
   }
 
   if (tmp.sn.unl && (hasTree("qu_qol1") || hasInfUpgrade(4)))
@@ -391,7 +375,7 @@ function updateQuantumHTML() {
     tmp.el.bpAmt.setTxt(
       format(player.qu.bp, 1) +
         " " +
-        formatGain(player.qu.bp, tmp.qu.bpGain.mul(inf_gs))
+        formatGain(player.qu.bp, tmp.qu.bpGain.mul(inf_gs)),
     );
     tmp.el.bpEff.setTxt(format(tmp.qu.bpEff));
 
@@ -399,12 +383,11 @@ function updateQuantumHTML() {
   } else if (tmp.tab_name == "chroma") updateChromaHTML();
   else if (tmp.tab_name == "qu-mil") {
     tmp.el.qu_times.setTxt(format(player.qu.times, 0));
-    let u = EVO.amt >= 4 ? 10 : 7;
+
     for (let x = 0; x < QUANTUM.mils.length; x++) {
-      tmp.el["qu_mil" + x].setDisplay(x < u);
       tmp.el["qu_mil" + x].changeStyle(
         "background-color",
-        tmp.qu.mil_reached[x] ? "#2f22" : "#4442"
+        tmp.qu.mil_reached[x] ? "#2f22" : "#4442",
       );
       tmp.el["qu_mil_goal" + x].setTxt(format(QUANTUM.mils[x][0], 0));
     }
@@ -414,7 +397,7 @@ function updateQuantumHTML() {
     tmp.el.auto_qu_res.setTxt(
       player.qu.auto.mode == 0
         ? format(tmp.qu.auto_input, 0)
-        : formatTime(tmp.qu.auto_input, 1) + "s"
+        : formatTime(tmp.qu.auto_input, 1) + "s",
     );
   } else if (tmp.tab_name == "prim") updatePrimordiumHTML();
   else if (tmp.tab_name == "entropy") updateEntropyHTML();

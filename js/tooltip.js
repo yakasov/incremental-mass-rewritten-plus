@@ -70,16 +70,16 @@ function updateTooltips() {
           TOOLTIP_CONFING.padding_y,
           Math.min(
             window.innerHeight - t_rect.height - TOOLTIP_CONFING.padding_y,
-            dy
-          )
+            dy,
+          ),
         ) + window.scrollY;
       style.left =
         Math.max(
           TOOLTIP_CONFING.padding_x,
           Math.min(
             window.innerWidth - t_rect.width - TOOLTIP_CONFING.padding_x,
-            dx
-          )
+            dx,
+          ),
         ) + window.scrollX;
       style["text-align"] = text_align;
     }

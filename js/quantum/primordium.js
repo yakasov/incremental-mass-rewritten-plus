@@ -1,26 +1,26 @@
 const PRIM = {
   unl() {
-    return hasTree("unl2") || (EVO.amt >= 4 && player.qu.times.gte(20));
+    return hasTree("unl2");
   },
   getTheorems() {
-    let b = tmp.qu.prim.t_base;
+    let b = tmp.prim.t_base;
     let x = player.qu.bp
       .max(1)
       .log(b)
       .mul(2)
       .mul(tmp.chal ? tmp.chal.eff[14] : 1);
     if (!hasElement(63, 1)) x = x.scale(1e42, 10, 0, true);
-    return x.root(tmp.qu.prim.prim_pow).floor();
+    return x.root(tmp.prim.prim_pow).floor();
   },
   getNextTheorem() {
-    let b = tmp.qu.prim.t_base;
-    let t = player.qu.prim.theorems.pow(tmp.qu.prim.prim_pow);
+    let b = tmp.prim.t_base;
+    let t = player.qu.prim.theorems.pow(tmp.prim.prim_pow);
     if (!hasElement(63, 1)) t = t.scale(1e42, 10, 0);
     let x = E(b).pow(
       t
         .div(tmp.chal ? tmp.chal.eff[14] : 1)
         .div(2)
-        .add(1)
+        .add(1),
     );
 
     return x;
@@ -28,7 +28,9 @@ const PRIM = {
   spentTheorems() {
     let x = E(0);
     for (let i = 0; i < player.qu.prim.particles.length; i++) {
-      x = x.add(player.qu.prim.particles[i]);
+      if (!hasTree("qu_qol10") || i >= 4)
+        if (!hasTree("qu_qol11") || i >= 6)
+          if (!hasTree("qu_qol12")) x = x.add(player.qu.prim.particles[i]);
     }
     return x;
   },
@@ -107,19 +109,13 @@ const PRIM = {
         return `Boost Stronger Power by ${format(x)}x`;
       },
       (x) => {
-        return `Boost Rage Powers gain by ^${
-          format(x[0]) + x[0].softcapHTML(3, hasUpgrade("br", 16))
-        } /<br> Boost Non-Bonus Tickspeed by ${format(x[1])}x`;
+        return `Boost Rage Powers gain by ^${format(x[0]) + x[0].softcapHTML(3, hasUpgrade("br", 16))} /<br> Boost Non-Bonus Tickspeed by ${format(x[1])}x`;
       },
       (x) => {
-        return `Boost Dark Matters gain by ^${
-          format(x[0]) + x[0].softcapHTML(3, hasUpgrade("br", 16))
-        } /<br> Boost BH Condenser Power by ${format(x[1])}x`;
+        return `Boost Dark Matters gain by ^${format(x[0]) + x[0].softcapHTML(3, hasUpgrade("br", 16))} /<br> Boost BH Condenser Power by ${format(x[1])}x`;
       },
       (x) => {
-        return `Boost Atoms gain by ^${
-          format(x[0]) + x[0].softcapHTML(3, hasUpgrade("br", 16))
-        } /<br> Boost Cosmic Ray Power by ${format(x[1])}x`;
+        return `Boost Atoms gain by ^${format(x[0]) + x[0].softcapHTML(3, hasUpgrade("br", 16))} /<br> Boost Cosmic Ray Power by ${format(x[1])}x`;
       },
       (x) => {
         return `Boost Higgs Boson's effect by ${format(x)}x`;
@@ -143,9 +139,7 @@ const PRIM = {
       (x) => {
         return hasUpgrade("br", 22)
           ? `Increase supernova generation by ${formatMult(x)}`
-          : `Make ${
-              player.dark.unl ? "pre-exotic" : "all"
-            } Supernova's scalings start ${format(x)} later` +
+          : `Make ${player.dark.unl ? "pre-exotic" : "all"} Supernova's scalings start ${format(x)} later` +
               x.softcapHTML(1500);
       },
     ],
@@ -167,16 +161,16 @@ const PRIM = {
 function giveRandomPParticles(v, max = false) {
   if (!PRIM.unl()) return;
 
-  let s = max ? tmp.qu.prim.unspent : E(v);
-  if (!max) s = s.min(tmp.qu.prim.unspent);
+  let s = max ? tmp.prim.unspent : E(v);
+  if (!max) s = s.min(tmp.prim.unspent);
 
-  let tw = tmp.qu.prim.total_w;
+  let tw = tmp.prim.total_w;
   let s_div = s.div(tw).floor();
   let sm = s.mod(tw).floor().toNumber();
 
   for (let x in PRIM.particle.names)
     player.qu.prim.particles[x] = player.qu.prim.particles[x].add(
-      s_div.mul(tmp.qu.prim.w[x])
+      s_div.mul(tmp.prim.w[x]),
     );
   for (let x = 0; x < sm; x++) {
     let c = Math.random();
@@ -193,26 +187,26 @@ function giveRandomPParticles(v, max = false) {
 function respecPParticles() {
   createConfirm(
     "Are you sure you want to respec all Particles?",
-    "respec",
+    "respectPPs",
     () => {
       for (let i = 0; i < 8; i++)
         if (!player.qu.prim.lock.includes(i))
           player.qu.prim.particles[i] = E(0);
       QUANTUM.doReset();
-    }
+    },
   );
 }
 
 function calcPartChances() {
   var sum = 0;
   for (let x in PRIM.particle.names) {
-    sum += tmp.qu.prim.w[x];
-    PRIM.particle.chance[x] = sum / tmp.qu.prim.total_w;
+    sum += tmp.prim.w[x];
+    PRIM.particle.chance[x] = sum / tmp.prim.total_w;
   }
 }
 
 function updatePrimordiumTemp() {
-  let tp = tmp.qu.prim;
+  let tp = tmp.prim;
 
   tp.parts = [];
   tp.bonus = [];
@@ -221,26 +215,28 @@ function updatePrimordiumTemp() {
 
   tp.w = [6, 6, 6, 6, 2, 2, 2, 1];
   tp.total_w = 31;
-  for (
-    let i = 0;
-    i <
-    (hasTree("qu_qol12") || EVO.amt >= 4
-      ? 8
-      : hasTree("qu_qol11")
-      ? 6
-      : hasTree("qu_qol10")
-      ? 4
-      : 0);
-    i++
-  ) {
-    tp.total_w -= tp.w[i];
-    tp.w[i] = 0;
+
+  if (hasTree("qu_qol10")) {
+    tp.w = [0, 0, 0, 0, 2, 2, 2, 1];
+    tp.total_w -= 24;
+
+    if (hasTree("qu_qol11")) {
+      tp.w = [0, 0, 0, 0, 0, 0, 2, 1];
+      tp.total_w -= 4;
+
+      if (hasTree("qu_qol12")) {
+        tp.w = [0, 0, 0, 0, 0, 0, 0, 0];
+        tp.total_w -= 3;
+      }
+    }
   }
 
   let pt = player.qu.prim.theorems;
   let pstr = E(1);
-  let p_mul = hasElement(63, 1);
+
   if (tmp.inf_unl) pstr = pstr.mul(theoremEff("proto", 1));
+
+  let p_mul = hasElement(63, 1);
 
   tp.prim_pow = CSEffect("prim_reduce");
   tp.theorems = PRIM.getTheorems();
@@ -254,16 +250,19 @@ function updatePrimordiumTemp() {
     if (tmp.c16.in) {
       pp = E(0);
     } else {
-      if (tmp.qu.prim.w[i] == 0) pp = pt;
+      if (hasTree("qu_qol10") && i < 4) pp = pt;
+      else if (hasTree("qu_qol11") && i < 6) pp = pt;
+      else if (hasTree("qu_qol12") && i < 8) pp = pt;
+
       if (hasPrestige(1, 4)) b = b.add(5);
     }
     tp.parts[i] = pp;
     tp.bonus[i] = b;
-    if (tmp.qu.rip.in) pp = pp.mul(i == 5 ? (hasElement(95) ? 0.1 : 0) : 1 / 2);
+    if (tmp.rip.in) pp = pp.mul(i == 5 ? (hasElement(95) ? 0.1 : 0) : 1 / 2);
     tp.eff[i] = PRIM.particle.eff[i](
       (p_mul ? pp.add(1).mul(b.add(1)).sub(1) : pp.add(b))
         .softcap(100, 0.75, 0)
-        .mul(pstr)
+        .mul(pstr),
     );
   }
 
@@ -273,36 +272,28 @@ function updatePrimordiumTemp() {
 function updatePrimordiumHTML() {
   let p_mul = hasElement(63, 1);
 
-  tmp.el.prim_btns.setDisplay(tmp.qu.prim.total_w > 0);
+  tmp.el.prim_btns.setDisplay(!hasTree("qu_qol12"));
   tmp.el.prim_theorem.setTxt(
-    format(tmp.qu.prim.unspent, 0) +
-      (tmp.qu.prim.total_w > 0
-        ? " / " + format(player.qu.prim.theorems, 0)
-        : "")
+    format(tmp.prim.unspent, 0) + " / " + format(player.qu.prim.theorems, 0),
   );
   tmp.el.prim_next_theorem.setTxt(
-    tmp.qu.prim.total_w > 0
-      ? `(+1 at ${format(player.qu.bp, 1)} / ${format(
-          tmp.qu.prim.next_theorem,
-          1
-        )})`
-      : ""
+    format(player.qu.bp, 1) + " / " + format(tmp.prim.next_theorem, 1),
   );
   for (let i = 0; i < player.qu.prim.particles.length; i++) {
     tmp.el["prim_part" + i].setTxt(
-      format(tmp.qu.prim.parts[i], 0) +
-        (tmp.qu.prim.bonus[i].gt(0)
-          ? (p_mul ? " × " : " + ") + tmp.qu.prim.bonus[i].format(0)
-          : "")
+      format(tmp.prim.parts[i], 0) +
+        (tmp.prim.bonus[i].gt(0)
+          ? (p_mul ? " × " : " + ") + tmp.prim.bonus[i].format(0)
+          : ""),
     );
     tmp.el["prim_part_eff" + i].setHTML(
-      PRIM.particle.effDesc[i](tmp.qu.prim.eff[i])
+      PRIM.particle.effDesc[i](tmp.prim.eff[i]),
     );
 
-    tmp.el["prim_lock" + i].setDisplay(tmp.qu.prim.w[i] && EVO.amt >= 2);
+    tmp.el["prim_lock" + i].setDisplay(tmp.prim.w[i] && OURO.evo >= 2);
     tmp.el["prim_lock" + i].setClasses({ btn: true, locked: !PRIM.canLock(i) });
     tmp.el["prim_lock" + i].setTxt(
-      player.qu.prim.lock.includes(i) ? "Unlock" : "Lock"
+      player.qu.prim.lock.includes(i) ? "Unlock" : "Lock",
     );
   }
 }

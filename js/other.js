@@ -56,7 +56,7 @@ const POPUP_GROUPS = {
         M☉ (mass of Sun): 333,054 M⊕ = 1.989e33 g<br>
         MMWG (mass of Milky Way Galaxy): 1.5e12 M☉ = 2.9835e45 g<br>
         uni (mass of Universe): 50,276,520,864 MMWG = 1.5e56 g<br>
-        mlt (mass of Multiverse): 1ee9 uni (logarithmic)<br>
+        mlt (mass of Multiverse): 1e1e9 uni (logarithmic)<br>
         mgv (mass of Megaverse): 1e15 mlt<br>
         giv (mass of Gigaverse): 1e15 mgv<br>
         arv^n (mass of n-th Archverse): 1e15 arv^n-1<br>
@@ -91,25 +91,23 @@ const POPUP_GROUPS = {
   },
   notations: {
     html: `
-            <button class="btn" onclick="player.options.notation = 'mixed_sc'">Default</button>
-            <button class="btn" onclick="player.options.notation = 'sc'">Scientific</button>
-            <button class="btn" onclick="player.options.notation = 'old_sc'">Old Scientific</button>
-			<br class='line'>
-            <button class="btn" onclick="player.options.notation = 'eng'">Engineering</button>
-            <button class="btn" onclick="player.options.notation = 'st'">Standard</button>
             <button class="btn" onclick="player.options.notation = 'elemental'">Elemental</button>
+            <button class="btn" onclick="player.options.notation = 'eng'">Engineering</button>
+            <button class="btn" onclick="player.options.notation = 'inf'">Infinity</button>
+            <button class="btn" onclick="player.options.notation = 'mixed_sc'">Mixed Scientific</button>
+            <button class="btn" onclick="player.options.notation = 'layer'">Prestige Layer</button>
+            <button class="btn" onclick="player.options.notation = 'sc'">Scientific</button>
+            <button class="btn" onclick="player.options.notation = 'st'">Standard</button>
+            <button class="btn" onclick="player.options.notation = 'old_sc'">Old Scientific</button>
             <button class="btn" onclick="player.options.notation = 'omega'">Omega</button>
             <button class="btn" onclick="player.options.notation = 'omega_short'">Omega Short</button>
-            <button class="btn" onclick="player.options.notation = 'inf'">Infinity</button>
-            <button class="btn" onclick="player.options.notation = 'layer'">Prestige Layer</button>
-            <button class="btn" onclick="player.options.notation = 'upsital'">Bezier's Upsital</button>
         `,
   },
   supernova10: {
     html: `
-            Congratulations!<br><br>You have reached 10 Supernovas!<br>
-            You can now manually Supernova.<br><br>
-            <b>Bosons are unlocked in the Supernova tab!</b>
+            Congratulations!<br><br>You got 10 Supernovas!<br>
+            And you can manualy supernova!<br><br>
+            <b>Bosons are unlocked in Supernova tab!</b>
         `,
     width: 400,
     height: 150,
@@ -119,11 +117,50 @@ const POPUP_GROUPS = {
   },
   fermions: {
     html: `
-            Congratulations!<br><br>You have beaten Challenge 10!<br><br>
-            <b>Fermions are unlocked in the Supernova tab!</b>
+            Congratulations!<br><br>You have beated Challenge 10!<br><br>
+            <b>Fermions are unlocked in Supernova tab!</b>
         `,
     width: 400,
     height: 150,
+    otherStyle: {
+      "font-size": "14px",
+    },
+  },
+  qu: {
+    html() {
+      return `
+            Congratulations!<br><br>You have reached ${formatMass(
+              mlt(1e4)
+            )} of mass after beating Challenge 12!<br><br>
+            <b>You need to go Quantum!</b>
+        `;
+    },
+    width: 400,
+    height: 150,
+    otherStyle: {
+      "font-size": "14px",
+    },
+  },
+  qus1: {
+    html() {
+      return `
+            <img src="images/qu_story1.png"><br><br>
+            Mass has collapsed while going Quantum! It looks like evaporation! But at what cost?
+        `;
+    },
+    button: "Uhh Oh",
+    otherStyle: {
+      "font-size": "14px",
+    },
+  },
+  qus2: {
+    html() {
+      return `
+            <img src="images/qu_story2.png"><br><br>
+            Don’t worry, new mechanics will arrive for you!
+        `;
+    },
+    button: "Cool",
     otherStyle: {
       "font-size": "14px",
     },
@@ -134,7 +171,7 @@ const POPUP_GROUPS = {
             Congratulations!<br><br>You have reached ${formatMass(
               mlt(7.5e6)
             )} of mass!<br><br>
-            <b>Entropy is unlocked in the Quantum tab!</b>
+            <b>Entropy is unlocked in Quantum tab!</b>
         `;
     },
     width: 400,
@@ -160,37 +197,37 @@ const QUOTES = [
   `
     <h2>Chapter 3: The Black Hole</h2><br>
     <img class='quote' src='images/quotes/3.png'><br>
-    You pulled up a hidden mystery of cosmos. The force was so strong that it formed a black hole!
+    You lifted a singularity. It even formed a black hole!
     `,
   `
     <h2>Chapter 4: The Atom</h2><br>
     <img class='quote' src='images/quotes/4.png'><br>
-    You discovered an Atom! You decompose it to find a physical miracle: Gravity. This helps you to go further!
+    You discovered a Atom! You decompose it to find a physical miracle: Gravity. This helps you to go further!
     `,
   `
     <h2>Chapter 5: Supernova Born</h2><br>
     <img class='quote' src='images/quotes/5.png'><br>
-    Stars have collapsed. A dwarf age begins
+    Stars have collapsed. A dwarf age begins.
     `,
   `
     <h2>Chapter 6: The Radiation</h2><br>
     <img class='quote' src='images/quotes/6.png'><br>
-    The stars begin to radiate...
+    Neutron Stars have gone very radiant.
     `,
   `
     <h2>Chapter 7: Scale to Quantum</h2><br>
     <img class='quote' src='images/quotes/7.png'><br>
-    Mass has collapsed into quantum fluctuations!
+    Mass has collapsed in quantum scale! Good luck on new features!
     `,
   `
     <h2>Chapter 8: Ripping Universe</h2><br>
     <img class='quote' src='images/quotes/8.png'><br>
-    All of space-time rips before your eyes!
+    All the spacetime rips before your eyes!
     `,
   `
     <h2>Chapter 9: Trapped in Darkness</h2><br>
     <img class='quote' src='images/quotes/9.png'><br>
-    You rose up within the darkness. Time to research the mysteries of matter!
+    You rose with darkness. Time to enrich for Matters.
     `,
   `
     <h2>Chapter 10: The Corruption</h2><br>
@@ -200,7 +237,7 @@ const QUOTES = [
   `
     <h2>Chapter 11: The Infinity</h2><br>
     <img class='quote' src='images/quotes/11.png'><br>
-    Infinity. You have evolved into a god.
+    Infinity. You have been evolved to a god.
     `,
   `
     <h2>Chapter 12: Broken Infinity</h2><br>
@@ -367,7 +404,7 @@ function keyEvent(e) {
     else if (k == 68 || k == 39) recordMovement(1);
     else if (k == 83 || k == 40) recordMovement(2);
     else if (k == 65 || k == 37) recordMovement(3);
-  } else if (!player.options.nav_hide[2]) {
+  } else if (!player.options.nav_hide[3]) {
     if (k == 38 || k == 40) {
       let v = k == 40 ? 1 : -1,
         t = tmp.tab,
@@ -421,11 +458,12 @@ function updateNavigation() {
   let ids = [
     ["nav_left_hider", "tabs"],
     ["nav_right_hider", "resources_table"],
+    ["nav_extra_hider"],
     ["nav_pin_hider"],
   ];
   let w = 450;
 
-  for (let i in ids) {
+  for (let i in player.options.nav_hide) {
     let h = player.options.nav_hide[i];
 
     tmp.el[ids[i][0]].setClasses({ toggled: h });
@@ -438,14 +476,14 @@ function updateNavigation() {
   tmp.el.main_app.changeStyle("width", p);
   tmp.el.nav_btns.changeStyle("width", p);
 
-  tmp.el.stabs.setDisplay(!player.options.nav_hide[2]);
+  tmp.el.stabs.setDisplay(!player.options.nav_hide[3]);
   PINS.update();
 }
 
 function prefer(x) {
   player.options.prefer[x] = !player.options.prefer[x];
   if (x == "pin") {
-    player.options.nav_hide[2] = false;
+    player.options.nav_hide[3] = false;
     updateNavigation();
   }
 }
@@ -462,7 +500,6 @@ function setupStatsHTML() {
   for (let i in RANKS.names) {
     h += `<div id="stats_${RANKS.names[i]}_btn" style="width: 145px"><button class="btn_tab" onclick="player.ranks_reward = ${i}">${RANKS.fullNames[i]}</button></div>`;
   }
-  h += `<div id="stats_beyond_rank_btn" style="width: 145px"><button class="btn_tab" onclick="player.ranks_reward = 'beyond'">Beyond</button></div>`;
 
   new Element("ranks_reward_btn").setHTML(h);
 
@@ -492,7 +529,13 @@ function setupStatsHTML() {
 }
 
 function updateStatsHTML() {
-  if (tmp.tab_name == "scaling")
+  if (tmp.tab_name == "rank-reward")
+    for (let i in RANKS.names) {
+      tmp.el[`stats_${RANKS.names[i]}_btn`].setDisplay(
+        player.ranks[RANKS.names[i]].gt(0)
+      );
+    }
+  else if (tmp.tab_name == "scaling")
     for (let i in SCALE_TYPE) {
       tmp.el[`stats_${SCALE_TYPE[i]}_btn`].setDisplay(
         tmp.scaling[SCALE_TYPE[i]].length > 0
@@ -518,6 +561,3 @@ function checkImage(imageSrc, good, bad) {
   img.onerror = bad;
   img.src = imageSrc;
 }
-
-//debugger
-devSpeed = 1;

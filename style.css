@@ -126,8 +126,8 @@
   text-align: center;
 }
 
-a {
-  color: #def;
+p {
+  line-height: 0.6;
 }
 
 body {
@@ -146,17 +146,13 @@ tr {
 }
 
 button {
-  border: solid 2px #444;
-  background-color: #1b1b1b;
+  border: solid 2px white;
+  background-color: #171717;
   color: white;
   font-size: 14px;
   cursor: pointer;
   transition-property: background-color, border, transform, box-shadow;
   transition-duration: 0.15s;
-}
-
-button * {
-  pointer-events: none;
 }
 
 .line {
@@ -165,12 +161,12 @@ button * {
   width: 100%;
   margin-top: 6px;
   height: 6px;
-  border-top: solid 2px #222;
+  border-top: solid 2px white;
 }
 
 .main-line {
   width: 100%;
-  border-bottom: solid 2px #222;
+  border-bottom: solid 2px white;
   height: 5px;
   margin-bottom: 13px;
 }
@@ -195,7 +191,7 @@ button * {
   width: 400px;
   min-height: 10px;
   color: white;
-  border: solid 2px #222;
+  border: solid 2px white;
   background-color: #171717;
   padding: 7px 25px;
   transition-duration: 0.75s;
@@ -234,6 +230,7 @@ button * {
   color: hsl(237, 15%, 47%);
   font-weight: bold;
   text-shadow: 0px 1px 0px hsl(252, 19%, 57%);
+  pointer-events: none;
 }
 
 .stab_btn .btn_tab {
@@ -258,23 +255,8 @@ button * {
   background-color: #444;
 }
 
-.img_chal.in {
-  background-color: #52520b;
-}
-
-.img_chal.comp {
-  background-color: #00520b;
-}
-
-.disabled_chal {
-  background-color: #444;
-  filter: grayscale(1);
-  pointer-events: none;
-  opacity: 0.5;
-}
-
 .light_red {
-  color: #f55;
+  color: lightcoral;
 }
 
 .red {
@@ -282,15 +264,11 @@ button * {
 }
 
 .orange {
-  color: #f50;
+  color: orange;
 }
 
 .yellow {
-  color: #fb0;
-}
-
-.gold {
-  color: #fe0;
+  color: yellow;
 }
 
 .limegreen {
@@ -314,7 +292,7 @@ button * {
 }
 
 .magenta {
-  color: #f08;
+  color: magenta;
 }
 
 .gray {
@@ -326,12 +304,13 @@ button * {
 }
 
 .saved_text {
-  color: #bfb;
-  text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0;
+  text-shadow:
+    2px 2px 3px #0f0,
+    -2px -2px 3px #7f0,
+    0 0 60px #0f0;
 }
 
 .corrupted_text {
-  color: white;
   animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
@@ -343,26 +322,37 @@ button * {
 @keyframes corrupted_text {
   0%,
   100% {
-    text-shadow: -2px -2px 2px #5555ff, 2px 2px 2px #ff5555;
+    text-shadow:
+      -2px -2px 2px #5555ff,
+      2px 2px 2px #ff5555;
     color: white;
   }
   25% {
-    text-shadow: -2px 2px 2px #5555ff, 2px -2px 2px #ff5555;
+    text-shadow:
+      -2px 2px 2px #5555ff,
+      2px -2px 2px #ff5555;
     color: #eeddff;
   }
   50% {
-    text-shadow: 2px 2px 2px #5555ff, -2px -2px 2px #ff5555;
+    text-shadow:
+      2px 2px 2px #5555ff,
+      -2px -2px 2px #ff5555;
     color: white;
   }
   75% {
-    text-shadow: 2px -2px 2px #5555ff, -2px 2px 2px #ff5555;
+    text-shadow:
+      2px -2px 2px #5555ff,
+      -2px 2px 2px #ff5555;
     color: #ffddee;
   }
 }
 
 .charged_text {
   color: cyan;
-  text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa, 1px 1px 3px blue;
+  text-shadow:
+    -1px -1px 3px lightskyblue,
+    0px 0px 5px #878ffa,
+    1px 1px 3px blue;
 }
 
 .idk {
@@ -453,33 +443,30 @@ button * {
   min-height: 40px;
 }
 
-.bh,
 .btn_tab.bh {
-  color: #fe5;
+  color: gold;
+  border-color: gold;
 }
-.btn_tab.bh {
-  border-color: #fe5;
-}
-.btn_tab.bh:hover,
-.btn_tab.bh.chosen {
-  background-color: #542;
+
+.btn_tab.bh:hover {
+  background-color: #493e00;
 }
 
 .btn_tab.atom {
-  color: #07f;
-  border-color: #07f;
+  color: #3157be;
+  border-color: #3157be;
 }
-.btn_tab.atom:hover,
-.btn_tab.atom.chosen {
-  background-color: #124;
+
+.btn_tab.atom:hover {
+  background-color: #172857;
 }
 
 .btn_tab.sn {
-  color: #f08;
-  border-color: #f08;
+  color: #ff009d;
+  border-color: #ff009d;
 }
-.btn_tab.sn:hover,
-.btn_tab.sn.chosen {
+
+.btn_tab.sn:hover {
   background-color: #500031;
 }
 
@@ -487,8 +474,8 @@ button * {
   color: lightgreen;
   border-color: lightgreen;
 }
-.btn_tab.qu:hover,
-.btn_tab.qu.chosen {
+
+.btn_tab.qu:hover {
   background-color: #005a00;
 }
 
@@ -496,38 +483,35 @@ button * {
   color: #666;
   border-color: #666;
 }
-.btn_tab.dark:hover,
-.btn_tab.dark.chosen {
+
+.btn_tab.dark:hover {
   background-color: #222;
 }
 
 .btn_tab.inf {
-  color: #fb0;
-  border-color: #fb0;
+  color: orange;
+  border-color: orange;
 }
-.btn_tab.inf:hover,
-.btn_tab.inf.chosen {
+
+.btn_tab.inf:hover {
   background-color: #220;
 }
 
-.snake,
 .btn_tab.snake {
-  color: #227f33;
+  color: #0d3;
+  border-color: #0d3;
 }
-.btn_tab.snake {
-  border-color: #227f33;
-}
-.btn_tab.snake:hover,
-.btn_tab.snake.chosen {
-  background-color: #0e4a2d;
+
+.btn_tab.snake:hover {
+  background-color: #051;
 }
 
 .space {
   color: #357;
   border-color: #357;
 }
-.btn_tab.space:hover,
-.btn_tab.space.chosen {
+
+.btn_tab.space:hover {
   background-color: #123;
 }
 
@@ -535,8 +519,8 @@ button * {
   color: #25ff30;
   border-color: #25ff30;
 }
-.btn_tab.dilation:hover,
-.btn_tab.dilation.chosen {
+
+.btn_tab.dilation:hover {
   background-color: #0a470d;
 }
 
@@ -544,8 +528,8 @@ button * {
   color: #00cea1;
   border-color: #00cea1;
 }
-.btn_tab.break_dilation:hover,
-.btn_tab.break_dilation.chosen {
+
+.btn_tab.break_dilation:hover {
   background-color: #0a4735;
 }
 
@@ -562,7 +546,7 @@ button * {
 
 .btn_tree {
   background-color: black;
-  border: solid 2px #222;
+  border: solid 2px white;
   margin: 15px;
   width: 54px;
   height: 54px;
@@ -641,10 +625,10 @@ button * {
 }
 
 .elements.br {
-  border-color: red;
+  border-color: #ff3939;
 }
 .elements.br.bought {
-  box-shadow: 0px 0px 10px 0px #f007;
+  box-shadow: 0px 0px 10px 0px #ff39397e;
   background-color: #800;
 }
 
@@ -659,7 +643,7 @@ button * {
   border-color: #00520b;
 }
 
-.btn_tree.chosen {
+.btn_tree.choosed {
   transform: scale(1.25) !important;
 }
 
@@ -667,7 +651,6 @@ button * {
   font-size: var(--elem-symbol-size);
   width: 50px;
   height: 50px;
-  border-color: white;
   background-color: #444;
 }
 
@@ -688,15 +671,13 @@ button * {
 .elements.corrupted,
 .btn_tree.corrupted {
   color: white;
-  box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
-    3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
+  box-shadow:
+    3px 3px 3px #ff5555,
+    -3px -3px 3px #5555ff,
+    3px 3px 3px #ff5555 inset,
+    -3px -3px 3px #5555ff inset;
   opacity: 0.1;
   animation: corrupted_div 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
-}
-
-.elements.cannot {
-  border-color: red;
-  transform: scale(0.8);
 }
 
 .elements.corrupted {
@@ -705,20 +686,27 @@ button * {
 
 .elements.paralyzed {
   border-color: #070;
-  box-shadow: 2px 2px 1px #0f0, -2px -2px 1px #7f0;
+  box-shadow:
+    2px 2px 1px #0f0,
+    -2px -2px 1px #7f0;
   opacity: 0.1;
   color: #111;
   text-shadow: none;
   transform: scale(0.8);
 }
 .elements.paralyzed:hover {
-  box-shadow: 2px 2px 24px #0f0, -2px -2px 12px #7f0;
+  box-shadow:
+    2px 2px 24px #0f0,
+    -2px -2px 12px #7f0;
 }
 
 .elements.c16 {
   border-color: #f5b;
-  box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
-    3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
+  box-shadow:
+    3px 3px 3px #ff5555,
+    -3px -3px 3px #5555ff,
+    3px 3px 3px #ff5555 inset,
+    -3px -3px 3px #5555ff inset;
 }
 
 .elements.c16.bought {
@@ -741,29 +729,50 @@ button * {
 @keyframes corrupted_div {
   0%,
   100% {
-    box-shadow: 3px 3px 3px #ff5555, -3px -3px 3px #5555ff,
-      3px 3px 3px #ff5555 inset, -3px -3px 3px #5555ff inset;
-    text-shadow: -2px -2px 0px #5555ff, 2px 2px 0px #ff5555;
+    box-shadow:
+      3px 3px 3px #ff5555,
+      -3px -3px 3px #5555ff,
+      3px 3px 3px #ff5555 inset,
+      -3px -3px 3px #5555ff inset;
+    text-shadow:
+      -2px -2px 0px #5555ff,
+      2px 2px 0px #ff5555;
   }
   25% {
-    box-shadow: -3px 3px 3px #ff5555, 3px -3px 3px #5555ff,
-      -3px 3px 3px #ff5555 inset, 3px -3px 3px #5555ff inset;
-    text-shadow: -2px 2px 0px #5555ff, 2px -2px 0px #ff5555;
+    box-shadow:
+      -3px 3px 3px #ff5555,
+      3px -3px 3px #5555ff,
+      -3px 3px 3px #ff5555 inset,
+      3px -3px 3px #5555ff inset;
+    text-shadow:
+      -2px 2px 0px #5555ff,
+      2px -2px 0px #ff5555;
   }
   50% {
-    box-shadow: -3px -3px 3px #ff5555, 3px 3px 3px #5555ff,
-      -3px -3px 3px #ff5555 inset, 3px 3px 3px #5555ff inset;
-    text-shadow: 2px 2px 0px #5555ff, -2px -2px 0px #ff5555;
+    box-shadow:
+      -3px -3px 3px #ff5555,
+      3px 3px 3px #5555ff,
+      -3px -3px 3px #ff5555 inset,
+      3px 3px 3px #5555ff inset;
+    text-shadow:
+      2px 2px 0px #5555ff,
+      -2px -2px 0px #ff5555;
   }
   75% {
-    box-shadow: 3px -3px 3px #ff5555, -3px 3px 3px #5555ff,
-      3px -3px 3px #ff5555 inset, -3px 3px 3px #5555ff inset;
-    text-shadow: 2px -2px 0px #5555ff, -2px 2px 0px #ff5555;
+    box-shadow:
+      3px -3px 3px #ff5555,
+      -3px 3px 3px #5555ff,
+      3px -3px 3px #ff5555 inset,
+      -3px 3px 3px #5555ff inset;
+    text-shadow:
+      2px -2px 0px #5555ff,
+      -2px 2px 0px #ff5555;
   }
 }
 
 .btn {
   cursor: pointer;
+  background-color: #444;
   font-size: 12px;
   max-width: 250px;
   padding: 7px 25px;
@@ -779,12 +788,6 @@ button * {
   width: 250px;
 }
 
-.btn.locked {
-  border-color: #222;
-  background: #171717;
-  color: #777;
-}
-
 .btn.locked,
 .img_btn.locked,
 .elements.locked {
@@ -798,9 +801,13 @@ button * {
   cursor: default;
 }
 
+.chal_comp {
+  background-color: #00520b;
+}
+
 .input_ratio {
   width: 100px;
-  border: solid 2px #222;
+  border: solid 2px white;
   background-color: #171717;
 }
 
@@ -808,7 +815,7 @@ button * {
   color: white;
   font-size: 20px;
   width: 200px;
-  border: solid 2px #222;
+  border: solid 2px white;
   background-color: #171717;
   text-align: left;
 }
@@ -840,10 +847,6 @@ h4 {
   display: inline;
   font-weight: bold;
   font-size: 18px;
-}
-
-.basic_bold {
-  font-weight: bold;
 }
 
 *::-webkit-scrollbar {
@@ -890,8 +893,7 @@ h4 {
   cursor: default;
 }
 
-.md:not(.locked):hover,
-.md.bought {
+.md:not(.locked):hover {
   border-color: #00ce00;
   background-color: #003a00;
   box-shadow: 0 0 10px #00ce00;
@@ -902,8 +904,7 @@ h4 {
   background-color: #171717;
 }
 
-.bd:not(.locked):hover,
-.bd.bought {
+.bd:not(.locked):hover {
   border-color: #00cea1;
   background-color: #00363a !important;
   box-shadow: 0 0 10px #00cea1;
@@ -914,12 +915,14 @@ h4 {
   background-color: #171717;
 }
 
-.charger:not(.locked):hover,
-.charger.bought {
+.charger:not(.locked):hover {
   border-color: #47cbff;
   background-color: #009ddb !important;
-  box-shadow: 2px 2px 6px #47cbff, 2px 2px 6px #47cbff inset,
-    -2px -2px 6px white, -2px -2px 6px white inset;
+  box-shadow:
+    2px 2px 6px #47cbff,
+    2px 2px 6px #47cbff inset,
+    -2px -2px 6px white,
+    -2px -2px 6px white inset;
   color: black;
 }
 
@@ -1005,7 +1008,7 @@ h4 {
   background-color: hsl(39, 100%, 6%);
 }
 
-.fermion_btn.quark.chosen {
+.fermion_btn.quark.choosed {
   background: repeating-linear-gradient(
     45deg,
     #0005 0%,
@@ -1026,7 +1029,7 @@ h4 {
   background-color: hsl(120, 100%, 6%);
 }
 
-.fermion_btn.lepton.chosen {
+.fermion_btn.lepton.choosed {
   background: repeating-linear-gradient(
     45deg,
     #0005 0%,
@@ -1141,7 +1144,7 @@ h4 {
   top: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  border: solid 2px #222;
+  border: solid 2px white;
   background-color: #171717;
   padding: 7px 25px;
   pointer-events: auto;
@@ -1181,7 +1184,7 @@ h4 {
   width: 196px;
   height: 100%;
   overflow-y: auto;
-  border-right: solid 2px #222;
+  border-right: solid 2px white;
 }
 
 #tabs > div {
@@ -1215,16 +1218,16 @@ h4 {
 }
 
 #tabs .btn_tab:hover > iconify-icon,
-#tabs .btn_tab.chosen > iconify-icon {
+#tabs .btn_tab.choosed > iconify-icon {
   transform: scale(1.3) rotate(-25deg);
 }
 
-#tabs .btn_tab.chosen {
+#tabs .btn_tab.choosed {
   border-left-width: 10px;
   border-bottom-width: 2px;
 }
 
-.btn_tab.chosen {
+.btn_tab.choosed {
   border-bottom-width: 6px;
 }
 
@@ -1236,14 +1239,14 @@ h4 {
   position: absolute;
   height: 20px;
   left: 0;
-  top: -13px;
+  top: -20px;
 }
 
 #resources_table {
   width: 246px;
   height: 100%;
   overflow-y: auto;
-  border-left: solid 2px #222;
+  border-left: solid 2px white;
 }
 
 #resources_table > div {
@@ -1265,15 +1268,13 @@ h4 {
   font-size: 12px;
 }
 
-#resources_table > div > div.reset,
-#resources_table.force_btn > div > div {
+#resources_table > div > div.reset {
   border: 1px solid;
   transition-duration: 0.2s;
   cursor: pointer;
 }
 
-#resources_table > div > div.reset:hover,
-#resources_table.force_btn > div > div:hover {
+#resources_table > div > div.reset:hover {
   background: #444;
 }
 
@@ -1307,7 +1308,6 @@ h4 {
   height: 50px;
   pointer-events: all;
   background-color: white;
-  border: none;
 }
 
 #nav_btns > button > iconify-icon {
@@ -1333,9 +1333,15 @@ h4 {
   border-radius: 15px 0 0 15px;
 }
 
-#nav_pin_hider {
+#nav_extra_hider {
   left: 0;
   bottom: 90px !important;
+  border-radius: 0 15px 15px 0;
+}
+
+#nav_pin_hider {
+  left: 0;
+  bottom: 155px !important;
   border-radius: 0 15px 15px 0;
 }
 
@@ -1414,8 +1420,8 @@ h4 {
 }
 
 .theorem_div.bh {
-  color: #fd7;
-  border-color: #fd7;
+  color: yellow;
+  border-color: yellow;
 }
 
 .theorem_div.atom {
@@ -1507,6 +1513,10 @@ h4 {
   left: 2px;
 }
 
+.theorem_div * {
+  pointer-events: none;
+}
+
 #pre_theorem {
   align-items: center;
   min-height: 120px;
@@ -1519,7 +1529,7 @@ h4 {
   cursor: pointer;
 }
 
-.theorem_div.chosen {
+.theorem_div.choosed {
   box-shadow: inset white 0 0 15px;
 }
 
@@ -1588,7 +1598,8 @@ h4 {
 .inf_upg > * {
   position: absolute;
   transform: translate(-50%, -50%);
-  transition-duration: 0.5s;
+  transition-duration: 1s;
+  pointer-events: none;
 }
 
 .inf_upg.locked {
@@ -1600,7 +1611,9 @@ h4 {
   cursor: default;
   background-color: #ffbd30;
   border: solid 4px #f06c14;
-  box-shadow: inset 0 0 5px #f06c14, 0 0 5px #f06c14;
+  box-shadow:
+    inset 0 0 5px #f06c14,
+    0 0 5px #f06c14;
 }
 
 .inf_upg > img {
@@ -1612,14 +1625,18 @@ h4 {
   width: 100%;
   left: 50%;
   opacity: 0;
+  filter: blur(3px);
 }
 
 .inf_upg:hover > div {
   opacity: 1;
+  filter: blur(0px);
 }
 
 .inf_upg:hover > img {
-  filter: blur(6px);
+  opacity: 0;
+  filter: blur(3px);
+  transform: scale(0.5) translate(-100%, -100%);
 }
 
 #iu_row4 > .inf_upg {
@@ -1636,11 +1653,23 @@ h4 {
   position: relative;
   border-color: #0098a3;
   background-color: #0000;
-
+  text-shadow:
+    0 0 3px black,
+    0 0 3px black,
+    0 0 3px black,
+    0 0 3px black,
+    0 0 3px black,
+    0 0 3px black,
+    0 0 3px black,
+    0 0 3px black;
   width: 300px;
   height: 120px;
   max-width: 300px;
   max-height: 120px;
+}
+
+.galactic * {
+  pointer-events: none;
 }
 
 .galactic:before {
@@ -1652,7 +1681,9 @@ h4 {
   width: 100%;
   height: 100%;
   background-image: url("images/galactic_texture.png");
-  animation: gal_spin 5s linear infinite;
+  animation:
+    gal_spin-1 30s cubic-bezier(0.42, 0, 0.58, 1) infinite,
+    gal_spin-2 10s cubic-bezier(0.42, 0, 0.58, 1) infinite;
   z-index: -1;
 }
 
@@ -1680,14 +1711,17 @@ h4 {
   );
 }
 
-#ouro_scene {
+#ouro_scene,
+#ouro_quotes {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: linear-gradient(rgba(15, 63, 39, 0.6), #0f3f27);
+}
+#ouro_scene {
+  background: linear-gradient(transparent, #0f3f27);
 }
 #ouro_scene > *:not(#ouro_quotes) {
   position: fixed;
@@ -1735,16 +1769,16 @@ h4 {
 }
 
 #snake_movement > button {
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
 }
 
 .wormhole-div {
   position: relative;
 
-  width: 175px;
-  height: 175px;
-  margin: 5px;
+  width: 200px;
+  height: 200px;
+  margin: 15px;
   padding: 10px;
   background: #210;
   border: solid 2px #b60;
@@ -1760,7 +1794,7 @@ h4 {
 
 .wormhole-div.none {
   background: #111;
-  border: solid 2px #222;
+  border: solid 2px #333;
   box-shadow: #111 0px 0px 20px;
 }
 
@@ -1775,18 +1809,20 @@ h4 {
   box-shadow: #6b0 0px 0px 20px;
 }
 
-.wormhole-div > div {
+.wormhole-div > div:not(.wh-id) {
   position: absolute;
   left: 0px;
   width: 100%;
 }
 
 .wormhole-div > .wh-id {
-  top: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   opacity: 0.5;
 }
 .wormhole-div > .wh-mult {
-  top: 40px;
+  top: 20px;
 }
 .wormhole-div > .wh-mass {
   font-size: 16px;
@@ -1810,9 +1846,10 @@ h4 {
 }
 
 .proto_table > button {
-  width: 350px;
-  height: 75px;
+  width: 400px;
+  height: 100px;
   border-color: #357;
+  box-shadow: 0px 0px 10px 0px #357;
   background-color: #123;
 }
 .proto_table > button:hover {
@@ -1824,7 +1861,8 @@ h4 {
   margin: auto;
   border: 4px solid transparent;
   padding: 5px;
-  background: url("images/evolution/space.jpg") padding-box,
+  background:
+    url("images/evolution/space.jpg") padding-box,
     linear-gradient(45deg, pink, darkorchid, pink, darkorchid) border-box;
   width: 720px;
   height: 480px;
@@ -1847,13 +1885,23 @@ h4 {
   overflow-y: scroll;
 }
 
+#const_glow {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset #fff 0px 0px 20px;
+  pointer-events: none;
+}
+
 #const_table {
   position: relative;
   width: 100%;
   height: 490px;
 }
 
-.zodiac_upg {
+.zoviac_upg {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -1861,13 +1909,11 @@ h4 {
   cursor: pointer;
 }
 
-.zodiac_upg.locked {
-  transform: translate(-50%, -50%) scale(0.9);
-  filter: brightness(0.4);
-}
-
-.zodiac_upg.bought {
-  filter: drop-shadow(0 0 20px magenta);
+.zoviac_upg.bought {
+  box-shadow:
+    0 0 12px green,
+    0 0 12px green,
+    0 0 18px magenta;
 }
 
 #zodiac_desc {
@@ -1903,43 +1949,6 @@ h4 {
   margin: 3px;
 }
 
-.cosmo {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border: 3px solid #143a3d;
-  padding: 0;
-}
-
-.cosmo.highlight {
-  border-color: #0098a3;
-  box-shadow: 0 0 12px #0098a3;
-}
-
-.cosmo > div {
-  position: absolute;
-  left: -1.5px;
-  width: 120px;
-  text-align: center;
-}
-
-.cosmo > .sym {
-  transform: translateY(-50%);
-  top: 50%;
-  font-size: 48px;
-  color: #bfe5e8;
-}
-
-.cosmo > .tier {
-  top: 20px;
-  color: #bfe5e8;
-}
-
-.cosmo > .desc {
-  bottom: 0;
-  font-size: 8px;
-}
-
 #sisyphus {
   position: fixed;
   top: 0px;
@@ -1973,14 +1982,38 @@ h4 {
   }
 }
 
-@keyframes gal_spin {
+@keyframes gal_spin-1 {
   0% {
-    background-size: 75px;
     background-position: 0px 0px;
   }
+  20% {
+    background-position: -450px -150px;
+  }
+  45% {
+    background-position: 180px -70px;
+  }
+  65% {
+    background-position: 120px 270px;
+  }
+  90% {
+    background-position: -330px 60px;
+  }
   100% {
-    background-size: 75px;
-    background-position: 300px 300px;
+    background-position: 150px -100px;
+  }
+}
+
+@keyframes gal_spin-2 {
+  0%,
+  100% {
+    background-size: 50px;
+  }
+  25%,
+  75% {
+    background-size: 30px;
+  }
+  50% {
+    background-size: 80px;
   }
 }
 

@@ -37,7 +37,6 @@
     <script src="js/buildings.js"></script>
     <script src="js/debug.js"></script>
 
-    <script src="js/ouroboros/cosmic.js"></script>
     <script src="js/ouroboros/constellation.js"></script>
     <script src="js/ouroboros/protostar.js"></script>
     <script src="js/ouroboros/wormhole.js"></script>
@@ -161,34 +160,33 @@
                 width="35"
               ></iconify-icon>
             </button>
-            <button id="nav_pin_hider" onclick="hideNavigation(2)">
+            <button id="nav_extra_hider" onclick="hideNavigation(2)">
+              <iconify-icon icon="mdi:plus" width="35"></iconify-icon>
+            </button>
+            <button id="nav_pin_hider" onclick="hideNavigation(3)">
               <iconify-icon icon="mdi:pin" width="35"></iconify-icon>
             </button>
-            <button id="nav_res_hider" onclick="tmp.res_hide = !tmp.res_hide">
+            <button id="nav_res_hider" onclick="goToTab('res-hide')">
               <iconify-icon icon="mdi:eye" width="35"></iconify-icon>
             </button>
           </div>
-          <div style="margin-top: 12px; min-height: 81px">
+          <div style="min-height: 60px">
             <div id="chal_upper"></div>
             <div id="requirement"></div>
             <div id="upg_notify">
               <h4 class="red" id="upg_notify_msg"></h4>
               <br />
-              <br />
               <button class="btn" onclick="goUpgNotify()">
                 Go to upgrade!
               </button>
             </div>
-            <div id="snake_stats"></div>
             <div class="saved_text" id="saved">
               Evolution stands in favor. Saved from Corruption.
             </div>
           </div>
           <div class="main-line"></div>
           <div id="stabs_div">
-            <button id="pin_btn" onclick="PINS.pin()" style="line-height: 0">
-              Pin
-            </button>
+            <button id="pin_btn" onclick="PINS.pin()">Pin</button>
             <div class="table_center stab_btn" id="pins_stabs"></div>
             <div id="stabs"></div>
           </div>
@@ -201,18 +199,18 @@
                 style="min-height: 55px"
               >
                 <div style="width: 145px">
-                  <button onclick="tmp.ranks.tab = 0" class="btn_tab">
+                  <button onclick="tmp.rank_tab = 0" class="btn_tab">
                     Ranks
                   </button>
                 </div>
                 <div style="width: 145px">
-                  <button onclick="tmp.ranks.tab = 1" class="btn_tab">
+                  <button onclick="tmp.rank_tab = 1" class="btn_tab">
                     Prestiges
                   </button>
                 </div>
                 <div style="width: 145px">
                   <button
-                    onclick="tmp.ranks.tab = 2"
+                    onclick="tmp.rank_tab = 2"
                     class="btn_tab"
                     id="asc_btn"
                   >
@@ -229,7 +227,20 @@
                   <div id="ranks_table" class="table_center"></div>
                   <div style="width: 400px; display: none" id="beyond_ranks">
                     <div class="table_center" style="align-items: center">
-                      <div id="br_amt"></div>
+                      <button
+                        id="br_auto"
+                        class="btn"
+                        style="width: 80px"
+                        onclick="RANKS.autoSwitch('beyond')"
+                      >
+                        OFF
+                      </button>
+                      <div
+                        style="margin-left: 5px; text-align: left"
+                        id="br_amt"
+                      >
+                        Hept 0
+                      </div>
                     </div>
                     <br />
                     <button
@@ -237,7 +248,12 @@
                       class="btn reset"
                       style="max-width: 380px"
                       id="br_desc"
-                    ></button>
+                    >
+                      Reset your hexs (hexes) (and force a darkness reset) but
+                      hept/oct/enne etc. up.<br />
+                      To Hept up, require Hex ???<br />
+                      To Oct up, require Hept ???
+                    </button>
                   </div>
                 </div>
                 <br /><br />
@@ -364,7 +380,7 @@
                   You have
                   <h4 id="bhMass2">X</h4>
                   of Black Hole<br />
-                  <span class="bh"
+                  <span class="green"
                     >Which boosts mass gain by
                     <h4 id="bhEffect">X</h4></span
                   ><br /><br />
@@ -377,8 +393,8 @@
                   You have
                   <h4 id="bhUnstable" class="corrupted_text">X</h4>
                   of Unstable Black Hole<br />
-                  <span class="bh"
-                    >Which boosts Black Hole Mass gain by
+                  <span class="green"
+                    >Which boosts mass of black hole gain by
                     <h4 id="bhUnstableEffect">X</h4></span
                   ><br /><br />
                   Unstable BH's production is decreased based on its mass
@@ -393,10 +409,10 @@
                   >After <b id="massSoftStart2">X</b> of mass gain from black
                   hole, its mass gain will be softcapped!</span
                 ><br />
+                <span id="bhOverflow"></span>
                 <span id="bhFSoft" class="red"
                   >The formula softcaps at <b id="bhFSoftStart">X</b>!</span
                 ><br />
-                <span id="bhOverflow"></span>
                 <div id="bhOverflow2" style="color: rgb(255, 197, 215)"></div>
                 <br />
                 <div
@@ -409,7 +425,7 @@
               You have
               <h4 id="atomicAmt">X</h4>
               Atomic Power<br />
-              <span class="cyan" id="atomicEff"
+              <span class="green" id="atomicEff"
                 >Which provides
                 <h4>X</h4>
                 free Tickspeeds</span
@@ -424,8 +440,7 @@
               You collapsed
               <h4 id="stars_Amt">X</h4>
               stars, which multiplies mass gain based on all rank types.<br />
-              <span class="magenta"
-                >Currently: <span id="stars_Eff">X</span></span
+              <span class="green">Currently: <span id="stars_Eff">X</span></span
               ><br /><br />
               <button
                 id="star_btn"
@@ -449,7 +464,7 @@
               You have
               <h4 id="bpAmt">0</h4>
               Blueprint Particles<br />
-              <span class="light_green"
+              <span class="green"
                 >Which increases pre-Quantum global speed by
                 <h4 id="bpEff">1</h4>
                 x</span
@@ -460,7 +475,7 @@
               You have
               <h4 id="dim_mass">X</h4>
               of dimensional mass
-              <div class="yellow">
+              <div class="green">
                 Which boosts meta-score of equipped theorems by
                 <h4 id="dim_mass_eff">X</h4>
               </div>
@@ -472,7 +487,6 @@
               <div id="ranks_reward_btn" class="table_center stab_btn"></div>
               <br />
               <div id="ranks_rewards_table"></div>
-              <div id="br_rewards_table"></div>
             </div>
             <div id="tab_div-scaling">
               <div id="scaling_btn" class="table_center stab_btn"></div>
@@ -483,6 +497,9 @@
               <div id="pres_reward_btn" class="table_center stab_btn"></div>
               <br />
               <div id="pres_rewards_table"></div>
+            </div>
+            <div id="tab_div-bd-reward">
+              <div id="br_rewards_table"></div>
             </div>
             <div id="tab_div-asc-reward">
               <div id="asc_reward_btn" class="table_center stab_btn"></div>
@@ -496,7 +513,8 @@
             </div>
 
             <div id="tab_div-chal">
-              Click an image to show a challenge. Click again to start.<br /><br />
+              Note: Click any image to show challenge description. Click again
+              to enter any challenge<br /><br />
               <div class="table_center" style="width: 100%">
                 <div style="width: calc(50%)">
                   <div id="chals_table"></div>
@@ -515,20 +533,13 @@
                       class="btn"
                       id="chal_auto"
                       onclick="player.options.auto_retry = !player.options.auto_retry"
-                    ></button
-                    ><br />
-                    <br />
-
-                    <h4 id="chal_ch_title"></h4>
-                    <br />
-                    <span id="chal_ch_desc"></span>
-                    <br class="line" />
-                    <span class="red" id="chal_ch_reset"></span><br />
-                    <span id="chal_ch_goal"></span>
-                    <br class="line" />
+                    ></button>
+                    <p id="chal_ch_title"></p>
+                    <span class="red" id="chal_ch_desc"></span><br />
+                    <span class="red" id="chal_ch_reset"></span>
+                    <p id="chal_ch_goal"></p>
                     <span class="green" id="chal_ch_reward"></span><br />
-                    <span class="green" id="chal_ch_eff"></span><br /><br />
-                    <span id="chal_ch_comp" style="font-size: 10px"></span>
+                    <span class="green" id="chal_ch_eff"></span>
                   </div>
                 </div>
               </div>
@@ -546,12 +557,12 @@
               ><br /><br />
               <div class="table_center" style="min-height: 30px">
                 <div style="width: 145px">
-                  <button onclick="tmp.qu.qc.tab = 0" class="btn_tab">
+                  <button onclick="tmp.qc_tab = 0" class="btn_tab">
                     Modifications
                   </button>
                 </div>
                 <div style="width: 145px">
-                  <button onclick="tmp.qu.qc.tab = 1" class="btn_tab">
+                  <button onclick="tmp.qc_tab = 1" class="btn_tab">
                     Presets
                   </button>
                 </div>
@@ -621,12 +632,11 @@
               </button>
               <button class="btn" onclick="buyAllElements()">Buy All</button>
               <div id="elemTierDiv"></div>
-              <div id="elem_amount_div"></div>
               <br />
               <div style="min-height: 70px">
                 <div id="elem_ch_div">
                   <span id="elem_desc" class="sky">X</span><br />
-                  <span id="elem_cost">X</span><br />
+                  Cost: <span id="elem_cost">X</span><br />
                   <span id="elem_eff" class="green">X</span>
                 </div>
                 <div id="elem_next_div">
@@ -759,9 +769,6 @@
                   <button class="btn" onclick="SUPERNOVA.reset(true)">
                     Reset without being Supernova
                   </button>
-                  <button class="btn" onclick="delete player.supernova.pin_req">
-                    Unpin requirement
-                  </button>
                 </div>
                 You have <span id="neutronStar">X</span> Neutron star.<br />
                 <div id="tree_desc" style="margin-top: 3px"></div>
@@ -888,7 +895,7 @@
             <div id="tab_div-prim">
               You have <span id="prim_theorem">0</span> Primordium Theorem
               (based on Blueprint Particles)<br />
-              <span id="prim_next_theorem">X</span><br /><br />
+              (+1 at <span id="prim_next_theorem">X</span>)<br /><br />
               <div id="prim_btns">
                 <button class="btn" onclick="giveRandomPParticles(1)">
                   Give 1
@@ -907,7 +914,7 @@
             <div id="tab_div-entropy">
               <div class="table_center" style="min-height: 250px">
                 <div style="width: 33.3%; min-width: 300px">
-                  <span id="enEva1">0</span><br /><br />
+                  Your frequency is <span id="enEva1">0</span> Hz<br /><br />
                   <button
                     id="evaBtn1"
                     class="btn half_full"
@@ -930,7 +937,7 @@
                     class="btn half_full"
                     onclick="ENTROPY.switch(1)"
                   >
-                    Evaporate your Black Hole Mass to gain Hawking Radiation</button
+                    Evaporate your mass of Black Hole to gain Hawking Radiation</button
                   ><br /><br />
                   You have <span id="enAmt3">0</span> Hawking Radiation, which
                   increases Entropy cap to <span id="enEff2">0</span>
@@ -1017,13 +1024,17 @@
                   to unlock next matter!
                 </div>
                 <div id="FSS_eff1"></div>
+                <br />
+                <button class="btn" onclick="buyMaxMatters()">
+                  Max All Upgrades
+                </button>
               </div>
               <br />
               <div class="table_center" id="matters_table"></div>
             </div>
             <div id="tab_div-c16">
               <div id="c16_info">
-                Your best Black Hole Mass in the 16th Challenge is
+                Your best mass of black hole in the 16th Challenge is
                 <h4 id="bestBH">X</h4>
                 .<br />
                 You must purchase corruption upgrades outside C16!<br /><br />
@@ -1053,11 +1064,11 @@
               <span
                 id="pt_lvl"
                 class="tooltip"
-                tooltip-html="Based on normal mass, best Black Hole Mass in C16"
+                tooltip-html="Based on normal mass, best mass of black hole in C16"
                 >???</span
               ><br />
-              <div>
-                <div style="margin: 24px 0">
+              <div class="table_center">
+                <div style="width: 50%; min-width: 500px">
                   <h2>The Core</h2>
                   <div id="theorem_table" class="table_center"></div>
                   <i
@@ -1065,25 +1076,20 @@
                     Core at the same time]</i
                   >
                 </div>
-                <div>
+                <div style="width: 50%; min-width: 500px">
                   <h2>Inventory</h2>
                   <br />
                   <button id="rerollBtn" onclick="rerollTheorems()"></button>
+                  <button onclick="removeTheorem()">Remove selected</button>
                   <button
                     onclick="savageTheorem()"
                     class="tooltip"
                     tooltip-html="Reroll with selected only but with new theorem stars."
                   >
-                    Savage
+                    Savage selected
                   </button>
-                  <button id="removeTBtn" onclick="removeTheorem()">
-                    Remove
-                  </button>
-                  <button id="formTBtn" onclick="formTheorem()">
-                    Form into fragments
-                  </button>
-                  <button onclick="formAllTheorems()" id="formAllTBtn">
-                    Form ALL Theorems into fragments
+                  <button onclick="formTheorem()" id="formTBtn">
+                    Form selected into fragments
                   </button>
                   <div id="theorem_inv_table" class="table_center"></div>
                 </div>
@@ -1093,8 +1099,10 @@
               <div id="core_eff_div"></div>
             </div>
             <div id="tab_div-inf-upgs">
-              You have <b id="ip_amt">???</b> Infinity Points. Hover any upgrade
-              to see its description.
+              <p>
+                You have <b id="ip_amt">???</b> Infinity Points. Hover any
+                upgrade to see its description.
+              </p>
               <div id="inf_upg_table"></div>
             </div>
             <div id="tab_div-c-star">
@@ -1147,6 +1155,7 @@
                 style="display: none"
               />
 
+              <div id="snake_stats"></div>
               <div id="snake_canvas_div">
                 <canvas id="snake_canvas" width="640" height="480"></canvas>
               </div>
@@ -1162,27 +1171,17 @@
                   <button onclick="recordMovement(3)">←</button>
                   <button onclick="recordMovement(2)">↓</button>
                   <button onclick="recordMovement(1)">→</button><br />
-                  <button
-                    class="tooltip"
-                    tooltip-html="Spend 200 energy to let out a collecting wave."
-                    id="snake_boom"
-                    onclick="boomSnake()"
-                  >
-                    💥
-                  </button>
+                  <button id="snake_boom" onclick="boomSnake()">💥</button>
                 </div>
               </div>
               <div class="table_center">
+                <div id="apples" style="width: 50%; min-width: 400px"></div>
                 <div style="width: 50%; min-width: 400px">
-                  <h3>Apple Boosts</h3>
-                  <div id="snake_boosts"></div>
-                </div>
-                <div
-                  id="escrow_boosts_div"
-                  style="width: 50%; min-width: 400px"
-                >
                   <h3>Escrow Boosts</h3>
                   <div id="escrow_boosts" class="sky"></div>
+                  <br />
+                  <h3>Other Resources</h3>
+                  <div id="ouro_other_res"></div>
                 </div>
               </div>
             </div>
@@ -1239,13 +1238,8 @@
               <div id="const_div">
                 <canvas id="const_canvas" width="730" height="490"></canvas>
                 <div id="const_scroll"><div id="const_table"></div></div>
+                <div id="const_glow"></div>
               </div>
-            </div>
-            <div id="tab_div-cosmo">
-              <div class="table_center" id="uni_table"></div>
-              <br />
-              Reroll: <span id="reroll_time"></span><br />
-              <div id="cluster_div"></div>
             </div>
 
             <div id="tab_div-options">
@@ -1256,11 +1250,11 @@
               <button class="btn" onclick="export_copy()">Export</button>
               <button class="btn" onclick="importy()">Import</button>
               <button class="btn" onclick="turnOffline()">
-                Offline: <span id="offline_active">ON</span>
+                Offline Production: <span id="offline_active">ON</span>
               </button>
               <button
                 class="btn"
-                onclick="createConfirm('Are you sure you want to RESET your progress to new game?','wipe',()=>wipe())"
+                onclick="createConfirm('Are you sure you want to RESET your progress to new game?','wipe',()=>wipe(true))"
               >
                 HARD RESET
               </button>
@@ -1301,6 +1295,11 @@
               </button>
 
               <br /><br />
+              <h2>Confirmations</h2>
+              <br />
+              <div id="confirm_table" class="table_center"></div>
+
+              <br /><br />
               <h2>Preferences</h2>
               <br />
               <button class="btn" id="prefer_notify" onclick="prefer('notify')">
@@ -1313,6 +1312,12 @@
               <br /><br />
               <h2>Others</h2>
               <br />
+              <button
+                class="btn"
+                onclick="createPopup(POPUP_GROUPS.help.html,'help')"
+              >
+                Help
+              </button>
               <button
                 class="btn"
                 onclick="window.open('https://discord.gg/Ekp8FsSwzR')"
@@ -1328,22 +1333,8 @@
               </button>
 
               <br /><br />
-              Incremental Mass Rewritten v0.8 Beta 5 -
-              <a href="https://mrredshark77.github.io/" target="_newtab"
-                >By MrRedShark77</a
-              ><br />
-              The game is inspired by
-              <a
-                href="https://jacorb90.me/Distance-Incremental/main.html"
-                target="_newtab"
-                >Distance Incremental</a
-              >
-              &
-              <a
-                href="https://pseudo-corp.github.io/SynergismOfficial/"
-                target="_newtab"
-                >Synergism</a
-              ><br />
+              Incremental Mass Rewritten v0.8 Beta 4 - By MrRedShark77<br />
+              The game is inspired by Distance Incremental & Synergism<br />
               Contributors:
               <span
                 style="cursor: pointer"
@@ -1351,6 +1342,9 @@
                 >Bézier</span
               >, 16777216 & Aarex (Artists)<br /><br /><br />
               Total time played: <span id="total_time">X</span>
+            </div>
+            <div id="tab_div-res-hide">
+              <div id="res_hider_table" class="table_center"></div>
             </div>
             <div style="position: absolute; bottom: 35px; right: 35px">
               <img id="omega_badge" src="images/omega.png" />
@@ -1361,15 +1355,12 @@
       </div>
       <div id="ouro_scene" style="display: none">
         <img id="ouro_loop" src="images/the_loop.png" />
+        <div id="ouro_quotes"></div>
         <div id="ouro_desc">
           <h4>You've evolved.</h4>
-          <br />
-          <b id="ouro_quotes"></b>
-          <br class="line" />
-
           <div id="ouro_evo"></div>
           You broke the loop! Serp'iu and the forest redeem you.<br />
-          <button class="btn" onclick="setOuroScene(0)">Redeem</button>
+          <button class="btn" onclick="setOuroScene(false)">Redeem</button>
         </div>
       </div>
       <div id="sisyphus"></div>

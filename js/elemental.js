@@ -278,15 +278,14 @@ const ELEMENTS = {
         updateTheoremCore();
         updateTheoremInv();
       }
-      if (x == 243 || x == 311) updateTemp();
-      if (x == 251 && !EVO.amt) {
+      if (x == 251 && !OURO.evo) {
         tmp.tab = 8;
         tmp.stab[8] = 3;
       }
-      if (x == 262 && !EVO.amt) {
+      if (x == 262 && !OURO.evo) {
         tmp.tab = 0;
         tmp.stab[0] = 0;
-        tmp.ranks.tab = 1;
+        tmp.rank_tab = 1;
       }
     }
     tmp.pass = 1;
@@ -295,11 +294,11 @@ const ELEMENTS = {
     null,
     {
       get desc() {
-        return EVO.amt >= 3
+        return OURO.evo >= 3
           ? `+0.25 to the exponent of quark's formula from protostars.`
           : `Quark gain formula is better.`;
       },
-      cost: E(1e6),
+      cost: E(1e8),
     },
     {
       desc: `Hardened Challenge scaling is 25% weaker.`,
@@ -322,7 +321,7 @@ const ELEMENTS = {
             : E(1);
         } else {
           x = tmp.atom.unl ? player.atom.powers[2].add(1).root(2) : E(1);
-          if (x.gte("ee4")) x = expMult(x.div("ee4"), 0.9).mul("ee4");
+          if (x.gte("e1e4")) x = expMult(x.div("e1e4"), 0.9).mul("e1e4");
           x = overflow(x, "ee100", 0.25).min("ee101");
         }
 
@@ -341,7 +340,7 @@ const ELEMENTS = {
         let x = tmp.atom.unl
           ? player.atom.powers[0].max(1).log10().pow(0.8).div(50).add(1)
           : E(1);
-        if (EVO.amt >= 2) x = x.min(5e7);
+        if (OURO.evo >= 2) x = x.min(5e7);
         return overflow(x.softcap(1e45, 0.1, 0), "e60000", 0.5).min("ee6");
       },
       effDesc(x) {
@@ -427,7 +426,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Raise Fabric by +^0.1.`
           : `Super BH Condenser & Cosmic Ray scale 20% weaker.`;
       },
@@ -457,7 +456,7 @@ const ELEMENTS = {
             ? player.build.cosmic_ray.amt.pow(0.5).mul(0.02).add(1)
             : player.build.cosmic_ray.amt.pow(0.35).mul(0.01).add(1),
           1000,
-          0.5
+          0.5,
         );
         if (hasElement(18, 1)) x = x.pow(muElemEff(18));
         return x;
@@ -563,7 +562,7 @@ const ELEMENTS = {
     {
       desc: `Rage power boosts Relativistic particles gain.`,
       cost: E(1e175),
-      effect: () =>
+      effect: (_) =>
         tmp.rp.unl ? player.rp.points.max(1).log10().add(1).pow(0.75) : E(1),
       effDesc(x) {
         return format(x) + "x";
@@ -572,7 +571,7 @@ const ELEMENTS = {
     {
       desc: `Mass from Black Hole boosts dilated mass gain.`,
       cost: E(1e210),
-      effect: () =>
+      effect: (_) =>
         tmp.bh.unl ? player.bh.mass.max(1).log10().add(1).pow(0.8) : E(1),
       effDesc(x) {
         return format(x) + "x";
@@ -664,7 +663,7 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Collapsed star's effect boosts Black Hole Mass gain at a reduced rate.`,
+      desc: `Collapsed star's effect boosts mass of black hole gain at a reduced rate.`,
       cost: E("e510"),
       effect() {
         let x = tmp.star_unl ? tmp.stars.effect[0].add(1).pow(0.02) : E(1);
@@ -691,7 +690,7 @@ const ELEMENTS = {
           .add(1)
           .log10()
           .add(1)
-          .pow(EVO.amt >= 2 ? 1.5 : 1.1);
+          .pow(OURO.evo >= 2 ? 1.5 : 1.1);
       },
       effDesc(x) {
         return format(x) + "x";
@@ -706,9 +705,9 @@ const ELEMENTS = {
       cost: E("e2400"),
     },
     {
-      desc: `Black Hole Mass boosts atomic powers gain at a reduced rate.`,
+      desc: `Mass of black hole boosts atomic powers gain at a reduced rate.`,
       cost: E("e2800"),
-      effect: () => (tmp.bh.unl ? expMult(player.bh.mass.add(1), 0.6) : E(1)),
+      effect: (_) => (tmp.bh.unl ? expMult(player.bh.mass.add(1), 0.6) : E(1)),
       effDesc(x) {
         return format(x) + "x";
       },
@@ -724,7 +723,7 @@ const ELEMENTS = {
         let x = player.mass
           .max(1)
           .log10()
-          .root(EVO.amt >= 2 ? 1.5 : 2);
+          .root(OURO.evo >= 2 ? 1.5 : 2);
         return x;
       },
       effDesc(x) {
@@ -733,7 +732,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Square Atomic Upgrade 6.`
           : `Hyper/Ultra BH Condenser & Cosmic Ray scale 25% weaker.`;
       },
@@ -772,7 +771,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Gain 10x more Apples.`
           : `The power from the mass of the BH formula is increased to 0.45.`;
       },
@@ -799,7 +798,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Increase Wormhole loselessness by 20%.`
           : `Non-Bonus tickspeeds are 25x more effective.`;
       },
@@ -822,16 +821,18 @@ const ELEMENTS = {
       cost: E("e1.7e6"),
       effect() {
         if (!tmp.star_unl) return E(1);
-        return hasElement(236) || EVO.amt >= 2
+        return hasElement(236) || OURO.evo >= 2
           ? Decimal.pow(1.1, player.stars.points.add(1).log10().add(1).log10())
           : overflow(
               player.stars.points.add(1).softcap("e3e15", 0.85, 2),
               "ee100",
-              0.5
+              0.5,
             );
       },
       effDesc(x) {
-        return hasElement(236) || EVO.amt >= 2 ? formatPow(x) : format(x) + "x";
+        return hasElement(236) || OURO.evo >= 2
+          ? formatPow(x)
+          : format(x) + "x";
       },
     },
     {
@@ -848,7 +849,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Raise Fabric by +^0.05.`
           : `BH formula softcap starts laster based on Supernovas.`;
       },
@@ -858,7 +859,7 @@ const ELEMENTS = {
         return player.supernova.times.add(1).root(4);
       },
       effDesc(x) {
-        return EVO.amt >= 2 ? undefined : formatPow(x) + " later";
+        return OURO.evo >= 2 ? undefined : formatPow(x) + " later";
       },
     },
     {
@@ -904,12 +905,12 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Gain 100x more Quantum Foam.`
           : `Stronger & Tickspeed are 10x stronger.`;
       },
       get cost() {
-        return EVO.amt >= 2 ? E("e7e12") : E("e1.4e13");
+        return OURO.evo >= 2 ? E("e7e12") : E("e1.4e13");
       },
     },
     {
@@ -929,11 +930,11 @@ const ELEMENTS = {
       cost: E("e7e14"),
       effect() {
         if (!tmp.atom.unl) return E(1);
-        return E(EVO.amt >= 2 ? 0.998 : 0.9).pow(
+        return E(OURO.evo >= 2 ? 0.998 : 0.9).pow(
           tmp.atom.atomicEff[0]
             .add(1)
             .log10()
-            .pow(2 / 3)
+            .pow(2 / 3),
         );
       },
       effDesc(x) {
@@ -957,9 +958,9 @@ const ELEMENTS = {
       cost: E("e500"),
     },
     {
-      desc: `Black Hole Mass effect raises itself at a reduced logarithmic rate.`,
+      desc: `Mass of Black Hole effect raises itself at a reduced logarithmic rate.`,
       cost: E("e1100"),
-      effect: () =>
+      effect: (_) =>
         tmp.bh.unl
           ? player.bh.mass
               .add(1)
@@ -977,7 +978,7 @@ const ELEMENTS = {
     {
       desc: `Death Shard gain is boosted by Dilated Mass.`,
       cost: E("e1300"),
-      effect: () =>
+      effect: (_) =>
         tmp.atom.unl ? player.md.mass.add(1).log10().add(1).pow(0.5) : E(1),
       effDesc(x) {
         return "x" + x.format();
@@ -1009,13 +1010,13 @@ const ELEMENTS = {
         if (!tmp.sn.unl) return E(1);
 
         let s = player.supernova.times;
-        if (EVO.amt >= 2) return (s = s.max(1).min(Number.MAX_VALUE));
+        if (OURO.evo >= 2) return (s = s.max(1).min(Number.MAX_VALUE));
 
         s = s.overflow(1e8, 0.5);
         if (!player.qu.rip.active) s = s.root(1.5);
         let x = E(1.1).pow(s);
         return x
-          .softcap(player.qu.rip.active ? "e130" : "e308", 0.01, 0)
+          .softcap(player.qu.rip.active ? "1e130" : "1e308", 0.01, 0)
           .min("e2e4");
       },
       effDesc(x) {
@@ -1050,7 +1051,7 @@ const ELEMENTS = {
         let x = hasElement(195)
           ? pent.softcap(2e5, 0.25, 0).root(1.5).div(400)
           : pent.root(2).div(1e3);
-        return x.min(EVO.amt >= 4 ? 100 : 1e4);
+        return x.min(1e4);
       },
       effDesc(x) {
         return "+^" + format(x);
@@ -1140,7 +1141,7 @@ const ELEMENTS = {
     },
     {
       desc: `Prestige Base boosts Relativistic Energy gain.`,
-      cost: E("ee14"),
+      cost: E("e1e14"),
       effect() {
         let x = tmp.prestiges.base.add(1).root(3);
         return x;
@@ -1159,10 +1160,10 @@ const ELEMENTS = {
     },
     {
       dark: true,
-      desc: `Pre-Quantum Speed boosts Dark Shadows.`,
+      desc: `Pre-Quantum global speed affects dark shadow gain at a logarithmic reduced rate.`,
       cost: E("500"),
       effect() {
-        let s = tmp.qu.speed;
+        let s = tmp.preQUGlobalSpeed || E(1);
         let x = hasPrestige(0, 110) ? expMult(s, 0.4) : s.max(1).log10().add(1);
         return x;
       },
@@ -1183,35 +1184,35 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `You can now automatically complete Challenges 9-11. Keep Challenge 12 completions on Big Rip or start QC.`,
-      cost: E("e6"),
+      cost: E("1e6"),
     },
     {
       br: true,
       get desc() {
-        return EVO.amt >= 3
+        return OURO.evo >= 3
           ? `Death shards boost protostars gain.`
           : `You can now automatically buy break dilation upgrades. They no longer spent relativistic mass.`;
       },
       cost: E("ee19"),
       effect() {
-        if (EVO.amt < 3) return E(1);
+        if (OURO.evo < 3) return E(1);
         let x = hasElement(200)
           ? expMult(player.qu.rip.amt.add(1), 0.5)
           : player.qu.rip.amt.add(1).log10().add(1).pow(2);
         return x;
       },
       effDesc(x) {
-        return EVO.amt < 3 ? undefined : formatMult(x);
+        return OURO.evo < 3 ? undefined : formatMult(x);
       },
     },
     {
       dark: true,
       desc: `Keep quantum tree on darkness.`,
-      cost: E("e7"),
+      cost: E("1e7"),
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Improve the Wormhole.`
           : `7th challenge’s effect gives more C9-12 completions at 10% rate.`;
       },
@@ -1223,23 +1224,23 @@ const ELEMENTS = {
         return x;
       },
       effDesc(x) {
-        return EVO.amt >= 2 ? undefined : "+" + format(x, 0);
+        return "+" + format(x, 0);
       },
     },
     {
       dark: true,
       desc: `You can buy Tungsten-74 in Big Rip.`,
-      cost: E("e8"),
+      cost: E("1e8"),
     },
     {
       dark: true,
       desc: `Start with break dilation unlocked. Relativistic energy gain is increased by 10%.`,
-      cost: E("e9"),
+      cost: E("1e9"),
     },
     {
       dark: true,
       desc: `You can buy atom upgrades 13-15 outside Big Rip.`,
-      cost: E("e11"),
+      cost: E("1e11"),
     },
     {
       br: true,
@@ -1263,14 +1264,14 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `2nd Wormhole boosts Stronger instead. Improve 5th Wormhole in Big Rips.`
           : `Make the 3rd, 4th & 8th Challenges’ effect better.`;
       },
       cost: E("e6.5e27"),
     },
     {
-      desc: `Super Prestige & Honor are 5% weaker.`,
+      desc: `Super Prestige Level & Honor are 5% weaker.`,
       cost: E("e1.5e29"),
     },
     {
@@ -1288,7 +1289,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `You can now gain Relativistic Energy outside of Big Rip.`,
-      cost: E("e18"),
+      cost: E("1e18"),
     },
     {
       desc: `Super & Hyper cosmic string scalings are 25% weaker.`,
@@ -1302,7 +1303,7 @@ const ELEMENTS = {
         if (!tmp.sn.unl) return E(1);
         return Decimal.pow(
           1.1,
-          player.supernova.times.overflow(1e75, 0.1).softcap(2e5, 0.25, 0)
+          player.supernova.times.overflow(1e75, 0.1).softcap(2e5, 0.25, 0),
         );
       },
       effDesc(x) {
@@ -1338,21 +1339,20 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Dark shadow’s second effect is better. Keep pre-118 big rip elements on darkness.`,
-      cost: E("e27"),
+      cost: E("1e27"),
     },
     {
       dark: true,
       desc: `Unlock the 14th Challenge.`,
-      cost: E("e32"),
+      cost: E("1e32"),
     },
     {
       desc: `Prestige Base boosts dark rays earned.`,
       cost: E("e1.7e31"),
       effect() {
         let pb = tmp.prestiges.base;
-        if (EVO.amt >= 4) pb = pb.root(10);
         let x = hasPrestige(0, 218)
-          ? E(10).pow(pb.add(1).log10().root(2))
+          ? Decimal.pow(10, pb.add(1).log10().root(2))
           : pb.add(1).log10().add(1);
         return x.softcap(1e12, 0.25, 0);
       },
@@ -1364,7 +1364,10 @@ const ELEMENTS = {
       br: true,
       desc: `Quantum shard’s base is increased based on the number of elements bought.`,
       cost: E("ee30"),
-      effect: () => getElemLength(0) / 100,
+      effect() {
+        let x = getElemLength(0) / 100;
+        return x;
+      },
       effDesc(x) {
         return "+" + format(x, 2);
       },
@@ -1372,7 +1375,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Outside of Big Rip, you can now gain Death Shards. Automate Cosmic Strings.`,
-      cost: E("e40"),
+      cost: E("1e40"),
     },
     {
       br: true,
@@ -1381,7 +1384,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Untritrium-133 effect in Big Rip works outside of Big Rip.`
           : `Stronger’s effect softcap is slightly weaker.`;
       },
@@ -1389,7 +1392,7 @@ const ELEMENTS = {
     },
     {
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Improve 4th Wormhole.`
           : `Stronger’s effect softcap is slightly weaker again. Tickspeed’s effect is overpowered.`;
       },
@@ -1398,13 +1401,21 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Add 75 more C13 maximum completions.`,
-      cost: E("e67"),
+      cost: E("1e67"),
     },
     {
       desc: `Boost Dark Ray gain based on quarks.`,
       cost: E("e3.6e61"),
-      effect: () =>
-        player.atom.quarks.add(1).log10().add(1).log10().add(1).pow(1.5),
+      effect() {
+        let x = player.atom.quarks
+          .add(1)
+          .log10()
+          .add(1)
+          .log10()
+          .add(1)
+          .pow(1.5);
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
@@ -1422,7 +1433,7 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Hyper Prestige, Tetr & Pent scalings are 10% weaker.`,
+      desc: `Hyper Prestige Level, Tetr & Pent scalings are 10% weaker.`,
       cost: E("e5e64"),
     },
     {
@@ -1441,28 +1452,28 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Uncap Top & Neut-Muon.`,
-      cost: E("e80"),
+      cost: E("1e80"),
     },
     {
       dark: true,
       desc: `Uncap [Neut-Muon]’s effect, and it’s better if its effect is greater than 33%.`,
-      cost: E("e84"),
+      cost: E("1e84"),
     },
     {
       br: true,
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Fabric boosts Wormhole more.`
-          : EVO.amt >= 1
-          ? `Raise Meditation' level to the 1.5th power.`
-          : `Meta-Tickspeed scaling starts ^2 later.`;
+          : OURO.evo >= 1
+            ? `Raise Meditation' level to the 1.5th power.`
+            : `Meta-Tickspeed scaling starts ^2 later.`;
       },
       cost: E("e2.5e53"),
     },
     {
       desc: `Abyssal Blot’s second effect applies to mass gain’s softcap^7-8, they are 20% weaker.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "e8e68" : "e2.2e69");
+        return E(OURO.evo >= 1 ? "e8e68" : "e2.2e69");
       },
     },
     {
@@ -1473,12 +1484,12 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Unlock Dark Run. Keep Oganesson-118 on darkness.`,
-      cost: E("e96"),
+      cost: E("1e96"),
     },
     {
-      desc: `Collapsed star’s effect raises normal mass. This exponent also raises Black Hole Mass.`,
+      desc: `Collapsed star’s effect raises normal mass. This exponent also raises mass of black hole.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "ee69" : "e2e69");
+        return E(OURO.evo >= 1 ? "e1e69" : "e2e69");
       },
     },
     {
@@ -1489,14 +1500,14 @@ const ELEMENTS = {
       br: true,
       desc: `[m1]’s effect is overpowered.`,
       get cost() {
-        return E(EVO.amt >= 2 ? "ee66" : EVO.amt >= 1 ? "e6e68" : "e4.2e69");
+        return E(OURO.evo >= 2 ? "e1e66" : OURO.evo >= 1 ? "e6e68" : "e4.2e69");
       }, // nice
     },
     {
       br: true,
       desc: `[rp1]’s effect is overpowered again.`,
       get cost() {
-        return E(EVO.amt >= 2 ? "ee67" : "e6.3e69");
+        return E(OURO.evo >= 2 ? "e1e67" : "e6.3e69");
       },
     },
     {
@@ -1507,23 +1518,21 @@ const ELEMENTS = {
     {
       desc: `Hex’s requirement and Glory’s requirement are slightly weaker.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "ee71" : "e1.08e72");
+        return E(OURO.evo >= 1 ? "e1e71" : "e1.08e72");
       },
     },
     {
       dark: true,
       desc: `Unlock the 15th Challenge.`,
-      cost: E("e106"),
+      cost: E("1e106"),
     },
     {
       get desc() {
-        return EVO.amt >= 3
+        return OURO.evo >= 3
           ? `+^0.05 to Protostars. Nebulae Tier 1 work in Big Rip.`
           : `Remove two softcaps of particle powers gain.`;
       },
-      get cost() {
-        return E(EVO.amt >= 4 ? "ee25" : "e2.35e72");
-      },
+      cost: E("e2.35e72"),
     },
     {
       br: true,
@@ -1533,7 +1542,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Add 100 more C13-C14 maximum completions.`,
-      cost: E("e108"),
+      cost: E("1e108"),
     },
     {
       br: true,
@@ -1550,7 +1559,7 @@ const ELEMENTS = {
     },
     {
       br: true,
-      desc: `Super & Hyper Prestiges start +30 later.`,
+      desc: `Super & Hyper prestige levels start +30 later.`,
       cost: E("e1.39e75"),
     },
     {
@@ -1567,7 +1576,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Dark Shadow’s fifth effect also boosts entropy cap at a reduced rate.`,
-      cost: E("e141"),
+      cost: E("1e141"),
       effect() {
         let e = tmp.dark.shadowEff.en || E(1);
         let x = expMult(e, 0.5);
@@ -1593,7 +1602,7 @@ const ELEMENTS = {
     },
     {
       br: true,
-      desc: `Entropy's cap is increased by 25% every Prestige. Entropic Evaporation^2 is slightly weaker.`,
+      desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation^2 is slightly weaker.`,
       cost: E("e4.4e76"),
       effect() {
         let x = Decimal.pow(1.25, player.prestiges[0]);
@@ -1670,18 +1679,18 @@ const ELEMENTS = {
       br: true,
       desc: `Dark matter boosts abyssal blots gain. Ultra mass upgrades start ^1.5 later.`,
       cost: E("e8.8e89"),
-      effect: () => (tmp.bh.unl ? player.bh.dm.add(1).log10().add(1) : E(1)),
+      effect: (_) => (tmp.bh.unl ? player.bh.dm.add(1).log10().add(1) : E(1)),
       effDesc(x) {
         return formatMult(x);
       },
     },
     {
       desc: `Chromas gain is raised to 1.1th power.`,
-      cost: E("e1.8e93"),
+      cost: E("e1.8e91"),
     },
     {
       desc: `Z0 Boson’s first effect raises tickspeed power at a reduced rate.`,
-      cost: E("e3.5e93"),
+      cost: E("e3.5e92"),
       effect() {
         if (!tmp.sn.boson) return E(1);
         return tmp.sn.boson.effect.z_boson[0]
@@ -1698,8 +1707,8 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Each Matter’s gain is increased by 10% for every OoM^2 of Dark Matter. Unlock more main upgrades.`,
-      cost: E("e318"),
-      effect: () =>
+      cost: E(1e303),
+      effect: (_) =>
         tmp.bh.unl
           ? Decimal.pow(1.1, player.bh.dm.add(1).log10().add(1).log10())
           : E(1),
@@ -1709,7 +1718,7 @@ const ELEMENTS = {
     },
     {
       desc: `Hybridized Uran-Astatine’s first effect makes Exotic Rank and Meta-Tier start later at ^0.5 rate.`,
-      cost: E("ee94"),
+      cost: E("e3.3e93"),
       effect() {
         let x = tmp.qu.chroma_eff[1][0].max(1).root(2);
         return x;
@@ -1720,12 +1729,12 @@ const ELEMENTS = {
     },
     {
       dark: true,
-      desc: `Keep prestige tiers on darkness. Super and Hyper Prestiges start x2 later.`,
+      desc: `Keep prestige tiers on darkness. Super and Hyper Prestige Levels start x2 later.`,
       cost: E("e360"),
     },
     {
       desc: `Fermium-100 is slightly stronger. Automate each matter’s upgrade.`,
-      cost: E("e5e94"),
+      cost: E("e1.2e94"),
     },
     {
       br: true,
@@ -1734,12 +1743,12 @@ const ELEMENTS = {
     },
     {
       dark: true,
-      desc: `Exotic Rank and Ultra Prestige scaling are 10% weaker.`,
+      desc: `Exotic Rank and Ultra Prestige Level scaling are 10% weaker.`,
       cost: E("e435"),
     },
     {
       desc: `Particle powers’ first effect is better.`,
-      cost: E("ee95"),
+      cost: E("e1.6e94"),
     },
     {
       desc: `Unlock Accelerators, tickspeed now provides an exponential boost, but nullify Argon-18 and Unpentnilium-150 (except in 15th Challenge).`,
@@ -1748,11 +1757,11 @@ const ELEMENTS = {
     {
       br: true,
       get desc() {
-        return EVO.amt >= 3
+        return OURO.evo >= 3
           ? `Improve Unbitrium-123.`
           : `15th challenge reward applies to black hole overflow.`;
       },
-      cost: E("e2.6e97"),
+      cost: E("1e2.6e97"),
     },
     {
       desc: `Black hole’s effect provides an exponential boost to mass. Actinium-89 is now stronger outside big rip.`,
@@ -1761,11 +1770,11 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Unlock the fourth mass upgrade which raises Stronger.`,
-      cost: E("e4.9e98"),
+      cost: E("1e4.9e98"),
     },
     {
       desc: `Booster boosts its effect.`,
-      cost: E("e2e100"),
+      cost: E("e4e99"),
       effect() {
         let m = player.build.mass_2.amt;
         let x = m.add(10).log10().pow(0.8);
@@ -1798,8 +1807,8 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Dark matter boosts matter exponent.`,
-      cost: E("e1.69e100"),
-      effect: () =>
+      cost: E("1e1.69e100"),
+      effect: (_) =>
         tmp.bh.unl
           ? player.bh.dm.add(1).log10().add(1).log10().add(1).log10().div(10)
           : E(0),
@@ -1810,7 +1819,7 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Hybridized Uran-Astatine’s second effect applies to hex scalings. It is stronger.`,
-      cost: E("e1.67e103"),
+      cost: E("1e1.67e103"),
     },
     {
       desc: `Unlock Beyond-Ranks.`,
@@ -1835,43 +1844,43 @@ const ELEMENTS = {
       get desc() {
         return (
           `Stronger overflow starts later based on FSS.` +
-          (EVO.amt == 3
+          (OURO.evo >= 3
             ? " You can buy protostar elements during Big Rip."
             : "")
         );
       },
-      get cost() {
-        return E(EVO.amt >= 4 ? "e645" : "e710");
-      },
-      effect: () =>
-        player.dark.matters.final
+      cost: E("e710"),
+      effect() {
+        return player.dark.matters.final
           .pow(0.8)
           .add(2)
-          .pow(player.dark.matters.final),
-      effDesc: (x) => formatMult(x) + " later",
+          .pow(player.dark.matters.final);
+      },
+      effDesc(x) {
+        return formatMult(x) + " later";
+      },
     },
     {
       br: true,
       desc: `Meta-Rank Boost also affects Meta-Tetr starting at a reduced rate, strengthen Unpentpentium-155.`,
-      cost: E("e5e110"),
-      effect: () => radBoostEff(14).max(1).log10().add(1),
-      effDesc: (x) => formatMult(x) + " later",
+      cost: E("1e5e110"),
+      effect() {
+        let x = radBoostEff(14).max(1).log10().add(1);
+        return x;
+      },
+      effDesc(x) {
+        return formatMult(x) + " later";
+      },
     },
     {
       br: true,
       desc: `Exotic supernova scales 25% weaker.`,
-      cost: E("e1.6e117"),
+      cost: E("1e1.6e117"),
     },
     {
       dark: true,
-      get desc() {
-        return EVO.amt >= 4
-          ? `+^0.01 to quark formula from Protostars.`
-          : `[Bottom]’s effect is now better, and is uncapped. Additionally, the Fourth Photon upgrade now provides an exponential boost.`;
-      },
-      get cost() {
-        return E(EVO.amt >= 4 ? "e652" : "e1024");
-      },
+      desc: `[Bottom]’s effect is now better, and is uncapped. Additionally, the Fourth Photon upgrade now provides an exponential boost.`,
+      cost: E("e1024"),
     },
     {
       desc: `Entropic Multiplier is overpowered.`,
@@ -1880,7 +1889,9 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Entropic Evaporation^2 and Condenser^2 scale another 15% weaker.`,
-      cost: E("ee123"),
+      get cost() {
+        return E(OURO.evo >= 1 ? "e1e123" : "e3.1e123");
+      },
     },
     {
       desc: `Strengthen Unseptoctium-178 slightly.`,
@@ -1889,12 +1900,12 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Final Star Shard's requirement is 20% cheaper.`,
-      cost: E("e1480"),
+      cost: E("1e1480"),
     },
     {
       desc: `Unlock the 16th Challenge.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "ee134" : "e7e134");
+        return E(OURO.evo >= 1 ? "e1e134" : "e7e134");
       },
     },
     {
@@ -1909,17 +1920,17 @@ const ELEMENTS = {
     {
       c16: true,
       desc: `Beyond Rank’s next tier requirement is 5% weaker.`,
-      cost: E("ee20"),
+      cost: E("e1e20"),
     },
     {
       inf: true,
-      desc: `The softcap of theorem’s level starts +10 later.`,
-      cost: E("e13"),
+      desc: `The softcap of theorem’s level starts +5 later.`,
+      cost: E("1e13"),
     },
     {
       c16: true,
       desc: `Improve the formula of corrupted shard gain better.`,
-      cost: E("ee23"),
+      cost: E("e1e23"),
     },
     {
       desc: `The effect of Glory 45 is even stronger.`,
@@ -1928,7 +1939,7 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `Infinity theorem increases parallel extruder’s power. Muon-Catalyzed Fusion no longer resets.`,
-      cost: E("e14"),
+      cost: E("1e14"),
       effect() {
         if (!tmp.inf_unl) return E(0);
         return player.inf.theorem.div(20);
@@ -1953,7 +1964,7 @@ const ELEMENTS = {
     {
       c16: true,
       desc: `Matter exponent boosts matters gain outside C16 (changed during C16).`,
-      cost: E("ee25"),
+      cost: E("e1e25"),
       effect() {
         let x = tmp.matters.exponent.add(1).log10().div(20);
         if (tmp.c16.in) x = x.mul(5);
@@ -1979,8 +1990,8 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `Black Hole Mass boosts mass overflow^1-2 starting.`,
-      cost: E("ee26"),
+      desc: `Mass of black hole boosts mass overflow^1-2 starting.`,
+      cost: E("e1e26"),
       effect() {
         if (!tmp.bh.unl) return E(1);
         let x = player.bh.mass.add(10).log10().root(20);
@@ -1993,7 +2004,7 @@ const ELEMENTS = {
     },
     {
       inf: true,
-      desc: `Passively generate 100% of corrupted shards gained by best Black Hole Mass in C16.`,
+      desc: `Passively generate 100% of corrupted shards gained by best mass of black hole in C16.`,
       cost: E("1.25e19"),
     },
     {
@@ -2027,12 +2038,12 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `Going infinity without any theorem selected will auto-fragment each theorem at 25% yield.`,
-      cost: E("e24"),
+      cost: E("1e24"),
     },
     {
       inf: true,
       desc: `Unlock 17th Challenge.`,
-      cost: E("e25"),
+      cost: E("1e25"),
     },
     {
       c16: true,
@@ -2054,7 +2065,7 @@ const ELEMENTS = {
       effect() {
         if (!tmp.inf_unl) return E(1);
         return hasElement(273)
-          ? E(10).pow(player.inf.theorem.pow(2))
+          ? Decimal.pow(10, player.inf.theorem.pow(2))
           : player.inf.theorem.add(1).tetrate(1.75);
       },
       effDesc(x) {
@@ -2063,7 +2074,7 @@ const ELEMENTS = {
     },
     {
       desc: `Binilennium-209 is overpowered.`,
-      cost: E("ee1234"),
+      cost: E("ee1291"),
     },
     {
       dark: true,
@@ -2099,7 +2110,7 @@ const ELEMENTS = {
       inf: true,
       desc: `Unlock the Corrupted Star.`,
       get cost() {
-        return E(EVO.amt >= 3 ? 1e32 : 1e34);
+        return E(OURO.evo >= 3 ? 1e32 : 1e35);
       },
     },
     {
@@ -2109,17 +2120,17 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `Passively gain 1% of fragment formed from theorem in the core.`,
-      cost: E(1e35),
+      cost: E("e41"),
     },
     {
       c16: true,
       desc: `De-corrupt Unhexbium-162.`,
-      cost: E("ee77"),
+      cost: E("e1e77"),
     },
     {
       dark: true,
       desc: `C17’s completions boost Super Parallel Extruder.`,
-      cost: E("e5e8"),
+      cost: E("e1.9e8"),
       effect() {
         let x = (player.chal.comps[17] || E(0)).pow(2).div(4).floor();
         return x;
@@ -2131,9 +2142,7 @@ const ELEMENTS = {
     {
       c16: true,
       desc: `The formula of each matter production is better.`,
-      get cost() {
-        return E(EVO.amt >= 4 ? "ee88" : "ee92");
-      },
+      cost: E("e1e92"),
     },
     {
       desc: `Fading Matters boost mass overflow^2 starting.`,
@@ -2174,7 +2183,10 @@ const ELEMENTS = {
     {
       desc: `Galactic Prestige’s resources are affected by pre-infinity global speed.`,
       cost: E("ee7676"),
-      effect: () => tmp.preInfGlobalSpeed.max(1).root(2),
+      effect() {
+        let x = tmp.preInfGlobalSpeed.max(1).root(2);
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
@@ -2184,7 +2196,7 @@ const ELEMENTS = {
       desc: `Prestige mass’s effect now affects stronger overflow^1-2 at a reduced rate.`,
       cost: E("ee294"),
       effect() {
-        let x = GPEffect(1, E(1)).root(EVO.amt >= 2 ? 1 : 2);
+        let x = GPEffect(1, E(1)).root(OURO.evo >= 2 ? 1 : 2);
         return x;
       },
       effDesc(x) {
@@ -2235,8 +2247,11 @@ const ELEMENTS = {
     {
       inf: true,
       desc: `The softcap of theorem’s meta-score starts x1.05 later per infinity theorem.`,
-      cost: E("e94"),
-      effect: () => (tmp.inf_unl ? E(1.05).pow(player.inf.theorem) : E(1)),
+      cost: E("1e94"),
+      effect() {
+        if (!tmp.inf_unl) return E(1);
+        return Decimal.pow(1.05, player.inf.theorem);
+      },
       effDesc(x) {
         return formatMult(x) + " later";
       },
@@ -2249,9 +2264,13 @@ const ELEMENTS = {
       dark: true,
       desc: `Dark shadow’s fourth reward now affects supernova generation at reduced rate.`,
       get cost() {
-        return EVO.amt >= 2 ? E("e8e10") : E("e1.67e11");
+        return OURO.evo >= 2 ? E("e8e10") : E("e1.67e11");
       },
-      effect: () => (tmp.dark.shadowEff.sn || E(1)).root(3),
+      effect() {
+        let x = tmp.dark.shadowEff.sn || E(1);
+        x = x.root(3);
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
@@ -2267,76 +2286,75 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `You can buy False Vacuum Manipulator outside of C16.`,
+      desc: `You can now buy false vacuum manipulator outside C16.`,
       cost: E("ee6170"),
     },
     {
-      desc: `Bonus Cosmic Strings strengthen its power at a reduced rate.`,
+      desc: `Bonus cosmic string strengthens its power at a reduced rate.`,
       cost: E("ee23500"),
-      effect: () => tmp.build.cosmic_string.bonus.add(1).pow(0.75),
+      effect() {
+        let x = tmp.build.cosmic_string.bonus.add(1).pow(0.75);
+        return x;
+      },
       effDesc(x) {
         return formatPow(x);
       },
     },
     {
       dark: true,
-      desc: `The base of collapsed star’s effect for Supernova generation is slightly stronger.`,
+      desc: `The base of collapsed star’s effect for supernova generation is slightly stronger.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "ee12" : "e1.13e12");
+        return E(OURO.evo >= 1 ? "e1e12" : "e1.13e12");
       },
     },
     {
       inf: true,
       desc: `Unlock 19th Challenge.`,
       get cost() {
-        return E(EVO.amt >= 3 ? 1e100 : EVO.amt >= 1 ? "e105" : "e110");
+        return E(OURO.evo >= 3 ? 1e100 : OURO.evo >= 1 ? "e105" : "e110");
       },
     },
     {
-      get desc() {
-        return EVO.amt >= 4
-          ? "Improve Limitless Dust effect and Galactic Prestige."
-          : `Supernovas boost galactic prestige’s resources at a reduced rate.`;
-      },
+      desc: `Supernovas boost galactic prestige’s resources at a reduced rate.`,
       cost: E("ee25400"),
       effect() {
         if (!tmp.sn.unl) return E(1);
         return expMult(player.supernova.times.add(1), 0.5);
       },
-      effDesc: (x) => (EVO.amt < 4 ? formatMult(x) : undefined),
-    },
-    {
-      c16: true,
-      desc: `Total Corrupted Shards boost Infinity Points.`,
-      cost: E("ee6700"),
-      effect: () =>
-        EVO.amt >= 4
-          ? expMult(
-              player.dark.c16.totalS,
-              1 / (hasInfUpgrade(20) ? 1.9 : 2)
-            ).root(30)
-          : player.dark.c16.totalS.add(10).log10(),
       effDesc(x) {
         return formatMult(x);
       },
     },
     {
-      desc: `Automate Parallel Extruder in addition to making it thrice as effective.`,
-      get cost() {
-        return E(EVO.amt >= 4 ? "ee42000" : "ee46000");
+      c16: true,
+      desc: `Total corrupted shards boost infinity points gain.`,
+      cost: E("ee6700"),
+      effect() {
+        let x = player.dark.c16.totalS.add(10).log10();
+        return x;
       },
+      effDesc(x) {
+        return formatMult(x);
+      },
+    },
+    {
+      desc: `Parallel Extruder is thrice as effective.`,
+      cost: E("ee46000"),
     },
     {
       dark: true,
       desc: `FSS boosts the exponent of Ascension’s base.`,
       cost: E("e3.1e12"),
-      effect: () => player.dark.matters.final.root(2).div(100),
+      effect() {
+        let x = player.dark.matters.final.root(2).div(100);
+        return x;
+      },
       effDesc(x) {
         return "+" + format(x);
       },
     },
     {
-      desc: `Super Galactic Prestige starts +1 later. Automate the Corrupted Star.`,
+      desc: `Super Galactic Prestige starts +1 later.`,
       cost: E("ee59000"),
     },
     {
@@ -2361,9 +2379,9 @@ const ELEMENTS = {
     },
     {
       c16: true,
-      desc: `Challenge 5’s reward is twice as strong.`,
+      desc: `Challenge 5’s reward is twice as stronger.`,
       get cost() {
-        return EVO.amt >= 2 ? E("ee13700") : E("ee23700");
+        return E("ee23700");
       },
     },
     {
@@ -2374,9 +2392,11 @@ const ELEMENTS = {
       inf: true,
       desc: `Unlock 20th Challenge.`,
       get cost() {
-        return E(
-          OURO.evo == 3 ? 1e300 : OURO.evo == 2 ? 1e295 : Number.MAX_VALUE
-        );
+        return OURO.evo >= 3
+          ? E(1e300)
+          : OURO.evo >= 2
+            ? E(1e256)
+            : E(Number.MAX_VALUE);
       },
     },
     {
@@ -2384,8 +2404,8 @@ const ELEMENTS = {
       desc: `Stardust boosts Protostars at a reduced rate.`,
       cost: E(1e3),
       effect() {
-        if (!OURO.unl) return E(1);
-        let x = expMult(player.evo.proto.dust.add(1), 0.4);
+        if (!tmp.ouro.unl) return E(1);
+        let x = expMult(player.evo.proto.dust.add(1), 0.25).pow(2);
         return x;
       },
       effDesc(x) {
@@ -2393,13 +2413,12 @@ const ELEMENTS = {
       },
     },
     {
+      proto: true,
       desc: `Wormhole affects Protostars slightly.`,
       cost: E(1e6),
       effect() {
-        if (!OURO.unl) return E(1);
-        let x = expMult(WORMHOLE.total().add(1), 0.066);
-        if (tmp.qu.rip.in && hasZodiacUpg("taurus", "u5"))
-          x = x.pow(zodiacEff("taurus", "u5"));
+        if (!tmp.ouro.unl) return E(1);
+        let x = expMult(WORMHOLE.total().add(1), 0.5);
         return x;
       },
       effDesc(x) {
@@ -2407,50 +2426,37 @@ const ELEMENTS = {
       },
     },
     {
+      proto: true,
       desc: `Automatically assign all normal nebulae.`,
       cost: E(1e9),
     },
     {
-      desc: `Improve Tier 1 Nebulae. Raise Neutron Stars by ^1.5.`,
+      proto: true,
+      desc: `Nebulae Tier 1 are better. Raise neutron stars gain to the 1.5th power.`,
       cost: E(1e12),
     },
     {
+      proto: true,
       desc: `Quarks raise normal mass slightly.`,
-      get cost() {
-        return E(EVO.amt >= 4 ? 1e14 : 1e15);
+      cost: E(1e15),
+      effect() {
+        let x = player.atom.quarks.add(1).log10().add(1).root(15);
+        return x.softcap(1e6, 3, "log");
       },
-      effect: () =>
-        hasElement(310)
-          ? expMult(player.atom.quarks.add(1).log10().add(1).root(1.5), 0.5)
-          : player.atom.quarks
-              .add(1)
-              .log10()
-              .add(1)
-              .root(15)
-              .softcap(1e6, 3, "log"),
       effDesc(x) {
-        return formatPow(x) + x.softcapHTML(1e6, hasElement(310));
+        return formatPow(x) + x.softcapHTML(1e6);
       },
     },
     {
+      proto: true,
       desc: `Dark Shadow’s second reward is better.`,
       cost: E(1e24),
     },
     {
-      get desc() {
-        return EVO.amt >= 4
-          ? `Dark Rays boost Protostars.`
-          : `Collapsed stars boost Protostars.`;
-      },
-      get cost() {
-        return E(EVO.amt >= 4 ? 1e28 : 1e42);
-      },
+      proto: true,
+      desc: `Collapsed stars boost protostars gain.`,
+      cost: E(1e42),
       effect() {
-        if (EVO.amt >= 4)
-          return expMult(player.dark.rays.add(1), 0.5).pow(
-            hasElement(306) ? 1.5 : 1
-          );
-
         if (!tmp.star_unl) return E(1);
         return player.stars.points.add(1).log10().add(1).log10().add(1).pow(2);
       },
@@ -2459,33 +2465,49 @@ const ELEMENTS = {
       },
     },
     {
-      desc: `Protostars boost Exotic Atoms.`,
+      proto: true,
+      desc: `Protostars boost Exotic Atoms slightly.`,
       cost: E(1e150),
-      effect: () => expMult(player.evo.proto.star.add(1), 0.5),
+      effect() {
+        if (!tmp.ouro.unl) return E(1);
+        let x = expMult(player.evo.proto.star.add(1), 0.5);
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
     },
     {
+      proto: true,
       desc: `The softcap of quark’s formula from protostars is weaker.`,
       cost: E("e700"),
     },
     {
+      proto: true,
       desc: `FSS raises the speed and the starting reduction of corrupted star at a reduced rate.`,
       cost: E("e3300"),
-      effect: () => player.dark.matters.final.root(2).div(10).add(1),
+      effect() {
+        let x = player.dark.matters.final.root(2).div(10).add(1);
+        return x;
+      },
       effDesc(x) {
         return formatPow(x);
       },
     },
     {
+      proto: true,
       desc: `Yellow and cyan nebulae have a second effect that provides a super-exponential boost slightly.`,
       cost: E("e4400"),
     },
     {
+      proto: true,
       desc: `Exotic II Nebulae boost infinity points gain.`,
       cost: E("e6000"),
-      effect: () => E(2).pow(expMult(player.evo.proto.nebula.ext2, 0.8)),
+      effect() {
+        if (!tmp.ouro.unl) return E(1);
+        let x = Decimal.pow(2, expMult(player.evo.proto.nebula.ext2, 0.8));
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
@@ -2494,7 +2516,11 @@ const ELEMENTS = {
       proto: true,
       desc: `Anti-wormhole boosts protostars slightly.`,
       cost: E("e6200"),
-      effect: () => player.evo.wh.mass[6].add(1).overflow("ee4", 0.5),
+      effect() {
+        if (!tmp.ouro.unl) return E(1);
+        let x = player.evo.wh.mass[6].add(1).overflow("ee4", 0.5);
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
@@ -2503,65 +2529,17 @@ const ELEMENTS = {
       proto: true,
       desc: `Stardust boosts supernova generation.`,
       cost: E("e7500"),
-      effect: () => player.evo.proto.dust.add(1).log10().add(1),
+      effect() {
+        if (!tmp.ouro.unl) return E(1);
+        let x = player.evo.proto.dust.add(1).log10().add(1);
+        return x;
+      },
       effDesc(x) {
         return formatMult(x);
       },
     },
-    {
-      desc: `Quantum Shards improve Quark Formula.`,
-      cost: E(1e17),
-
-      effect: () => Math.min(player.qu.qc.shard, 20) / 100,
-      effDesc: (x) => "+" + format(x),
-    },
-    {
-      desc: `Improve Biennseptium-297.`,
-      cost: E(1e42),
-    },
-    {
-      desc: `Improve Purple Nebulae.`,
-      cost: E(1e56),
-    },
-    {
-      desc: `FSS raises Matters by an exponential boost.`,
-      cost: E(1e65),
-    },
-    {
-      desc: `Corrupted Shards improve Magneta Nebulae.`,
-      cost: E(1e75),
-
-      effect: () =>
-        player.dark.c16.shard.max(1).log10().div(50).add(0.6).min(0.85),
-      effDesc: (x) => formatPow(x),
-    },
-    {
-      desc: `Improve Biennpentium-295.`,
-      cost: E(1e130),
-    },
-    {
-      desc: `Improve Tier, Pent & Hex. Stardust weakens Exotic Tier & Prestige. Nullify Hybridized Uran-Astaine's first effect.`,
-      cost: E(1e240),
-
-      effect() {
-        let sd = OURO.unl ? player.evo.proto.dust : E(1);
-        return sd.div(1e12).max(1).log10().div(5).max(1).pow(-0.6);
-      },
-      effDesc: (x) => formatReduction(x) + " weaker",
-    },
-    {
-      desc: `Corrupted Stars reduce later based on Corrupted Shards.`,
-      cost: E("e2800"),
-
-      effect: () => expMult(player.dark.c16.totalS.add(1).root(200), 2 / 3),
-      effDesc: (x) => formatMult(x),
-    },
   ],
   /*
-	{
-		desc: `Nullify a lot of scalings and Tetr 2 reward.`,
-		cost: EINF
-	}
     {
         desc: `Placeholder.`,
         cost: EINF,
@@ -2573,42 +2551,49 @@ const ELEMENTS = {
     },
     */
   getUnlLength() {
-    let u = 0;
-    if (OURO.unl) u = 290 + [0, 0, 0, 14, 22, 31, 38][EVO.amt] ?? 0;
-    else if (tmp.inf_unl) {
-      u = 218;
+    let u = 4;
+
+    if (OURO.unl()) u = 290 + [0, 0, 0, 14, 21, 28, 35][OURO.evo] ?? 0;
+    else {
+      if (tmp.inf_unl) u = 218;
+      else {
+        if (player.dark.unl) u = 118 + 14;
+        else {
+          if (quUnl()) u = 77 + 3;
+          else {
+            if (player.supernova.times.gte(1)) u = 49 + 5;
+            else {
+              if (player.chal.comps[8].gte(1)) u += 14;
+              if (hasElement(18)) u += 3;
+              if (MASS_DILATION.unlocked()) u += 15;
+              if (STARS.unlocked()) u += 18;
+            }
+            if (player.supernova.post_10) u += 3;
+            if (player.supernova.fermions.unl) u += 10;
+            if (hasTree("unl1")) u += 10;
+          }
+          if (PRIM.unl()) u += 3;
+          if (hasTree("unl3")) u += 3;
+          if (player.qu.rip.first) u += 9;
+          if (hasUpgrade("br", 9)) u += 23; // 23
+        }
+        if (tmp.chal13comp) u += 10 + 2;
+        if (tmp.chal14comp) u += 6 + 11;
+        if (tmp.chal15comp) u += 16 + 4;
+        if (tmp.darkRunUnlocked) u += 7;
+        if (tmp.matterUnl) u += 14;
+        if (tmp.mass4Unl) u += 6;
+        if (tmp.brUnl) u += 10;
+      }
+
       if (tmp.brokenInf) u += 12;
       if (tmp.tfUnl) u += 12;
-      if (tmp.asc.unl) u += 9;
-      if (tmp.cs.unl) u += 7;
+      if (tmp.ascensions_unl) u += 9;
+      if (tmp.CS_unl) u += 7;
       if (tmp.c18reward) u += 12;
       if (tmp.fifthRowUnl) u += 20;
-    } else if (player.dark.unl) {
-      u = 118 + 14;
-      if (tmp.chal13comp) u += 10 + 2;
-      if (tmp.chal14comp) u += 6 + 11;
-      if (tmp.chal15comp) u += 16 + 4;
-      if (tmp.darkRunUnlocked) u += 7;
-      if (tmp.matterUnl) u += 14;
-      if (tmp.mass4Unl) u += 6;
-      if (tmp.brUnl) u += 10;
-    } else if (quUnl()) {
-      u = 77 + 3;
-      if (PRIM.unl()) u += 3;
-      if (hasTree("unl3")) u += 3;
-      if (player.qu.rip.first) u += 9;
-      if (hasUpgrade("br", 9)) u += 23;
-    } else if (tmp.sn.unl) {
-      u = 49 + 5;
-      if (player.supernova.post_10) u += 3;
-      if (player.supernova.fermions.unl) u += 10;
-      if (hasTree("unl1")) u += 10;
-    } else {
-      u = 4;
-      if (player.chal.comps[8].gte(1)) u += 17;
-      if (MASS_DILATION.unlocked()) u += 15;
-      if (STARS.unlocked()) u += 18;
     }
+
     return u;
   },
 };
@@ -2619,37 +2604,33 @@ const ELEM_TYPES = {
   final: {
     title: "???",
     get: (i, l, eu) => l == 0 && i == 118,
-    can: () => EVO.amt >= 5 || hasInfUpgrade(6) || player.qu.rip.active,
+    can: () => hasInfUpgrade(6) || player.qu.rip.active,
     get res() {
       return player.atom.quarks;
     },
     set res(x) {
       player.atom.quarks = E(x);
     },
-    resDisp: (x) =>
-      format(x, 0) +
-      (EVO.amt >= 5 || hasInfUpgrade(6) ? " Quarks" : " Quarks in Big Rip"),
+    resDisp: (x) => format(x, 0) + " Quarks in Big Rip",
   },
 
   //Challenges
   br: {
     title: "Ripped",
     get: (i, l, eu) => l == 0 && BR_ELEM.includes(i),
-    can: () => EVO.amt >= 5 || hasInfUpgrade(6) || player.qu.rip.active,
+    can: () => hasInfUpgrade(6) || player.qu.rip.active,
     get res() {
       return player.atom.quarks;
     },
     set res(x) {
       player.atom.quarks = E(x);
     },
-    resDisp: (x) =>
-      format(x, 0) +
-      (EVO.amt >= 5 || hasInfUpgrade(6) ? " Quarks" : " Quarks in Big Rip"),
+    resDisp: (x) => format(x, 0) + " Quarks in Big Rip",
   },
   c16: {
     title: "C16",
     get: (i, l, eu) => eu.c16,
-    can: () => tmp.c16.in,
+    can: (_) => tmp.c16.in,
     get res() {
       return player.atom.quarks;
     },
@@ -2706,11 +2687,8 @@ const ELEM_TYPES = {
   },
   proto: {
     title: "Proto",
-    get: (i, l, eu) => l == 0 && i > 290,
-    can: () =>
-      EVO.amt >= 4
-        ? true
-        : !tmp.c16.in && (hasElement(210) || !player.qu.rip.active),
+    get: (i, l, eu) => eu.proto,
+    can: () => !tmp.c16active && (hasElement(210) || !player.qu.rip.active),
     get res() {
       return player.evo.proto.star;
     },
@@ -2736,7 +2714,7 @@ const ELEM_TYPES = {
     title: "Muonic",
     get: (i, l, eu) => l == 1,
     get res() {
-      return tmp.ea.amount;
+      return tmp.exotic_atom.amount;
     },
     set res(x) {},
     resDisp: (x) => format(x, 0) + " Exotic Atoms",
@@ -2839,6 +2817,7 @@ for (let x = 1; x <= MAX_ELEM_TIERS; x++) {
       if (!ELEMENTS.upgs[y])
         ELEMENTS.upgs.push({
           desc: `Placeholder.`,
+          proto: true, //temp
           cost: EINF,
         });
     }
@@ -2872,7 +2851,8 @@ function buyElement(x, layer = player.atom.elemLayer) {
   ELEMENTS.buyUpg(x, layer);
 }
 
-function buyAllElements(layer = player.atom.elemLayer) {
+function buyAllElements() {
+  let layer = player.atom.elemLayer;
   for (let i = 1; i <= tmp.elements.unl_length[layer]; i++)
     buyElement(i, layer);
 }
@@ -2892,24 +2872,14 @@ function setupElementsHTML() {
       let m = ELEMENTS.map[k - 1][i];
       if (m == "v") table += `</div><div class="table_center">`;
       else if (m == "_" || !isNaN(Number(m)))
-        table += `<div ${
-          ELEMENTS.la[m] !== undefined && k == 1 ? `id='element_la_${m}'` : ""
-        } style="width: 50px; height: 50px">${
-          ELEMENTS.la[m] !== undefined ? "<br>" + ELEMENTS.la[m] : ""
-        }</div>`;
+        table += `<div ${ELEMENTS.la[m] !== undefined && k == 1 ? `id='element_la_${m}'` : ""} style="width: 50px; height: 50px">${ELEMENTS.la[m] !== undefined ? "<br>" + ELEMENTS.la[m] : ""}</div>`;
       else if (m == "x") {
         num++;
         table +=
           ELEMENTS.upgs[num] === undefined
             ? `<div style="width: 50px; height: 50px"></div>`
-            : `<button class="elements ${
-                num == 118 ? "final" : ""
-              }" id="elementID_${num}" onclick="buyElement(${num}); ssf[0]('${
-                ELEMENTS.names[num]
-              }')" onmouseover="tmp.elements.chosen = ${num}" onmouseleave="tmp.elements.chosen = 0">
-                <div style="font-size: 12px;">${num}</div><sup class="muon-symbol"></sup>${
-                ELEMENTS.names[num]
-              }
+            : `<button class="elements ${num == 118 ? "final" : ""}" id="elementID_${num}" onclick="buyElement(${num}); ssf[0]('${ELEMENTS.names[num]}')" onmouseover="tmp.elements.choosed = ${num}" onmouseleave="tmp.elements.choosed = 0">
+                <div style="font-size: 12px;">${num}</div><sup class="muon-symbol"></sup>${ELEMENTS.names[num]}
                 </button>`;
         if (k == 1) {
           if (num == 56 || num == 88) num += 14;
@@ -2946,9 +2916,7 @@ function setupElementsHTML() {
     table += `
         <button class="btn" id="elemTier_btn${i}" onclick="player.atom.elemTier[player.atom.elemLayer] = ${i}">
             Tier ${i}<br>
-            <span style="font-size: 10px">[${ELEMENTS.exp[i - 1] + 1} - ${
-      ELEMENTS.exp[i]
-    }]</span>
+            <span style="font-size: 10px">[${ELEMENTS.exp[i - 1] + 1} - ${ELEMENTS.exp[i]}]</span>
         </button>
         `;
   }
@@ -2964,56 +2932,39 @@ function updateElementsHTML() {
     elayer = player.atom.elemLayer;
   let infU7 = hasInfUpgrade(6);
 
-  tmp.el.elemLayer.setDisplay(tmp.ea.unl || EVO.amt > 0);
+  tmp.el.elemLayer.setDisplay(tmp.eaUnl || OURO.evo > 0);
   tmp.el.elemLayer.setHTML("Elements' Layer: " + ["Normal", "Muonic"][elayer]);
   tmp.el.elemTierDiv.setDisplay(tElem.max_tier[elayer] > 1);
 
   let elem_const = [ELEMENTS, MUONIC_ELEM][elayer];
 
-  let elem_resource_display =
-    player.atom.elemLayer === 1
-      ? tmp.ea.amount.format(0)
-      : player.atom.elemTier[player.atom.elemLayer] === 1
-      ? player.atom.quarks.format(0)
-      : player.dark.shadow.format(0);
-  tmp.el.elem_amount_div.setHTML(
-    `<br />You have <b>${elem_resource_display}</b> ${
-      player.atom.elemLayer === 1
-        ? "Exotic Atoms"
-        : player.atom.elemTier[player.atom.elemLayer] === 1
-        ? "Quarks"
-        : "Dark Shadows"
-    }.`
-  );
-
-  let ch = tElem.chosen;
+  let ch = tElem.choosed;
   tmp.el.elem_ch_div.setDisplay(ch > 0);
   tmp.el.elem_next_div.setDisplay(ch == 0);
   if (ch) {
     let eu = elem_const.upgs[ch];
     let eff = tElem[["effect", "mu_effect"][elayer]];
-    let fed = tmp.ouro.fed["e" + elayer + "_" + ch];
+    let fed = tmp.evo.fed["e" + elayer + "_" + ch];
 
     tmp.el.elem_desc.setHTML(
       "<b>[" +
         ["", "Muonic "][elayer] +
         ELEMENTS.fullNames[ch] +
         "]</b> " +
-        (fed ? EVO.fed_msg[fed] : eu.desc)
+        (fed ? EVO.fed_msg[fed] : eu.desc),
     );
     tmp.el.elem_desc.setClasses({
       sky: true,
       corrupted_text2: c16 && isElemCorrupted(ch, elayer),
     });
     tmp.el.elem_cost.setTxt(
-      fed
-        ? ""
-        : "Cost: " +
-            ELEM_TYPES[getElementClass(ch, elayer)].resDisp(eu.cost) +
-            (tElem.cannot.includes(ch) ? " [CANNOT AFFORD in Big Rip]" : "")
+      ELEM_TYPES[getElementClass(ch, elayer)].resDisp(eu.cost) +
+        (player.qu.rip.active && tElem.cannot.includes(ch)
+          ? " [CANNOT AFFORD in Big Rip]"
+          : ""),
     );
 
-    let effDesc = !fed && eu.effDesc && eu.effDesc(eff[ch]);
+    let effDesc = eu.effDesc && eu.effDesc(eff[ch]);
     tmp.el.elem_eff.setHTML(effDesc ? "Currently: " + effDesc : "");
   }
 
@@ -3037,20 +2988,18 @@ function updateElementsHTML() {
           upg.setVisible(unl2);
           if (unl2) {
             let eu = elem_const.upgs[x];
-            let fed = tmp.ouro.fed["e" + elayer + "_" + x];
+            let fed = tmp.evo.fed["e" + elayer + "_" + x];
             upg.setClasses(
               fed
                 ? { elements: true, locked: true, [fed]: true }
                 : c16 && isElemCorrupted(x, elayer)
-                ? { elements: true, locked: true, corrupted: true }
-                : elayer == 0 && tElem.cannot.includes(ch)
-                ? { elements: true, locked: true, cannot: true }
-                : {
-                    elements: true,
-                    locked: !ELEMENTS.canBuy(x, elayer),
-                    bought: hasElement(x, elayer),
-                    [getElementClass(x, elayer)]: true,
-                  }
+                  ? { elements: true, locked: true, corrupted: true }
+                  : {
+                      elements: true,
+                      locked: !ELEMENTS.canBuy(x, elayer),
+                      bought: hasElement(x, elayer),
+                      [getElementClass(x, elayer)]: true,
+                    },
             );
           }
         }
@@ -3068,7 +3017,7 @@ function getElementClass(i, layer) {
 }
 
 function updateElementsTemp() {
-  let evo = EVO.amt;
+  let evo = OURO.evo;
   let tElem = tmp.elements;
   let et = player.atom.elemTier,
     elayer = player.atom.elemLayer;
@@ -3087,7 +3036,6 @@ function updateElementsTemp() {
   if (player.qu.rip.active) {
     if (!hasElement(121)) cannot.push(58);
     if (!hasElement(126)) cannot.push(74);
-    if (EVO.amt >= 4 && !hasZodiacUpg("taurus", "u5")) cannot.push(292);
   }
   tElem.cannot = cannot;
 
@@ -3136,7 +3084,7 @@ function unchunkify(r) {
 }
 
 function getChunk(x) {
-  return typeof x == "number" ? [x, x] : x ?? [0, 0];
+  return typeof x == "number" ? [x, x] : (x ?? [0, 0]);
 }
 
 function hasElement(i, layer = 0) {
@@ -3196,6 +3144,6 @@ function calcNextElements() {
 		<span style='font-size: 12px'>${type_data.title}</span>`);
     nextElm.push(i);
   }
-  for (let i = nextElm.length; i < 3; i++)
+  for (i = nextElm.length; i < 3; i++)
     tmp.el["elem_next_div" + i].setDisplay(false);
 }

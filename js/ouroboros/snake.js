@@ -8,9 +8,8 @@ Math.randomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-var snake;
-function resetSnake() {
-  snake = {
+function newSnakeData() {
+  let s = {
     time: 0,
     auto: 0,
     cam_pos: { x: 320, y: 240 },
@@ -41,14 +40,10 @@ function resetSnake() {
     powerup: null,
     powerup_time: 0,
   };
-
-  for (let i in SNAKE_HELPER.images)
-    snake.images[SNAKE_HELPER.images[i]] = document.getElementById(
-      SNAKE_HELPER.images[i]
-    );
-  snake.canvas = document.getElementById("snake_canvas");
-  snake.canvas_ctx = document.getElementById("snake_canvas").getContext("2d");
+  return s;
 }
+
+var snake = newSnakeData();
 
 const SNAKE_HELPER = {
   images: ["arrow_image", "snake_texture"],
@@ -88,69 +83,73 @@ const SNAKE_HELPER = {
     21: 1,
   },
   objectIDs: {
-    strawberry: 40,
-    starfruit: 41,
-
-    aim: 50,
-    combo: 51,
-    adjoin: 52,
-    frenzy: 53,
-    purify: 54,
-    boom: 55,
-    align: 56,
+    strawberry: 30,
+    aim: 40,
+    combo: 41,
+    adjoin: 42,
+    frenzy: 43,
+    purify: 44,
   },
-  appleTiers: 12,
+  appleTiers: 10,
 };
+
+const TIMED_POWERUPS = ["aim", "combo", "frenzy", "purify"];
+function onPowerup(i) {
+  if (TIMED_POWERUPS.includes(i)) {
+    snake.powerup = i;
+    snake.powerup_time = hasElement(81, 1) ? 30 : 15;
+  }
+  switch (i) {
+    case "adjoin":
+      for (let x of snake.apples) {
+        if (Math.random() < 0.5 - 0.1 * x.tier) continue;
+        if (x.type == "powerup") continue;
+        let n = getNewSnakePosition(
+          { ...x },
+          SNAKE_HELPER.movement[Math.randomInt(0, 4)],
+        );
+        if (isSnakeOccupied(n)) break;
+        snake.new_apples.push(n);
+      }
+      break;
+    case "frenzy":
+      if (Math.random() < 0.5) boomSnake(true);
+      break;
+  }
+}
 
 function calcSnake(dt) {
   snake.time += dt;
   snake.auto += dt;
-  snake.star -= dt;
-  if (boomUnl())
+  if (OURO.evo >= 2)
     player.ouro.energy = Math.min(player.ouro.energy + dt / 5, 500);
-
-  let speed = SNAKE_HELPER.speed[player.options.snake_speed];
-  if (snake.time >= speed) {
-    let times = Math.floor(snake.time / speed);
-    snake.accel = Math.max(times / 5, 1);
-    snake.time -= speed * times;
-    for (var i = 0; i < Math.min(times, 5); i++) snakeStep(snake.accel);
+  if (snake.time >= SNAKE_HELPER.speed[player.options.snake_speed]) {
+    snake.time = 0;
+    snakeStep();
   }
   if (snake.powerup_time > 0) {
-    snake.powerup_time -= dt;
+    snake.powerup_time = Math.max(snake.powerup_time - dt, 0);
     if (snake.powerup_time <= 0) snake.powerup = null;
   }
 }
 
 function snakeMove(s, you) {
-  if (s.paralyzed > 0) {
-    s.paralyzed--;
-    return;
-  }
-
   // Movement
   let gs = snake;
   if (you) s.move = snake.move;
   else if (s.moves == 0) s.move = Math.randomInt(0, 3);
 
-  let head_move = { ...s.bodies[0][0] },
-    old_head = s.bodies[0][0];
-  let m = SNAKE_HELPER.movement[s.move];
-  let aim = you && hasPowerup("aim");
-  getNewSnakePosition(head_move, m);
+  let head_move = { ...s.bodies[0][0] };
+  let m = SNAKE_HELPER.movement[s.move],
+    p = you ? gs.powerup : "";
+  if (s.paralyzed > 0) s.paralyzed--;
+  else getNewSnakePosition(head_move, m);
 
   // Apple Feeding
   let keep = [];
   gs.apples.forEach((x, w) => {
-    let special =
-      x.type == "powerup" ||
-      (x.type == "apple" && x.tier.gte(4) && (!hasElement(94, 1) || !you));
-    if (you && hasPowerup("align") && !special) {
-      if (m.x != 0 && old_head.x == x.x) getNewSnakePosition(x, m);
-      if (m.y != 0 && old_head.y == x.y) getNewSnakePosition(x, m);
-    }
-
-    let aim_range = aim && !special ? 1 : 0;
+    let special = x.type == "powerup" || x.tier >= 4;
+    let aim_range = p == "aim" && !special ? 2 : 0;
     if (
       Math.abs(x.x - head_move.x) + Math.abs(x.y - head_move.y) <= aim_range &&
       (you || !special)
@@ -169,7 +168,7 @@ function snakeMove(s, you) {
       se.bodies.forEach((bd, i2) => {
         if (
           Math.abs(head_move.x - bd[0].x) + Math.abs(head_move.y - bd[0].y) <=
-          (aim ? 1 : 0)
+          (p == "aim" ? 2 : 0)
         )
           spliced = true;
       });
@@ -179,7 +178,7 @@ function snakeMove(s, you) {
             x: bd[0].x,
             y: bd[0].y,
             type: "apple",
-            tier: rollAppleTier(getPurifyLuck()),
+            tier: rollAppleTier(Math.max(1, s.len - 4)),
           });
         gs.snakes.splice(i, 1);
       }
@@ -208,7 +207,7 @@ function snakeMove(s, you) {
 function snakeStep() {
   // Snakes
   let s = snake;
-  if (Math.random() < 0.1 && EVO.amt >= 3 && s.snakes.length < 3) {
+  if (Math.random() < 0.1 && OURO.evo >= 3 && s.snakes.length < 3) {
     let even = Math.random() > 0.5;
     s.snakes.push({
       bodies: [[{ x: even ? -8 : 7, y: 0 }, "1h"]],
@@ -231,39 +230,32 @@ function snakeStep() {
 
   // Boom
   if (s.boom.range != undefined) s.boom.range++;
-  if (s.boom.range > 30) delete s.boom.range;
 
   let keep = [];
   s.snakes.forEach((se, i) => {
     if (i == 0) return;
     if (
       Math.max(se.bodies[0][0].x - s.boom.x) +
-        Math.abs(se.bodies[0][0].y - s.boom.y) <=
+        Math.abs(se.bodies[0][0].y - s.boom.y) ==
       s.boom.range
     )
       se.paralyzed = 30;
   });
   s.apples.forEach((x, w) => {
-    let special =
-      x.type == "powerup" ||
-      (x.type == "apple" && x.tier.gte(4) && !hasElement(91, 1));
-    let keep_it = true;
+    let special = x.type == "powerup" || x.tier >= 4;
     if (
       Math.abs(x.x - s.boom.x) + Math.abs(x.y - s.boom.y) == s.boom.range &&
       !special
-    ) {
-      keep_it = hasElement(91, 1);
-      if (keep_it) purifyApple(x);
-      else feedSomething(x, w, true);
-    }
-    if (keep_it) keep.push(x);
+    )
+      feedSomething(x, w, true);
+    else keep.push(x);
   });
   s.apples = keep;
 
   // Apple Spawn
   let max_apples = 8;
-  if (hasPowerup("frenzy")) max_apples += 4;
-  if (hasElement(79, 1) && !hasPowerup("aim")) max_apples += 4;
+  if (s.powerup == "frenzy") max_apples += 4;
+  if (hasElement(79, 1) && s.powerup != "aim") max_apples += 4;
   if (s.apples.length < max_apples) spawnApples();
 
   // Auto-Moving
@@ -290,10 +282,10 @@ function isSnakeOccupied(p) {
 function spawnApples() {
   var len = Math.min(
     Math.max(
-      Math.log10(1 / Math.random()) * (hasPowerup("combo") ? 2 : 1) + 1,
-      1
+      Math.log10(1 / Math.random()) * (snake.powerup == "combo" ? 2 : 1) + 1,
+      1,
     ),
-    4
+    4,
   );
   var origin;
   var s = snake.size;
@@ -311,14 +303,16 @@ function spawnApples() {
   for (var i = 1; i <= len; i++) {
     let type = "apple",
       tier;
-    if (EVO.amt >= 2 && Math.random() < (hasElement(81, 1) ? 1 / 25 : 1 / 50)) {
-      let POWERUPS = getPowerups();
+    if (
+      OURO.evo >= 2 &&
+      Math.random() < (hasElement(81, 1) ? 1 / 25 : 1 / 50)
+    ) {
+      let POWERUPS = ["aim", "combo", "adjoin", "frenzy", "purify"];
       let powerup = POWERUPS[Math.randomInt(0, POWERUPS.length)];
       type = "powerup";
       tier = powerup;
-    } else if (berry && type != "powerup") {
-      type = EVO.amt >= 4 && Math.random() < 0.5 ? "starfruit" : "berry";
-    } else tier = rollAppleTier(luck); //Elund - Green Apples
+    } else if (berry && type != "powerup") type = "berry";
+    else tier = rollAppleTier(luck); //Elund - Green Apples
 
     snake.apples.push({ ...origin, type, tier });
     getNewSnakePosition(origin, SNAKE_HELPER.movement[rot]);
@@ -329,13 +323,11 @@ function spawnApples() {
 function rollAppleTier(luck = 1) {
   let r = E(Math.random())
     .div(luck)
-    .log(
-      1 / (hasZodiacUpg("taurus", "u6") ? zodiacEff("taurus", "u6", 10) : 10)
-    )
+    .log(1 / 10)
     .max(0)
     .add(1)
     .floor();
-  return r.min(EVO.amt >= 2 ? 3 + EVO.amt : 2);
+  return Math.min(r.toNumber(), OURO.evo >= 2 ? 3 + OURO.evo : 2);
 }
 
 function drawSnake() {
@@ -345,18 +337,13 @@ function drawSnake() {
   for (let a of snake.apples) {
     let x = a.x * 32 + snake.cam_pos.x,
       y = a.y * 32 + snake.cam_pos.y,
-      tx,
-      beyond;
+      tx;
     switch (a.type) {
       case "apple":
-        beyond = a.tier.gt(SNAKE_HELPER.appleTiers);
-        tx = beyond ? 28 : 20 + a.tier.toNumber() - 1;
+        tx = 20 + a.tier - 1;
         break;
       case "berry":
         tx = SNAKE_HELPER.objectIDs.strawberry;
-        break;
-      case "starfruit":
-        tx = SNAKE_HELPER.objectIDs.starfruit;
         break;
       case "powerup":
         tx = SNAKE_HELPER.objectIDs[a.tier];
@@ -374,16 +361,9 @@ function drawSnake() {
       0,
       0,
       32,
-      32
+      32,
     );
     ctx.restore();
-
-    if (beyond) {
-      let msg = format(a.tier, 0);
-      ctx.fillStyle = "white";
-      ctx.font = "12px Typewriter";
-      ctx.fillText(msg, x - 16, y + 16);
-    }
   }
 
   let you = snake.snakes[0],
@@ -408,7 +388,7 @@ function drawSnake() {
           0,
           0,
           32,
-          32
+          32,
         );
         ctx.restore();
       }
@@ -422,12 +402,12 @@ function drawSnake() {
     snake.cam_pos.x - Math.floor(s[0] / 2) * 32 - 16,
     snake.cam_pos.y - Math.floor(s[1] / 2) * 32 - 16,
     s[0] * 32,
-    s[1] * 32
+    s[1] * 32,
   );
 
   if (snake.boom.range > 0 && snake.boom.range < 20)
     drawDiamond("red", snake.boom);
-  if (hasPowerup("aim")) drawDiamond("green", { ...head, range: 2 });
+  if (snake.powerup == "aim") drawDiamond("green", { ...head, range: 2 });
 
   if (snake.images.arrow_image) {
     let am = SNAKE_HELPER.arrow_movement[snake.move];
@@ -435,7 +415,7 @@ function drawSnake() {
     ctx.save();
     ctx.translate(
       (head.x + am.x) * 32 - 16 + snake.cam_pos.x,
-      (head.y + am.y) * 32 - 16 + snake.cam_pos.y
+      (head.y + am.y) * 32 - 16 + snake.cam_pos.y,
     );
     ctx.rotate((Math.PI * snake.move) / 2);
     ctx.drawImage(snake.images.arrow_image, 0, 0);
@@ -449,34 +429,39 @@ function drawDiamond(clr, data) {
   ctx.beginPath();
   ctx.moveTo(
     snake.cam_pos.x + data.x * 32,
-    snake.cam_pos.y + (data.y + data.range) * 32
+    snake.cam_pos.y + (data.y + data.range) * 32,
   );
   ctx.lineTo(
     snake.cam_pos.x + (data.x + data.range) * 32,
-    snake.cam_pos.y + data.y * 32
+    snake.cam_pos.y + data.y * 32,
   );
   ctx.lineTo(
     snake.cam_pos.x + data.x * 32,
-    snake.cam_pos.y + (data.y - data.range) * 32
+    snake.cam_pos.y + (data.y - data.range) * 32,
   );
   ctx.lineTo(
     snake.cam_pos.x + (data.x - data.range) * 32,
-    snake.cam_pos.y + data.y * 32
+    snake.cam_pos.y + data.y * 32,
   );
   ctx.lineTo(
     snake.cam_pos.x + data.x * 32,
-    snake.cam_pos.y + (data.y + data.range) * 32
+    snake.cam_pos.y + (data.y + data.range) * 32,
   );
   ctx.stroke();
+}
+
+function setupSnake() {
+  for (let i in SNAKE_HELPER.images)
+    snake.images[SNAKE_HELPER.images[i]] = document.getElementById(
+      SNAKE_HELPER.images[i],
+    );
+  snake.canvas = document.getElementById("snake_canvas");
+  snake.canvas_ctx = document.getElementById("snake_canvas").getContext("2d");
 }
 
 function recordMovement(i) {
   snake.move = i;
   snake.auto = 0;
-}
-
-function boomUnl() {
-  return EVO.amt >= 2 && !hasElement(97, 1);
 }
 
 function boomSnake(auto) {
@@ -507,7 +492,7 @@ function getNewSnakePosition(p, m) {
 function calcMaxMoves() {
   let r = snake.snakes[0].len == 5 ? 1 / 0 : 20 - snake.snakes[0].len;
   if (hasElement(82, 1)) r += 5;
-  if (hasPowerup("combo")) r *= 1.5;
+  if (snake.powerup == "combo") r *= 1.5;
   return Math.round(r);
 }
 
@@ -516,11 +501,11 @@ function feedSomethingOnSnake(s, you) {
   s.moves = -1;
   if (you) {
     snake.auto = 0;
-    if (boomUnl())
+    if (OURO.evo >= 2)
       player.ouro.energy = Math.min(
         player.ouro.energy +
-          Math.max(1, s.len - 7) * (hasPowerup("frenzy") ? 2 : 1) * snake.accel,
-        500
+          Math.max(1, s.len - 7) * (snake.powerup == "frenzy" ? 2 : 1),
+        500,
       );
   }
 }
@@ -529,111 +514,28 @@ function feedSomething(obj, target, you) {
   if (!you) return;
   switch (obj.type) {
     case "apple":
-      if (hasElement(93, 1)) {
-        let toAdd = E(2).pow(obj.tier.sub(1)).div(100).mul(snake.accel);
-        player.ouro.purify = player.ouro.purify.add(toAdd);
-      }
-
-      let base = E(3);
-      if (hasElement(96, 1)) base = muElemEff(96);
       player.ouro.apple = player.ouro.apple.add(
-        base.pow(obj.tier.sub(1)).mul(tmp.ouro.apple_gain).mul(snake.accel)
+        tmp.ouro.apple_gain.mul(Decimal.pow(3, obj.tier - 1)),
       );
-      break;
-    case "starfruit":
-      player.evo.proto.dust = player.evo.proto.dust.add(
-        tmp.evo.neb.dust_prod.mul(snake.accel * 5)
-      );
-      CONSTELLATION.calc(snake.accel * 5);
-      snake.star = 2;
       break;
     case "berry":
-      player.ouro.berry = player.ouro.berry.add(
-        tmp.ouro.berry_gain.mul(snake.accel)
-      );
+      player.ouro.berry = player.ouro.berry.add(tmp.ouro.berry_gain);
       break;
     case "powerup":
       onPowerup(obj.tier);
       break;
   }
-  if (hasPowerup("purify")) {
-    for (let x of snake.apples) purifyApple(x);
+  if (snake.powerup == "purify") {
+    for (let x of snake.apples) {
+      if (x.type != "apple") continue;
+      x.tier = Math.max(
+        x.tier,
+        rollAppleTier(
+          hasElement(83, 1) ? Math.max(1, snake.snakes[0].len - 4) : 1,
+        ),
+      );
+    }
   }
-}
-
-//POWERUPS
-const TIMED_POWERUPS = ["aim", "combo", "frenzy", "purify", "align"];
-function onPowerup(i) {
-  if (TIMED_POWERUPS.includes(i)) {
-    snake.powerup = i;
-    snake.powerup_time = hasElement(81, 1) ? 30 : 15;
-  }
-  switch (i) {
-    case "adjoin":
-      for (let x of snake.apples) {
-        if (x.type == "powerup") continue;
-        if (x.type == "apple" && Math.random() < 0.5 - 0.1 * x.tier.toNumber())
-          continue;
-
-        let n = getNewSnakePosition(
-          { ...x },
-          SNAKE_HELPER.movement[Math.randomInt(0, 4)]
-        );
-        if (isSnakeOccupied(n)) break;
-        snake.new_apples.push(n);
-      }
-      break;
-    case "frenzy":
-      if (Math.random() < 0.5) boomSnake(true);
-      break;
-    case "boom":
-      boomSnake(true);
-      break;
-  }
-}
-
-function hasPowerup(x) {
-  return tmp.ouro.powerups.includes(x);
-}
-
-function getPowerups() {
-  let POWERUPS = ["adjoin"];
-  if (!hasElement(88, 1)) POWERUPS.push("aim");
-  if (!hasElement(91, 1)) POWERUPS.push("purify");
-  if (hasElement(92, 1) && boomUnl()) POWERUPS.push("boom");
-  if (!hasElement(95, 1)) POWERUPS.push("frenzy");
-  if (!hasElement(97, 1)) POWERUPS.push("combo");
-  if (EVO.amt >= 4) POWERUPS.push("align");
-  return POWERUPS;
-}
-
-function getActivatedPowerups() {
-  let POWERUPS = [];
-  if (snake.powerup) POWERUPS.push(snake.powerup);
-  if (hasElement(88, 1)) POWERUPS.push("aim");
-  if (hasElement(95, 1)) POWERUPS.push("frenzy");
-  if (hasElement(97, 1)) POWERUPS.push("purify");
-  if (hasElement(98, 1)) POWERUPS.push("combo");
-  return POWERUPS;
-}
-
-//PURIFICATION
-function purifyApple(a) {
-  if (a.type == "apple") a.tier = a.tier.max(rollAppleTier(getPurifyLuck()));
-}
-
-function getPurifyLuck() {
-  let r = 1;
-  if (hasElement(83, 1)) r = Math.max(1, snake.snakes[0].len - 4);
-  return player.ouro.purify.add(r);
-}
-
-//GAIN
-function appleGainExp() {
-  let x = E(1);
-  x = x.mul(escrowBoost("apple"));
-  if (hasElement(89, 1)) x = x.mul(1.5);
-  return x;
 }
 
 function appleGain() {
@@ -641,59 +543,56 @@ function appleGain() {
   if (hasElement(82, 1)) x = x.pow(2);
   if (hasElement(68, 1)) x = x.mul(muElemEff(68)[0]);
   if (hasElement(71, 1)) x = x.mul(2);
-  if (EVO.amt >= 2 && hasElement(59)) x = x.mul(10);
-  return x.pow(appleGainExp()).round();
+  if (OURO.evo >= 2 && hasElement(59)) x = x.mul(10);
+
+  x = x.pow(escrowBoost("apple"));
+  if (hasElement(89, 1)) x = x.pow(1.1);
+  return x.round();
 }
 
 function berryGain() {
-  let x = E(300).pow(EVO.amt - 1);
+  let x = E(300).pow(OURO.evo - 1);
   if (hasElement(68, 1)) x = x.mul(muElemEff(68)[1]);
   if (hasElement(71, 1)) x = x.mul(2);
-  if (hasZodiacUpg("aries", "u4")) x = x.mul(zodiacEff("aries", "u4"));
   return x.round();
 }
 
 function appleEffects() {
   let a = player.ouro.apple,
     eff = {},
-    evo = EVO.amt;
-  if (QCs.active()) a = a.mul(tmp.qu.qc.eff[8]);
+    evo = OURO.evo;
 
   eff.mass = [
-    QCs.active() && EVO.amt >= 4
-      ? E(1)
-      : expMult(a.div(10).add(1), a.div(100).add(1).log10().add(1)),
+    expMult(a.div(10).add(1), a.div(100).add(1).log10().add(1)),
     a.div(1e8).add(1).pow(2),
   ];
   eff.cp = a
-    .div(5)
+    .div(10)
     .add(1)
-    .pow(hasElement(90, 1) ? 0.7 : hasElement(76, 1) ? 0.6 : 0.5);
-  if (player.atom.unl) eff.cp_lvl = a.add(1).pow(hasElement(90, 1) ? 0.4 : 0.2);
+    .pow(hasElement(90, 1) ? 0.8 : hasElement(76, 1) ? 0.6 : 0.5);
+  if (player.atom.unl) eff.cp_lvl = a.add(1).pow(0.1);
 
   if (evo >= 2 && FORMS.bh.unl()) {
     eff.fabric = a
       .div(100)
       .add(1)
-      .pow(hasElement(91, 1) ? 0.5 : 1 / 3);
-    eff.wh_loss = a
-      .add(1)
-      .log10()
-      .add(1)
-      .pow(hasElement(92, 1) ? 1 / 3 : 1 / 5);
+      .pow(1 / 3);
+    eff.wh_loss = a.add(1).log10().add(1).pow(0.2);
   }
   if (evo >= 3 && player.atom.unl) {
     eff.ps = a
       .div(1e3)
       .add(1)
-      .pow(hasElement(92, 1) ? 1 / 2 : 1 / 4);
+      .pow(1 / 4);
     eff.ps_dim = a
       .div(1e3)
       .add(1)
       .pow(-1 / 6);
   }
-  if (evo <= 6 && player.dark.unl)
+  if (evo <= 6 && player.dark.unl) {
+    eff.dark = a.div(1e6).add(1).cbrt();
     eff.glyph = a.div(1e4).add(1).log10().add(1).root(2);
+  }
 
   return eff;
 }

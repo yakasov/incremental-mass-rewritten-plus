@@ -29,45 +29,27 @@ const DARK_RUN = {
 
   mass_glyph_effDesc: [
     (x) =>
-      `Reduce the exponent of normal mass’s multiplier, multiplier from Black Hole Mass by <b>^${format(
-        x
-      )}</b> in dark run.<br class='line'>Earn more glyphs based on normal mass.`,
+      `Reduce the exponent of normal mass’s multiplier, multiplier from mass of black hole by <b>^${format(x)}</b> in dark run.<br class='line'>Earn more glyphs based on normal mass.`,
     (x) =>
-      EVO.amt >= 2
-        ? `Reduce Calm Power and Fabric by <b>^${format(
-            x
-          )}</b>.<br class='line'>Earn more glyphs based on Fabric.`
-        : `Reduce the exponent of dark matter’s multiplier, rage power’s multiplier by <b>^${format(
-            x
-          )}</b> in dark run.<br class='line'>Earn more glyphs based on Black Hole Mass.`,
+      OURO.evo >= 2
+        ? `Reduce Calm Power and Fabric by <b>^${format(x)}</b>.<br class='line'>Earn more glyphs based on Fabric.`
+        : `Reduce the exponent of dark matter’s multiplier, rage power’s multiplier by <b>^${format(x)}</b> in dark run.<br class='line'>Earn more glyphs based on mass of black hole.`,
     (x) =>
-      `Reduce the exponent of atom, atomic power and quark multiplier by <b>^${format(
-        x
-      )}</b> in dark run.<br class='line'>Earn more glyphs based on quarks.`,
+      `Reduce the exponent of atom, atomic power and quark multiplier by <b>^${format(x)}</b> in dark run.<br class='line'>Earn more glyphs based on quarks.`,
     (x) =>
-      `Reduce the exponent of relativistic particle’s multiplier, the exponent of dilated mass formula by <b>^${format(
-        x
-      )}</b> in dark run.<br class='line'>Earn more glyphs based on dilated mass.`,
+      `Reduce the exponent of relativistic particle’s multiplier, the exponent of dilated mass formula by <b>^${format(x)}</b> in dark run.<br class='line'>Earn more glyphs based on dilated mass.`,
     (x) =>
-      `Reduce the exponent of supernova resources’ multiplier by <b>^${format(
-        x[0]
-      )}</b>, increase the supernova’s requirement by <b>x${format(
-        x[1]
-      )}</b> in dark run.<br class='line'>Earn more glyphs based on collapsed stars.`,
+      `Reduce the exponent of supernova resources’ multiplier by <b>^${format(x[0])}</b>, increase the supernova’s requirement by <b>x${format(x[1])}</b> in dark run.<br class='line'>Earn more glyphs based on collapsed stars.`,
     (x) =>
-      `Reduce the prestige base’s exponent by <b>/${format(
-        x
-      )}</b>, increase every rank’s requirement by <b>x${format(
-        x
-      )}</b> in dark run.<br class='line'>Earn more glyphs based on prestige base.`,
+      `Reduce the prestige base’s exponent by <b>/${format(x)}</b>, increase every rank’s requirement by <b>x${format(x)}</b> in dark run.<br class='line'>Earn more glyphs based on prestige base.`,
   ],
 
   mass_glyph_gain: [
     () =>
-      player.mass.gte(EVO.amt >= 3 ? "ee18" : EVO.amt >= 1 ? "ee26" : "ee39")
+      player.mass.gte(OURO.evo >= 3 ? "ee18" : OURO.evo >= 1 ? "ee26" : "ee39")
         ? player.mass
             .log10()
-            .div(EVO.amt >= 3 ? "e18" : EVO.amt >= 1 ? "e26" : "e39")
+            .div(OURO.evo >= 3 ? "e18" : OURO.evo >= 1 ? "e26" : "e39")
             .log(1.1)
             .add(1)
             .softcap(50, 0.5, 0)
@@ -76,7 +58,7 @@ const DARK_RUN = {
             .floor()
         : E(0),
     () =>
-      EVO.amt >= 2
+      OURO.evo >= 2
         ? player.evo.wh.fabric
             .add(1)
             .log10()
@@ -84,21 +66,21 @@ const DARK_RUN = {
             .pow(1.5)
             .mul(tmp.dark.glyph_mult)
             .floor()
-        : player.bh.mass.gte(EVO.amt >= 1 ? "ee18" : "e1.5e34")
-        ? player.bh.mass
-            .log10()
-            .div(EVO.amt >= 1 ? "e18" : 1.5e34)
-            .log(1.1)
-            .add(1)
-            .softcap(50, 0.5, 0)
-            .mul(tmp.dark.glyph_mult)
-            .floor()
-        : E(0),
+        : player.bh.mass.gte(OURO.evo >= 1 ? "e1e18" : "e1.5e34")
+          ? player.bh.mass
+              .log10()
+              .div(OURO.evo >= 1 ? "1e18" : 1.5e34)
+              .log(1.1)
+              .add(1)
+              .softcap(50, 0.5, 0)
+              .mul(tmp.dark.glyph_mult)
+              .floor()
+          : E(0),
     () =>
-      player.atom.quarks.gte(EVO.amt >= 1 ? "ee17" : "e3e32")
+      player.atom.quarks.gte(OURO.evo >= 1 ? "e1e17" : "e3e32")
         ? player.atom.quarks
             .log10()
-            .div(EVO.amt >= 1 ? "e17" : 3e32)
+            .div(OURO.evo >= 1 ? "1e17" : 3e32)
             .log(1.1)
             .add(1)
             .softcap(50, 0.5, 0)
@@ -106,10 +88,10 @@ const DARK_RUN = {
             .floor()
         : E(0),
     () =>
-      tmp.atom.unl && player.md.mass.gte(EVO.amt >= 1 ? "ee9" : "ee21")
+      tmp.atom.unl && player.md.mass.gte(OURO.evo >= 1 ? "e1e9" : "e1e21")
         ? player.md.mass
             .log10()
-            .div(EVO.amt >= 1 ? "e9" : 1e21)
+            .div(OURO.evo >= 1 ? "1e9" : 1e21)
             .log(1.1)
             .add(1)
             .softcap(50, 0.5, 0)
@@ -117,10 +99,11 @@ const DARK_RUN = {
             .floor()
         : E(0),
     () =>
-      tmp.star_unl && player.stars.points.gte(EVO.amt >= 1 ? "ee11" : "e1.5e24")
+      tmp.star_unl &&
+      player.stars.points.gte(OURO.evo >= 1 ? "e1e11" : "e1.5e24")
         ? player.stars.points
             .log10()
-            .div(EVO.amt >= 1 ? "e11" : 1.5e24)
+            .div(OURO.evo >= 1 ? "1e11" : 1.5e24)
             .log(1.1)
             .add(1)
             .softcap(50, 0.5, 0)
@@ -128,9 +111,9 @@ const DARK_RUN = {
             .floor()
         : E(0),
     () =>
-      tmp.prestiges.base.gte(EVO.amt >= 3 ? 1e9 : EVO.amt >= 1 ? 1e10 : 1e13)
+      tmp.prestiges.base.gte(OURO.evo >= 3 ? 1e9 : OURO.evo >= 1 ? 1e10 : 1e13)
         ? tmp.prestiges.base
-            .div(EVO.amt >= 3 ? 1e9 : EVO.amt >= 1 ? 1e10 : 1e13)
+            .div(OURO.evo >= 3 ? 1e9 : OURO.evo >= 1 ? 1e10 : 1e13)
             .log(1.1)
             .add(1)
             .softcap(10, 0.5, 0)
@@ -164,9 +147,9 @@ const DARK_RUN = {
     {
       max: 10,
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Raise Wormhole by 1.5 every level.`
-          : `Raise Black Hole Mass gain by 1.5 every level.`;
+          : `Raise mass of black hole gain by 1.5 every level.`;
       },
       cost(i) {
         i *= Math.max(1, i - 4) ** 0.5;
@@ -234,10 +217,10 @@ const DARK_RUN = {
     },
     {
       get max() {
-        return EVO.amt >= 2 ? 15 : 10;
+        return OURO.evo >= 2 ? 15 : 10;
       },
       get desc() {
-        return EVO.amt >= 2
+        return OURO.evo >= 2
           ? `Decrease Meditation's softcap weakness by -5%.`
           : `Dilated mass's overflow starts ^10 later every level.`;
       },
@@ -246,9 +229,9 @@ const DARK_RUN = {
         return { 3: Math.floor(35 + 5 * i), 4: Math.floor(5 * i + 5) };
       },
       eff(i) {
-        return EVO.amt >= 2 ? 1 - 0.05 * i : 10 ** i;
+        return OURO.evo >= 2 ? 1 - 0.05 * i : 10 ** i;
       },
-      effDesc: (x) => (EVO.amt >= 2 ? formatReduction(x) : formatPow(x, 0)),
+      effDesc: (x) => (OURO.evo >= 2 ? formatReduction(x) : formatPow(x, 0)),
     },
     {
       max: 5,
@@ -368,7 +351,7 @@ function darkRun(round) {
 
 function changeRunRounds() {
   if (player.dark.run.active) {
-    if (GLYPH_SEL.length) darkRun(1);
+    if (GLYPH_SEL.length) darkRun();
   } else player.dark.run.rounds = (player.dark.run.rounds % 4) + 1;
 }
 
@@ -402,7 +385,7 @@ function buyGlyphUpgrade(i) {
     for (let c in cost)
       if (tmp.dark.mg_passive[c] <= 0)
         player.dark.run.glyphs[c] = player.dark.run.glyphs[c].sub(
-          cost[c] * (EVO.amt >= 2 ? 0.5 : 1)
+          cost[c] * (OURO.evo >= 2 ? 0.5 : 1),
         );
     if (upgs[i] == max && pin == i) player.dark.run.pin_upg = 0;
 
@@ -417,25 +400,23 @@ function updateDarkRunHTML() {
   let dtmp = tmp.dark,
     dra = player.dark.run.active;
   let pin = player.dark.run.pin_upg,
-    gum = tmp.mass_glyph_msg || pin;
+    gum = tmp.mass_glyph_msg;
   let c16 = tmp.c16.in;
 
   tmp.el.dark_run_btn.setTxt(dra ? "Exit Dark Run" : "Start Dark Run");
   tmp.el.dark_run_btn.setTooltip(
-    `Dark Running will force a Dark reset, and will trap you into Big Rip with quantum challenge modifiers ${getQCForceDisp(
-      "run"
-    )}. You will produce <b>Glyphic Mass</b> based on resources which nerf things, and choosing a glyph to earn will exit a Dark Run.`
+    `Dark Running will force a Dark reset, and will trap you into Big Rip with quantum challenge modifiers ${getQCForceDisp("run")}. You will produce <b>Glyphic Mass</b> based on resources which nerf things, and choosing a glyph to earn will exit a Dark Run.`,
   );
   tmp.el.dark_run_rounds.setTxt(
     GLYPH_SEL.length
       ? "Next Round"
       : dra
-      ? "Rounds left: " + player.dark.run.round
-      : "Rounds: " + player.dark.run.rounds
+        ? "Rounds left: " + player.dark.run.round
+        : "Rounds: " + player.dark.run.rounds,
   );
   tmp.el.mg_max.setTxt("Max: " + ["OFF", "ON"][player.dark.run.gmode]);
   tmp.el.mg_max_gain.setTxt(
-    player.dark.run.gmode ? "∞" : format(player.dark.run.gamount, 0)
+    player.dark.run.gmode ? "∞" : format(player.dark.run.gamount, 0),
   );
   for (let x = 0; x < MASS_GLYPHS_LEN; x++) {
     let cost =
@@ -454,22 +435,22 @@ function updateDarkRunHTML() {
               gum && dtmp.mg_passive[x]
                 ? dtmp.mg_passive[x]
                 : player.dark.run.glyphs[x],
-              0
+              0,
             ) +
             (dra
               ? " (+" + format(tmp.dark.mass_glyph_gain[x], 0) + ")"
               : gum
-              ? " / " + format(cost[x], 0)
-              : dtmp.mg_passive[x] > 0
-              ? " [" + format(dtmp.mg_passive[x], 0) + "]"
-              : "")
-        : ""
+                ? " / " + format(cost[x], 0)
+                : dtmp.mg_passive[x] > 0
+                  ? " [" + format(dtmp.mg_passive[x], 0) + "]"
+                  : "")
+        : "",
     );
     tmp.el["mass_glyph_tooltip" + x].setTooltip(
       "<h3>" +
         DARK_RUN.mass_glyph_name[x] +
         "</h3><br class='line'>" +
-        DARK_RUN.mass_glyph_effDesc[x](tmp.dark.mass_glyph_eff[x])
+        DARK_RUN.mass_glyph_effDesc[x](tmp.dark.mass_glyph_eff[x]),
     );
   }
 
@@ -513,8 +494,8 @@ function updateDarkRunHTML() {
         "<span class='green'>Currently: " +
         u.effDesc(tmp.glyph_upg_eff[gum]) +
         "</span>";
-    if (ua < max && pin != gum)
-      msg += `<br><br><span class='yellow'>[ Click to pin ]</span>`;
+    if (ua < max)
+      msg += `<br><br><span class='yellow'>[ Click to ${player.dark.run.pin_upg == gum ? "unpin" : "pin"} ]</span>`;
   }
   tmp.el.glyph_upg_msg.setHTML(msg);
 
@@ -536,17 +517,14 @@ function updateDarkRunHTML() {
 
   tmp.el.FSS_eff2.setHTML(
     player.dark.matters.final.gt(0)
-      ? `Thanks to FSS, your glyphic mass gain is boosted by x${format(
-          tmp.matters.FSS_eff[1],
-          2
-        )}`
-      : ""
+      ? `Thanks to FSS, your glyphic mass gain is boosted by x${format(tmp.matters.FSS_eff[1], 2)}`
+      : "",
   );
 
   tmp.el.glyphSel.setHTML(
     (dtmp.glyph_sel_max > 1
       ? `Thanks to Evolutions, you can select up to ${dtmp.glyph_sel_max} glyphs.`
-      : "") + (EVO.amt >= 2 ? `<br>Also, upgrades spend 50% cost.` : "")
+      : "") + (OURO.evo >= 2 ? `<br>Also, upgrades spend 50% cost.` : ""),
   );
 }
 
@@ -558,7 +536,7 @@ function updateDarkRunTemp() {
   if (tmp.inf_unl) w /= theoremEff("time", 3);
   dtmp.glyph_weak = w;
 
-  dtmp.glyph_sel_max = 1 + EVO.amt;
+  dtmp.glyph_sel_max = 1 + OURO.evo;
   dtmp.glyph_mult = E(dtmp.rayEff.glyph || 1).mul(appleEffect("glyph"));
   if (hasPrestige(2, 5))
     dtmp.glyph_mult = dtmp.glyph_mult.mul(prestigeEff(2, 5, 1));
