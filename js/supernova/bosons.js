@@ -445,7 +445,7 @@ const BOSONS = {
       {
         desc: "Supernova requirement is decreased based on Gluon.",
         get unl() {
-          return EVO.amt < 2;
+          return EVO.amt < 4;
         },
         cost(x) {
           return E(10).pow(x.pow(1.25)).mul(1e5);

@@ -700,28 +700,34 @@ function updateFermionsHTML() {
     for (let x = 0; x < FERMIONS.types[i].length; x++) {
       let f = FERMIONS.types[i][x];
       let unl = x < unls && (!f.unl || f.unl());
+      let disabled = !unl && x < unls;
       let id = `f${FERMIONS.names[i]}${x}`;
       let fm = f.isMass ? formatMass : format;
 
-      tmp.el[id + "_div"].setDisplay(unl);
+      tmp.el[id + "_div"].setDisplay(unl || disabled);
 
-      if (unl) {
+      if (unl || disabled) {
         let active = FERMIONS.onActive(i + "" + x);
         tmp.el[id + "_div"].setClasses({
           fermion_btn: true,
           [FERMIONS.names[i]]: true,
           chosen: active,
+          disabled_chal: disabled,
         });
         tmp.el[id + "_nextTier"].setTxt(
           fm(f.nextTierAt(player.supernova.fermions.tiers[i][x]))
         );
         tmp.el[id + "_tier_scale"].setTxt(getScalingName("fTier", i, x));
         tmp.el[id + "_tier"].setTxt(
-          format(player.supernova.fermions.tiers[i][x], 0) +
-            (Decimal.lt(tf.maxTier[i][x], EINF)
-              ? " / " + format(tf.maxTier[i][x], 0)
-              : "") +
-            (E(tf.bonuses[i][x]).gt(0) ? " + " + tf.bonuses[i][x].format() : "")
+          disabled
+            ? "???"
+            : format(player.supernova.fermions.tiers[i][x], 0) +
+                (Decimal.lt(tf.maxTier[i][x], EINF)
+                  ? " / " + format(tf.maxTier[i][x], 0)
+                  : "") +
+                (E(tf.bonuses[i][x]).gt(0)
+                  ? " + " + tf.bonuses[i][x].format()
+                  : "")
         );
         tmp.el[id + "_desc"].setHTML(f.desc(fermEff(i, x)));
 

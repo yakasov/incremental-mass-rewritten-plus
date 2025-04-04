@@ -58,6 +58,8 @@ const ATOM = {
   quarkGain() {
     let x = tmp.atom.gain;
     if (hasZodiacUpg("taurus", "u4")) x = x.max(player.evo.proto.star.div(10));
+    if (hasElement(291)) x = x.div(elemEffect(291));
+    if (hasElement(292)) x = x.div(elemEffect(292));
 
     if (x.lt(1)) return E(0);
     let evo = EVO.amt;

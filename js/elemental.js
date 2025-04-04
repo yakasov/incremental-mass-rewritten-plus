@@ -2384,8 +2384,8 @@ const ELEMENTS = {
       desc: `Stardust boosts Protostars at a reduced rate.`,
       cost: E(1e3),
       effect() {
-        if (!tmp.ouro.unl) return E(1);
-        let x = expMult(player.evo.proto.dust.add(1), 0.25).pow(2);
+        if (!OURO.unl) return E(1);
+        let x = expMult(player.evo.proto.dust.add(1), 0.4);
         return x;
       },
       effDesc(x) {
@@ -2396,8 +2396,8 @@ const ELEMENTS = {
       desc: `Wormhole affects Protostars slightly.`,
       cost: E(1e6),
       effect() {
-        if (!tmp.ouro.unl) return E(1);
-        let x = expMult(WORMHOLE.total().add(1), 0.5);
+        if (!OURO.unl) return E(1);
+        let x = expMult(WORMHOLE.total().add(1), 0.066);
         if (tmp.qu.rip.in && hasZodiacUpg("taurus", "u5"))
           x = x.pow(zodiacEff("taurus", "u5"));
         return x;

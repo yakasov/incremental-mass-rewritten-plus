@@ -14,11 +14,14 @@ function setupChalHTML() {
 
 function updateChalHTML() {
   if (tmp.tab_name == "chal") {
+    let highestChallenge = Array.from({ length: CHALS.cols }, (_, i) => i + 1)
+      .filter((e) => CHALS[e].unl())
+      .slice(-1)[0];
     for (let x = 1; x <= CHALS.cols; x++) {
       let chal = CHALS[x];
       let unl = chal.unl ? chal.unl() : true;
-      let disabled = chal.disabled ? chal.disabled() : false;
-      tmp.el["chal_div_" + x].setDisplay(unl);
+      let disabled = !unl && x < highestChallenge;
+      tmp.el["chal_div_" + x].setDisplay(unl || (!unl && disabled));
       tmp.el["chal_btn_" + x].setClasses({
         img_chal: true,
         ch: tmp.chal.ch == x,
@@ -26,7 +29,7 @@ function updateChalHTML() {
         comp: player.chal.comps[x].gte(tmp.chal.max[x]),
         disabled_chal: disabled,
       });
-      if (unl)
+      if (unl || (!unl && disabled))
         tmp.el["chal_comp_" + x].setHTML(
           disabled
             ? `<span style="color: grey; font-style: italic">Disabled!</span>`
@@ -472,9 +475,6 @@ const CHALS = {
     unl() {
       return player.mass.gte(1e125) || player.chal.unl || player.atom.unl;
     },
-    disabled() {
-      return EVO.amt >= 2;
-    },
     title: "Instant Scale",
     desc: "Super Ranks and Mass Upgrades start at 25 and Super Tickspeed starts at 50.",
     reward: () =>
@@ -510,9 +510,6 @@ const CHALS = {
     unl() {
       return player.chal.comps[1].gte(1) || player.atom.unl;
     },
-    disabled() {
-      return EVO.amt >= 2;
-    },
     title: "Anti-Tickspeed",
     desc: "You cannot buy Tickspeed.",
     reward: `+9% Tickspeed Power per completion.`,
@@ -539,9 +536,6 @@ const CHALS = {
   3: {
     unl() {
       return player.chal.comps[2].gte(1) || player.atom.unl;
-    },
-    disabled() {
-      return EVO.amt >= 2;
     },
     title: "Melted Mass",
     desc: "Mass gain softcap starts 150 OoMs earlier, and is stronger.",
@@ -570,9 +564,6 @@ const CHALS = {
   4: {
     unl() {
       return player.chal.comps[3].gte(1) || player.atom.unl;
-    },
-    disabled() {
-      return EVO.amt >= 2;
     },
     title: "Weakened Rage",
     get desc() {
@@ -756,7 +747,7 @@ const CHALS = {
     desc: "You cannot assign quarks. Additionally, mass gains exponent is raised to 0.9th power.",
     reward: () =>
       EVO.amt >= 3
-        ? `Gain +10% more protostars per completion.`
+        ? `Gain +15% more protostars per completion.`
         : `Improve Magnesium-12.`,
     max: E(100),
     inc: E("e500"),
@@ -764,7 +755,7 @@ const CHALS = {
     start: E("e9.9e4").mul(1.5e56),
     effect(x) {
       if (EVO.amt >= 3)
-        return Decimal.pow(1.1, expMult(x, 0.5)).softcap(1e9, 3, "log");
+        return Decimal.pow(1.15, expMult(x, 0.5)).softcap(1e9, 3, "log");
 
       let ret = x
         .root(hasTree("chal4a") ? 3.5 : 4)
@@ -793,7 +784,7 @@ const CHALS = {
     desc: "You are trapped in Mass Dilation and challenges 1-8.",
     reward: () =>
       (EVO.amt >= 3
-        ? `Gain +10% more protostars per completion.`
+        ? `Gain +15% more protostars per completion.`
         : `The exponent of the RP formula is multiplied by completions (doesn't apply in this challenge).`) +
       `<br><span class="gold">On 1st completion, unlock Fermions!</span>`,
     max: E(100),
@@ -803,7 +794,7 @@ const CHALS = {
     effect(x) {
       let ret =
         EVO.amt >= 3
-          ? Decimal.pow(1.1, expMult(x, 0.5)).softcap(1e9, 3, "log")
+          ? Decimal.pow(1.15, expMult(x, 0.5)).softcap(1e9, 3, "log")
           : x
               .root(1.75)
               .mul(EVO.amt >= 2 ? 0.1 : 0.01)
@@ -826,7 +817,10 @@ const CHALS = {
     pow: E(2),
     start: uni("e3.8e7"),
     effect(x) {
-      let ret = x.root(2).div(10).add(1);
+      let ret = x
+        .root(2)
+        .div(EVO.amt >= 3 ? 10 / 3 : 10)
+        .add(1);
       return ret;
     },
     effDesc(x) {
