@@ -6,10 +6,13 @@ Personal tweaks to IMR.
 
 ### v0.7.1.6-plus 11
 
+- Element 294 boosts Protostar gain
 - Challenge 4 effect softcapped slightly earlier
 - Challenges 1-4 properly disabled in Evo 2+
 - Boosted Quark gain in Evo 2
 - Stronger building effect is slightly weaker
+- Unobtainable elements (due to the specific resource not being unlocked) are not shown in the 'Next Elements' display
+- Fix challenge chosen not being reset on Quantum reset
 - Formatting run
 
 ### v0.7.1.6-plus 10

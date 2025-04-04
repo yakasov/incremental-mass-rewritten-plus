@@ -14,6 +14,7 @@ const ATOM = {
       if (hasElement(123)) x = x.mul(elemEffect(123));
       if (hasElement(291)) x = x.mul(elemEffect(291));
       if (hasElement(292)) x = x.mul(elemEffect(292));
+      if (hasElement(294)) x = x.pow(1.3);
       if (hasElement(297)) x = x.mul(elemEffect(297));
       if (hasElement(303)) x = x.mul(elemEffect(303));
       if (tmp.sn.boson) x = x.mul(tmp.sn.boson.upgs.gluon[4].effect);
@@ -60,6 +61,7 @@ const ATOM = {
     if (hasZodiacUpg("taurus", "u4")) x = x.max(player.evo.proto.star.div(10));
     if (hasElement(291)) x = x.div(elemEffect(291));
     if (hasElement(292)) x = x.div(elemEffect(292));
+    if (hasElement(294)) x = x.pow(1 / 1.3);
 
     if (x.lt(1)) return E(0);
     let evo = EVO.amt;

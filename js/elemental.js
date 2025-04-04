@@ -2411,7 +2411,7 @@ const ELEMENTS = {
       cost: E(1e9),
     },
     {
-      desc: `Improve Tier 1 Nebulae. Raise Neutron Stars by ^1.5.`,
+      desc: `Improve Tier 1 Nebulae, boost Protostar gain and raise Neutron Stars by ^1.5.`,
       cost: E(1e12),
     },
     {
@@ -3185,6 +3185,9 @@ function calcNextElements() {
     let len = nextElm.length,
       type = getElementClass(i, layer),
       type_data = ELEM_TYPES[type];
+
+    if (RESOURCES_DIS[type] && !RESOURCES_DIS[type].unl()) continue;
+
     tmp.el["elem_next_div" + len].setDisplay(true);
     tmp.el["elem_next_btn" + len].setClasses({
       elements: true,

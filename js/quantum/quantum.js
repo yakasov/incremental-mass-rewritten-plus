@@ -72,6 +72,7 @@ const QUANTUM = {
       return;
     }
 
+    if (tmp.chal.ch < 13) tmp.chal.ch = 0;
     let c16 = tmp.c16.in;
 
     if (!hasElement(47, 1)) player.supernova.times = E(0);
