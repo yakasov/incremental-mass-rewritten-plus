@@ -16,8 +16,11 @@ Personal tweaks to IMR.
 - Background now changes when in Big Rip
 - Some de-obfuscating(?) of some code, just to make it easier to read and understand
 
-- *To fix at some point: Charger notification showing when Charger not unlocked*
-- *To also fix: Boom not working in Snake*
+<br>
+
+*To fix at some point:* 
+- *Charger notification showing when Charger not unlocked*
+- *Boom not working in Snake*
 
 ### v0.7.1.6-plus 11
 
