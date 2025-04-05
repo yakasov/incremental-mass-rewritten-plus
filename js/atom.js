@@ -23,6 +23,8 @@ const ATOM = {
 
       if (hasElement(169)) x = x.pow(1.05);
       if (tmp.inf_unl) x = x.pow(theoremEff("atom", 5));
+      if (player.qu.rip.active) x = x.pow(1.5);
+      if (hasZodiacUpg("taurus", "u7")) x = x.mul(zodiacEff("taurus", "u7"));
       return x;
     } else if (evo >= 2) {
       if (player.evo.wh.fabric.lt(300)) return E(0);

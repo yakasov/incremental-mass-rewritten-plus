@@ -307,7 +307,7 @@ const TOOLTIP_RES = {
     desc() {
       let h = `
             Your best ${
-              EVO.amt >= 2 ? "Wormhole" : "Black Hole Mass"
+              EVO.amt >= 3 ? "Fabric" : EVO.amt >= 2 ? "Wormhole" : "Black Hole Mass"
             } in the 16th Challenge is <b>${formatMass(
         player.dark.c16.bestBH
       )}</b>.

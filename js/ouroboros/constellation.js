@@ -68,7 +68,7 @@ const CONSTELLATION = {
           branch: ["u2"],
           pos: [480, 190],
           desc: `Gain 25% more Strawberries per Evolution.`,
-          cost: E(2e5),
+          cost: E(2.5e4),
           perm: true,
           effect: () => Decimal.pow(1.25, player.evo.times),
           effDesc: (x) => formatMult(x),
@@ -144,7 +144,15 @@ const CONSTELLATION = {
             Math.max(10 - player.ouro.apple.max(1).log10().toNumber() / 10, 6),
           effDesc: (x) => formatMult(10) + " -> " + formatMult(x),
         },
-      },
+        u7: {
+          branch: ["u2"],
+          pos: [180, 250],
+          desc: "Boost Protostar gain based on Stardust.",
+          cost: E(2.5e4),
+          effect: () => player.evo.proto.dust.pow(1/1.8),
+          effDesc: (x) => formatMult(x),
+        },
+      }, 
     },
     gemini: {
       name: "Gemini",
@@ -188,18 +196,19 @@ const CONSTELLATION = {
     },
   },
 
-  buy(zi, ui) {
-    if (!tmp.evo.zodiac.can[zi + "-" + ui]) return;
-    player.evo.const[zi].amount = player.evo.const[zi].amount.sub(
-      this.zodiac[zi].upgs[ui].cost
-    );
-    player.evo.const.upg[zi + "-" + ui] = true;
-    this.zodiacTemp(zi);
+  buy(zodiacSign, upgradeId) {
+    if (!tmp.evo.zodiac.can[zodiacSign + "-" + upgradeId]) return;
+    player.evo.const[zodiacSign].amount = player.evo.const[
+      zodiacSign
+    ].amount.sub(this.zodiac[zodiacSign].upgs[upgradeId].cost);
+    player.evo.const.upg[zodiacSign + "-" + upgradeId] = true;
+    this.zodiacTemp(zodiacSign);
   },
-  upgGen(zi = zodiac_tab) {
+  upgGen(zodiacSign = zodiac_tab) {
     if (tmp.evo.zodiac.perks < 1) return;
-    if (player.evo.const[zi].level == tmp.evo.zodiac[zi].cap) return;
-    player.evo.const[zi].level++;
+    if (player.evo.const[zodiacSign].level == tmp.evo.zodiac[zodiacSign].cap)
+      return;
+    player.evo.const[zodiacSign].level++;
     this.temp();
   },
 
@@ -207,16 +216,16 @@ const CONSTELLATION = {
     let h1 = "",
       h2 = "";
 
-    for (let [zi, z] of Object.entries(this.zodiac)) {
+    for (let [zodiacSign, zodiacProperties] of Object.entries(this.zodiac)) {
       let h11 = "";
-      for (let [ui, u] of Object.entries(z.upgs)) {
-        let url = `images/evolution/c_upgs/${zi}-${ui}.png`;
-        h11 += `<div class='tooltip' id='c_${zi}_upg_${ui}'
-                onclick="CONSTELLATION.buy('${zi}','${ui}')"
-                style='top: ${u.pos[1]}px; left: ${u.pos[0]}px; background: url("${url}")'></div>`;
+      for (let [upgradeId, upgrade] of Object.entries(zodiacProperties.upgs)) {
+        let url = `images/evolution/c_upgs/${zodiacSign}-${upgradeId}.png`;
+        h11 += `<div class='tooltip' id='c_${zodiacSign}_upg_${upgradeId}'
+                onclick="CONSTELLATION.buy('${zodiacSign}','${upgradeId}')"
+                style='top: ${upgrade.pos[1]}px; left: ${upgrade.pos[0]}px; background: url("${url}")'></div>`;
       }
-      h1 += `<div id='c_${zi}_div'>${h11}</div>`;
-      h2 += `<button class="btn" id="c_${zi}_btn" style="display: none" onclick="zodiac_tab = '${zi}'">${z.name}</button>`;
+      h1 += `<div id='c_${zodiacSign}_div'>${h11}</div>`;
+      h2 += `<button class="btn" id="c_${zodiacSign}_btn" style="display: none" onclick="zodiac_tab = '${zodiacSign}'">${zodiacProperties.name}</button>`;
     }
 
     new Element("const_table").setHTML(h1);
@@ -233,70 +242,76 @@ const CONSTELLATION = {
     return x;
   },
 
-  zodiacTemp(zi) {
-    let ct = tmp.evo.zodiac,
-      cu = player.evo.const.upg;
-    let zt = tmp.evo.zodiac[zi],
-      zp = player.evo.const[zi];
-    let zua = 0;
+  zodiacTemp(zodiacSign) {
+    let zodiac = tmp.evo.zodiac,
+      constellationUpgrades = player.evo.const.upg;
+    let zodiacTemp = tmp.evo.zodiac[zodiacSign],
+      zodiacPlayerValues = player.evo.const[zodiacSign];
+    let zodiacUpgradeAmount = 0;
 
-    const upgs = this.zodiac[zi].upgs;
+    const upgs = this.zodiac[zodiacSign].upgs;
     let ap = 0;
 
-    for (let [ui, u] of Object.entries(upgs)) {
-      let unl = !u.unl || u.unl(),
-        bought = cu[zi + "-" + ui];
-      if (unl && u.branch)
-        for (let b of u.branch) if (!cu[zi + "-" + b]) unl = false;
+    for (let [upgradeId, upgrade] of Object.entries(upgs)) {
+      let unl = !upgrade.unl || upgrade.unl(),
+        bought = constellationUpgrades[zodiacSign + "-" + upgradeId];
+      if (unl && upgrade.branch)
+        for (let branch of upgrade.branch)
+          if (!constellationUpgrades[zodiacSign + "-" + branch]) unl = false;
 
-      let can = unl && !bought && zp.amount.gte(u.cost);
-      ct.unl[zi + "-" + ui] = unl;
-      ct.can[zi + "-" + ui] = can;
+      let can = unl && !bought && zodiacPlayerValues.amount.gte(upgrade.cost);
+      zodiac.unl[zodiacSign + "-" + upgradeId] = unl;
+      zodiac.can[zodiacSign + "-" + upgradeId] = can;
       if (bought) {
-        if (u.effect) tmp.evo.zodiac.eff[zi + "-" + ui] = u.effect();
-        if (u.oct) ap += u.oct;
-        if (u.perm) ct.keep[zi + "-" + ui] = 1;
-        zua++;
+        if (upgrade.effect)
+          tmp.evo.zodiac.eff[zodiacSign + "-" + upgradeId] = upgrade.effect();
+        if (upgrade.oct) ap += upgrade.oct;
+        if (upgrade.perm) zodiac.keep[zodiacSign + "-" + upgradeId] = 1;
+        zodiacUpgradeAmount++;
       }
     }
 
-    zt.has = zua;
+    zodiacTemp.has = zodiacUpgradeAmount;
     return ap;
   },
 
   temp() {
-    const ct = tmp.evo.zodiac,
-      tr = player.evo.const.tier;
+    const zodiac = tmp.evo.zodiac,
+      constellationTier = player.evo.const.tier;
     let mult = (tmp.evo.global_zodiac_mult = this.globalMult());
 
-    if (ct.can == undefined) {
-      ct.can = {};
-      ct.unl = {};
-      ct.keep = {};
+    if (zodiac.can == undefined) {
+      zodiac.can = {};
+      zodiac.unl = {};
+      zodiac.keep = {};
     }
 
     let ap = 0,
       lp = 0,
       cp = 0;
-    for (let [zi, z] of Object.entries(this.zodiac)) {
-      let zt = (ct[zi] = {}),
-        zp = player.evo.const[zi];
-      let lvl = zp.level;
+    for (let [zodiacSign, zodiacProperties] of Object.entries(this.zodiac)) {
+      let zodiacTemp = (zodiac[zodiacSign] = {}),
+        zodiacPlayerValues = player.evo.const[zodiacSign];
+      let zodiacLevel = zodiacPlayerValues.level;
 
-      zt.gain = z.gain(Decimal.pow(3, lvl).mul(mult));
-      if (tr >= z.tier) cp += zt.cap = z.cap + this.zodiacTemp(zi);
-      lp += lvl;
+      zodiacTemp.gain = zodiacProperties.gain(
+        Decimal.pow(3, zodiacLevel).mul(mult)
+      );
+      if (constellationTier >= zodiacProperties.tier)
+        cp += zodiacTemp.cap =
+          zodiacProperties.cap + this.zodiacTemp(zodiacSign);
+      lp += zodiacLevel;
     }
-    ct.perks = Math.max(0, Math.max(cp - 2, 0) + ap - lp);
+    zodiac.perks = Math.max(0, Math.max(cp - 2, 0) + ap - lp);
   },
 
   calc(dt) {
-    const ct = player.evo.const.tier;
-    for ([zi, z] of Object.entries(this.zodiac))
-      if (ct >= z.tier) {
-        player.evo.const[zi].amount = player.evo.const[zi].amount.add(
-          tmp.evo.zodiac[zi].gain.mul(dt)
-        );
+    const constellationTier = player.evo.const.tier;
+    for ([zodiacSign, zodiacProperties] of Object.entries(this.zodiac))
+      if (constellationTier >= zodiacProperties.tier) {
+        player.evo.const[zodiacSign].amount = player.evo.const[
+          zodiacSign
+        ].amount.add(tmp.evo.zodiac[zodiacSign].gain.mul(dt));
       }
     if (hasZodiacUpg("aries", "u3"))
       for (let l = 0; l < 2; l++) buyAllElements(l);

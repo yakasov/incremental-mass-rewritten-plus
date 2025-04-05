@@ -4,6 +4,21 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 12
+
+- Muonic Element 93 cost reduced
+- Added Taurus upgrade [u7] which boosts Protostar gain based on Stardust
+- Stardust gain from Starfruits increased by 5x
+- Aries upgrade [u4] cost decreased
+- C16 uses Fabric for Corrupted Shard gain in Evo 3+
+- Added a boost (^1.5) to Atoms in Big Rip in Evo 3+
+- Wormhole unlocks automatically increments for Evo 4 (so you don't have to reset for Atoms when they're already being automated)
+- Background now changes when in Big Rip
+- Some de-obfuscating(?) of some code, just to make it easier to read and understand
+
+- *To fix at some point: Charger notification showing when Charger not unlocked*
+- *To also fix: Boom not working in Snake*
+
 ### v0.7.1.6-plus 11
 
 - Element 294 boosts Protostar gain

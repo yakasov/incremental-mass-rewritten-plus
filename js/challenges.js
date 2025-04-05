@@ -216,6 +216,7 @@ const CHALS = {
   },
   getResource(x) {
     if (x < 5 || x > 8) return player.mass;
+    if (EVO.amt >= 3) return player.evo.wh.fabric;
     if (EVO.amt >= 2) return WORMHOLE.total();
     return player.bh.mass;
   },
@@ -929,7 +930,7 @@ const CHALS = {
         • Primordium particles are disabled.<br>
         • Pre-Quantum global speed is always set to /100.
 		<br class='line'>
-        You can earn Corrupted Shards based on your Black Hole Mass, when exiting the challenge${
+        You can earn Corrupted Shards based on your ${EVO.amt >= 3 ? "Fabric" : EVO.amt >= 2 ? "Wormhole" : "Black Hole Mass"} when exiting the challenge${
           EVO.amt >= 2
             ? ""
             : `with more than <b>${formatMass(

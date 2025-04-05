@@ -181,10 +181,10 @@ function corruptedShardGain() {
       dil = 3;
     if (hasElement(223) && EVO.amt >= 3) e -= 5;
     if (hasCharger(6)) e -= 5;
-    if (EVO.amt >= 4) (e *= 2), (dil = 2);
+    if (EVO.amt >= 3) (e *= 2), (dil = 2);
 
     x = expMult(
-      (hasElement(232) ? player.dark.c16.bestBH : WORMHOLE.total())
+      (EVO.amt >= 3 ? player.evo.wh.fabric: hasElement(232) ? player.dark.c16.bestBH : WORMHOLE.total())
         .add(1)
         .root(e),
       dil

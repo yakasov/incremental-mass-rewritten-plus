@@ -625,7 +625,7 @@ const MUONIC_ELEM = {
     {
       berry: true,
       desc: `Improve Protostar formula. Feeding an apple adds purify luck based on tier.`,
-      cost: E(2e11),
+      cost: E(5e10),
     },
     {
       berry: true,

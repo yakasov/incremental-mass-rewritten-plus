@@ -145,7 +145,7 @@ const WORMHOLE = {
     if (player.dark.unl) return 6;
     if (quUnl() || player.evo.cosmo.unl) return 5;
     if (tmp.sn.boson) return 4;
-    if (player.atom.unl) return 3;
+    if (player.atom.unl || hasElement(24)) return 3;
     return 2;
   },
   maxLength: 7,

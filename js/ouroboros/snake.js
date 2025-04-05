@@ -542,9 +542,9 @@ function feedSomething(obj, target, you) {
       break;
     case "starfruit":
       player.evo.proto.dust = player.evo.proto.dust.add(
-        tmp.evo.neb.dust_prod.mul(snake.accel * 5)
+        tmp.evo.neb.dust_prod.mul(snake.accel * 25)
       );
-      CONSTELLATION.calc(snake.accel * 5);
+      CONSTELLATION.calc(snake.accel * 25);
       snake.star = 2;
       break;
     case "berry":

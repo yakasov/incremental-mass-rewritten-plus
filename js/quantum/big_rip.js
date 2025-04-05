@@ -1,8 +1,12 @@
 const BIG_RIP = {
   rip() {
     if (tmp.dark.run) return;
-    if (player.qu.rip.active)
+    if (player.qu.rip.active) {
+      document.body.classList.remove("in_big_rip");
       player.qu.rip.amt = player.qu.rip.amt.add(tmp.qu.rip.gain);
+    } else {
+      document.body.classList.add("in_big_rip");
+    }
     player.qu.qc.active = false;
     player.qu.rip.first = true;
     player.qu.rip.active = !player.qu.rip.active;

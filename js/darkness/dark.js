@@ -300,7 +300,7 @@ function calcDark(dt) {
 
   if (tmp.c16.in)
     player.dark.c16.bestBH = player.dark.c16.bestBH.max(
-      EVO.amt >= 2 ? WORMHOLE.total() : player.bh.mass
+      EVO.amt >= 3 ? player.evo.wh.fabric : EVO.amt >= 2 ? WORMHOLE.total() : player.bh.mass
     );
   if (hasCharger(1) && tmp.bh.unl)
     player.bh.unstable = UNSTABLE_BH.getProduction(

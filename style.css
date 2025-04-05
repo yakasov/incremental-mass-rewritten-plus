@@ -343,6 +343,10 @@ button * {
   animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
+.in_big_rip {
+  background: repeating-linear-gradient(45deg, black, rgb(50 0 0) 6px)
+}
+
 @keyframes corrupted_text {
   0%,
   100% {
