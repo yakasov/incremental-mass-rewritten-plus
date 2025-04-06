@@ -4,6 +4,26 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 13
+
+- Slightly moved Taurus upgrade [u7] for better visuals
+- Taurus upgrade [o1] and Gemini upgrade [o1] are both permanent upon purchase
+- Keep Element 14 in Evo 4+ (down from 5+)
+- Quantize amount does not reset on Infinity in Evo 4+
+- Challenges subtab is hidden if no challenges are available
+- Challenges 13 - 15 do not show their 'completed/max' if automated
+- Subtab default logic improved to be set to the first available subtab
+- Fixed Charger 9 and 10 notifications showing when they were not yet unlocked
+- Fixed Big Rip background persisting through Darkness resets
+- Fixed tabs showing even when they have no valid subtabs
+
+<br>
+
+*TODO*
+- *Snake Boom*
+- *Inf reset on Evo 4 sometimes breaks Atom+Quark gain*
+- *Inf reset on Evo 4 only sometimes resets Constellation stuff*
+
 ### v0.7.1.6-plus 12
 
 - Muonic Element 93 cost reduced

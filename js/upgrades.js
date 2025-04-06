@@ -1230,6 +1230,7 @@ function updateUpgNotify() {
       i = parseInt(i);
       if (hasCharger(i)) continue;
       if (!canCharge(i)) continue;
+      if (i > 7 && !hasInfUpgrade(15)) continue;
       if (player.dark.c16.shard.lt(ch.cost)) continue;
       tmp.upg_notify = ["ch", i + 1];
       return;

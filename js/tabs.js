@@ -56,7 +56,18 @@ function chooseTab(x, stab = false) {
   if (!stab) tmp.tab = x;
   else tmp.stab[tmp.tab] = x;
 
-  tmp.stab[tmp.tab] ??= 0;
+  tmp.stab[tmp.tab] ??=
+    TABS[tmp.tab].stab
+      .map((e) =>
+        typeof e === "string"
+          ? true
+          : typeof e[2] === "function"
+          ? (typeof e[1] === "function" ? e[1]() : true) && e[2]()
+          : typeof e[1] === "function"
+          ? e[1]()
+          : false
+      )
+      .indexOf(true) ?? 0;
   if (player.options.nav_hide[2]) PINS.open_menu();
 
   updateTabTemp();
@@ -108,7 +119,11 @@ const TABS = [
       return player.chal.unl;
     },
     stab: [
-      ["chal", () => player.chal.unl],
+      [
+        "chal",
+        () =>
+          player.chal.unl && Object.values(CHALS).some((e) => e.unl && e.unl()),
+      ],
       [
         "qc",
         () => hasTree("unl3") || (EVO.amt == 4 && player.qu.times.gte(200)),
@@ -285,7 +300,19 @@ function updateTabsHTML() {
 
   for (let [x, tab] of Object.entries(TABS)) {
     if (s) {
-      tmp.el["tab" + x].setDisplay(!tab.unl || tab.unl());
+      tmp.el["tab" + x].setDisplay(
+        !tab.unl ||
+          (tab.unl() &&
+            TABS[x].stab.some((e) =>
+              typeof e === "string"
+                ? true
+                : typeof e[2] === "function"
+                ? (typeof e[1] === "function" ? e[1]() : true) && e[2]()
+                : typeof e[1] === "function"
+                ? e[1]()
+                : false
+            ))
+      );
       tmp.el["tab" + x].setClasses({
         btn_tab: true,
         [tab.style ?? "normal"]: true,
@@ -321,7 +348,7 @@ function updateTabsHTML() {
           }
         }
       }
-      tmp.el["stabs" + x].setDisplay(x == tmp.tab && st_unl > 1);
+      tmp.el["stabs" + x].setDisplay(x == tmp.tab && st_unl >= 1);
     }
   }
 

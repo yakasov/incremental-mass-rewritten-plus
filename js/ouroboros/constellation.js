@@ -115,6 +115,7 @@ const CONSTELLATION = {
           pos: [360, 260],
           desc: "+1 Gemini Cap.",
           cost: E(1e5),
+          perm: true,
         },
         u4: {
           branch: ["o1"],
@@ -146,7 +147,7 @@ const CONSTELLATION = {
         },
         u7: {
           branch: ["u2"],
-          pos: [180, 250],
+          pos: [180, 200],
           desc: "Boost Protostar gain based on Stardust.",
           cost: E(2.5e4),
           effect: () => player.evo.proto.dust.pow(1/1.8),
@@ -191,6 +192,7 @@ const CONSTELLATION = {
           desc: "+1 Zodiac cap.",
           cost: E(1e6),
           oct: 1,
+          perm: true,
         },
       },
     },
@@ -403,7 +405,7 @@ const CONSTELLATION = {
             u_el.setHTML(ct.can[zi + "-" + ui] ? `<h4 class='red'>!</h4>` : ``);
             u_el.setAttr(
               "tooltip-html",
-              u.desc + (h ? `<br class='line'>` : "") + h
+              `<b>${z.name} [${ui}]</b><br>` + u.desc + (h ? `<br class='line'>` : "") + h
             );
 
             if (u.branch)

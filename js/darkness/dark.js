@@ -57,6 +57,7 @@ const DARK = {
   },
   doReset(force = false) {
     if (EVO.amt >= 5) resetEvolutionSave("dark");
+    document.body.classList.remove("in_big_rip");
 
     let qu = player.qu;
     let quSave = getQUSave();

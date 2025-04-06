@@ -473,8 +473,7 @@ function getEvo2Ch8Boost() {
 function keepElementsOnOuroboric(ek = []) {
   let e = EVO.amt;
   if (e >= 3) ek.push(285);
-  if (e >= 4) ek.push(24, 262, 293, 304);
-  if (e >= 5) ek.push(14);
+  if (e >= 4) ek.push(14, 24, 262, 293, 304);
   return ek;
 }
 

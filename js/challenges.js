@@ -34,7 +34,7 @@ function updateChalHTML() {
           disabled
             ? `<span style="color: grey; font-style: italic">Disabled!</span>`
             : format(player.chal.comps[x], 0) +
-                (tmp.chal.max[x].gte(EINF)
+                (tmp.chal.max[x].gte(EINF) || x >= 13 && x <= 15 && hasInfUpgrade(13)
                   ? ""
                   : " / " + format(tmp.chal.max[x], 0))
         );

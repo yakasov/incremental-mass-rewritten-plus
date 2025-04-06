@@ -87,6 +87,7 @@ const INF = {
   doReset() {
     ykCoreTick = 0;
     player.mass = E(0);
+    document.body.classList.remove("in_big_rip");
 
     // QoL
     let iu11 = hasInfUpgrade(11),
@@ -236,7 +237,7 @@ const INF = {
     let qu = player.qu;
     let quSave = getQUSave();
 
-    qu.times = E(10);
+    if (EVO.amt < 4) qu.times = E(10);
     qu.points = E(0);
     qu.bp = E(0);
     qu.chroma = [E(0), E(0), E(0)];
