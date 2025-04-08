@@ -515,9 +515,19 @@ function resetEvolutionSave(order) {
   if (order == "ouro" || inf) {
     if (EVO.amt >= 4) CONSTELLATION.temp();
     player.evo.wh.origin = 0;
+    let tier = player.evo.const.tier;
     player.evo.const = deepUndefinedAndDecimal(
-      { upg: tmp.evo.zodiac.keep ?? {} },
+      {
+        upg: hasInfUpgrade(16)
+          ? player.evo.const.upg
+          : tmp.evo.zodiac.keep ?? {},
+        aries: { level: player.evo.const.aries.level },
+        gemini: { level: player.evo.const.gemini.level },
+        taurus: { level: player.evo.const.taurus.level },
+        tier: player.evo.const.tier,
+      },
       s.const
     );
+    //player.evo.const.tier = tier;
   }
 }

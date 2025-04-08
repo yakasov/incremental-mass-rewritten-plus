@@ -34,7 +34,7 @@ const ATOM = {
         .pow(1 / 1.9);
       if (!tmp.c16.in) x = E(2).pow(x).mul(5);
     } else {
-      x = player.bh.mass.div(hasUpgrade("br", 1) ? 1.5e156 ** 0.5 : 1.5e156);
+      x = player.bh.mass.div(hasUpgrade("br", 1) ? 1e160 ** 0.5 : 1e160);
       if (x.lt(1)) return E(0);
       x = x.root(5);
     }
@@ -84,7 +84,7 @@ const ATOM = {
 
       x = expMult(x.overflow(s, hasElement(299) ? 2 / 3 : 0.5).sub(1), k);
       x = E(1.01).pow(x);
-    } else if (hasElement(1)) x = E(1.25).pow(x.max(1).log10());
+    } else if (hasElement(1)) x = E(1.275).pow(x.max(1).log10());
     else
       x = x
         .log10()

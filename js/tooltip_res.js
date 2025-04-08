@@ -88,7 +88,7 @@ const TOOLTIP_RES = {
       let r =
         EVO.amt >= 2
           ? `<b>${format(300, 0)}</b> Fabric`
-          : `<b>${formatMass(uni(1e100))}</b> of black hole`;
+          : `<b>${formatMass(1e160)}</b> of black hole`;
 
       return `<i>Reach over ${r} to reset all previous features to gain Atoms & Quarks.</i>`;
     },
@@ -173,20 +173,20 @@ const TOOLTIP_RES = {
     full: "Supernova",
     desc() {
       let h = `
-            You became ${getScalingName(
+            You have imploded into ${getScalingName(
               "supernova"
-            )}Supernova <b>${player.supernova.times.format(0)}</b>  times
+            )}Supernovas<b> ${player.supernova.times.format(0)}</b> times
             <br class='line'>
             You have <b>${player.stars.points.format(
               0
             )} ${player.stars.points.formatGain(
         tmp.stars.gain.mul(tmp.qu.speed)
-      )}</b> Collapsed Star.<br>
+      )}</b> Collapsed Stars.<br>
             You have <b>${player.supernova.stars.format(
               0
             )} ${player.supernova.stars.formatGain(
         tmp.sn.star_gain.mul(tmp.qu.speed)
-      )}</b> Neutron Star.
+      )}</b> Neutron Stars.
             `;
 
       if (!tmp.sn.gen)
@@ -307,7 +307,11 @@ const TOOLTIP_RES = {
     desc() {
       let h = `
             Your best ${
-              EVO.amt >= 3 ? "Fabric" : EVO.amt >= 2 ? "Wormhole" : "Black Hole Mass"
+              EVO.amt >= 3
+                ? "Fabric"
+                : EVO.amt >= 2
+                ? "Wormhole"
+                : "Black Hole Mass"
             } in the 16th Challenge is <b>${formatMass(
         player.dark.c16.bestBH
       )}</b>.

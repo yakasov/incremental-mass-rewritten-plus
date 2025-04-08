@@ -4,6 +4,33 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 14
+
+- Rage upgrades 1x4, 1x5, 2x1 and 2x2 costs increased
+- Black Hole upgrade 1x3 cost decreased
+- Black Hole upgrades 2x4 and 2x5 costs increased
+- Atom upgrades 2x4 and 2x5 costs decreased
+- Challenges 1 - 4 goals scale faster
+- Atom reset requirement slightly increased
+- Elements 1 and 6 effects boosted
+- Elements 5, 6, 13, 58, 59 and 60 costs decreased
+- Elements 19, 20, 21, 23, 24, 27, 29, 36, 40, 41, 42 and 50 increased
+- Star 1 cost increased (to match Element 50)
+- Supernova tree upgrade [chal3] requirement decreased
+- Supernova tree upgrades [sn1], [sn2] and [sn3] effects boosted
+- Microwave wave 'BH-Condenser Boost' effect reduced
+- Dark Matter gain increased in Evo 0
+- Charger 6 cost decreased in Evo 4
+- 'Break Infinity' Infinity upgrade keeps Constellation upgrades in Evo 4+
+- Keep Constellation tiers and perks on Infinity reset
+- Notifications update every tick rather than once per second
+- Pending Challenge completion tiers are only shown if [qol6] has not been bought
+- Improved Supernova scene CSS
+- Simplified Supernova reset logic, so any reset will give gains (eg entering a Fermion whilst you have Supernova gain pending)
+- Fixed Element Available notification showing when Elements were not yet unlocked
+- Fixed a weird extra line on the Radiation unlock image
+- Removed the ability to meet Supernova tree requirements on double-click (it was buggy and not fully implemented, and ultimately a little confusing as to what might be happening)
+
 ### v0.7.1.6-plus 13
 
 - Slightly moved Taurus upgrade [u7] for better visuals
@@ -12,6 +39,7 @@ Personal tweaks to IMR.
 - Quantize amount does not reset on Infinity in Evo 4+
 - Challenges subtab is hidden if no challenges are available
 - Challenges 13 - 15 do not show their 'completed/max' if automated
+- Constellation upgrades show their IDs
 - Subtab default logic improved to be set to the first available subtab
 - Fixed Charger 9 and 10 notifications showing when they were not yet unlocked
 - Fixed Big Rip background persisting through Darkness resets
@@ -19,10 +47,12 @@ Personal tweaks to IMR.
 
 <br>
 
-*TODO*
-- *Snake Boom*
-- *Inf reset on Evo 4 sometimes breaks Atom+Quark gain*
-- *Inf reset on Evo 4 only sometimes resets Constellation stuff*
+_TODO_
+
+- _Snake Boom_
+- _Late Evo 4 Infinity scaling is completely busted_
+- _Inf reset on Evo 4 sometimes breaks Atom+Quark gain_
+- _Inf reset on Evo 4 only sometimes resets Constellation stuff_
 
 ### v0.7.1.6-plus 12
 
@@ -38,9 +68,10 @@ Personal tweaks to IMR.
 
 <br>
 
-*To fix at some point:* 
-- *Charger notification showing when Charger not unlocked*
-- *Boom not working in Snake*
+_To fix at some point:_
+
+- _Charger notification showing when Charger not unlocked_
+- _Boom not working in Snake_
 
 ### v0.7.1.6-plus 11
 

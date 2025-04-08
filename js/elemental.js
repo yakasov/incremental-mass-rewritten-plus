@@ -350,11 +350,11 @@ const ELEMENTS = {
     },
     {
       desc: `The 7th challenge's effect is twice as effective.`,
-      cost: E(1e18),
+      cost: E(1e17),
     },
     {
       desc: `Gain 1% more quarks for each challenge completion.`,
-      cost: E(5e18),
+      cost: E(2e18),
       effect() {
         let x;
         if (hasElement(276)) {
@@ -369,7 +369,7 @@ const ELEMENTS = {
             x = x.add(player.chal.comps[i].mul(i > 4 ? 2 : 1));
           if (hasElement(7)) x = x.mul(elemEffect(7));
           if (hasElement(87)) x = E(1.01).pow(x).root(3);
-          else x = x.div(100).add(1).max(1);
+          else x = x.div(25).add(1).max(1);
         }
         return x;
       },
@@ -403,15 +403,15 @@ const ELEMENTS = {
     },
     {
       desc: `Nitrogen's multiplier is squared.`,
-      cost: E(1e27),
+      cost: E(1e26),
     },
     {
       desc: `Power's gain from each particle formula is better.`,
-      cost: E(1e29),
+      cost: E(1e27),
     },
     {
-      desc: `For every c7 completion, increase c5 and c6 cap by 2.`,
-      cost: E(2.5e30),
+      desc: `For every C7 completion, increase C5 and C6 cap by 2.`,
+      cost: E(1e30),
       effect() {
         let x = player.chal.comps[7].mul(2);
         if (hasElement(79)) x = x.mul(tmp.qu.chroma_eff[2]);
@@ -468,15 +468,15 @@ const ELEMENTS = {
     },
     {
       desc: `2nd Neutron's effect is better.`,
-      cost: E(1e50),
+      cost: E(1e52),
     },
     {
       desc: `Increase C7 cap by 50.`,
-      cost: E(1e53),
+      cost: E(1e55),
     },
     {
       desc: `Unlock Mass Dilation.`,
-      cost: E(1e56),
+      cost: E(1e58),
     },
     {
       desc: `Dilated mass gain is increased by tickspeed at a reduced rate.`,
@@ -491,11 +491,11 @@ const ELEMENTS = {
     },
     {
       desc: `Atomic power's effects are better.`,
-      cost: E(1e65),
+      cost: E(1e67),
     },
     {
       desc: `Passively gain 100% of the atoms you would get from resetting each second. Atomic Power boost Relativistic particles gain at a reduced rate.`,
-      cost: E(1e75),
+      cost: E(1e78),
       effect() {
         if (!tmp.atom.unl) return E(1);
         let x = hasPrestige(0, 40)
@@ -526,7 +526,7 @@ const ELEMENTS = {
     },
     {
       desc: `Hyper/Ultra Rank & Tickspeed scales 25% weaker.`,
-      cost: E(1e90),
+      cost: E(1e92),
     },
     {
       desc: `Mass gain is raised to 1.5 while in mass dilation.`,
@@ -534,7 +534,7 @@ const ELEMENTS = {
     },
     {
       desc: `Proton power's effects are better.`,
-      cost: E(1e100),
+      cost: E(1e105),
     },
     {
       desc: `Electron power's effects are better. Passively gain 10% of each particle you would assign quarks.`,
@@ -580,7 +580,7 @@ const ELEMENTS = {
     },
     {
       desc: `Unlock Stars.`,
-      cost: E(1e225),
+      cost: E(1e235),
     },
     {
       desc: `Super Tier scales weaker based on Tetr.`,
@@ -612,7 +612,7 @@ const ELEMENTS = {
     },
     {
       desc: `Collapsed star boosts dilated mass gain.`,
-      cost: E(1e303),
+      cost: E("e320"),
       effect() {
         if (!tmp.star_unl) return [E(1), E(1)];
         let x = player.stars.points.add(1).pow(0.5);
@@ -629,11 +629,11 @@ const ELEMENTS = {
     },
     {
       desc: `Add 50 more C7 maximum completions.`,
-      cost: E("e315"),
+      cost: E("e325"),
     },
     {
       desc: `Collapsed stars boost quark gain.`,
-      cost: E("e325"),
+      cost: E("e330"),
       effect() {
         if (!tmp.star_unl) return E(1);
         let x = player.stars.points.add(1).pow(1 / 3);
@@ -699,7 +699,7 @@ const ELEMENTS = {
     },
     {
       desc: `Star generator is now ^1.05 stronger.`,
-      cost: E("e1750"),
+      cost: E("e2000"),
     },
     {
       desc: `Mass gain softcap^2 is 10% weaker.`,
@@ -761,7 +761,7 @@ const ELEMENTS = {
     },
     {
       desc: `Ultra Rank & Tickspeed scale weaker based on Tier.`,
-      cost: E("e5.7e4"),
+      cost: E("e5.4e4"),
       effect() {
         let x = E(0.975).pow(player.ranks.tier.pow(0.5));
         return x;
@@ -776,11 +776,11 @@ const ELEMENTS = {
           ? `Gain 10x more Apples.`
           : `The power from the mass of the BH formula is increased to 0.45.`;
       },
-      cost: E("e6.6e4"),
+      cost: E("e6.45e4"),
     },
     {
       desc: `Add 100 more C7 maximum completions.`,
-      cost: E("e7.7e4"),
+      cost: E("e7.575e4"),
     },
     {
       desc: `Multiply Particle Powers gain by ^0.5 of its Particle's amount after softcap.`,

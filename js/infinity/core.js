@@ -187,8 +187,8 @@ const CORE = {
         return evo1 ? x : x.div(1e4);
       },
       (s) => s.add(1).log10().root(2).div(10).add(1),
-      (s) => s.add(1).log10().root(2).div(10).add(1),
-      (s) => s.add(1).log10().add(1).root(4),
+      (s) => E(1),
+      (s) => E(1),
       (s) => E(0),
     ],
     effDesc: [
@@ -883,7 +883,6 @@ function updateCoreTemp() {
 var TS_visible = true;
 
 function updateOneSec() {
-  updateUpgNotify();
   if (hasElement(242)) changeCoreFromBestLevel();
   if (WORMHOLE.autoUnl) {
     let split;

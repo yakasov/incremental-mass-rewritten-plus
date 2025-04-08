@@ -34,18 +34,19 @@ const CONFIRMS_FUNCTION = {
 
     addQuote(4);
   },
-  sn(force, chal, post, fermion) {
+  sn(click) {
+    let g = tmp.sn.gen
+      ? tmp.sn.passive.div(FPS)
+      : tmp.sn.bulk.sub(player.supernova.times).max(0);
     addQuote(5);
 
-    if (tmp.sn.reached || force || fermion) {
-      tmp.el.supernova_scene.setDisplay(false);
-      if (!force && !fermion) {
-        player.supernova.times = player.supernova.post_10
-          ? player.supernova.times.max(tmp.sn.bulk)
-          : player.supernova.times.add(1);
-      }
-      if (post || !hasTree("qu_qol4")) SUPERNOVA.doReset();
+    tmp.el.supernova_scene.setDisplay(false);
+    if (g.gt(0)) {
+      player.supernova.times = player.supernova.post_10
+        ? player.supernova.times.max(tmp.sn.bulk)
+        : player.supernova.times.add(1);
     }
+    if (!hasTree("qu_qol4")) SUPERNOVA.doReset();
 
     document.body.style.backgroundColor = "#111";
   },
@@ -54,7 +55,7 @@ const CONFIRMS_FUNCTION = {
     if (player.supernova.fermions.chosen != id) {
       player.supernova.fermions.chosen = id;
       if (x == 6) QUANTUM.doReset(true, false, true);
-      else SUPERNOVA.reset(false, false, false, true);
+      else SUPERNOVA.reset();
     }
   },
   qu(auto, force, rip) {
@@ -135,7 +136,7 @@ const RESET_CONFIRMS = {
   bh: {
     color: `yellow`,
     title: `2: Black Hole`,
-    gain: "Dark Matters",
+    gain: "Dark Matter",
     unls: "Black Hole",
     quoteSkip: 3,
   },

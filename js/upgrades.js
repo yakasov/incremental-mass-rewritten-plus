@@ -81,19 +81,19 @@ const UPGS = {
       },
       4: {
         desc: "Rank 4 reward is better.",
-        cost: E(50),
+        cost: E(100),
       },
       5: {
         desc: "Double Rage Powers.",
-        cost: E(100),
+        cost: E(500),
       },
       6: {
         desc: "You can automatically tier up.",
-        cost: E(1e3),
+        cost: E(5e4),
       },
       7: {
         desc: "Tickspeed adds Stronger.",
-        cost: E(1e4),
+        cost: E(1e7),
         effect() {
           let e38 = hasElement(38) ? elemEffect(38, E(0)) : E(0);
           let x = player.build.tickspeed.amt.div(3);
@@ -369,7 +369,7 @@ const UPGS = {
       },
       3: {
         desc: "Super Mass Upgrade scales later based on Black Hole Mass.",
-        cost: E(100),
+        cost: E(50),
         effect() {
           let ret = player.bh.mass
             .max(1)
@@ -436,7 +436,7 @@ const UPGS = {
           return player.chal.unl;
         },
         desc: "Stronger Effect's softcap starts later based on unspent Dark Matters.",
-        cost: E(1e27),
+        cost: E(1e35),
         effect() {
           let ret = player.bh.dm.max(1).log10().pow(0.5);
           return ret;
@@ -450,7 +450,7 @@ const UPGS = {
           return player.chal.unl;
         },
         desc: "Mass gain is boosted by OoM of Dark Matters.",
-        cost: E(1e33),
+        cost: E(1e50),
         effect() {
           let ret = E(2).pow(
             player.bh.dm.add(1).log10().softcap(11600, 0.5, 0)
@@ -702,7 +702,7 @@ const UPGS = {
             `Gain 100% of Dark Matters gained from reset per second.` +
             (EVO.amt >= 2
               ? ""
-              : "Mass gain from Black Hole softcap starts later.")
+              : " Mass gain from Black Hole softcap starts later.")
           );
         },
         get cost() {
@@ -742,11 +742,11 @@ const UPGS = {
       },
       9: {
         desc: "Stronger softcap is 15% weaker.",
-        cost: E(1e42),
+        cost: E(1e41),
       },
       10: {
         desc: "Tier requirement is halved. Hyper Rank starts later based on Tiers you have.",
-        cost: E(5e47),
+        cost: E(5e46),
         effect() {
           let ret = player.ranks.tier.mul(2).floor();
           return ret;
@@ -1209,7 +1209,10 @@ function updateUpgNotify() {
       return;
     }
   }
-  if ((player.atom.unl || OURO.unl) && !hasZodiacUpg("aries", "u3")) {
+  if (
+    (player.chal.comps[7].gte(1) || tmp.sn.unl || OURO.unl) &&
+    !hasZodiacUpg("aries", "u3")
+  ) {
     for (var x = 0; x < 2; x++) {
       for (var y = 1; y <= tmp.elements.unl_length[x]; y++) {
         if (!ELEMENTS.canBuy(y, x)) continue;

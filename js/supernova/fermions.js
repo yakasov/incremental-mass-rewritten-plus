@@ -21,7 +21,7 @@ const FERMIONS = {
   backNormal() {
     if (player.supernova.fermions.chosen != "") {
       player.supernova.fermions.chosen = "";
-      SUPERNOVA.reset(false, false, false, true);
+      SUPERNOVA.reset();
     }
   },
   choose(i, x) {

@@ -177,7 +177,7 @@ const TREE_UPGS = {
             ? expMult(player.evo.cp.level.add(1).root(4), 1.5)
             : EVO.amt == 1
             ? player.evo.cp.level.add(1).root(2)
-            : player.build.tickspeed.amt.add(1).root(4);
+            : player.build.tickspeed.amt.add(1).root(2);
         return x;
       },
       effDesc(x) {
@@ -190,7 +190,7 @@ const TREE_UPGS = {
       cost: E(350),
       effect() {
         let sn = player.supernova.times;
-        if (!hasTree("qu4")) sn = sn.softcap(15, 0.8, 0).softcap(25, 0.5, 0);
+        if (!hasTree("qu4")) sn = sn.softcap(15, 1.2, 0).softcap(25, 0.5, 0);
 
         let x = E(2.05);
         if (hasTree("sn4")) x = x.add(treeEff("sn4", 0));
@@ -209,7 +209,7 @@ const TREE_UPGS = {
       reqDesc: `6 Supernovas.`,
       cost: E(50000),
       effect() {
-        let x = player.stars.generators[4].max(1).log10().add(1);
+        let x = player.stars.generators[4].max(1).log2().add(1);
         return x;
       },
       effDesc(x) {
@@ -594,13 +594,13 @@ const TREE_UPGS = {
         if (EVO.amt >= 2) return true;
         for (let x = 5; x <= 8; x++)
           if (player.chal.comps[x].gte(1)) return false;
-        return player.bh.mass.gte(E("e1.75e4").mul(1.5e56));
+        return player.bh.mass.gte(uni("e16000"));
       },
       reqDesc() {
         return EVO.amt >= 2
           ? `YOU CAN AFFORD BECAUSE OF EVOLUTION!`
           : `Reach ${format(
-              "e1.75e4"
+              uni("e16000")
             )} uni of black hole without challenge 5-8 completions in a Supernova run.`;
       },
       desc: `Keep challenge 5-8 completions on reset.`,
@@ -1026,7 +1026,7 @@ const TREE_UPGS = {
       cost: E("e1000"),
     },
 
-    // Quatnum
+    // Quantum
 
     qu0: {
       unl() {
@@ -1113,7 +1113,6 @@ const TREE_UPGS = {
     },
     qu8: {
       qf: true,
-
       branch: ["qu7"],
       desc: `Chromas are affected by Quantum Shard’s effect.`,
       cost: E(1e27),
@@ -1465,21 +1464,18 @@ const TREE_UPGS = {
 
     qu_qol10: {
       unl: () => player.dark.unl,
-
       qf: true,
       desc: `You can't gain Delta, Alpha, Omega & Sigma Particles from Primordium Theorem now. Instead, their amount is set to your total primordium theorems.`,
       cost: E(1e110),
     },
     qu_qol11: {
       branch: ["qu_qol10"],
-
       qf: true,
       desc: `You can't gain Phi & Epsilon Particles from Primordium Theorem now. Instead, their amount is set to your total primordium theorems.`,
       cost: E(1e130),
     },
     qu_qol12: {
       branch: ["qu_qol11"],
-
       qf: true,
       desc: `You can't gain Theta & Beta Particles from Primordium Theorem now. Instead, their amount is set to your total primordium theorems.`,
       cost: E(1e190),
@@ -1487,7 +1483,6 @@ const TREE_UPGS = {
 
     fn13: {
       unl: () => tmp.chal13comp,
-
       branch: ["fn8"],
       desc: `Unlock 2 meta-types of U-Quark & U-Fermion.`,
       cost: E("e1.5e10"),
@@ -1508,10 +1503,8 @@ const TREE_UPGS = {
     },
     ct2: {
       branch: ["ct1"],
-
-      desc: `Best Black Hole Mass in C16 boosts bosonic resources gain.`,
+      desc: `Best Black Hole Mass in C16 boosts Bosonic resources gain.`,
       cost: E(50),
-
       effect() {
         let x = tmp.c16.best_bh_eff.add(1).pow(2);
         return x;
@@ -1522,10 +1515,8 @@ const TREE_UPGS = {
     },
     ct3: {
       branch: ["ct1"],
-
       desc: `Best Black Hole Mass in C16 adds free fermion tiers.`,
       cost: E(50),
-
       req() {
         return (
           tmp.c16.in &&
@@ -1538,7 +1529,6 @@ const TREE_UPGS = {
           "e81"
         )} of black hole during C16 & [Meta-Quark].`;
       },
-
       effect() {
         let x = tmp.c16.best_bh_eff.add(1).log10().mul(1.5);
         return x;
@@ -1549,17 +1539,14 @@ const TREE_UPGS = {
     },
     ct4: {
       branch: ["ct1"],
-
       desc: `Best Black Hole Mass in C16 adds to the base of all matter's upgrade.`,
       cost: E(100),
-
       req() {
         return tmp.c16.in && player.bh.dm.gte(1e300);
       },
       reqDesc() {
         return `Reach ${format(1e300)} dark matters during C16.`;
       },
-
       effect() {
         let p = hasPrestige(2, 40),
           c = tmp.c16.in;
@@ -1576,10 +1563,8 @@ const TREE_UPGS = {
     },
     ct5: {
       branch: ["ct1"],
-
       desc: `Neutronium-0 now affects Challenge 13 at a reduced rate.`,
       cost: E(100),
-
       effect() {
         let x = hasElement(237)
           ? expMult(tmp.qu.chroma_eff[2], 0.5)
@@ -1592,17 +1577,14 @@ const TREE_UPGS = {
     },
     ct6: {
       branch: ["ct1"],
-
       desc: `Mass overflow starts later based on best Black Hole Mass in C16.`,
       cost: E(300),
-
       req() {
         return tmp.c16.in && player.atom.atomic.gte(1e8);
       },
       reqDesc() {
         return `Reach ${format(1e8)} atomic powers during C16.`;
       },
-
       effect() {
         let x = tmp.c16.best_bh_eff.add(1).pow(2);
         return overflow(x, 10, 0.5);
@@ -1613,10 +1595,8 @@ const TREE_UPGS = {
     },
     ct7: {
       branch: ["ct5"],
-
       desc: `Neutronium-0 now affects Challenge 14 at a reduced rate. (like [ct5])`,
       cost: E(1500),
-
       req() {
         return player.chal.comps[14] && player.chal.comps[14].gte(750);
       },
@@ -1626,10 +1606,8 @@ const TREE_UPGS = {
     },
     ct8: {
       branch: ["ct2"],
-
       desc: `Keep pre-C16 tree on entering C16. Best Black Hole Mass in C16 boosts all radiation gains.`,
       cost: E(2500),
-
       effect() {
         let x = tmp.c16.best_bh_eff.add(1).pow(2);
         return x;
@@ -1640,10 +1618,8 @@ const TREE_UPGS = {
     },
     ct9: {
       branch: ["ct3"],
-
       desc: `Best Black Hole Mass in C16 adds free radiation boosts.`,
       cost: E(5000),
-
       req() {
         return (
           tmp.c16.in &&
@@ -1657,7 +1633,6 @@ const TREE_UPGS = {
           "e400"
         )} of black hole during C16 & [Meta-Lepton] without buying BH Condensers.`;
       },
-
       effect() {
         let x = tmp.c16.best_bh_eff.root(3);
         return x.overflow("e300", 0.25);
@@ -1668,10 +1643,8 @@ const TREE_UPGS = {
     },
     ct10: {
       branch: ["ct4"],
-
       desc: `FSS Requirement is lower based on total corrupted shards.`,
       cost: E(5e4),
-
       effect() {
         let x = Decimal.pow(
           0.95,
@@ -1686,10 +1659,8 @@ const TREE_UPGS = {
     },
     ct11: {
       branch: ["ct6"],
-
       desc: `Black Hole Mass overflow starts later based on best Black Hole Mass in C16. (weaker during C16)`,
       cost: E(1e6),
-
       req() {
         return tmp.c16.in && player.atom.atomic.gte(1e20);
       },
@@ -1710,10 +1681,8 @@ const TREE_UPGS = {
     },
     ct12: {
       branch: ["ct9"],
-
       desc: `Best Black Hole Mass in C16 adds free primordium particles.`,
       cost: E(5e7),
-
       req() {
         return (
           tmp.c16.in &&
@@ -1727,7 +1696,6 @@ const TREE_UPGS = {
           "e1960"
         )} of black hole during C16 & [Meta-Quark] without buying BH Condensers.`;
       },
-
       effect() {
         let x = tmp.c16.best_bh_eff.root(2).overflow("e430", 0.25);
         return x;
@@ -1738,10 +1706,8 @@ const TREE_UPGS = {
     },
     ct13: {
       branch: ["ct7"],
-
       desc: `Neutronium-0 now affects Challenge 15 at a reduced rate, like [ct5].`,
       cost: E(2.5e8),
-
       req() {
         return player.chal.comps[14] && player.chal.comps[14].gte(940);
       },
@@ -1751,17 +1717,14 @@ const TREE_UPGS = {
     },
     ct14: {
       branch: ["ct11"],
-
       desc: `Dilated mass overflow starts later based on best Black Hole Mass in C16.`,
       cost: E(1e10),
-
       req() {
         return tmp.c16.in && player.atom.atomic.gte(1e144);
       },
       reqDesc() {
         return `Reach ${format(1e144)} atomic powers during C16.`;
       },
-
       effect() {
         let x = tmp.c16.best_bh_eff.add(1).pow(2);
         return x;
@@ -1772,10 +1735,8 @@ const TREE_UPGS = {
     },
     ct15: {
       branch: ["ct8"],
-
       desc: `Total corrupted shards boost matters gain.`,
       cost: E(2.5e10),
-
       effect() {
         let x = player.dark.c16.totalS.add(1).root(2);
         return x;
@@ -1787,12 +1748,10 @@ const TREE_UPGS = {
     ct16: {
       unl: () => tmp.ea.unl || tmp.epUnl,
       branch: ["ct10"],
-
       desc: `Best Black Hole Mass in C16 boosts Kaon & Pion gain.`,
       get cost() {
         return E(EVO.amt >= 3 ? 1e15 : EVO.amt >= 2 ? 1e12 : 5e16);
       },
-
       effect() {
         let x = tmp.c16.best_bh_eff.div(1e5).add(1).pow(2);
         return x;
@@ -2079,10 +2038,10 @@ function updateTreeHTML() {
               2
             )} ${
         t_ch.qf
-          ? "Quantum foam"
+          ? "Quantum Foam"
           : t_ch.cs
           ? '<span class="corrupted_text">Corrupted Shard</span>'
-          : "Neutron star"
+          : "Neutron Stars"
       }</span><br>
             <span class="green">${
               t_ch.effDesc

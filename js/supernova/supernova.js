@@ -1,10 +1,15 @@
 const SUPERNOVA = {
-  reset(force = false, chal = false, post = false, fermion = false) {
-    if (force && !chal && !post && !fermion && !quUnl())
-      createConfirm("Are you sure to restart?", "sn", () =>
-        CONFIRMS_FUNCTION.sn(force, chal, post, fermion)
+  reset(click = false) {
+    let g = tmp.sn.gen
+      ? tmp.sn.passive.div(FPS)
+      : tmp.sn.bulk.sub(player.supernova.times).max(0);
+    if (click && g.eq(0))
+      createConfirm(
+        "Are you sure you want to restart this Supernova?",
+        "sn",
+        () => CONFIRMS_FUNCTION.sn(click)
       );
-    else CONFIRMS_FUNCTION.sn(force, chal, post, fermion);
+    else CONFIRMS_FUNCTION.sn(false);
   },
   doReset() {
     let br = tmp.qu.rip.in;

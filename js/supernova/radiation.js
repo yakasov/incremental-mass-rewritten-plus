@@ -209,8 +209,8 @@ const RADIATION = {
     {
       title: `BH-Condenser Boost`,
       eff(b) {
-        let x = b.add(1).pow(2);
-        if (tmp.c16.in) x = x.root(2);
+        let x = b.add(1).pow(1.25);
+        if (tmp.c16.in) x = x.root(1.25);
         return x.softcap(100, 0.5, 0);
       },
       desc(x) {

@@ -155,12 +155,12 @@ const QUOTES = [
   `
     <h2>Chapter 2: Rage Power</h2><br>
     <img class='quote' src='images/quotes/2.png'><br>
-    With your energy, you felt outrageous and want to rush!
+    You begin to feel your emotions building - you want to rage!
     `,
   `
     <h2>Chapter 3: The Black Hole</h2><br>
     <img class='quote' src='images/quotes/3.png'><br>
-    You pulled up a hidden mystery of cosmos. The force was so strong that it formed a black hole!
+    You discover a hidden mystery of cosmos. The very discovery reveals a massive force that expands into a Black Hole!
     `,
   `
     <h2>Chapter 4: The Atom</h2><br>
@@ -170,7 +170,7 @@ const QUOTES = [
   `
     <h2>Chapter 5: Supernova Born</h2><br>
     <img class='quote' src='images/quotes/5.png'><br>
-    Stars have collapsed. A dwarf age begins
+    Stars have collapsed. A dwarf age begins.
     `,
   `
     <h2>Chapter 6: The Radiation</h2><br>
@@ -519,5 +519,4 @@ function checkImage(imageSrc, good, bad) {
   img.src = imageSrc;
 }
 
-//debugger
 devSpeed = 1;

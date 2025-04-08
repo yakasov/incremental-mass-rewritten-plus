@@ -343,7 +343,7 @@ const FORMS = {
         if (tmp.rp.unl) gain = player.rp.points.div(1e25);
         if (CHALS.inChal(7) || CHALS.inChal(10)) gain = player.mass.div(1e175);
         if (gain.lt(1)) return E(0);
-        gain = gain.root(4);
+        gain = gain.root(3);
       } else {
         let cp = player.evo.cp.points;
         if (cp.lt(evo >= 2 ? 1e5 : 5e3)) return E(0);
@@ -543,6 +543,7 @@ function loop() {
   date = Date.now();
 
   updateHTML();
+  updateUpgNotify();
 }
 
 function format(ex, acc = 2, type = player.options.notation) {

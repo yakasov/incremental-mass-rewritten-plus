@@ -34,7 +34,8 @@ function updateChalHTML() {
           disabled
             ? `<span style="color: grey; font-style: italic">Disabled!</span>`
             : format(player.chal.comps[x], 0) +
-                (tmp.chal.max[x].gte(EINF) || x >= 13 && x <= 15 && hasInfUpgrade(13)
+                (tmp.chal.max[x].gte(EINF) ||
+                (x >= 13 && x <= 15 && hasInfUpgrade(13))
                   ? ""
                   : " / " + format(tmp.chal.max[x], 0))
         );
@@ -175,7 +176,7 @@ const CHALS = {
   reset(x, chal_reset = true) {
     if (x < 5) FORMS.bh.doReset();
     else if (x < 9) ATOM.doReset(chal_reset);
-    else if (x < 13) SUPERNOVA.reset(true, true);
+    else if (x < 13) SUPERNOVA.reset();
     else if (x < 16) DARK.doReset(true);
     else if (x == 16) MATTERS.final_star_shard.reset(true);
     else INF.doReset();
@@ -486,7 +487,7 @@ const CHALS = {
         ? `Supercritical Rank & All Fermions Tier scaling starts later, Super Overpower scales weaker based on completions.`
         : `Super Rank scales later and Super Tickspeed scales weaker.`,
     max: E(100),
-    inc: E(5),
+    inc: E(6),
     pow: E(1.3),
     start: E(1e35),
     effect(x) {
@@ -518,7 +519,7 @@ const CHALS = {
     desc: "You cannot buy Tickspeed.",
     reward: `+9% Tickspeed Power per completion.`,
     max: E(100),
-    inc: E(10),
+    inc: E(12),
     pow: E(1.3),
     start: E(1e30),
     effect(x) {
@@ -545,7 +546,7 @@ const CHALS = {
     desc: "Mass gain softcap starts 150 OoMs earlier, and is stronger.",
     reward: `Raise Mass gain. (nullified in this challenge)`,
     max: E(100),
-    inc: E(25),
+    inc: E(50),
     pow: E(1.25),
     start: E(1e38),
     effect(x) {
@@ -578,7 +579,7 @@ const CHALS = {
     },
     reward: `Raise Rage Powers.`,
     max: E(100),
-    inc: E(30),
+    inc: E(35),
     pow: E(1.25),
     start: E(1e120),
     effect(x) {
@@ -930,13 +931,19 @@ const CHALS = {
         • Primordium particles are disabled.<br>
         • Pre-Quantum global speed is always set to /100.
 		<br class='line'>
-        You can earn Corrupted Shards based on your ${EVO.amt >= 3 ? "Fabric" : EVO.amt >= 2 ? "Wormhole" : "Black Hole Mass"} when exiting the challenge${
-          EVO.amt >= 2
-            ? ""
-            : `with more than <b>${formatMass(
-                EVO.amt >= 1 ? 1e70 : 1e100
-              )}</b> of black hole`
-        }.
+        You can earn Corrupted Shards based on your ${
+          EVO.amt >= 3
+            ? "Fabric"
+            : EVO.amt >= 2
+            ? "Wormhole"
+            : "Black Hole Mass"
+        } when exiting the challenge${
+        EVO.amt >= 2
+          ? ""
+          : `with more than <b>${formatMass(
+              EVO.amt >= 1 ? 1e70 : 1e100
+            )}</b> of black hole`
+      }.
         `;
     },
     reward: `Improve Hybridized Uran-Astatine.<br><span class="gold">On 1st completion, unlock <b class='yellow'>Infinity!</b></span>`,
@@ -1081,7 +1088,9 @@ const CHALS = {
     max: E(1),
     inc: E(2),
     pow: E(1),
-    start: E("e1.5e25"),
+    get start() {
+      return EVO.amt >= 4 ? E("ee5000") : E("e1.5e25");
+    },
     effect: (x) => x.gte(1),
     effDesc(x) {
       return x ? "<b class='snake'>Ouroboric</b> unlocked!" : "Locked";

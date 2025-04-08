@@ -129,7 +129,7 @@ const RESOURCES_DIS = {
         ? "(+" + format(tmp.atom.gain, 0) + ")"
         : EVO.amt >= 2
         ? `(requires ${format(300, 0)} Fabric)`
-        : `(requires ${formatMass(1.5e156, 0)} mass of BH)`),
+        : `(requires ${formatMass(1e160, 0)} mass of BH)`),
 
     resetBtn() {
       ATOM.reset();
@@ -188,7 +188,7 @@ const RESOURCES_DIS = {
     },
 
     resetBtn() {
-      if (player.supernova.post_10) SUPERNOVA.reset(false, false, true);
+      SUPERNOVA.reset(true);
     },
   },
   qu: {

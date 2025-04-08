@@ -327,7 +327,9 @@ const INF = {
       E(10).pow(
         Decimal.pow(
           1.05,
-          player.inf.theorem.scaleEvery("inf_theorem").pow(1.25)
+          player.inf.theorem
+            .scaleEvery("inf_theorem")
+            .pow(player.inf.theorem > 15 ? 2 : 1.25)
         ).mul(Math.log10(Number.MAX_VALUE))
       )
     );
@@ -526,7 +528,13 @@ const INF = {
     [
       {
         title: "Break Infinity",
-        desc: "Remove the mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.",
+        get desc() {
+          return `Remove the mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.${
+            EVO.amt >= 4
+              ? "<br /><br />In Evo 4+, keep Constellation upgrades on Infinity."
+              : ""
+          }`;
+        },
         cost: E(1e12),
       },
     ],

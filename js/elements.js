@@ -169,7 +169,7 @@ function updateUpperHTML() {
     tmp.el.chal_upper.setHTML(`You are in [${
       CHALS[player.chal.active].title
     }] Challenge!
-		(+${format(tmp.chal.gain, 0)})<br>
+		${hasTree("qol6") ? "" : "+" + format(tmp.chal.gain, 0)}<br>
 		Goal: ${tmp.chal.format(data.goal) + CHALS.getResName(player.chal.active)}`);
   }
 

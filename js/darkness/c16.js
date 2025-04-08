@@ -39,7 +39,7 @@ const CHARGERS = [
   {
     req: E("e77000"),
     get cost() {
-      return [E(5e10), E(5e10), E(5e7), E(1e14), E(5e9)][EVO.amt];
+      return [E(5e10), E(5e10), E(5e7), E(1e14), E(1e9)][EVO.amt];
     },
     get desc() {
       return EVO.amt >= 3
@@ -184,7 +184,12 @@ function corruptedShardGain() {
     if (EVO.amt >= 3) (e *= 2), (dil = 2);
 
     x = expMult(
-      (EVO.amt >= 3 ? player.evo.wh.fabric: hasElement(232) ? player.dark.c16.bestBH : WORMHOLE.total())
+      (EVO.amt >= 3
+        ? player.evo.wh.fabric
+        : hasElement(232)
+        ? player.dark.c16.bestBH
+        : WORMHOLE.total()
+      )
         .add(1)
         .root(e),
       dil

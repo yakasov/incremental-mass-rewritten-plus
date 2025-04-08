@@ -108,7 +108,7 @@ const STARS = {
   },
   generators: {
     req: [
-      E(1e225),
+      E(1e235),
       E(1e280),
       E("e320"),
       E("e430"),
