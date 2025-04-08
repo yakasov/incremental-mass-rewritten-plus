@@ -4,6 +4,14 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 15
+
+- Top, Bottom, Neutrino and Neut-Muon effects reduced
+- Supernova tree upgrade [qu_qol7] requirement increased
+- Supernova tree upgrades [unl2] and [unl3] costs decreased
+- Respec Primordium Theorems button no longer requires a confirmation
+- Fixed Challenge limits still showing for Challenges 1 - 8 when automated
+
 ### v0.7.1.6-plus 14
 
 - Rage upgrades 1x4, 1x5, 2x1 and 2x2 costs increased
