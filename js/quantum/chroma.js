@@ -73,12 +73,12 @@ const CHROMA = {
   effDesc: [
     (x) => {
       return EVO.amt >= 4
-        ? `Boost Fabric by ${formatMult(x)}.`
-        : `Makes tickspeed power raised to the ${format(x)}th power.`;
+        ? `boosts Fabric by ${formatMult(x)}.`
+        : `makes tickspeed power raised to the ${format(x)}th power.`;
     },
     (x) => {
       return (
-        `Makes all ${
+        `makes all ${
           player.dark.unl ? "Pre-Exotic p" : "P"
         }re-Pent requirements reduced by ${format(x[0])}x` +
         x[0].softcapHTML(1e10) +
@@ -91,7 +91,7 @@ const CHROMA = {
       );
     },
     (x) => {
-      return `Makes rewards from Challenges 1-8 ${format(x)}x stronger.`;
+      return `makes rewards from Challenges 1-8 ${format(x)}x stronger.`;
     },
   ],
 };

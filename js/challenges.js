@@ -35,6 +35,8 @@ function updateChalHTML() {
             ? `<span style="color: grey; font-style: italic">Disabled!</span>`
             : format(player.chal.comps[x], 0) +
                 (tmp.chal.max[x].gte(EINF) ||
+                (x <= 4 && hasTree("qu_qol3")) ||
+                (x >= 5 && x <= 8 && hasTree("qu_qol5")) ||
                 (x >= 13 && x <= 15 && hasInfUpgrade(13))
                   ? ""
                   : " / " + format(tmp.chal.max[x], 0))

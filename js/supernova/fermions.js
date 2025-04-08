@@ -240,7 +240,7 @@ const FERMIONS = {
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
-          let x = i.add(1).log10().div(500).mul(t.root(2)).add(1);
+          let x = i.add(1).log10().div(500).mul(t.root(3)).add(1);
           return x
             .softcap(1.15, 0.5, 0)
             .softcap(1.8, 1 / 3, 0)
@@ -275,7 +275,7 @@ const FERMIONS = {
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
-          let x = i.add(1).log10().pow(0.5).div(150).add(1).pow(t);
+          let x = i.add(1).log10().pow(0.5).div(250).add(1).pow(t);
           if (hasElement(213)) {
             let y = expMult(t.add(1).pow(i.add(1).log10().add(1).log10()), 0.8);
             return x.min(500).max(y);
@@ -448,7 +448,7 @@ const FERMIONS = {
             .log10()
             .add(1)
             .mul(t)
-            .div(200)
+            .div(350)
             .add(1)
             .softcap(1.5, 0.5, 0);
           return x;
@@ -496,7 +496,7 @@ const FERMIONS = {
           return FERMIONS.getTierScaling(x, true);
         },
         eff(i, t) {
-          let m = i.add(1).log10().mul(t).root(4);
+          let m = i.add(1).log10().mul(t).root(5);
           let x = hasCharger(3)
             ? Decimal.pow(0.975, overflow(m.max(1).log10(), 10, 0.5))
             : Math.min(

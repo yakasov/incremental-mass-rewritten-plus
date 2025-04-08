@@ -931,7 +931,7 @@ const BUILDINGS_DATA = {
     },
 
     get_power: (x) => formatMult(x.power),
-    get_effect: (x) => formatMult(x.effect) + " to blueprint particle",
+    get_effect: (x) => formatMult(x.effect) + " to Blueprint Particles",
   },
   pe: {
     name: "Parallel Extruder",

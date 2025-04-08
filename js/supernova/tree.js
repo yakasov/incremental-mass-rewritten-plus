@@ -1169,7 +1169,7 @@ const TREE_UPGS = {
         return player.qu.times.gte(4);
       },
       reqDesc: `Quantized 4 times.`,
-      desc: `You now automatically purchase supernova tree upgrades as long as they don't cost quantum foam.`,
+      desc: `You now automatically purchase Supernova tree upgrades as long as they don't cost Quantum Foam.`,
       cost: E(3),
     },
     qu_qol2: {
@@ -1253,13 +1253,13 @@ const TREE_UPGS = {
         if (EVO.amt >= 1) return true;
         for (let x = 9; x <= 12; x++)
           if (player.chal.comps[x].gte(1)) return false;
-        return player.mass.gte(mlt(5e3)) && FERMIONS.onActive("05");
+        return player.mass.gte(mlt(1.5e4)) && FERMIONS.onActive("05");
       },
       reqDesc() {
         return EVO.amt >= 1
           ? `YOU CAN AFFORD BECAUSE OF EVOLUTION!`
           : `Reach ${formatMass(
-              mlt(5e3)
+              mlt(1.5e4)
             )} of mass without completing Challenges 9-12 in Quantum run, while in [Bottom].`;
       },
       desc: `Keep challenge 9-12 completions on going Quantum.`,
@@ -1437,7 +1437,7 @@ const TREE_UPGS = {
       },
       reqDesc: `Quantize 20 times.`,
       desc: `Unlock Primordium.`,
-      cost: E(1e5),
+      cost: E(5e3),
     },
     unl3: {
       qf: true,
@@ -1447,9 +1447,7 @@ const TREE_UPGS = {
       },
       reqDesc: `Quantize 200 times.`,
       desc: `Unlock Quantum Challenge.`,
-      cost() {
-        return EVO.amt >= 2 ? E(1e11) : E(1e13);
-      },
+      cost: E(1e10),
     },
     unl4: {
       qf: true,
