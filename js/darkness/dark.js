@@ -36,6 +36,7 @@ const DARK = {
       .pow(2)
       .pow(tmp.c16.in ? 1 : fermEff(0, 6));
     x.shadow = x.shadow.overflow("ee10", 0.5);
+    x.deathShard = a.max(1).min(1e9);
 
     if (a.gte(1e9))
       x.passive = a.div(1e9).max(1).log10().add(1).pow(2).div(100);
@@ -301,7 +302,11 @@ function calcDark(dt) {
 
   if (tmp.c16.in)
     player.dark.c16.bestBH = player.dark.c16.bestBH.max(
-      EVO.amt >= 3 ? player.evo.wh.fabric : EVO.amt >= 2 ? WORMHOLE.total() : player.bh.mass
+      EVO.amt >= 3
+        ? player.evo.wh.fabric
+        : EVO.amt >= 2
+        ? WORMHOLE.total()
+        : player.bh.mass
     );
   if (hasCharger(1) && tmp.bh.unl)
     player.bh.unstable = UNSTABLE_BH.getProduction(
@@ -451,7 +456,8 @@ function updateDarkHTML() {
 
     e =
       getNextDarkEffectFromID(0) +
-      `Boosts Dark Shadow gain by <b>x${eff.shadow.format(2)}</b>`;
+      `Boosts Dark Shadow gain by <b>x${eff.shadow.format(2)}</b>
+      <br>Adds <b>${eff.deathShard.format(0)}</b> to final Death Shard gain`;
 
     if (eff.passive)
       e += `<br>Passively gains <b>${formatPercent(
@@ -490,7 +496,7 @@ function getNextDarkEffectFromID(i) {
         return (
           "Next " +
           ["Ray", "Shadow", "Abyssal Blot"][i] +
-          "'s effect at <b>" +
+          " effect at <b>" +
           format(q[s]) +
           "</b><br><br>"
         );

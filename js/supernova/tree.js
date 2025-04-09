@@ -1296,7 +1296,7 @@ const TREE_UPGS = {
         return `Get 24 Quantum Shards.`;
       },
       desc: `Start with Polonium–84 unlocked when entering in Quantum Challenge.`,
-      cost: E(1e17),
+      cost: E(1e21),
     },
     prim1: {
       qf: true,
@@ -1392,12 +1392,12 @@ const TREE_UPGS = {
       branch: ["qu5"],
       req() {
         return (
-          tmp.qu.qc.s >= 76 && player.mass.gte(uni("e7500")) && QCs.active()
+          tmp.qu.qc.s >= 76 && player.mass.gte(uni("e3500")) && QCs.active()
         );
       },
       reqDesc() {
         return `Reach ${formatMass(
-          uni("e7500")
+          uni("e3500")
         )} of mass with 76 QS build (before bonus from [qc2]).`;
       },
       desc: `Quantum Shards boost Death Shard gain.`,
@@ -1447,7 +1447,7 @@ const TREE_UPGS = {
       },
       reqDesc: `Quantize 200 times.`,
       desc: `Unlock Quantum Challenge.`,
-      cost: E(1e10),
+      cost: E(1e11),
     },
     unl4: {
       qf: true,

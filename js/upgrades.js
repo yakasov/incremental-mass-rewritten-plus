@@ -922,7 +922,7 @@ const UPGS = {
         get desc() {
           return `Keep ${EVO.amt >= 4 ? "Trinilpentium-305" : "Hydrogen-1"}.`;
         },
-        cost: E(5),
+        cost: E(1),
       },
       2: {
         desc: `Mass Upgrades & Ranks are no longer nerfed by 8th QC modifier.`,
@@ -956,7 +956,7 @@ const UPGS = {
       },
       6: {
         desc: `Start with all Radiation features unlocked.`,
-        cost: E(5000),
+        cost: E(2500),
       },
       7: {
         desc: `Hybridized Uran-Astatine is twice as effective in Big Rip.`,
@@ -1009,12 +1009,12 @@ const UPGS = {
           return brokeDil() || tmp.inf_unl || EVO.amt >= 3;
         },
         desc: `Death Shard gain is boosted based on Prestige Base.`,
-        cost: E(1e17),
+        cost: E(1e19),
         effect() {
           let x = (tmp.prestiges.base || E(1))
             .add(1)
             .log10()
-            .tetrate(1.5)
+            .tetrate(1.4)
             .add(1);
           return x.min("e2.5e4");
         },

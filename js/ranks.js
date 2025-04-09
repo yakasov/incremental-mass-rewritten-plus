@@ -391,8 +391,8 @@ const PRESTIGES = {
     switch (i) {
       case 0:
         x = Decimal.pow(
-          1.1,
-          y.scaleEvery("prestige0", false, [0, 0, 0, fp]).pow(1.1)
+          1.2,
+          y.scaleEvery("prestige0", false, [0, 0, 0, fp]).pow(1.2)
         ).mul(EVO.amt >= 2 ? 2e12 : 2e13);
         break;
       case 1:

@@ -8,9 +8,20 @@ Personal tweaks to IMR.
 
 - Top, Bottom, Neutrino and Neut-Muon effects reduced
 - Supernova tree upgrade [qu_qol7] requirement increased
+- Supernova tree upgrade [br1] requirement decreased
 - Supernova tree upgrades [unl2] and [unl3] costs decreased
+- Supernova tree upgrade [qu_qol9] cost increased
+- Big Rip upgrades 1x1 and 2x1 costs decreased
+- Big Rip upgrade 3x3 cost increased
+- Big Rip upgrade 3x3 effect decreased
+- Prestige scaling is faster
+- Dark Rays has an additional effect that boosts Death Shard gain at low gain values
+- Elements 133, 134, 137 and 141 costs increased
 - Respec Primordium Theorems button no longer requires a confirmation
-- Fixed Challenge limits still showing for Challenges 1 - 8 when automated
+- Fixed Big Rip upgrade 1x4 not doing anything
+- Fixed Entropy not resetting properly on Quantum reset
+- Fixed Challenge limits still showing for Challenges 1 - 12 when automated
+- Gring and strammar pass (pretty much every update)
 
 ### v0.7.1.6-plus 14
 

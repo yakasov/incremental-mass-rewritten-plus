@@ -54,7 +54,6 @@ const QUANTUM = {
 
     QUANTUM.doReset(force);
     addQuote(7);
-    if (EVO.amt < 5) return;
 
     ENTROPY.reset(0);
     ENTROPY.reset(1);

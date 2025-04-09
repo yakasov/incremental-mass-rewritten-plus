@@ -27,6 +27,7 @@ const BIG_RIP = {
 
     x = x.pow(theoremEff("proto", 5));
     if (EVO.amt >= 3) x = x.pow(1.25);
+    x = x.add(tmp.dark.rayEff.deathShard);
 
     return x.floor();
   },

@@ -340,7 +340,7 @@ function getQCForceDisp(mod) {
   for (var i = 0; i < QCs_len; i++) {
     let ctn = QCs.ctn[i];
     if (ctn.shown && !ctn.shown()) continue;
-    h += (h ? "," : "") + (mod[i] ?? 0);
+    h += (h ? ", " : "") + (mod[i] ?? 0);
   }
   return `[${h}]`;
 }

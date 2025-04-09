@@ -37,6 +37,8 @@ function updateChalHTML() {
                 (tmp.chal.max[x].gte(EINF) ||
                 (x <= 4 && hasTree("qu_qol3")) ||
                 (x >= 5 && x <= 8 && hasTree("qu_qol5")) ||
+                (x >= 9 && x <= 11 && hasElement(122)) ||
+                (x === 12 && hasElement(131)) ||
                 (x >= 13 && x <= 15 && hasInfUpgrade(13))
                   ? ""
                   : " / " + format(tmp.chal.max[x], 0))

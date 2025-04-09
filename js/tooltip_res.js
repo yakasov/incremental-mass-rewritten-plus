@@ -131,7 +131,7 @@ const TOOLTIP_RES = {
             )} ${player.md.mass.formatGain(
         tmp.md.mass_gain.mul(tmp.qu.speed),
         true
-      )}</b> of dilated mass.
+      )}</b> of Dilated Mass.
             `;
 
       if (tmp.overflowBefore.dm.gte(tmp.overflow_start.dm))
@@ -162,8 +162,8 @@ const TOOLTIP_RES = {
                 ? `Reach <b>${formatMass(
                     tmp.md.mass_req
                   )}</b> of normal mass to gain Relativistic Particles, or cancel dilation.`
-                : "Dilate mass, then cancel."
-            }<br><br>Dilating mass will force an atom reset. While mass is dilated, all pre-atom resources and atomic power gain will get their multipliers' exponents raised to 0.8<br>
+                : "Dilate Mass, then cancel."
+            }<br><br>Dilating Mass will force an Atom reset. While Mass is dilated, all pre-Atom resources and Atomic Power gain will get their multipliers' exponents raised to 0.8<br>
             </i>`;
 
       return h;
@@ -180,7 +180,7 @@ const TOOLTIP_RES = {
             You have <b>${player.stars.points.format(
               0
             )} ${player.stars.points.formatGain(
-        tmp.stars.gain.mul(tmp.qu.speed)
+        tmp.stars.gain ? tmp.stars.gain.mul(tmp.qu.speed) : 0
       )}</b> Collapsed Stars.<br>
             You have <b>${player.supernova.stars.format(
               0
@@ -229,17 +229,19 @@ const TOOLTIP_RES = {
       let h = `<i>
             ${
               player.qu.rip.active
-                ? "Our dimension is Big Ripped. Click to undo."
-                : "Big Rip the Dimension."
-            } (Force a Quantum reset)
+                ? "Our dimension is Big Ripped. Click to undo"
+                : "Big Rip the Dimension"
+            } (which will force a Quantum reset).
             <br><br>
-            While in Big Rip, some Entropic Rewards don't work, all Primordium effects are 50% weaker${
+            While in Big Rip:<br /> 
+            • Some Entropic Rewards don't work<br />
+            • All Primordium effects are 50% weaker${
               EVO.amt >= 4
                 ? ""
-                : "except for Epsilon Particles, which don't work, [qu2] and [qu10] don't work"
-            }, and you are trapped in Quantum Challenge with modifiers ${getQCForceDisp(
+                : " except for Epsilon Particles, which don't work<br />• [qu2] and [qu10] don't work<br />"
+            }• You are trapped in Quantum Challenge with modifiers ${getQCForceDisp(
         "rip"
-      )}. Death Shards are gained based on your normal mass while in Big Rip. Unlock various upgrades from Big Rip.</i>`;
+      )}.<br /><br />Death Shards are gained based on your normal mass while in Big Rip. Unlock various upgrades from Big Rip.</i>`;
       if (EVO.amt == 3)
         h +=
           "<br class='line'>For this evolution, you can't get Nebulae and buy Protostar Elements!";
@@ -256,13 +258,13 @@ const TOOLTIP_RES = {
           0
         )} ${player.dark.shadow.formatGain(
           tmp.dark.shadowGain
-        )}</b> Dark Shadow.`;
+        )}</b> Dark Shadows.`;
         if (tmp.chal14comp)
           h += `<br>You have <b>${player.dark.abyssalBlot.format(
             0
           )} ${player.dark.abyssalBlot.formatGain(
             tmp.dark.abGain
-          )}</b> Abyssal Blot.`;
+          )}</b> Abyssal Blots.`;
         h += `<br class='line'>`;
       }
 
@@ -299,7 +301,7 @@ const TOOLTIP_RES = {
             <br class='line'>
             <i>Reach over <b>${tmp.matters.FSS_req.format(
               0
-            )}</b> of FSS's base to get Final Star Shard.</i>`;
+            )}</b> of FSS's base to get Final Star Shards.</i>`;
     },
   },
   corrupt: {

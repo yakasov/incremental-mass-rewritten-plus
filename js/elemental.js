@@ -1267,11 +1267,11 @@ const ELEMENTS = {
           ? `2nd Wormhole boosts Stronger instead. Improve 5th Wormhole in Big Rips.`
           : `Make the 3rd, 4th & 8th Challenges’ effect better.`;
       },
-      cost: E("e6.5e27"),
+      cost: E("ee29"),
     },
     {
       desc: `Super Prestige & Honor are 5% weaker.`,
-      cost: E("e1.5e29"),
+      cost: E("e1e30"),
     },
     {
       br: true,
@@ -1292,7 +1292,7 @@ const ELEMENTS = {
     },
     {
       desc: `Super & Hyper cosmic string scalings are 25% weaker.`,
-      cost: E("ee30"),
+      cost: E("ee31"),
     },
     {
       br: true,
@@ -1328,7 +1328,7 @@ const ELEMENTS = {
     },
     {
       desc: `Gain 10x more dark rays.`,
-      cost: E("e1.5e30"),
+      cost: E("e2.5e31"),
     },
     {
       dark: true,
