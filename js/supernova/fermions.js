@@ -244,7 +244,7 @@ const FERMIONS = {
           return x
             .softcap(1.15, 0.5, 0)
             .softcap(1.8, 1 / 3, 0)
-            .min(2); //.softcap(2,0.1,0)
+            .softcap(2.25, 0.1, 0); //.softcap(2,0.1,0)
         },
         desc(x) {
           return (
@@ -321,7 +321,7 @@ const FERMIONS = {
           );
         },
         inc: "product of above u-quarks",
-        cons: "All u-quarks at once, and force quantum reset.",
+        cons: "All U-Quarks are active at once, and force a Quantum reset.",
       },
     ],
     [
@@ -580,7 +580,7 @@ const FERMIONS = {
           return `Increase prestige base's exponent by ${format(x)}`;
         },
         inc: "product of above u-leptons",
-        cons: "All u-leptons at once, and force quantum reset.",
+        cons: "All U-Leptons are active at once, and force a Quantum reset.",
       },
     ],
   ],

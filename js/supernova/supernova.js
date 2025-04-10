@@ -38,7 +38,7 @@ const SUPERNOVA = {
       if (quUnl()) list_keep.push(30);
     }
     if (hasUpgrade("br", 1)) list_keep.push(EVO.amt >= 4 ? 305 : 1);
-    keepElementsOnOuroboric(list_keep);
+    list_keep = keepElementsOnOuroboric(list_keep);
 
     keep = [];
     for (let x of unchunkify(player.atom.elements))

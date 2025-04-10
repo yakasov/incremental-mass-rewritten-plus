@@ -4,9 +4,24 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 16
+
+- Top Fermion effect hardcap removed (but severely softcapped)
+- Elements 162, 163, 164, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 178, 179, 180, 181, 182, 183, 184, 186, 187, 189, 190, 191, 193, 195, 196, 198, 199, 200, 201, 202, 203, 205, 206, 207 and 209 costs increased
+- Elements 185 and 188 costs decreased
+- Supernova tree upgrades [fn13] and [qu_qol12] costs decreased
+- Dark Rays Dark Shadows effect boosted
+- Dark Shadows Abyssal Blots effect boosted
+- Abyssal Blots Dark Shadows effect boosted
+- Dark Rays have an additional effect that boosts Quark gain
+- Removed the cap on the new Dark Rays Death Shard gain boost
+- Fixed Elements not persisting through Darkness reset if you were in Big Rip
+- Fixed Dark Run display not matching the Max: ON/OFF mode
+- Full Elements grammar pass (whoa!)
+
 ### v0.7.1.6-plus 15
 
-- Top, Bottom, Neutrino and Neut-Muon effects reduced
+- Top, Bottom, Neutrino and Neut-Muon Fermion effects reduced
 - Supernova tree upgrade [qu_qol7] requirement increased
 - Supernova tree upgrade [br1] requirement decreased
 - Supernova tree upgrades [unl2] and [unl3] costs decreased
@@ -15,7 +30,7 @@ Personal tweaks to IMR.
 - Big Rip upgrade 3x3 cost increased
 - Big Rip upgrade 3x3 effect decreased
 - Prestige scaling is faster
-- Dark Rays has an additional effect that boosts Death Shard gain at low gain values
+- Dark Rays have an additional effect that boosts Death Shard gain at low gain values
 - Elements 133, 134, 137 and 141 costs increased
 - Respec Primordium Theorems button no longer requires a confirmation
 - Fixed Big Rip upgrade 1x4 not doing anything

@@ -100,7 +100,7 @@ const INF = {
     if (!iu11) resetMainUpgs(4, [8]);
 
     let e = [14, 18, 24, 30, 122, 124, 131, 136, 143, 194];
-    keepElementsOnOuroboric(e);
+    e = keepElementsOnOuroboric(e);
     if (hasInfUpgrade(2)) e.push(202);
     if (hasInfUpgrade(3)) e.push(161);
     if (iu15) e.push(218);

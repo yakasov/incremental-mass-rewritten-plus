@@ -1476,14 +1476,14 @@ const TREE_UPGS = {
       branch: ["qu_qol11"],
       qf: true,
       desc: `You can't gain Theta & Beta Particles from Primordium Theorem now. Instead, their amount is set to your total primordium theorems.`,
-      cost: E(1e190),
+      cost: E(1e180),
     },
 
     fn13: {
       unl: () => tmp.chal13comp,
       branch: ["fn8"],
       desc: `Unlock 2 meta-types of U-Quark & U-Fermion.`,
-      cost: E("e1.5e10"),
+      cost: E("e1.25e9"),
     },
 
     // Corrupted Tree

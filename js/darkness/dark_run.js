@@ -333,7 +333,7 @@ function mgEff(i, def = 1) {
 }
 
 function setGlyphs(x) {
-  if (player.dark.run.gmode) return;
+  if (!player.dark.run.gmode) return;
   player.dark.run.gamount =
     x == 0 ? 10 : Math.max(player.dark.run.gamount + x, 10);
 }
@@ -435,7 +435,7 @@ function updateDarkRunHTML() {
   );
   tmp.el.mg_max.setTxt("Max: " + ["OFF", "ON"][player.dark.run.gmode]);
   tmp.el.mg_max_gain.setTxt(
-    player.dark.run.gmode ? "∞" : format(player.dark.run.gamount, 0)
+    player.dark.run.gmode ? format(player.dark.run.gamount, 0) : "∞"
   );
   for (let x = 0; x < MASS_GLYPHS_LEN; x++) {
     let cost =

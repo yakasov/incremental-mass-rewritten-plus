@@ -1,6 +1,6 @@
 const DARK = {
   nextEffectAt: [
-    [0, 1e9, 1e22, 1e130],
+    [0, 1e9, 1e11, 1e22, 1e130],
     [1e6, 1e11, 1e25, 1e130],
     [1e120, 1e180, "e345", "e800", "e2500", "e56000", "e125500", "ee7"],
   ],
@@ -36,10 +36,12 @@ const DARK = {
       .pow(2)
       .pow(tmp.c16.in ? 1 : fermEff(0, 6));
     x.shadow = x.shadow.overflow("ee10", 0.5);
-    x.deathShard = a.max(1).min(1e9);
+    x.deathShard = a.max(1);
 
     if (a.gte(1e9))
       x.passive = a.div(1e9).max(1).log10().add(1).pow(2).div(100);
+    if (a.gte(1e11))
+      x.quark = a.sqrt().softcap(1e4, 0.5, 0).softcap(1e10, 0.25, 0);
     if (a.gte(1e22))
       x.glyph = a.div(1e22).max(1).log10().add(1).root(2).sub(1).div(10).add(1);
     if (a.gte(1e130))
@@ -189,7 +191,7 @@ const DARK = {
         .pow(3)
         .overflow("ee10", 1 / 3);
     }
-    if (tmp.chal14comp) x.ab = a.add(1).pow(2);
+    if (tmp.chal14comp) x.ab = a.add(1).pow(3);
     if (!tmp.c16.in && EVO.amt < 2 && a.gte(1e130))
       x.bhp = a.div(1e130).log10().div(5);
 
@@ -211,7 +213,7 @@ const DARK = {
     let x = {};
     let a = player.dark.abyssalBlot;
 
-    x.shadow = a.add(1).log10().add(1).pow(2);
+    x.shadow = a.add(1).log10().add(1).pow(3);
     if (EVO.amt >= 1) x.shadow = expMult(x.shadow, 2);
     x.msoftcap = a.add(1).log10().root(2).div(2).add(1);
     if (a.gte(1e120)) {
@@ -382,8 +384,9 @@ function updateDarkHTML() {
       )}</b>`;
     if (eff.sn)
       e +=
-        `<br>Makes you becoming <b>x${eff.sn.format(3)}</b> more supernovas` +
-        eff.sn.softcapHTML(7.5, hasElement(9, 1));
+        `<br>Makes you implode into <b>x${eff.sn.format(
+          3
+        )}</b> more Supernovas` + eff.sn.softcapHTML(7.5, hasElement(9, 1));
     if (eff.en) e += `<br>Boosts Entropy earned by <b>x${eff.en.format(3)}</b>`;
     if (eff.ab)
       e += `<br>Boosts Abyssal Blots earned by <b>x${eff.ab.format(3)}</b>`;
@@ -463,6 +466,8 @@ function updateDarkHTML() {
       e += `<br>Passively gains <b>${formatPercent(
         eff.passive
       )}</b> of Dark Rays gained on reset per second`;
+    if (eff.quark)
+      e += `<br>Raises Quark gain by <b>x${eff.quark.format(0)}</b>`;
     if (eff.glyph)
       e += `<br>Earns <b>x${format(eff.glyph, 3)}</b> more Glyphic Mass`;
     if (eff.dChal)
