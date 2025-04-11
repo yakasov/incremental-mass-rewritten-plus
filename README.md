@@ -4,6 +4,23 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 17
+
+- Elements 211, 212, 213, 214, 215, 216, 217 and 218 costs decreased
+- Muonic Element 4 removes the nerf to Corrupted Shard gain
+- Supernova tree upgrades [ct9] and [ct13] requirements changed
+- Supernova tree upgrades [ct14], [ct15] and [ct16] costs decreased
+- FSS effects boosted
+- Dark Rays Quark effect boosted
+- Dark Rays Challenge Completion effect begins earlier, softcaps later, and is boosted
+- Abyssal Blots Dark Shadows effect boosted
+- C16 Corrupted Shard gain reduced
+- C16 challenge goal reduced
+- Charger 6 cost reduced in Evo 0 and 1
+- Elements Tier button styling improved
+
+_This version has issues around Infinity. Starting from the beginning to fix balancing._
+
 ### v0.7.1.6-plus 16
 
 - Top Fermion effect hardcap removed (but severely softcapped)
