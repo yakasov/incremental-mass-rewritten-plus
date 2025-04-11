@@ -1622,14 +1622,13 @@ const TREE_UPGS = {
         return (
           tmp.c16.in &&
           player.supernova.fermions.chosen == "16" &&
-          player.bh.mass.gte("e400") &&
-          player.build.bhc.amt.lte(0)
+          player.bh.mass.gte(uni("e2500"))
         );
       },
       reqDesc() {
         return `Reach ${formatMass(
-          "e400"
-        )} of black hole during C16 & [Meta-Lepton] without buying BH Condensers.`;
+          uni("e2500")
+        )} of Black Hole Mass during C16 & [Meta-Lepton].`;
       },
       effect() {
         let x = tmp.c16.best_bh_eff.root(3);
@@ -1707,16 +1706,16 @@ const TREE_UPGS = {
       desc: `Neutronium-0 now affects Challenge 15 at a reduced rate, like [ct5].`,
       cost: E(2.5e8),
       req() {
-        return player.chal.comps[14] && player.chal.comps[14].gte(940);
+        return player.chal.comps[14] && player.chal.comps[14].gte(895);
       },
       reqDesc() {
-        return `Get ${format(940, 0)} C14 completions.`;
+        return `Get ${format(895, 0)} C14 completions.`;
       },
     },
     ct14: {
       branch: ["ct11"],
       desc: `Dilated mass overflow starts later based on best Black Hole Mass in C16.`,
-      cost: E(1e10),
+      cost: E(5e9),
       req() {
         return tmp.c16.in && player.atom.atomic.gte(1e144);
       },
@@ -1734,7 +1733,7 @@ const TREE_UPGS = {
     ct15: {
       branch: ["ct8"],
       desc: `Total corrupted shards boost matters gain.`,
-      cost: E(2.5e10),
+      cost: E(1e10),
       effect() {
         let x = player.dark.c16.totalS.add(1).root(2);
         return x;
@@ -1748,7 +1747,7 @@ const TREE_UPGS = {
       branch: ["ct10"],
       desc: `Best Black Hole Mass in C16 boosts Kaon & Pion gain.`,
       get cost() {
-        return E(EVO.amt >= 3 ? 1e15 : EVO.amt >= 2 ? 1e12 : 5e16);
+        return E(EVO.amt >= 3 ? 1e15 : 1e12);
       },
       effect() {
         let x = tmp.c16.best_bh_eff.div(1e5).add(1).pow(2);

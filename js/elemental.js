@@ -1853,14 +1853,14 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Meta-Rank Boost also affects Meta-Tetr starting at a reduced rate. Strengthen Unpentpentium-155.`,
-      cost: E("e5e110"),
+      cost: E("e2e110"),
       effect: () => radBoostEff(14).max(1).log10().add(1),
       effDesc: (x) => formatMult(x) + " later",
     },
     {
       br: true,
       desc: `Exotic Supernovas scale 25% weaker.`,
-      cost: E("e1.6e117"),
+      cost: E("e4e110"),
     },
     {
       dark: true,
@@ -1870,7 +1870,7 @@ const ELEMENTS = {
           : `[Bottom]'s effect is now better, and is uncapped. The Fourth Photon upgrade now provides an exponential boost.`;
       },
       get cost() {
-        return E(EVO.amt >= 4 ? "e652" : "e1024");
+        return E(EVO.amt >= 4 ? "e652" : "e800");
       },
     },
     {
@@ -1880,21 +1880,21 @@ const ELEMENTS = {
     {
       br: true,
       desc: `Entropic Evaporation^2 and Condenser^2 scale another 15% weaker.`,
-      cost: E("ee123"),
+      cost: E("ee115"),
     },
     {
       desc: `Strengthen Unseptoctium-178 slightly.`,
-      cost: E("e4.9e130"),
+      cost: E("e9e127"),
     },
     {
       dark: true,
       desc: `Final Star Shard's requirement is 20% cheaper.`,
-      cost: E("e1480"),
+      cost: E("e1000"),
     },
     {
       desc: `Unlock the 16th Challenge.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "ee134" : "e7e134");
+        return E(EVO.amt >= 1 ? "ee134" : "e4e128");
       },
     },
     {

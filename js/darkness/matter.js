@@ -257,14 +257,14 @@ const MATTERS = {
         rdc = tmp.matters.reduction;
       fss = fss.mul(tmp.dark.abEff.fss || 1);
 
-      let x = Decimal.pow(2, fss.pow(1.25));
+      let x = Decimal.pow(2, fss.pow(1.5));
       if (rdc == 1) {
         x = x.log10().div(10).add(1);
         if (hasElement(247)) x = x.pow(1.5);
       }
       if (hasElement(309)) x = fss.div(3).add(1).root(3);
 
-      let y = fss.mul(0.15).add(1);
+      let y = fss.mul(0.25).add(1);
       return [x, y];
     },
   },
@@ -439,7 +439,7 @@ function setupMattersHTML() {
                 <span id="final_star_base">You have ??? Final Star Shard base (based on previous matters)</span>
                 <br><br>
                 <button class="btn full" id="FSS_btn" onclick="MATTERS.final_star_shard.reset()">
-                    Reset dark shadows, abyssal blots, matters, and force darkness reset for a final star shard. It boosts matters gain and glyphic mass.<br>
+                    Reset Dark Shadows, Abyssal Blots, Matters, and force a Darkness reset for a Final Star Shard. It boosts Matters gain and Glyphic Mass.<br>
                     Requires: <span id="FSS_req">???</span> FSS base
                 </button>
             </div>

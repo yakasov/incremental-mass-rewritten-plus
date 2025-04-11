@@ -952,7 +952,7 @@ const CHALS = {
     },
     reward: `Improve Hybridized Uran-Astatine.<br><span class="gold">On 1st completion, unlock <b class='yellow'>Infinity!</b></span>`,
     max: E(1),
-    start: E("e1.25e11"),
+    start: E("e5e10"),
     effect(x) {
       if (hasBeyondRank(12, 1)) x = x.mul(beyondRankEffect(12, 1));
       if (tmp.chal.eff[18]) x = x.mul(tmp.chal.eff[18][0]);

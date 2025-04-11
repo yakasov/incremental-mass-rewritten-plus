@@ -741,9 +741,13 @@ button * {
   margin-bottom: 5px;
 }
 
-#elemTierDiv > .btn {
-  width: 180px;
-  padding: 3px 0;
+#elemTierDiv {
+  margin-top: 5px;
+
+  > .btn {
+    width: 180px;
+    padding: 3px 0;
+  }
 }
 
 .muon-symbol {

@@ -39,7 +39,7 @@ const CHARGERS = [
   {
     req: E("e77000"),
     get cost() {
-      return [E(5e10), E(5e10), E(5e7), E(1e14), E(1e9)][EVO.amt];
+      return [E(2e10), E(2e10), E(5e7), E(1e14), E(1e9)][EVO.amt];
     },
     get desc() {
       return EVO.amt >= 3
@@ -213,7 +213,10 @@ function corruptedShardGain() {
     let w = 1;
     if (hasUpgrade("br", 25)) w *= 0.8;
 
-    x = bh.max(1).log10();
+    x = bh
+      .max(1)
+      .log10()
+      .pow(1 / (hasElement(4, 1) ? 1 : 1.38));
     x = E(10).pow(
       x
         .overflow(1e70, (1 / 3) ** w)

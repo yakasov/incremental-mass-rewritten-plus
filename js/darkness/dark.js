@@ -1,8 +1,8 @@
 const DARK = {
   nextEffectAt: [
-    [0, 1e9, 1e11, 1e22, 1e130],
+    [0, 1e9, 1e11, 1e22, 1e85],
     [1e6, 1e11, 1e25, 1e130],
-    [1e120, 1e180, "e345", "e800", "e2500", "e56000", "e125500", "ee7"],
+    [1e120, 1e180, "e345", "e800", "e2500", "e54000", "e125500", "ee7"],
   ],
   gain() {
     let x = E(1.5);
@@ -41,16 +41,16 @@ const DARK = {
     if (a.gte(1e9))
       x.passive = a.div(1e9).max(1).log10().add(1).pow(2).div(100);
     if (a.gte(1e11))
-      x.quark = a.sqrt().softcap(1e4, 0.5, 0).softcap(1e10, 0.25, 0);
+      x.quark = a.sqrt().softcap(1e7, 0.75, 0).softcap(1e16, 0.4, 0);
     if (a.gte(1e22))
       x.glyph = a.div(1e22).max(1).log10().add(1).root(2).sub(1).div(10).add(1);
-    if (a.gte(1e130))
+    if (a.gte(1e85))
       x.dChal = a
-        .div(1e130)
+        .div(1e85)
         .max(1)
         .log10()
-        .mul(20)
-        .softcap(100, 0.5, 0, hasBeyondRank(3, 12))
+        .mul(50)
+        .softcap(350, 0.5, 0, hasBeyondRank(3, 12))
         .floor();
 
     return x;
@@ -213,7 +213,7 @@ const DARK = {
     let x = {};
     let a = player.dark.abyssalBlot;
 
-    x.shadow = a.add(1).log10().add(1).pow(3);
+    x.shadow = a.add(1).pow(1 / 100);
     if (EVO.amt >= 1) x.shadow = expMult(x.shadow, 2);
     x.msoftcap = a.add(1).log10().root(2).div(2).add(1);
     if (a.gte(1e120)) {
@@ -241,7 +241,7 @@ const DARK = {
         .add(1)
         .pow(1.5)
         .softcap(5, 0.2, 0, hasElement(234));
-    if (a.gte("e56000") && (hasElement(260) || !tmp.c16.in)) {
+    if (a.gte("e54000") && (hasElement(260) || !tmp.c16.in)) {
       let e = a.div("e56000").log10().add(1).log10();
       if (hasElement(238)) e = e.pow(2);
       x.ApQ_Overflow = E(10).pow(e);

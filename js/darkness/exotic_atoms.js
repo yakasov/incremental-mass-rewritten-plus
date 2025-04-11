@@ -27,7 +27,7 @@ const MUONIC_ELEM = {
       cost: E(1e10),
     },
     {
-      desc: `^1.1 to Matters gain inside C16, and ^1.05 to Matters' exponent outside C16.`,
+      desc: `^1.1 to Matters gain inside C16, and ^1.05 to Matters' exponent outside C16. Remove the nerf to Corrupted Shard production.`,
       cost: E(1e13),
     },
     {
