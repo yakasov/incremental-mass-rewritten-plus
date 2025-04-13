@@ -35,13 +35,10 @@ const CONFIRMS_FUNCTION = {
     addQuote(4);
   },
   sn(click) {
-    let g = tmp.sn.gen
-      ? tmp.sn.passive.div(FPS)
-      : tmp.sn.bulk.sub(player.supernova.times).max(0);
     addQuote(5);
 
     tmp.el.supernova_scene.setDisplay(false);
-    if (g.gt(0)) {
+    if (tmp.sn.reached) {
       player.supernova.times = player.supernova.post_10
         ? player.supernova.times.max(tmp.sn.bulk)
         : player.supernova.times.add(1);

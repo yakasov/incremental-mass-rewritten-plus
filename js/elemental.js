@@ -290,6 +290,10 @@ const ELEMENTS = {
       }
     }
     tmp.pass = 1;
+
+    if (!player.atom.elementsBoughtOnce.includes(x)) {
+      player.atom.elementsBoughtOnce.push(x);
+    }
   },
   upgs: [
     null,

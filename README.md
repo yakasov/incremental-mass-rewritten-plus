@@ -4,6 +4,13 @@ Personal tweaks to IMR.
 
 ## Changelog:
 
+### v0.7.1.6-plus 18
+
+- Atom upgrade 3x1 cost decreased
+- Elements must be bought once manually before they are automated
+- Fixed some weird Supernova calculation logic (which stopped you from actually gaining any Supernovas)
+- Fixed Quark gain being broken due to Dark Ray Quark effect being applied badly
+
 ### v0.7.1.6-plus 17
 
 - Elements 211, 212, 213, 214, 215, 216, 217 and 218 costs decreased

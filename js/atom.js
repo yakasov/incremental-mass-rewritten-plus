@@ -132,7 +132,7 @@ const ATOM = {
       op = op.pow(escrowBoost("quark_overflow"));
     }
 
-    x = x.pow(tmp.dark.rayEff.quark);
+    x = x.pow(tmp.dark.rayEff.quark ? tmp.dark.rayEff.quark.max(1) : 1);
     x = overflow(x, os, op);
 
     tmp.overflowBefore.quark = o;

@@ -760,7 +760,7 @@ const UPGS = {
           return MASS_DILATION.unlocked();
         },
         desc: "Dilated mass also boosts BH Condenser & Cosmic Ray powers at a reduced rate.",
-        cost: E("e1640"),
+        cost: E("e1635"),
         effect() {
           let ret = player.md.mass.max(1).log10().add(1).pow(0.1);
           return ret;

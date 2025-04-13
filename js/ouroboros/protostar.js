@@ -52,7 +52,9 @@ const PROTOSTAR = {
 
     if (hasTree("qol1"))
       for (let x = 291; x <= Math.min(tmp.elements.unl_length[0], 362); x++)
-        buyElement(x, 0);
+        if (player.atom.elementsBoughtOnce.includes(x)) {
+          buyElement(x, 0);
+        }
     if (hasElement(293))
       for (let x in NEBULAE_TIER)
         if (!x.includes("ext") || hasInfUpgrade(14)) this.nebula_click(x);

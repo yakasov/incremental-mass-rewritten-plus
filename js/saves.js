@@ -180,7 +180,10 @@ function calc(dt) {
         x <= Math.min(player.dark.unl ? 118 : 117, tmp.elements.unl_length[0]);
         x++
       )
-        ELEMENTS.buyUpg(x);
+        if (player.atom.elementsBoughtOnce.includes(x)) {
+          ELEMENTS.buyUpg(x);
+        }
+
     if (hasTree("qol4")) STARS.generators.unl(true);
   }
 
@@ -270,6 +273,7 @@ function getPlayerData() {
       muonic_el: [],
       elemTier: [1, 1],
       elemLayer: 0,
+      elementsBoughtOnce: [],
     },
     md: {
       active: false,
