@@ -36,12 +36,12 @@ const DARK = {
       .pow(2)
       .pow(tmp.c16.in ? 1 : fermEff(0, 6));
     x.shadow = x.shadow.overflow("ee10", 0.5);
-    x.deathShard = a.max(1);
+    x.deathShard = a.max(0);
 
     if (a.gte(1e9))
       x.passive = a.div(1e9).max(1).log10().add(1).pow(2).div(100);
     if (a.gte(1e11))
-      x.quark = a.sqrt().softcap(1e7, 0.75, 0).softcap(1e16, 0.4, 0);
+      x.quark = a.sqrt().softcap(1e16, 0.75, 0).softcap(1e40, 0.5, 0);
     if (a.gte(1e22))
       x.glyph = a.div(1e22).max(1).log10().add(1).root(2).sub(1).div(10).add(1);
     if (a.gte(1e85))
@@ -213,7 +213,7 @@ const DARK = {
     let x = {};
     let a = player.dark.abyssalBlot;
 
-    x.shadow = a.add(1).pow(1 / 100);
+    x.shadow = a.add(1).pow(1 / 50);
     if (EVO.amt >= 1) x.shadow = expMult(x.shadow, 2);
     x.msoftcap = a.add(1).log10().root(2).div(2).add(1);
     if (a.gte(1e120)) {

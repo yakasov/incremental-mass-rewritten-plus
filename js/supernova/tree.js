@@ -2000,7 +2000,9 @@ function updateTreeHTML() {
     let t_ch = TREE_UPGS.ids[ch];
     let req =
       CS_TREE.includes(ch) && (tmp.inf_unl || OURO.unl)
-        ? "Require-free thanks to evolving!"
+        ? `Requirement-free thanks to ${
+            tmp.inf_unl ? "reaching Infinity" : "evolving"
+          }!`
         : !t_ch.req || hasTree(ch)
         ? ""
         : `<span class="${t_ch.req() ? "green" : "red"}">${
@@ -2072,6 +2074,7 @@ function updateTreeHTML() {
                   btn_tree: true,
                   corrupted: true,
                   chosen: id == tmp.sn.tree_chosen,
+                  buyable: tmp.sn.tree_afford[id] && !bought,
                 }
               : {
                   btn_tree: true,
@@ -2079,6 +2082,7 @@ function updateTreeHTML() {
                   locked: !tmp.sn.tree_afford[id],
                   bought: bought,
                   chosen: id == tmp.sn.tree_chosen,
+                  buyable: tmp.sn.tree_afford[id] && !bought,
                 }
           );
       }

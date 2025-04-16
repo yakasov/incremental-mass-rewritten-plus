@@ -365,6 +365,9 @@ const BUILDINGS_DATA = {
 
       if (hasElement(248)) fp = fp.mul(getEnRewardEff(0));
 
+      let cost = Decimal.pow(2, x.div(fp).scaleEvery("tickspeed"));
+      if (fermEff(1, 2).gte(1e10) && x.gte(1e10) && cost.eq(1)) return "N/A";
+
       return Decimal.pow(2, x.div(fp).scaleEvery("tickspeed"));
     },
     get bulk() {
@@ -1129,6 +1132,8 @@ const BUILDINGS = {
 
     let cost = b.cost(),
       allow = b.allowPurchase ?? true;
+
+    if (cost === "N/A") return;
 
     tmp.el["building_btn_" + i].setClasses({
       btn: true,

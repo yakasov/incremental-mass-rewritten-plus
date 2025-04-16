@@ -375,14 +375,15 @@ const INF = {
   },
   gain() {
     if (player.mass.lt(this.req)) return E(0);
-    let x = player.mass
+    let x = (this.req.lt("ee309") ? player.mass : E("e1.8e308"))
       .add(1)
       .log10()
       .add(1)
       .log10()
       .sub(307)
       .root(hasInfUpgrade(20) ? 1.89 : 2)
-      .div(2);
+      .div(2)
+      .max(1);
     x = E(10).pow(x.sub(1));
 
     if (hasInfUpgrade(5)) x = x.mul(infUpgEffect(5));
@@ -398,7 +399,7 @@ const INF = {
 
     if (hasElement(302)) x = x.mul(elemEffect(302));
 
-    return x.max(1).floor();
+    return x.max(2).floor();
   },
 
   upgs: [
@@ -410,7 +411,7 @@ const INF = {
       },
       {
         title: "Infinity Mass",
-        desc: "Normal mass & BH mass gains are boosted by total infinity points.",
+        desc: "Normal Mass & Black Hole Mass gains are boosted by total Infinity points.",
         cost: E(1),
         effect() {
           let x = player.inf.total;
@@ -430,12 +431,12 @@ const INF = {
       },
       {
         title: "Legacy Mass Upgrade 4",
-        desc: "Start with overpower unlocked, its starting cost is massively decreased (likewise, start with Binilbium-202 unlocked).",
+        desc: "Start with Overpower unlocked. It's starting cost is massively decreased (likewise, start with Binilbium-202 unlocked).",
         cost: E(1),
       },
       {
         title: "Dark Rest",
-        desc: "Keep glyph upgrades on infinity (likewise, start with Unhexunium-161 unlocked).",
+        desc: "Keep Glyph upgrades on infinity (likewise, start with Unhexunium-161 unlocked).",
         cost: E(1),
       },
     ],
@@ -447,7 +448,7 @@ const INF = {
       },
       {
         title: "Self-Infinity",
-        desc: "Infinity theorem boosts infinity points gain.",
+        desc: "Infinity Theorems boost Infinity Points gain.",
         cost: E(10),
         effect() {
           let x = Decimal.pow(hasBeyondRank(6, 1) ? 3 : 2, player.inf.theorem);
@@ -457,19 +458,19 @@ const INF = {
       },
       {
         title: "Stop Big Rip Switching",
-        desc: "Pre-218 big rip elements are now affordable outside Big Rip. Automate elements tier 2 (119th-218th).",
+        desc: "Pre-218 Big Rip elements are now affordable outside Big Rip. Automate elements tier 2 (119th-218th).",
         cost: E(3),
       },
       {
         title: "Dark Passive",
-        desc: "Start with more dark rays (like dark ray’s first reward unlocked).",
+        desc: "Start with more Dark Rays (like Dark Ray’s first reward unlocked).",
         cost: E(3),
       },
     ],
     [
       {
         title: "Corrupted Construction",
-        desc: "Start with rows of upgrades bought in corrupted tree (based on infinity theorems, starting at 2, ending at 5).",
+        desc: "Start with rows of upgrades bought in corrupted tree based on Infinity Theorems.",
         cost: E(100),
         effect() {
           let x = Math.min(player.inf.theorem, 4);
@@ -479,29 +480,29 @@ const INF = {
       },
       {
         title: "Parallel Extruder",
-        desc: "Unlock new generator in Main tab. Also, passively generate Dimensional Mass that increases meta-score of equipped theorems.",
+        desc: "Unlock a new generator in Main tab. Also, passively generate Dimensional Mass that increases meta-score of equipped Theorems.",
         cost: E(2e3),
       },
       {
         title: "Final Star Automation",
-        desc: "Automate final star shard, and it doesn’t reset anything. Also, start with beyond-ranks automation.",
+        desc: "Automate Final Star Shard. Start with beyond-ranks automation.",
         cost: E(100),
       },
       {
         title: "Lethal Universe",
-        desc: "Keep big rip upgrades and breaking dilation on infinity.",
+        desc: "Keep Big Rip upgrades and Mass Dilation as broken on Infinity.",
         cost: E(50),
       },
     ],
     [
       {
         title: "Dark Challenge Automation",
-        desc: "Automate challenges 13-15.",
+        desc: "Automate Challenges 13-15.",
         cost: E(6e6),
       },
       {
         title: "Exotic Speed",
-        desc: "Infinity Theorems boost kaon and pion gains.",
+        desc: "Infinity Theorems boost Kaon and Pion gains.",
         cost: E(6e6),
         effect() {
           let x = Decimal.pow(hasBeyondRank(6, 1) ? 3 : 2, player.inf.theorem);
@@ -513,15 +514,15 @@ const INF = {
       {
         title: "Muonic Automation",
         get desc() {
-          return `Automate muonic elements and ${
-            EVO.amt >= 3 ? `exotic nebulae` : `muon-catalyzed fusion`
+          return `Automate Muonic elements and ${
+            EVO.amt >= 3 ? `exotic Nebulae` : `Muon-Catalyzed Fusion`
           }.`;
         },
         cost: E(6e6),
       },
       {
         title: "Corrupted Peak",
-        desc: "Start with C16 unlocked. Keep corruption upgrades and best BH in C16 on infinity. Unlock more corruption upgrades.",
+        desc: "Start with C16 unlocked. Keep corruption upgrades and best BH in C16 on Infinity. Unlock more corruption upgrades.",
         cost: E(6e6),
       },
     ],
@@ -529,7 +530,7 @@ const INF = {
       {
         title: "Break Infinity",
         get desc() {
-          return `Remove the mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.${
+          return `Remove the Mass limit, allowing you to lift limitlessly. Unlock Tier 3 and new Muonic Elements.${
             EVO.amt >= 4
               ? "<br /><br />In Evo 4+, keep Constellation upgrades on Infinity."
               : ""

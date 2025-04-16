@@ -27,8 +27,8 @@ const MUONIC_ELEM = {
       cost: E(1e10),
     },
     {
-      desc: `^1.1 to Matters gain inside C16, and ^1.05 to Matters' exponent outside C16. Remove the nerf to Corrupted Shard production.`,
-      cost: E(1e13),
+      desc: `^1.1 to Matters gain inside C16, and ^1.05 to Matters' exponent outside C16. Decrease the nerf to Corrupted Shard production.`,
+      cost: E(2e12),
     },
     {
       desc: `Kaon & Pion are doubled every muonic element bought.`,
@@ -769,7 +769,7 @@ const EXOTIC_ATOM = {
     if (hasAscension(0, 4)) xy = xy.mul(ascensionEff(0, 4));
     xy = xy.mul(getFragmentEffect("atom"));
 
-    let x = xy.div(5);
+    let x = xy.div(2);
     if (hasPrestige(2, 34)) x = x.mul(prestigeEff(2, 34));
     if (hasPrestige(1, 247)) x = x.mul(prestigeEff(1, 247));
     if (hasElement(1, 1) && hasElement(30, 1)) x = x.mul(muElemEff(1));

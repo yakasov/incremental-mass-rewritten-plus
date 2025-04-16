@@ -148,7 +148,7 @@ const UPGS = {
         unl() {
           return player.chal.unl;
         },
-        desc: "Black Hole mass's gain is boosted by Rage Powers.",
+        desc: "Black Hole Mass's gain is boosted by Rage Powers.",
         cost: E(1e72),
         effect() {
           let ret = player.rp.points.add(1).root(10).softcap("e4000", 0.1, 0);
@@ -166,7 +166,7 @@ const UPGS = {
         unl() {
           return player.chal.unl;
         },
-        desc: "OoMs of Rage powers increase stronger power at a reduced rate.",
+        desc: "OoMs of Rage powers increase Stronger power at a reduced rate.",
         cost: E(1e120),
         effect() {
           let ret = player.rp.points
@@ -223,7 +223,7 @@ const UPGS = {
         unl() {
           return tmp.moreUpgs || tmp.inf_unl;
         },
-        desc: `Remove tickspeed power's softcap.`,
+        desc: `Remove Tickspeed power's softcap.`,
         cost: E("e1.8e91"),
       },
       17: {
@@ -237,7 +237,7 @@ const UPGS = {
         unl() {
           return tmp.brUnl || tmp.inf_unl;
         },
-        desc: `Fading matter's upgrade applies to rage powers gain at a reduce rate.`,
+        desc: `Fading Matter's upgrade applies to Rage Powers gain at a reduce rate.`,
         cost: E("e1.5e128"),
         effect() {
           let x = E(10).pow(tmp.matters.upg[12].eff.max(1).log10().pow(0.8));
@@ -280,7 +280,7 @@ const UPGS = {
         unl() {
           return tmp.fifthRowUnl;
         },
-        desc: `Rage powers boost dark rays gain.`,
+        desc: `Rage Powers boost Dark Rays gain.`,
         cost: E("ee32200"),
         effect() {
           let x = player.rp.points.add(10).log10();
@@ -826,14 +826,14 @@ const UPGS = {
         unl() {
           return (tmp.mass4Unl || tmp.inf_unl) && EVO.amt < 2;
         },
-        desc: `Neutron Power's second effect now provides an expontial boost and applies to Black Hole Mass.`,
+        desc: `Neutron Power's second effect now provides an exponential boost and applies to Black Hole Mass.`,
         cost: E("e4.2e120"),
       },
       19: {
         unl() {
           return tmp.brUnl || tmp.inf_unl;
         },
-        desc: `Yellow matter's upgrade applies to dilated mass overflow at a reduced rate.`,
+        desc: `Yellow Matter's upgrade applies to dilated mass overflow at a reduced rate.`,
         cost: E("e8e139"),
         effect() {
           let x = expMult(tmp.matters.upg[9].eff, 1 / 3);
@@ -1089,7 +1089,10 @@ const UPGS = {
             .add(1)
             .log10()
             .div(60)
-            .add(1);
+            .add(1)
+            .softcap(1.025, 0.2, 0)
+            .softcap(1.05, 0.15, 0)
+            .softcap(1.075, 0.1, 0);
           if (hasAscension(0, 3)) x = x.pow(2);
           if (hasAscension(0, 33)) x = x.pow(2);
           return x;

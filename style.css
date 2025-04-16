@@ -582,6 +582,11 @@ button * {
   z-index: 1;
 }
 
+.btn_tree:not(.bought).buyable {
+  border-color: #fff;
+  box-shadow: 0 0 10px 2px;
+}
+
 .btn_tree:not(.bought).locked {
   border-color: #171717;
 }

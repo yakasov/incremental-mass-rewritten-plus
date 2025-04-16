@@ -410,6 +410,10 @@ function updateEntropyHTML() {
       : `Evaporate your Black Hole Mass to gain Hawking Radiation`
   );
 
+  tmp.el.autoEvaporateEntropy.setDisplay(
+    (EVO.amt >= 3 || hasMDUpg(10, true)) && player.qu.en.unl
+  );
+
   for (let x = 0; x < ENTROPY.rewards.length; x++) {
     let rs = player.qu.en.rewards[x];
     let rc = ENTROPY.rewards[x];

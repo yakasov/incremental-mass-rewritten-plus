@@ -216,7 +216,7 @@ function corruptedShardGain() {
     x = bh
       .max(1)
       .log10()
-      .pow(1 / (hasElement(4, 1) ? 1 : 1.38));
+      .pow(1 / (hasElement(4, 1) ? 1.2 : 1.38));
     x = E(10).pow(
       x
         .overflow(1e70, (1 / 3) ** w)

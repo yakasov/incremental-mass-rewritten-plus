@@ -1445,7 +1445,7 @@ const ELEMENTS = {
     {
       dark: true,
       desc: `Uncap Top & Neut-Muon.`,
-      cost: E("e80"),
+      cost: E("e78"),
     },
     {
       dark: true,
@@ -1898,7 +1898,7 @@ const ELEMENTS = {
     {
       desc: `Unlock the 16th Challenge.`,
       get cost() {
-        return E(EVO.amt >= 1 ? "ee134" : "e4e128");
+        return E(EVO.amt >= 1 ? "ee134" : "ee128");
       },
     },
     {
@@ -2532,7 +2532,7 @@ const ELEMENTS = {
       cost: E(1e65),
     },
     {
-      desc: `Corrupted Shards improve Magneta Nebulae.`,
+      desc: `Corrupted Shards improve Magenta Nebulae.`,
       cost: E(1e75),
 
       effect: () =>

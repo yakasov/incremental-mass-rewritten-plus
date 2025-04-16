@@ -941,7 +941,7 @@ const CHALS = {
             : EVO.amt >= 2
             ? "Wormhole"
             : "Black Hole Mass"
-        } when exiting the challenge${
+        } when exiting the challenge ${
         EVO.amt >= 2
           ? ""
           : `with more than <b>${formatMass(

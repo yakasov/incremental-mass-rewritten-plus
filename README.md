@@ -7,9 +7,25 @@ Personal tweaks to IMR.
 ### v0.7.1.6-plus 18
 
 - Atom upgrade 3x1 cost decreased
+- Big Rip upgrade 4x4 effect softcaps
+- Top Fermion softcap is softer
+- Neut-Muon Fermion effect has a higher cap
+- Meta-Lepton effect has a second, harsher softcap
+- Abyssal Blots Dark Shadows effect boosted
+- Exotic Atoms Kaon gain base increased
+- Muonic Element 4 cost decreased
+- Muonic Element 4 decreases, rather than removes, the nerf to Corrupted Shard gain
 - Elements must be bought once manually before they are automated
+- Infinity Points calculation will use the Infinity limit (e1.8e308) until Infinity is broken
+- Infinity Points minimum gain is 2
+- Improved Supernova tree upgrade styling to show buyable upgrades more clearly
+- Added an 'Evaporating automatically' notice on Entropy
+- Fixed Tickspeed cost sometimes showing as 1 Rage Power even when you had like, 1e20+. This fix is really haphazard and not permanent, I'll sort it properly at a later point
+- Fixed Dark Ray Death Shard effect automatically adding Death Shards before Darkness unlocked
 - Fixed some weird Supernova calculation logic (which stopped you from actually gaining any Supernovas)
 - Fixed Quark gain being broken due to Dark Ray Quark effect being applied badly
+
+_Infinity works... like, a few times. Need to fix scaling._
 
 ### v0.7.1.6-plus 17
 
@@ -246,10 +262,10 @@ _To fix at some point:_
 ### v0.7.1.6-plus 1
 
 - Challenge 10 start is slightly lower
-- Up, Down, Charm, Muon and Tau fermion requirements are slightly lower
-- Reduced Down requirement fermion scaling
+- Up, Down, Charm, Muon and Tau Fermion requirements are slightly lower
+- Reduced Down requirement Fermion scaling
 - Increased U-Quark and U-Lepton production base
-- Decreased Electron fermion softcap penalty
+- Decreased Electron Fermion softcap penalty
 - Supernova tree upgrades [fn1], [fn4] and [fn6] costs reduced
 - The 'You have been offline for' message only shows if you have been away for more than 5 minutes
 - String grammar pass

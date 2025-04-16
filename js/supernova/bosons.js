@@ -114,6 +114,7 @@ const BOSONS = {
   },
   effect: {
     pos_w(x) {
+      // return [E(1), E(1), E(1)];
       let a = x.add(1).pow(2e4);
       if (hasTree("qu2") && !player.qu.rip.active)
         a = a.pow(

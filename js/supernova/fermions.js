@@ -242,14 +242,14 @@ const FERMIONS = {
         eff(i, t) {
           let x = i.add(1).log10().div(500).mul(t.root(3)).add(1);
           return x
-            .softcap(1.15, 0.5, 0)
-            .softcap(1.8, 1 / 3, 0)
-            .softcap(2.25, 0.1, 0); //.softcap(2,0.1,0)
+            .softcap(1.25, 0.6, 0)
+            .softcap(1.8, 0.4, 0)
+            .softcap(2.25, 0.2, 0);
         },
         desc(x) {
           return (
             `Radiation Boosters are ${format(x)}x cheaper` +
-            (x.gte(1.15) ? " <span class='soft'>(softcapped)</span>" : "")
+            (x.gte(1.25) ? " <span class='soft'>(softcapped)</span>" : "")
           );
         },
         inc: "Dilated Mass",
@@ -294,12 +294,12 @@ const FERMIONS = {
         },
         nextTierAt(x) {
           let t = FERMIONS.getTierScaling(x, false, true);
-          return Decimal.pow(1.5, t).mul(this.base);
+          return Decimal.pow(1.35, t).mul(this.base);
         },
         calcTier() {
           let res = tmp.sn.ferm.prod[0];
           if (res.lt(this.base)) return E(0);
-          let x = res.div(this.base).max(1).log(1.5).max(0);
+          let x = res.div(this.base).max(1).log(1.35).max(0);
           return FERMIONS.getTierScaling(x, true, true);
         },
         eff(i, t) {
@@ -316,11 +316,11 @@ const FERMIONS = {
             .overflow(1e8, 1 / 3, 0);
         },
         desc(x) {
-          return `Dark ray's effect is ^${x.format()} stronger`.corrupt(
+          return `Dark Ray's effect is ^${x.format()} stronger`.corrupt(
             tmp.c16.in
           );
         },
-        inc: "product of above u-quarks",
+        inc: "product of above U-Quarks",
         cons: "All U-Quarks are active at once, and force a Quantum reset.",
       },
     ],
@@ -503,10 +503,7 @@ const FERMIONS = {
                 hasElement(157)
                   ? m.div(150).add(1).softcap(5, 0.5, 0).pow(-1).toNumber()
                   : 1,
-                E(0.95)
-                  .pow(m.softcap(27, 0.5, 0))
-                  .max(2 / 3)
-                  .toNumber()
+                E(0.95).pow(m.softcap(27, 0.5, 0)).max(0.5).toNumber()
               );
           return x;
         },
@@ -570,7 +567,7 @@ const FERMIONS = {
             .add(1)
             .log10()
             .div(2000)
-            .mul(t.softcap(8, 0.5, 0));
+            .mul(t.softcap(8, 0.5, 0).softcap(64, 0.5, 0));
           if (hasBeyondRank(2, 2)) x = x.mul(8);
           return x
             .softcap(20, hasPrestige(1, 300) ? 0.55 : 0.5, 0)
